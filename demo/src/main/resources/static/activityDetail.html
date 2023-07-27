@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/activity-detail-page.css"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C600%2C800"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C800"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+  <title>액티비티 상세 페이지</title>
+  <style>
+	  /* Create two columns/boxes that floats next to each other */
+	nav {
+	  float: left;
+	  width: 30%;
+	  padding: 20px;
+	}
+	article {
+	  float: left;
+	  padding: 55px;
+	  width: 70%;
+	  position: relative;
+	  top: -60px;
+	}
+	/* Clear floats after the columns */
+	section::after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+  </style>
+</head>
+ <body class="p-3 m-0 border-0 bd-example m-0 border-0">
+  <div class="container">
+    <h1 class="activity-title">경복궁 스냅 사진 투어</h1>
+    <div class="activity-rating"><img class="frame-BcM" src="./assets/frame-nTK.png"/>4.97 (100)</div>
+    <div class="activity-location">종로구, 한국</div>
+    <div class="activity-images">
+      <div class="div1jdtwz4-RpM">
+            <div class="button-n97" id="shareButton">
+			  <img class="frame-LRX share-icon" src="./assets/frame-imF.png"/>
+			  <div class="item--3qj">공유하기</div>
+			</div>
+			<div class="button-n97">
+			  <img class="frame-GyP save-icon" src="./assets/frame.png"/>
+			  <div class="item--3qj">저장하기</div>
+			</div>
+      </div>
+    </div>
+    <div class="activity-images">
+      <img class="activity-image" src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480" alt="Activity Image 1">
+      <img class="activity-image" src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480" alt="Activity Image 2">
+      <img class="activity-image" src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480" alt="Activity Image 3">
+    </div>
+
+	<!--호스트 이름 불러오기-->
+	<div class="activity-info">
+      <p><strong>제니 님이 호스팅하는 체험</strong></p>
+      <p>2시간</p>
+    </div>
+
+    <!--결제창 불러오기-->
+  <section>  
+    <nav>
+	      <div class="payment-section">
+		    <div class="price-info">
+		      <div class="price">최저가 ₩100,000</div>
+		      <div class="price-per-person">/인</div>
+		    </div>
+			<br />
+		  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+	      <div class="btn-group" role="group">
+	      <button type="button" class="btn btn-primary dropdown-toggle activity_btn" data-bs-toggle="dropdown" aria-expanded="false">
+	        날짜 &nbsp;<br>
+	        날짜입력 
+	      </button>
+	      <ul class="dropdown-menu" style="">
+	        <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+	      </ul>
+	    </div>
+	      <div class="btn-group" role="group">
+	        <button type="button" class="btn btn-primary dropdown-toggle activity_btn" data-bs-toggle="dropdown" aria-expanded="false">
+	        게스트 &nbsp;<br>
+	        게스트 수
+	        </button>
+	        <ul class="dropdown-menu" style="">
+	          <li><a class="dropdown-item" href="#">1</a></li>
+	          <li><a class="dropdown-item" href="#">2</a></li>
+	          <li><a class="dropdown-item" href="#">3</a></li>
+	          <li><a class="dropdown-item" href="#">4</a></li>
+	          <li><a class="dropdown-item" href="#">5</a></li>
+	        </ul>
+	      </div>
+	    </div> 
+	    	<br /><br />
+	    	<button class="btn btn-primary activity_btn" type="button">확인 및 결제</button>
+	   </div>   
+	</nav>
+    
+    <article class="activity-description">
+      <h2>프로그램</h2>
+      <p>
+       한복 피팅/헤어 스타일링 후 궁궐에 들어가 포토촬영을 진행하게 됩니다. 저희가 좋아하는 경복궁 포스트팟을 돌아다니며 사진을 찍게 될 것이고
+       투어 중 사진을 어떻게 찍어야 예쁘게 찍을 수 있는지에 대한 간단한 팁도 나눌 수 있는 시간을 가지게 될 것 입니다.
+       <br /><br />
+       사진 찍는 것이 많이 쑥스러우신가요?
+       많은 분들이 보통 어떻게 포즈를 취해야 될지 또는 부끄러움을 종종 타십니다. 하지만 실제 모델분들 또는 일반인들과 많이 일을 해온 경험을
+       토대로 자연스럽게 포즈를 취하는 법을 도와드릴겁니다!
+       <br /><br />
+       *진행시간
+       2시간
+       <br /><br />
+       *참여인원
+       최대 4명
+       <br /><br />
+       *제공 서비스<br>
+       -저희가 제공하는 사진 중 10장을 포토에디팅을 하여 보내드립니다.<br>
+       -100장 이상의 포토슛에서 찍은 모든 사진을 제공합니다.<br>
+       -인스타그램<br>
+       @jennie
+      </p>
+      
+      <!-- 호스트에게 연락하기 popup -->
+   		<button class="btn btn-primary custom-btn activity_btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+	        호스트에게 연락하기
+	      </button>
+	    <div class="collapse show" id="collapseExample" style="">
+	      <div class="card card-body">
+	        제니 님 카카오톡 연락처: jenniekim 
+	      </div>
+	    </div>
+    </article>
+  </section>  
+      
+      <!--탭 메뉴 넣어서 만들기!-->
+      <div class="tab-menu">
+		  <button class="tab-button active activity_btn" onclick="showTabContent('directions')">길 찾기</button>
+		  <button class="tab-button activity_btn" onclick="showTabContent('reviews')">리뷰 보기</button>
+	  </div>
+
+      
+      <!--카카오톡 지도 API 넣기! 위치랑 후기를 클릭하면 보이게? 하는건 어떨까여 ㅎㅎ 레이아웃 쉣임!-->
+     <div id="directionsContent" class="tab-content" style="display: block;">
+      <h2>위치</h2>
+      <div id="map" style="width: 100%; height: 400px;"></div> <!-- Map div -->
+       <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_API_KEY&libraries=services"></script>
+      <script>
+        // Initialize Kakao Maps API
+        kakao.maps.load(function () {
+          // Specify the latitude and longitude of the location
+          var latlng = new kakao.maps.LatLng(37.5799, 126.9778);
+
+          // Create a map centered at the specified location
+          var mapContainer = document.getElementById("map");
+          var mapOptions = {
+            center: latlng,
+            level: 3, // Adjust the level (zoom) as needed
+          };
+          var map = new kakao.maps.Map(mapContainer, mapOptions);
+
+          // Add a marker at the specified location
+          var marker = new kakao.maps.Marker({
+            position: latlng,
+          });
+          marker.setMap(map);
+        });
+      </script>
+   </div>
+   
+      <!-- Reviews section -->
+    <div id="reviewsContent" class="tab-content" style="display: none;">  
+      <h2>리뷰</h2>
+      <div class="review-section">
+	  <div class="review-heading">
+	    <div class="item-497-1121-7W1"><img class="frame-BcM" src="./assets/frame-nTK.png"/>4.97점(후기 1,121개)</div>
+	  </div>
+	  <div class="review-list">
+	    <div class="review-item">
+	      <div class="reviewer-info">
+	        <div class="reviewer-name"><img class="frame-RDB" src="./assets/frame-BCu.png"/>Teresa</div>
+	        <div class="review-date">2023년 7월</div>
+	      </div>
+	      <div class="review-content">
+	        <div class="review-text">
+	          Bellissima esperienza, davvero felice di averla fatta la mia<br/>
+	          prima volta in Corea. L’hanbok era meraviglioso, mi sono<br/>
+	          sentita una principessa e il fotografo è stato davvero…
+	        </div>
+	        <div class="read-more-button">
+	          <div class="item--WM7">더 보기</div>
+	        </div>
+	      </div>
+	    </div>
+	    <!-- Add more review items here -->
+	  </div>
+	  <div class="view-all-reviews-link">후기 모두 보기</div>
+	</div>
+  </div>    
+      
+<!--공유하기 클릭하면 나오는 스크립트-->
+<script>
+  const shareButton = document.getElementById('shareButton');
+
+  // Add a click event listener to the button
+  shareButton.addEventListener('click', function() {
+    // Get the current URL of the page
+    const currentUrl = window.location.href;
+
+    // Show an alert with the current URL
+    alert(`현재 페이지 주소: ${currentUrl}`);
+    // Alternatively, you can create a pop-up or modal to display the URL
+    // and style it according to your design.
+  });
+</script>
+
+
+<!--탭화면 클릭하기 관련-->
+<script>
+  function showTabContent(tabName) {
+    const tabs = document.getElementsByClassName('tab-content');
+    for (let i = 0; i < tabs.length; i++) {
+      tabs[i].style.display = 'none';
+    }
+
+    const buttons = document.getElementsByClassName('tab-button');
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove('active');
+    }
+
+    document.getElementById(tabName + 'Content').style.display = 'block';
+    document.querySelector(`[onclick="showTabContent('${tabName}')"]`).classList.add('active');
+  }
+</script>
+
+
+
+</body>
+</html>
