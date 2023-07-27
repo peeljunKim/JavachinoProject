@@ -1,0 +1,8 @@
+package com.example.demo.controller;
+
+import org.springframework.context.annotation.Conditional;
+
+@Conditional
+public class IndexController {
+
+}
