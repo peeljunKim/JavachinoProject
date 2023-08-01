@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "activity_review")
 @SequenceGenerator(
         name="ACTIVITY_REVIEW_SEQ_GEN",
-        sequenceName = "ACTIVITY_REVIEW_SEQ"
+        sequenceName = "ACTIVITY_REVIEW_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -32,9 +34,9 @@ public class ActivityReview {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_user"))
-    private Users users;
+    private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))
-    private Activity activity;
+    private Activity activity_id;
 
 }

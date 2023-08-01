@@ -9,7 +9,9 @@ import lombok.Setter;
 @Table(name = "activity")
 @SequenceGenerator(
         name="ACTIVITY_SEQ_GEN",
-        sequenceName = "ACTIVITY_SEQ"
+        sequenceName = "ACTIVITY_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Activity {
@@ -33,6 +35,6 @@ public class Activity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_activity_to_business"))
-    private Business business;
+    private Business business_id;
 }
 

@@ -21,7 +21,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "commentary")
 @SequenceGenerator(
         name="COMMENTARY_SEQ_GEN",
-        sequenceName = "COMMENTARY_SEQ"
+        sequenceName = "COMMENTARY_SEQ",
+		initialValue = 1,
+		allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Commentary {
@@ -34,8 +36,8 @@ public class Commentary {
 	private Date commentary_date;
 	private String commentary_content;
 	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
-	private Users users_id;
+	    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
+	private Users users_no;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_id", foreignKey = @ForeignKey(name = "fk_commentary_to_community"))  

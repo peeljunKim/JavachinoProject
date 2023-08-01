@@ -18,7 +18,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "pay")
 @SequenceGenerator(
 		name = "PAY_SEQ_GEN",
-		sequenceName = "PAY_SEQ"
+		sequenceName = "PAY_SEQ",
+		initialValue = 1,
+		allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pay {
@@ -29,14 +31,13 @@ public class Pay {
 			generator = "PAY_SEQ_GEN"
 	)
 	private int pay_no;
-	
 	private int pay_price;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ldg_rv_no", foreignKey = @ForeignKey(name = "fk_pay_to_accomodation_rv"))
-	private int ldg_rv_no;
+	@JoinColumn(name = "accomodation_rv_id", foreignKey = @ForeignKey(name = "fk_pay_to_accomodation_rv"))
+	private  AccomodationRV accomodation_rv_id;
 	
 	@ManyToOne(fetch =  FetchType.LAZY)
 	@JoinColumn(name = "activity_rv_no", foreignKey = @ForeignKey(name = "fk_pay_to_activity_rv"))
-	private int activity_rv_no;
+	private ActivityRv activity_rv_no;
 }

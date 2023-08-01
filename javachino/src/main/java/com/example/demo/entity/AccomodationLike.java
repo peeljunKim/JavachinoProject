@@ -6,18 +6,14 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(
-        name = "accomodation_like",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "ACCOMODATION_LIKE_UNIQUE",
-                        columnNames = {"users_id", "accomodation_id"}
-                )
-        }
+        name = "accomodation_like"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
         name="ACCOMODATION_LIKE_SEQ_GEN",
-        sequenceName = "ACCOMODATION_LIKE_SEQ"
+        sequenceName = "ACCOMODATION_LIKE_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 public class AccomodationLike {
     @Id
@@ -27,8 +23,8 @@ public class AccomodationLike {
     )
     private int accmodation_like_id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_accomodation_like_to_users"))
-    private Users users_id;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_like_to_users"))
+    private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_like_to_accomodation"))
     private Accomodation accomodation_id;

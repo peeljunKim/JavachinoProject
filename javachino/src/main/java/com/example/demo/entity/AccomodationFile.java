@@ -8,18 +8,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(
-        name = "accomodation_file",
-        uniqueConstraints = {
-                @UniqueConstraint(
-                        name = "ACCOMODATION_FILE_UNIQUE",
-                        columnNames = {"users_id", "accomodation_id"}
-                )
-        }
+        name = "accomodation_file"
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
         name="ACCOMODATION_FILE_SEQ_GEN",
-        sequenceName = "ACCOMODATION_FILE_SEQ"
+        sequenceName = "ACCOMODATION_FILE_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 public class AccomodationFile {
     @Id

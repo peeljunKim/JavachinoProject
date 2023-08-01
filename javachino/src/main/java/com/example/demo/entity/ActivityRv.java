@@ -14,7 +14,10 @@ import java.time.LocalDateTime;
 @Table(name = "activity_rv")
 @SequenceGenerator(
         name="ACTIVITY_RV_SEQ_GEN",
-        sequenceName = "ACTIVITY_RV_SEQ"
+        sequenceName = "ACTIVITY_RV_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
+        
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -37,9 +40,9 @@ public class ActivityRv {
     private String activity_rv_Phone;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_rv_to_user"))
-    private Users users;
+    private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "fk_activity_rv_to_activity"))
-    private Activity activity;
+    private Activity activity_id;
 
 }

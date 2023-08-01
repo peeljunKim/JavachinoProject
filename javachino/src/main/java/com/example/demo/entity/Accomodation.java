@@ -8,7 +8,11 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(name = "accomodation")
-@SequenceGenerator(name = "ACCOMODATION_SEQ_GEN", sequenceName = "ACCOMODATION_SEQ")
+@SequenceGenerator(
+		name = "ACCOMODATION_SEQ_GEN", 
+		sequenceName = "ACCOMODATION_SEQ",
+initialValue = 1,
+allocationSize = 1)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Accomodation {
 	@Id

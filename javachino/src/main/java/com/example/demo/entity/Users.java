@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @SequenceGenerator(
         name="USERS_SEQ_GEN",
-        sequenceName = "USERS_SEQ"
+        sequenceName = "USERS_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Users {

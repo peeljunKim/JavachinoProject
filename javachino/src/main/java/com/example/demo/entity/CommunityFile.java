@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "communityFile")
 @SequenceGenerator(
         name="COMMUNITY_FILE_SEQ_GEN",
-        sequenceName = "COMMUNITY_FILE_SEQ"
+        sequenceName = "COMMUNITY_FILE_SEQ",
+		initialValue = 1,
+		allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CommunityFile {

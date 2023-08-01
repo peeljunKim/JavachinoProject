@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "business")
 @SequenceGenerator(
         name="BUSINESS_SEQ_GEN",
-        sequenceName = "BUSINESS_SEQ"
+        sequenceName = "BUSINESS_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Business {

@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 @Table(name = "accomodation_review")
 @SequenceGenerator(
         name="ACCMOTATION_REVIEW_SEQ_GEN",
-        sequenceName = "ACCOMOTATION_REVIEW_SEQ"
+        sequenceName = "ACCOMOTATION_REVIEW_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
@@ -31,8 +33,8 @@ public class AccomodationReiview {
     private LocalDate accomodation_review_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_users"))
-    private Users users_id;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_users"))
+    private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_accomodation"))
     private Accomodation accomodation_id;

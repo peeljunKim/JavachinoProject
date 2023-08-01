@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,18 +17,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(
-		name = "communityLike",
-		uniqueConstraints = {
-				@UniqueConstraint(
-						name = "COMMUNITY_LIKE_UNIQUE",
-                        columnNames = {"user_id", "community_no"}
-                )
-        	}
+		name = "communityLike"
 		)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
         name="COMMUNITY_LIKE_SEQ_GEN",
-        sequenceName = "COMMUNITY_LIKE_SEQ"
+        sequenceName = "COMMUNITY_LIKE_SEQ",
+		initialValue = 1,
+		allocationSize = 1
 )
 public class CommmunityLike {
 	@Id
@@ -39,8 +34,8 @@ public class CommmunityLike {
     )
 	private int community_like_id;
 	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_community_like_to_user"))
-	private Users users_id;
+	    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_community_like_to_user"))
+	private Users users_no;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_id", foreignKey = @ForeignKey(name = "fk_community_like_to_community"))  

@@ -21,7 +21,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "report")
 @SequenceGenerator(
         name="REPORT_SEQ_GEN",
-        sequenceName = "REPORT_SEQ"
+        sequenceName = "REPORT_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Report {
@@ -32,25 +34,21 @@ public class Report {
     )
 	private int report_id;
 	@Enumerated(EnumType.ORDINAL)
-	private String report_reason;
+	private ReportReason report_reason;
 	@Enumerated(EnumType.ORDINAL)
-	private int report_status;
+	private ReportStatus report_status;
 	@Enumerated(EnumType.ORDINAL)
-	private int report_category;
+	private ReportCategory report_category;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_review_id", foreignKey = @ForeignKey(name = "fk_report_to_activity_review"))
-	private ActivityReview activityReview_id;
+	private ActivityReview activity_Review_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "pension_review_id", foreignKey = @ForeignKey(name = "fk_report_to_pension_review"))
-	private AccomodationReiview pensionReview_id;
+    @JoinColumn(name = "accomodation_review_id", foreignKey = @ForeignKey(name = "fk_report_to_pension_review"))
+	private AccomodationReiview accomodation_review_id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "community_id", foreignKey = @ForeignKey(name = "fk_report_to_community"))
-	private Community community_id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id", foreignKey = @ForeignKey(name = "fk_report_to_user"))
-	private Users users_id;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_report_to_user"))
+	private Users users_no;
 }

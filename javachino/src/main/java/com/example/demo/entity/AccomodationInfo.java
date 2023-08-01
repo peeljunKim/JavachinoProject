@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "accomodation_info")
 @SequenceGenerator(
         name="ACCOMODATION_INFO_SEQ_GEN",
-        sequenceName = "ACCOMODATION_INFO_SEQ"
+        sequenceName = "ACCOMODATION_INFO_SEQ",
+    	initialValue = 1,
+    	allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccomodationInfo {

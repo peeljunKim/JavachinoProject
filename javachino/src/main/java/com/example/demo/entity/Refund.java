@@ -21,7 +21,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "refund")
 @SequenceGenerator(
 		name = "REFUND_SEQ_GEN",
-		sequenceName = "REFUND_SEQ"
+		sequenceName = "REFUND_SEQ",
+		initialValue = 1,
+		allocationSize = 1
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
