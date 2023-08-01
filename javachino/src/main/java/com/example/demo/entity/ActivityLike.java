@@ -25,7 +25,7 @@ public class ActivityLike {
             strategy = GenerationType.SEQUENCE,
             generator = "ACTIVITY_LIKE_SEQ_GEN"
     )
-    private int actgivity_like_id;
+    private int activity_like_id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_user"))
     private Users users;
