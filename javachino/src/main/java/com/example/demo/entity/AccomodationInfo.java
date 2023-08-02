@@ -29,7 +29,7 @@ public class AccomodationInfo {
     private String accomodation_info_explanation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accmodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_info_to_accomdation"))
+    @JoinColumn(name = "accmodation_id", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
     private Accomodation accomodation_id;
 
 	

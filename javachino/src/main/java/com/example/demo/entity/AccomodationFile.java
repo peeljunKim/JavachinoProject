@@ -26,7 +26,7 @@ public class AccomodationFile {
     private int accomodation_file_id;
     private String accomodation_file;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_file_to_accomodation"))
+    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))
     private Accomodation accomodation_id;
 	
 

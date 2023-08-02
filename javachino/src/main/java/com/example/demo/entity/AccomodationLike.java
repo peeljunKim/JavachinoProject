@@ -23,10 +23,10 @@ public class AccomodationLike {
     )
     private int accmodation_like_id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_like_to_users"))
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_like_to_users"))
     private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_like_to_accomodation"))
+    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accom_like_to_accom"))
     private Accomodation accomodation_id;
     
 

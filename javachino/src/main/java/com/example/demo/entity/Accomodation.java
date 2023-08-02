@@ -25,7 +25,7 @@ public class Accomodation {
 	private AccomodationCategory accomodation_category;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_accomodation_to_business"))
+	@JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
 	private Business business_id;
 
 	public Accomodation(int accomodation_id, String accomodation_name, String accomodation_addr,

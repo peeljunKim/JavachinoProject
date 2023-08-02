@@ -33,10 +33,10 @@ public class AccomodationReiview {
     private LocalDate accomodation_review_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_users"))
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_users"))
     private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_accomodation"))
+    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accom_review_to_accom"))
     private Accomodation accomodation_id;
     
 
