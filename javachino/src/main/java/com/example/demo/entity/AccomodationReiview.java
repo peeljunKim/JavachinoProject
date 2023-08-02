@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "accomodation_review")
 @SequenceGenerator(
-        name="ACCMOTATION_REVIEW_SEQ_GEN",
-        sequenceName = "ACCOMOTATION_REVIEW_SEQ",
+        name="ACCOMODATION_REVIEW_SEQ_GEN",
+        sequenceName = "ACCOMODATION_REVIEW_SEQ",
     	initialValue = 1,
     	allocationSize = 1
 )
@@ -23,7 +23,7 @@ public class AccomodationReiview {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "ACCMOTATION_REVIEW_SEQ_GEN"
+            generator = "ACCOMODATION_REVIEW_SEQ_GEN"
     )
     private int accomodation_review_id;
     private double accomodation_review_star;

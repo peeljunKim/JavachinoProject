@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "accomodation_rv")
 @SequenceGenerator(
-        name="ACCMOTATION_RV_SEQ_GEN",
-        sequenceName = "ACCMOTATION_RV_SEQ",
+        name="ACCOMODATION_RV_SEQ_GEN",
+        sequenceName = "ACCOMODATION_RV_SEQ",
     	initialValue = 1,
     	allocationSize = 1
 )
@@ -23,7 +23,7 @@ public class AccomodationRV {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "ACCMOTATION_RV_SEQ_GEN"
+            generator = "ACCOMODATION_RV_SEQ_GEN"
     )
     private int  accomodation_rv_id;
     private String accomodation_rv_checkIn;
@@ -39,7 +39,7 @@ public class AccomodationRV {
     private Users users_no;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_rv_to_accomodation"))
-    private Accomodation accomodation;
+    private Accomodation accomodation_id;
 
 
     

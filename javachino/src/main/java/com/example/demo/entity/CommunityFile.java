@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "communityFile")
+@Table(name = "community_File")
 @SequenceGenerator(
         name="COMMUNITY_FILE_SEQ_GEN",
         sequenceName = "COMMUNITY_FILE_SEQ",

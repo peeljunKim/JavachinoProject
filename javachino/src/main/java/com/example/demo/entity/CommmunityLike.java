@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @Table(
-		name = "communityLike"
+		name = "community_Like"
 		)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
