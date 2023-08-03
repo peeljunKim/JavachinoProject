@@ -20,12 +20,18 @@ public class Business {
             strategy = GenerationType.SEQUENCE,
             generator = "BUSINESS_SEQ_GEN"
     )
-    private int business_id;
-    private String business_name;
-    private String business_addr;
-    private String business_phone;
-    private String business_manager;
+    @Column(name = "business_no")
+    private int businessNo;
+    @Column(name = "business_name")
+    private String businessName;
+    @Column(name = "business_addr")
+    private String businessAddr;
+    @Column(name = "business_phone")
+    private String businessPhone;
+    @Column(name = "business_manager")
+    private String businessManager;
     @Enumerated(EnumType.ORDINAL)
-    private BusinessCategory business_category;
+    @Column(name = "business_category")
+    private BusinessCategory businessCategory;
 
 }

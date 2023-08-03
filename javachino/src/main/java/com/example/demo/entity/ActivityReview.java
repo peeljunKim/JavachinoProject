@@ -25,18 +25,22 @@ public class ActivityReview {
             strategy = GenerationType.SEQUENCE,
             generator = "ACTIVITY_REVIEW_SEQ_GEN"
     )
-    private int activity_review_id;
-    private double activity_review_star;
-    private String activity_review_content;
+    @Column(name = "activity_review_no")
+    private int activityReviewNo;
+    @Column(name = "activity_review_star")
+    private double activityReviewStar;
+    @Column(name = "activity_review_content")
+    private String activityReviewContent;
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
-    private LocalDate activity_review_date;
+    @Column(name = "activity_review_date")
+    private LocalDate activityReviewDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_user"))
-    private Users users_no;
+    @JoinColumn(name = "user_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_users"))
+    private Users usersNo;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))
-    private Activity activity_id;
+    @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))
+    private Activity activityNo;
 
 }

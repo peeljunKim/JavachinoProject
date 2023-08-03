@@ -32,11 +32,11 @@ public class AccomodationRV {
     private String accomodationRVCheckOut;
     @Column(name = "accomodation_rv_date")
     private String accomodationRVDateRV;
-    @Column(name = "accomodation_rv_Name")
+    @Column(name = "accomodation_rv_name")
     private String accomodationRVName;
     @Column(name = "accomodation_rv_numberOfPerson")
     private String accomodationRVNumberOfPerson;
-    @Column(name = "accomodation_RV_Phone")
+    @Column(name = "accomodation_rv_phone")
     private String accomodationRVPhone;
     
     

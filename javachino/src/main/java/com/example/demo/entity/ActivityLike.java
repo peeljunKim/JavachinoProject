@@ -21,12 +21,13 @@ public class ActivityLike {
             strategy = GenerationType.SEQUENCE,
             generator = "ACTIVITY_LIKE_SEQ_GEN"
     )
-    private int activity_like_id;
+    @Column(name = "activity_like_no")
+    private int activityLikeNo;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_user"))
-    private Users users_no;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_users"))
+    private Users usersNo;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "fk_activity_like_to_activity"))
-    private Activity activity_id;
+    @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_activity"))
+    private Activity activityNo;
 
 }

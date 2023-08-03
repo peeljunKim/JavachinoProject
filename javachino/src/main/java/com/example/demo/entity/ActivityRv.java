@@ -27,22 +27,27 @@ public class ActivityRv {
             strategy = GenerationType.SEQUENCE,
             generator = "ACTIVITY_RV_SEQ_GEN"
     )
-    private int activity_rv_id;
+    @Column(name = "activity_rv_no")
+    private int activityRvNo;
 
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
-    private LocalDate rv_date;
+    @Column(name = "rv_date")
+    private LocalDate rvDate;
 
     @Temporal(TemporalType.DATE)
-    private LocalDate activity_rv_date;
-
-    private int activity_rv_people;
-    private String activity_rv_Phone;
+    @Column(name = "activity_rv_date")
+    private LocalDate activityRvDate;
+    @Column(name = "activity_rv_people")
+    private int activityRvPeople;
+    @Column(name = "activity_rv_phone")
+    private String activityRvPhone;
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_rv_to_user"))
-    private Users users_no;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_rv_to_users"))
+    private Users usersNo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_id", foreignKey = @ForeignKey(name = "fk_activity_rv_to_activity"))
-    private Activity activity_id;
+    private Activity activityNo;
 
 }

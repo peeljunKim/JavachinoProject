@@ -20,21 +20,31 @@ public class Activity {
             strategy = GenerationType.SEQUENCE,
             generator = "ACTIVITY_SEQ_GEN"
     )
-    private int activity_id;
-    private String activity_name;
-    private String activity_addr;
-    private String activity_explanation;
+    @Column(name = "activity_no")
+    private int activityNo;
+    @Column(name = "activity_name")
+    private String activityName;
+    @Column(name = "activity_addr")
+    private String activityAddr;
+    @Column(name = "activity_explanation")
+    private String activityExplanation;
     @Enumerated(EnumType.ORDINAL)
-    private ActivityCategory activity_category;
-    private double activity_price;
+    @Column(name = "activity_category")
+    private ActivityCategory activityCategory;
+    @Column(name = "activity_price")
+    private double activityPrice;
+    @Column(name = "activityTime")
     private int activity_time;
     @Setter
-    private String activity_fname1;
-    private String activity_fname2;
-    private String activity_fname3;
+    @Column(name = "activity_fname1")
+    private String activityFname1;
+    @Column(name = "activity_fname2")
+    private String activityFname2;
+    @Column(name = "activity_fname3")
+    private String activityFname3;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_activity_to_business"))
-    private Business business_id;
+    @JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_activity_to_business"))
+    private Business businessNo;
 }
 
