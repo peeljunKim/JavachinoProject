@@ -39,7 +39,7 @@ public class Refund {
 	private int refundNo;
 	@Column(name = "refund_receipt_date")
 	private Date refundReceiptDate;
-	@Column(name = "refund_receipt_date")
+	@Column(name = "refund_finish_date")
 	private Date refundFinishDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
