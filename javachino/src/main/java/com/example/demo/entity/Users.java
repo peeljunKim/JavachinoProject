@@ -19,9 +19,14 @@ public class Users {
 		strategy =  GenerationType.SEQUENCE,
 		generator = "USERS_SEQ_GEN"
     )
-    private int users_no;
-    private String users_id;
-    private String users_name;
-    private String users_fname;
-    private String users_phone;
+    @Column(name = "users_no")
+    private int usersNo;
+    @Column(name = "users_id")
+    private String usersId;
+    @Column(name = "users_name")
+    private String usersName;
+    @Column(name = "users_fname")
+    private String usersFname;
+    @Column(name = "users_phone")
+    private String usersPhone;
 } 

@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -30,8 +31,10 @@ public class Pay {
 			strategy =  GenerationType.SEQUENCE,
 			generator = "PAY_SEQ_GEN"
 	)
-	private int pay_no;
-	private int pay_price;
+	@Column(name = "pay_no")
+	private int payNo;
+	@Column(name = "pay_price")
+	private int payPrice;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accomodation_rv_id", foreignKey = @ForeignKey(name = "fk_pay_to_accomodation_rv"))
@@ -39,5 +42,5 @@ public class Pay {
 	
 	@ManyToOne(fetch =  FetchType.LAZY)
 	@JoinColumn(name = "activity_rv_no", foreignKey = @ForeignKey(name = "fk_pay_to_activity_rv"))
-	private ActivityRv activity_rv_no;
+	private ActivityRv activityRVNo;
 }

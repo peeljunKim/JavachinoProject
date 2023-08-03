@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -34,12 +35,14 @@ public class Refund {
 			strategy = GenerationType.SEQUENCE,
 			generator = "REFUND_SEQ_GEN"
 	)
-	private int refund_no;
-	
-	private Date refund_receipt_date;
-	private Date refund_finish_date;
+	@Column(name = "refund_no")
+	private int refundNo;
+	@Column(name = "refund_receipt_date")
+	private Date refundReceiptDate;
+	@Column(name = "refund_receipt_date")
+	private Date refundFinishDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pay_no", foreignKey = @ForeignKey(name = "fk_fefund_to_pay"))
-	private Pay pay_no;
+	private Pay payNo;
 }
