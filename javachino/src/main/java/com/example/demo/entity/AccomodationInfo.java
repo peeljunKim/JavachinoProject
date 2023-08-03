@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "ACCOMODATION_INFO_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccomodationInfo {
     @Id

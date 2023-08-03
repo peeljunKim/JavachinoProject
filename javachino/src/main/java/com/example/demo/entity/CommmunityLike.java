@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "COMMUNITY_LIKE_SEQ",
 		initialValue = 1,
 		allocationSize = 1
-)
+) 
 public class CommmunityLike {
 	@Id
 	@GeneratedValue(

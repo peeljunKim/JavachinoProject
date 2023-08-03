@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "COMMUNITY_SEQ",
 		initialValue = 1,
 		allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Community {
 	@Id

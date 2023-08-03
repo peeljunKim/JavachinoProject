@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 		sequenceName = "REFUND_SEQ",
 		initialValue = 1,
 		allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Refund {

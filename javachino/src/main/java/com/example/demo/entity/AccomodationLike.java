@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "ACCOMODATION_LIKE_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-)
+) 
 public class AccomodationLike {
     @Id
     @GeneratedValue(

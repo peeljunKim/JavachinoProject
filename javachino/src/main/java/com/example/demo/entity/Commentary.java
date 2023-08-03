@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "COMMENTARY_SEQ",
 		initialValue = 1,
 		allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Commentary {
 	@Id

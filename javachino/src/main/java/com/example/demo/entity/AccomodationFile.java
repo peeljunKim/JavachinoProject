@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Entity 
 @Data
 @Table(
         name = "accomodation_file"

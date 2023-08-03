@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "REPORT_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Report {
 	@Id

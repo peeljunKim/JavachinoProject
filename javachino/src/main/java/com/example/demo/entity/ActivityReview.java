@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
         sequenceName = "ACTIVITY_REVIEW_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class ActivityReview {

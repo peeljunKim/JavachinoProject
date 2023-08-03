@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
         sequenceName = "ACTIVITY_RV_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-        
+         
 )
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)

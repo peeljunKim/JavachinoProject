@@ -39,7 +39,7 @@ public class AccomodationRV {
     @Column(name = "accomodation_rv_phone")
     private String accomodationRVPhone;
     
-    
+     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_users"))
     private Users usersNo;

@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 		sequenceName = "PAY_SEQ",
 		initialValue = 1,
 		allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Pay {
 	

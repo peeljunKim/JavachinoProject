@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "BUSINESS_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Business {
     @Id

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(
         name = "activity_like"
-)
+) 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
         name="ACTIVITY_LIKE_SEQ_GEN",
