@@ -33,8 +33,8 @@ public class Activity {
     private ActivityCategory activityCategory;
     @Column(name = "activity_price")
     private double activityPrice;
-    @Column(name = "activityTime")
-    private int activity_time;
+    @Column(name = "activity_time")
+    private int activityTime;
     @Setter
     @Column(name = "activity_fname1")
     private String activityFname1;
