@@ -33,13 +33,9 @@ public class AccomodationInfo {
     private String accomodationInfoExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-<<<<<<< HEAD
     @JoinColumn(name = "accmodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
     private Accomodation accomodationNo;
-=======
-    @JoinColumn(name = "accmodation_id", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
-    private Accomodation accomodation_id;
->>>>>>> final
+
 
 	
 
