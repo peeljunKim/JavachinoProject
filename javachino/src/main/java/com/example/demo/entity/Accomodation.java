@@ -30,8 +30,13 @@ public class Accomodation {
 	private AccomodationCategory accomodationCategory;
 
 	@ManyToOne(fetch = FetchType.LAZY)
+<<<<<<< HEAD
 	@JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
 	private Business businessNo;
+=======
+	@JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
+	private Business business_id;
+>>>>>>> final
 
 
 
