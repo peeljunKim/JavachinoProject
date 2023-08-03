@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,17 +35,25 @@ public class Community {
             strategy = GenerationType.SEQUENCE,
             generator = "COMMUNITY_SEQ_GEN"
     )
-	private int community_id;
-	private Date community_date;
-	private String community_title;
-	private String community_content;
-	private String community_addr;
-	private int community_hit;
+	@Column(name = "community_no")
+	private int communityNo;
+	@Column(name = "community_date")
+	private Date communityDate;
+	@Column(name = "community_title")
+	private String communityTitle;
+	@Column(name = "community_content")
+	private String communityContent;
+	@Column(name = "community_addr")
+	private String communityAddr;
+	@Column(name = "community_hit")
+	private int communityHit;
 	@Enumerated(EnumType.ORDINAL)
-	private CommunityCategory community_category;
+	@Column(name = "community_category")
+	private CommunityCategory communityCategory;
 	@Enumerated(EnumType.ORDINAL)
-	private CommunitySelect community_select;
+	@Column(name = "community_select")
+	private CommunitySelect communitySelect;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_community_to_users"))
-	private Users users_no;
+	private Users usersNo;
 }

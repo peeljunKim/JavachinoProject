@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,23 +33,19 @@ public class Report {
             strategy = GenerationType.SEQUENCE,
             generator = "REPORT_SEQ_GEN"
     )
-	private int report_id;
+	@Column(name = "report_no")
+	private int reportNo;
 	@Enumerated(EnumType.ORDINAL)
-	private ReportReason report_reason;
+	@Column(name = "report_reason")
+	private ReportReason reportReason;
 	@Enumerated(EnumType.ORDINAL)
-	private ReportStatus report_status;
+	@Column(name = "report_status")
+	private ReportStatus reportStatus;
 	@Enumerated(EnumType.ORDINAL)
-	private ReportCategory report_category;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_review_id", foreignKey = @ForeignKey(name = "fk_report_to_activity_review"))
-	private ActivityReview activity_Review_id;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_review_id", foreignKey = @ForeignKey(name = "fk_report_to_pension_review"))
-	private AccomodationReiview accomodation_review_id;
+	@Column(name = "report_category")
+	private ReportCategory reportCategory;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_report_to_user"))
-	private Users users_no;
+	private Users usersNo;
 }

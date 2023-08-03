@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -32,14 +33,17 @@ public class Commentary {
             strategy=GenerationType.SEQUENCE,
             		generator = "COMMENTARY_SEQ"
 	)
-	private int commentary_id;
-	private Date commentary_date;
-	private String commentary_content;
+	@Column(name = "commentary_no")
+	private int commentaryNo;
+	@Column(name = "commentary_date")
+	private Date commentaryDate;
+	@Column(name = "commentary_content")
+	private String commentaryContent;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
-	private Users users_no;
+	private Users usersNo;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "community_id", foreignKey = @ForeignKey(name = "fk_commentary_to_community"))  
-	private Community community_id;
+	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_commentary_to_community"))  
+	private Community communityNo;
 }

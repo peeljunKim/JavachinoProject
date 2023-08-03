@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -30,9 +31,11 @@ public class CommunityFile {
             strategy = GenerationType.SEQUENCE,
             generator = "COMMUNITY_FILE_SEQ_GEN"
     )
-	private int community_file_id;
-	private String community_file_fname;
+	@Column(name = "community_file_no")
+	private int communityFileNo;
+	@Column(name = "community_file_fname")
+	private String communityFileFname;
 	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "community_id", foreignKey = @ForeignKey(name = "fk_community_file_to_community"))  
-	private Community community_id;
+    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_file_to_community"))  
+	private Community communityNo;
 }
