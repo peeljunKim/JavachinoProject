@@ -2,14 +2,13 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "accomodation_rv")
 @SequenceGenerator(
         name="ACCOMODATION_RV_SEQ_GEN",
@@ -25,21 +24,28 @@ public class AccomodationRV {
             strategy = GenerationType.SEQUENCE,
             generator = "ACCOMODATION_RV_SEQ_GEN"
     )
-    private int  accomodation_rv_id;
-    private String accomodation_rv_checkIn;
-    private String accomodation_rv_checkOut;
-    private String accomodation_rv_dateRV;
-    private String accomodation_rv_nameRV;
-    private String accomodation_rv_numberOfPerson;
-    private String accomodation_rv_phoneRV;
+    @Column(name = "accomodation_rv_no")
+    private int  accomodationRVNo;
+    @Column(name = "accomodation_rv_checkIn")
+    private String accomodationRVCheckIn;
+    @Column(name = "accomodation_rv_checkOut")
+    private String accomodationRVCheckOut;
+    @Column(name = "accomodation_rv_date")
+    private String accomodationRVDateRV;
+    @Column(name = "accomodation_rv_Name")
+    private String accomodationRVName;
+    @Column(name = "accomodation_rv_numberOfPerson")
+    private String accomodationRVNumberOfPerson;
+    @Column(name = "accomodation_RV_Phone")
+    private String accomodationRVPhone;
     
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_rv_to_users"))
-    private Users users_no;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_users"))
+    private Users usersNo;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_rv_to_accomodation"))
-    private Accomodation accomodation_id;
+    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_accom"))
+    private Accomodation accomodationNo;
 
 
     

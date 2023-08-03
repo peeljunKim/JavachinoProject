@@ -2,14 +2,15 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "accomodation_review")
 @SequenceGenerator(
         name="ACCOMODATION_REVIEW_SEQ_GEN",
@@ -25,19 +26,24 @@ public class AccomodationReiview {
             strategy = GenerationType.SEQUENCE,
             generator = "ACCOMODATION_REVIEW_SEQ_GEN"
     )
-    private int accomodation_review_id;
-    private double accomodation_review_star;
-    private String accomodation_review_content;
+    @Column(name = "accomodation_review_no")
+    private int accomodationReviewNo;
+    @Column(name = "accomodation_review_star")
+    private double accomodationReviewStar;
+    @Column(name = "accomodation_review_content")
+    private String accomodationReviewContent;
+    
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
-    private LocalDate accomodation_review_date;
+    @Column(name = "accomodation_review_date")
+    private LocalDate accomodationReviewDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_users"))
-    private Users users_no;
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_users"))
+    private Users usersNo;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_review_to_accomodation"))
-    private Accomodation accomodation_id;
+    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_accom"))
+    private Accomodation accomodationNo;
     
 
 

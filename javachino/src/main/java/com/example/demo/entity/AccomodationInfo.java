@@ -21,16 +21,20 @@ public class AccomodationInfo {
             strategy = GenerationType.SEQUENCE,
             generator = "ACCOMODATION_INFO_SEQ_GEN"
     )
-    private int accomodation_info_id;
-    private String accomodation_info_price;
-    private String accomodation_info_minPerson;
-    private String accomodation_info_maxPersion;
-    private String accomodation_info_size;
-    private String accomodation_info_explanation;
+    @Column(name = "accomodation_info_no")
+    private int accomodationInfoNo;
+    @Column(name = "accomodation_info_minPerson")
+    private String accomodationInfoMinPerson;
+    @Column(name = "accomodation_info_maxPersion")
+    private String accomodationInfoMaxPersion;
+    @Column(name = "accomodation_info_size")
+    private String accomodationInfoSize;
+    @Column(name = "accomodation_info_explanation")
+    private String accomodationInfoExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accmodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_info_to_accomdation"))
-    private Accomodation accomodation_id;
+    @JoinColumn(name = "accmodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
+    private Accomodation accomodationNo;
 
 	
 

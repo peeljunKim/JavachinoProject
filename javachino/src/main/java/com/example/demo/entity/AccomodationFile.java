@@ -23,11 +23,14 @@ public class AccomodationFile {
             strategy = GenerationType.SEQUENCE,
             generator = "ACCOMODATION_FILE_SEQ_GEN"
     )
-    private int accomodation_file_id;
-    private String accomodation_file;
+    @Column(name = "accomodation_file_no")
+    private int accomodationFileNo;
+    @Column(name = "accomodation_file_fname")
+    private String accomodationFileFname;
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_id", foreignKey = @ForeignKey(name = "fk_accomodation_file_to_accomodation"))
-    private Accomodation accomodation_id;
+    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))
+    private Accomodation accomodationNo;
 	
 
   

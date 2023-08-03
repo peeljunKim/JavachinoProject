@@ -17,27 +17,22 @@ allocationSize = 1)
 public class Accomodation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACCOMODATION_SEQ_GEN")
-	private int accomodation_id;
-	private String accomodation_name;
-	private String accomodation_addr;
-	private String accomodation_phone;
+	@Column(name = "accomodation_no")
+	private int accomodationNo;
+	@Column(name = "accomodation_name")
+	private String accomodationName;
+	@Column(name = "accomodation_addr")
+	private String accomodationAddr;
+	@Column(name = "accomodation_price")
+	private String accomodationPrice;
 	@Enumerated(EnumType.ORDINAL)
-	private AccomodationCategory accomodation_category;
+	@Column(name = "accomodation_category")
+	private AccomodationCategory accomodationCategory;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "business_id", foreignKey = @ForeignKey(name = "fk_accomodation_to_business"))
-	private Business business_id;
+	@JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
+	private Business businessNo;
 
-	public Accomodation(int accomodation_id, String accomodation_name, String accomodation_addr,
-			String accomodation_phone, AccomodationCategory accomodation_category, Business business_id) {
-		super();
-		this.accomodation_id = accomodation_id;
-		this.accomodation_name = accomodation_name;
-		this.accomodation_addr = accomodation_addr;
-		this.accomodation_phone = accomodation_phone;
-		this.accomodation_category = accomodation_category;
-		this.business_id = business_id;
-	}
 
 
 }

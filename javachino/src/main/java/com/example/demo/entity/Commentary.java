@@ -35,8 +35,8 @@ public class Commentary {
 	private int commentary_id;
 	private Date commentary_date;
 	private String commentary_content;
-	  @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
 	private Users users_no;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
