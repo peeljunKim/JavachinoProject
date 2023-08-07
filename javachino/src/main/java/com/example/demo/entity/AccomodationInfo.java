@@ -31,6 +31,8 @@ public class AccomodationInfo {
     private String accomodationInfoSize;
     @Column(name = "accomodation_info_explanation")
     private String accomodationInfoExplanation;
+    @Column(name = "accomodation_priceper_person")
+    private String accomodationPriceperPerson;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
