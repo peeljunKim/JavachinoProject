@@ -24,7 +24,7 @@ public class Accomodation {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
-	private Business businessNo;
+	private Business business;
 
 	public Accomodation() {
 	}

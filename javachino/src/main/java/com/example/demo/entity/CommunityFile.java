@@ -37,5 +37,5 @@ public class CommunityFile {
 	private String communityFileFname;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_file_to_community"))  
-	private Community communityNo;
+	private Community community;
 }

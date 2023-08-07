@@ -55,5 +55,12 @@ public class Community {
 	private CommunitySelect communitySelect;
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_community_to_users"))
-	private Users usersNo;
+	private Users users;
+	
+   @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_rv_no", foreignKey = @ForeignKey(name = "fk_community_to_activity_rv"))
+   private ActivityRv activityRv;
+   @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accomodation_rv_no", foreignKey = @ForeignKey(name = "fk_community_to_accomodation_rv"))
+   private AccomodationRv accomodationRv;
 }

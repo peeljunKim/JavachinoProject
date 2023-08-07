@@ -21,7 +21,7 @@ public class AccomodationFac {
 //    )
     @OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accomodation_no"/* , foreignKey = @ForeignKey(name = "fk_accomodation_fac_to_accomodation") */)
-    private Accomodation accomodationNo;
+    private Accomodation accomodation;
     private int spa;
     private int kitchen;
     private int bbq;

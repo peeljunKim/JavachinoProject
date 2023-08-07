@@ -41,9 +41,9 @@ public class Commentary {
 	private String commentaryContent;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_commentary_to_user"))
-	private Users usersNo;
+	private Users users;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_commentary_to_community"))  
-	private Community communityNo;
+	private Community community;
 }

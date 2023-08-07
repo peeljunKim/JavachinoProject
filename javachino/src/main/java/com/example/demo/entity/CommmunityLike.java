@@ -37,9 +37,9 @@ public class CommmunityLike {
 	private int communityLikeNo;
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_community_like_to_user"))
-	private Users usersNo;
+	private Users users;
 	  
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_like_to_community"))  
-	private Community communityNo;
+	private Community community;
 }

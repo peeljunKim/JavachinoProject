@@ -51,10 +51,10 @@ public class AccomodationRV {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_users"))
-    private Users usersNo;
+    private Users users;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_accom"))
-    private Accomodation accomodationNo;
+    private Accomodation accomodation;
 
 
     

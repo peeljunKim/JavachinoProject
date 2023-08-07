@@ -25,9 +25,9 @@ public class ActivityLike {
     private int activityLikeNo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_users"))
-    private Users usersNo;
+    private Users users;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_activity"))
-    private Activity activityNo;
+    private Activity activity;
 
 }

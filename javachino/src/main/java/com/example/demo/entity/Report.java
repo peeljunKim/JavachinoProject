@@ -47,5 +47,5 @@ public class Report {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_report_to_user"))
-	private Users usersNo;
+	private Users users;
 }

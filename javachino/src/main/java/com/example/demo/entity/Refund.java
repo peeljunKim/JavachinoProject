@@ -44,5 +44,5 @@ public class Refund {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pay_no", foreignKey = @ForeignKey(name = "fk_fefund_to_pay"))
-	private Pay payNo;
+	private Pay pay;
 }

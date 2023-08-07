@@ -38,9 +38,9 @@ public class ActivityReview {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_users"))
-    private Users usersNo;
+    private Users users;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))
-    private Activity activityNo;
+    private Activity activity;
 
 }

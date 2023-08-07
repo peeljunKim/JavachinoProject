@@ -36,6 +36,6 @@ public class AccomodationInfo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
-    private Accomodation accomodationNo;
+    private Accomodation accomodation;
 
 }

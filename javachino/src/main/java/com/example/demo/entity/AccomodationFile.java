@@ -30,7 +30,7 @@ public class AccomodationFile {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))
-    private Accomodation accomodationNo;
+    private Accomodation accomodation;
 	
 
   

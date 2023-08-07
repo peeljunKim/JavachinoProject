@@ -45,6 +45,6 @@ public class Activity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_activity_to_business"))
-    private Business businessNo;
+    private Business business;
 } 
 
