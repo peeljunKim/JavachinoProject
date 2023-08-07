@@ -41,11 +41,11 @@ public class AccomodationRV {
     @Temporal(TemporalType.DATE)
     @Column(name = "accomodation_rv_date")
     private LocalDate accomodationRVDate;
-    @Column(name = "accomodation_rv_Name")
+    @Column(name = "accomodation_rv_name")
     private String accomodationRVName;
-    @Column(name = "accomodation_rv_numberOfPerson")
+    @Column(name = "accomodation_rv_number_of_person")
     private String accomodationRVNumberOfPerson;
-    @Column(name = "accomodation_RV_Phone")
+    @Column(name = "accomodation_RV_phone")
     private String accomodationRVPhone;
     
     
