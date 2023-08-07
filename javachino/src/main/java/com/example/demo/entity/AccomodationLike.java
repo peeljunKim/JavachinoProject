@@ -22,6 +22,7 @@ public class AccomodationLike {
             generator = "ACCOMODATION_LIKE_SEQ_GEN"
     )
     @Column(name = "accmodation_like_no")
+    
     private int accmodationLikeNo;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_like_to_users"))

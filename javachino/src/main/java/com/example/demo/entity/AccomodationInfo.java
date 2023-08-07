@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
         sequenceName = "ACCOMODATION_INFO_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-) 
+)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccomodationInfo {
     @Id
@@ -33,10 +33,7 @@ public class AccomodationInfo {
     private String accomodationInfoExplanation;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accmodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
+    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
     private Accomodation accomodationNo;
-
-
-	
 
 }

@@ -17,7 +17,7 @@ import java.time.LocalDate;
         sequenceName = "ACCOMODATION_REVIEW_SEQ",
     	initialValue = 1,
     	allocationSize = 1
-) 
+)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class AccomodationReiview {
@@ -41,7 +41,6 @@ public class AccomodationReiview {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_users"))
     private Users usersNo;
-    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_accom"))
     private Accomodation accomodationNo;

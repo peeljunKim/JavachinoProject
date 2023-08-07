@@ -5,7 +5,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity 
+@Entity
 @Data
 @Table(
         name = "accomodation_file"
@@ -29,7 +29,7 @@ public class AccomodationFile {
     private String accomodationFileFname;
     
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accomodation_file_to_accomodation"))
+    @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))
     private Accomodation accomodationNo;
 	
 
