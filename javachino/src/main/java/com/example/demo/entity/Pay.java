@@ -37,7 +37,7 @@ public class Pay {
 	private int payPrice;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "accomodation_rv_id", foreignKey = @ForeignKey(name = "fk_pay_to_accomodation_rv"))
+	@JoinColumn(name = "accomodation_rv_no", foreignKey = @ForeignKey(name = "fk_pay_to_accomodation_rv"))
 	private  AccomodationRV accomodationRV;
 	
 	@ManyToOne(fetch =  FetchType.LAZY)
