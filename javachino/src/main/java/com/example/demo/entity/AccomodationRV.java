@@ -31,10 +31,10 @@ public class AccomodationRV {
     @Column(name = "accomodation_rv_no")
     private int  accomodationRVNo;
     @Temporal(TemporalType.DATE)
-    @Column(name = "accomodation_rv_checkIn")
+    @Column(name = "accomodation_rv_checkin")
     private LocalDate accomodationRVCheckIn;
     @Temporal(TemporalType.DATE)
-    @Column(name = "accomodation_rv_checkOut")
+    @Column(name = "accomodation_rv_checkout")
     private LocalDate accomodationRVCheckOut;
     
     @LastModifiedDate
@@ -43,7 +43,7 @@ public class AccomodationRV {
     private LocalDate accomodationRVDate;
     @Column(name = "accomodation_rv_name")
     private String accomodationRVName;
-    @Column(name = "accomodation_rv_number_of_person")
+    @Column(name = "accomodation_rv_numberofperson")
     private String accomodationRVNumberOfPerson;
     @Column(name = "accomodation_RV_phone")
     private String accomodationRVPhone;
