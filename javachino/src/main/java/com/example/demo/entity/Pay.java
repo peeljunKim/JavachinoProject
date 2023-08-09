@@ -16,6 +16,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @Table(name = "pay")
 @SequenceGenerator(
 		name = "PAY_SEQ_GEN",

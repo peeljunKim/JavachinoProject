@@ -3,9 +3,11 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @Table(name = "business")
 @SequenceGenerator(
         name="BUSINESS_SEQ_GEN",

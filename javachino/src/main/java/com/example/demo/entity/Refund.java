@@ -19,6 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @Table(name = "refund")
 @SequenceGenerator(
 		name = "REFUND_SEQ_GEN",
