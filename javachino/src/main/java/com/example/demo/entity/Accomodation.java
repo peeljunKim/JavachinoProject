@@ -6,7 +6,10 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "accomodation")
-@SequenceGenerator(name = "ACCOMODATION_SEQ_GEN", sequenceName = "ACCOMODATION_SEQ", initialValue = 1, allocationSize = 1)
+@SequenceGenerator(name = "ACCOMODATION_SEQ_GEN", 
+sequenceName = "ACCOMODATION_SEQ", 
+initialValue = 1, 
+allocationSize = 1)
 public class Accomodation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACCOMODATION_SEQ_GEN")
@@ -25,8 +28,5 @@ public class Accomodation {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_accom_to_business"))
 	private Business business;
-
-	public Accomodation() {
-	}
 
 }

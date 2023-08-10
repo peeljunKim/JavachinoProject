@@ -25,8 +25,12 @@ public class AccomodationFile {
     )
     @Column(name = "accomodation_file_no")
     private int accomodationFileNo;
-    @Column(name = "accomodation_file_fname")
-    private String accomodationFileFname;
+    @Column(name = "accomodation_file_fname1")
+    private String accomodationFileFname1;
+    @Column(name = "accomodation_file_fname2")
+    private String accomodationFileFname2;
+    @Column(name = "accomodation_file_fname3")
+    private String accomodationFileFname3;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))

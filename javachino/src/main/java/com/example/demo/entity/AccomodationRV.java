@@ -28,24 +28,22 @@ public class AccomodationRV {
             strategy = GenerationType.SEQUENCE,
             generator = "ACCOMODATION_RV_SEQ_GEN"
     )
-    @Column(name = "accomodation_rv_no")
+    @Column(name = "ACCOMODATION_RV_NO")
     private int  accomodationRVNo;
-    @Temporal(TemporalType.DATE)
     @Column(name = "accomodation_rv_checkin")
-    private LocalDate accomodationRVCheckIn;
-    @Temporal(TemporalType.DATE)
+    private String accomodationRVCheckIn;
     @Column(name = "accomodation_rv_checkout")
-    private LocalDate accomodationRVCheckOut;
+    private String accomodationRVCheckOut;
     
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
     @Column(name = "accomodation_rv_date")
     private LocalDate accomodationRVDate;
-    @Column(name = "accomodation_rv_name")
+    @Column(name = "accomodation_rv_Name")
     private String accomodationRVName;
-    @Column(name = "accomodation_rv_numberofperson")
+    @Column(name = "accomodation_rv_numberOfPerson")
     private String accomodationRVNumberOfPerson;
-    @Column(name = "accomodation_RV_phone")
+    @Column(name = "accomodation_RV_Phone")
     private String accomodationRVPhone;
     
     

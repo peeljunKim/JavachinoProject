@@ -24,9 +24,9 @@ public class AccomodationInfo {
     @Column(name = "accomodation_info_no")
     private int accomodationInfoNo;
     @Column(name = "accomodation_info_minPerson")
-    private String accomodationInfoMinPerson;
+    private int accomodationInfoMinPerson;
     @Column(name = "accomodation_info_maxPersion")
-    private String accomodationInfoMaxPersion;
+    private int accomodationInfoMaxPersion;
     @Column(name = "accomodation_info_size")
     private String accomodationInfoSize;
     @Column(name = "accomodation_info_explanation")
