@@ -39,7 +39,7 @@ public class ActivityReview {
     private LocalDate activityReviewDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_users"))
+    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_users"))
     private Users users;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))

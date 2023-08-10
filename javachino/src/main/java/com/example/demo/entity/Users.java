@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -31,4 +33,6 @@ public class Users {
     private String usersFname;
     @Column(name = "users_phone")
     private String usersPhone;
+    @Column(name = "users_date")
+    private Date usersDate;
 } 
