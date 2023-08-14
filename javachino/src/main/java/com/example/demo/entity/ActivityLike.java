@@ -1,16 +1,28 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.demo.entity.Activity;
+import com.example.demo.entity.ActivityLike;
+import com.example.demo.entity.Users;
 
-@Entity
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.Data;
+
 @Data
+@Entity
 @Table(
         name = "activity_like"
 ) 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+
 @SequenceGenerator(
         name="ACTIVITY_LIKE_SEQ_GEN",
         sequenceName = "ACTIVITY_LIKE_SEQ",
@@ -25,11 +37,20 @@ public class ActivityLike {
     )
     @Column(name = "activity_like_no")
     private int activityLikeNo;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_users"))
-    private Users users;
+    private Users usersNo;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_like_to_activity"))
-    private Activity activity;
-
+    private Activity activityNo;
+    
+    public ActivityLike(int activityLikeNo, Users usersNo, Activity activityNo) {
+        this.activityLikeNo = activityLikeNo;
+        this.usersNo = usersNo;
+        this.activityNo = activityNo;
+    }
+    public ActivityLike() {
+    }
 }
