@@ -1,0 +1,297 @@
+@charset "UTF-8";
+
+@import 'https://fonts.googleapis.com/css?family=Open+Sans:600,700';
+
+* {font-family: 'Open Sans', sans-serif;}
+.main_container {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  border: 1px solid #e3e5e8; /* 테두리(border) 속성을 단축하여 사용하고 선명한 효과를 위해 그림자를 추가합니다. */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자를 적용하여 부드러운 효과를 줍니다. */
+}
+.users_top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.user_insert{
+	width: 100px;
+	height: 40px;
+	border-radius: 10px;
+    border-style: solid;
+    border-color: #00000054;
+    font-size: 15px;
+    cursor: pointer;
+}
+.user_insert:hover {
+  background-color:  rgba(157, 201, 238, 0.4499999881);
+}
+.search_box{
+	display: flex;
+ 	align-items: center;
+	justify-content: flex-start;
+	width: 88%;
+}
+.search_bar {
+      display: flex; /* Use flexbox to place items side by side */
+      align-items: center; /* Center items vertically within the div */
+      height: 35px;
+      width: 100%;
+      border-radius: 10px;
+      border-style: solid;
+      border-color: #e3e5e8;
+}
+.search {
+  flex: 1;
+  background-color: var(--color-realbox-background);
+  border: none;
+  border-radius: var(--ntp-realbox-border-radius);
+  color: var(--color-realbox-foreground);
+  height: 100%;
+  outline: 0;
+  padding-inline-end: calc(var(--ntp-realbox-voice-icon-offset) + var(--ntp-realbox-icon-width) + var(--ntp-realbox-inner-icon-margin));
+  padding-inline-start: 20px;
+  position: relative;
+  width: 100%;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333; 
+}
+/* Style for the select box */
+select[name="select_box"] {
+  font-size: 14px;
+  border: solid #e3e5e8;
+  border-radius: 10px;
+  padding: 8px 30px 8px 10px;
+  background-color: white;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' fill='%23333' viewBox='0 0 16 16'%3E%3Cpath d='M6 9l4 4 4-4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #333; 
+}
+
+/* Style for the options in the select box */
+select[name="select_box"] option {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333; 
+}
+
+.users_top select,
+.users_top .search_bar {
+  margin-right: 0;
+}
+
+.fa-magnifying-glass {
+  margin-right: 10px; 
+  margin-left: 10px; 
+}
+.rwd-table {
+  min-width: 300px;
+  max-width: 100%;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.rwd-table tr:first-child {
+  border-top: none;
+  background: #428bca;
+  color: #fff;
+}
+
+.rwd-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #f5f9fc;
+}
+
+.rwd-table tr:nth-child(odd):not(:first-child) {
+  background-color: #ebf3f9;
+}
+
+.rwd-table th {
+  display: none;
+}
+
+.rwd-table td {
+  display: block;
+}
+
+.rwd-table td:first-child {
+  margin-top: .5em;
+}
+
+.rwd-table td:last-child {
+  margin-bottom: .5em;
+}
+
+.rwd-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 120px;
+  display: inline-block;
+  color: #000;
+}
+
+.rwd-table th,
+.rwd-table td {
+  text-align: left;
+}
+
+.rwd-table {
+  color: #333;
+  border-radius: .4em;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.rwd-table tr {
+  border-color: #bfbfbf;
+}
+
+.rwd-table th,
+.rwd-table td {
+  padding: .5em 1em;
+}
+@media screen and (max-width: 601px) {
+  .rwd-table tr:nth-child(2) {
+    border-top: none;
+  }
+}
+@media screen and (min-width: 600px) {
+  .rwd-table tr:hover:not(:first-child) {
+    background-color: #d8e7f3;
+  }
+  .rwd-table td:before {
+    display: none;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    display: table-cell;
+    padding: .22em .4em;
+  }
+  .rwd-table th:first-child,
+  .rwd-table td:first-child {
+    padding-left: 0;
+  }
+  .rwd-table th:last-child,
+  .rwd-table td:last-child {
+    padding-right: 0;
+  }
+  .rwd-table th,
+  .rwd-table td {
+    padding: 0.9em !important;
+  }
+}	
+.container {
+  display: block;
+
+}
+	
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}
+
+.user_update,
+.user_delete{
+	cursor: pointer;
+}
+.modal,
+.modalUpdate {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.modal-content,
+.modalUpdate-content {
+  background-color: #fefefe;
+  margin: 10% auto; /* Adjust the percentage to control the modal's vertical position */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px; /* Adjust the maximum width of the modal */
+  position: relative;
+}
+
+.close-modal-btn,
+.close-modalUpdate-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #999;
+  cursor: pointer;
+}
+
+.close-modal-btn:hover,
+.close-modalUpdate-btn:hover {
+  color: #333;
+}
+
+.modal-content h2,
+.modalUpdate-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form input[type="text"],
+form input[type="submit"],
+form input[type="reset"] {
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+form input[type="submit"],
+form input[type="reset"] {
+  cursor: pointer;
+  background-color: #428bca;
+  color: #fff;
+  border: none;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover {
+  background-color: #3071a9;
+}

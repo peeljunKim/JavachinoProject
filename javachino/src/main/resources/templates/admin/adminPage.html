@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css//admin/adminPage/adminPage.css">
+<title>관리자 페이지</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  $(".Sidebar li").click(function () {
+    var link = $(this).find("a").attr("href");
+    loadContent(link);
+    return false; // 기본 링크 동작 방지
+  });
+  
+  function loadContent(url) {
+    $.ajax({
+      url: url,
+      method: "GET",
+      success: function (data) {
+        $("#mainContent").html(data);
+        // 로드된 내용 안의 페이지네이션 링크에 클릭 이벤트를 다시 바인딩합니다.
+        $(".pagination a").click(function () {
+          var link = $(this).attr("href");
+          loadContent(link);
+          return false;
+        });
+      },
+      error: function () {
+        $("#mainContent").html("페이지를 불러오는데 오류가 발생했습니다.");
+      }
+    });
+  }
+  function updateHeaderText(text) {
+    $(".header-text").text(text);
+  }
+
+  $(".Sidebar li").click(function () {
+    var sidebarText = $(this).text().trim();
+    updateHeaderText(sidebarText);
+
+  });
+});
+
+// 여기서부터 대시보드
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawCharts);
+  
+      function generateLastWeekDates() {
+        var dates = [];
+        var today = new Date();
+        for (var i = 6; i >= 0; i--) {
+            var date = new Date(today);
+            date.setDate(date.getDate() - i);
+            dates.push(formatDate(date));
+        }
+        return dates;
+    }
+    function formatDate(date) {
+        var month = (date.getMonth() + 1).toString().padStart(2, '0');
+        var day = date.getDate().toString().padStart(2, '0');
+        return month + '-' + day;
+    }
+    
+    function generateChartData(data) {
+            var dates = generateLastWeekDates();
+            var chartData = [];
+            for (var i = 0; i < dates.length; i++) {
+                var date = dates[i];
+                var visitCount = 0;
+                for (var j = 0; j < data.length; j++) {
+                    if (formatDate(new Date(data[j].visitDate)) === date) {
+                        visitCount = data[j].visitCount;
+                        break;
+                    }
+                }
+                chartData.push([date, visitCount]);
+            }
+            return chartData;
+        }
+    
+ 		function drawCharts() {
+            $.ajax({
+                url: "/dashboard-data",
+                method: "GET",
+                success: function (data) {
+                    var areaData = google.visualization.arrayToDataTable([
+                        ['날짜', '방문자 수'],
+                        // The following line generates the dates and corresponding visit counts
+                        ...generateChartData(data),
+                    ]);
+
+                    var areaOptions = {
+                        title: '최근 방문자 수',
+                        titleTextStyle: { fontSize: 20, },
+                        hAxis: { title: '일주일간 방문자 수', titleTextStyle: { color: '#333' } },
+                        vAxis: { minValue: 0 }
+                    };
+
+                    var areaChart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+                    areaChart.draw(areaData, areaOptions);
+                },
+                error: function () {
+                    console.log("Error loading dashboard data.");
+                }
+            });
+        }
+</script>
+</head>
+<body>
+	<div class="Banner"><a href="/admin/adminPage"><img src="/images/admin/banner.png"></a></div>
+	<div class="Sidebar">
+		<div class="sidebar_menu">
+			<ul>
+				<li class="space"></li>
+				<li class="side_dashboard">
+					<a href="/admin/adminPage">대시보드</a>
+				</li>
+				<li class="side_user">
+					회원관리
+						<a th:href="@{/admin/users/usersList/1}"></a>		
+				</li>
+				<li class="side_business">
+					업체관리
+						<a th:href="@{/admin/business/businessList/1}"></a></a>
+				</li>
+				<li class="side_accomodation">
+					<a href="#">숙소관리</a>
+				</li>
+				<li class="side_activity">
+					<a href="#">액티비티관리</a>
+				</li>
+				<li class="side_cmmunity">
+					<a href="#">커뮤니티 관리</a>
+				</li>
+				<li class="side_review">
+					<a href="#">리뷰 관리</a>
+				</li>
+				<li class="side_reservation">
+					<a href="#">예약 내역</a>
+				</li>
+				<li class="side_content">
+					 <a th:href="@{/admin/hello}">결제 관리</a>
+				</li>
+				<li class="side_report">
+					<a href="#">신고 게시판</a>
+				</li>
+				<li class="side_message">
+					<a href="#">메세지 전송</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="Header">
+			<span class="header-text">대시보드</span> 
+			<div class="header-right">
+				<button class="header_logout">로그아웃</button>
+			</div>
+	</div>
+	<div class="MainBoard" id="mainContent">
+		<div class="main_container">
+		<div class="container_top">
+			<div class="total_visit">
+			  <div class="card">
+			    <div class="card_header">총 회원수</div>
+			   		<div class="card_content">
+						<div class="card_body" th:text="${totalUsers+'명'}"></div>
+						<div class="card_body_rate">+12.5%</div>   
+					</div>
+			  </div>
+			</div>
+			<div class="today_visit">
+				<div class="card">
+					<div class="card_header">일 방문자수</div>
+					<div class="card_content">
+						<div class="card_body" th:text="${todayVisit+'명'}"></div>
+						<div class="card_body_rate">+0.5%</div>   
+					</div>
+				</div>
+			</div>
+			<div class="total_rv">
+				<div class="card">
+					<div class="card_header">숙소 예약수</div>
+					<div class="card_content">
+						<div class="card_body" th:text="${totalAccomodationRv+'건'}"></div>
+						<div class="card_body_rate">+51%</div>   
+					</div>
+				</div>
+			</div>
+			<div class="rv_rate">
+				<div class="card">
+					<div class="card_header">액티비티 예약수</div>
+					<div class="card_content">
+						<div class="card_body" th:text="${totalActivityRv+'건'}"></div>
+						<div class="card_body_rate">+2.5%</div>   
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container_bottom">
+			<div class="graph_chart">
+				<div id="chart_div"></div>
+			</div>
+				<div class="table_chart">
+					<div id="table_chart_body">
+						<div class="table_container">
+						<div class="table_header">일자별 요약</div>    
+						  <table class="table">
+						    <thead>
+						      <tr>
+						        <th>일자</th>
+						        <th>가입</th>
+						        <th>방문자</th>
+						        <th>숙소 예약수</th>
+						        <th>액티비티 예약수</th>
+						        <th>숙소 후기</th>
+						        <th>액티비티 후기</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+						   <th:block th:each="visit : ${last7DaysData}">
+						      <tr>
+						        <td th:text="${#dates.format(visit.visitDate, 'yyyy-MM-dd')}"></td>
+						        <td class="tdr">5</td>
+						        <td class="tdr">174</td>
+						        <td class="tdr">5</td>
+						        <td class="tdr">6</td>
+						        <td class="tdr">8</td>
+						        <td class="tdr">2</td>
+						      </tr>
+						    </tbody>
+						  </table>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css/admin/business/businessList.css">
+<title>Insert title here</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
+<script>
+	function openModal() {
+	const modal = document.getElementById("myModal");
+	modal.style.display = "block";
+
+	  // 모달이 열릴 때, 닫기 버튼에 이벤트 리스너를 추가합니다.
+	  const btnCloseModal = document.getElementById("btnCloseModal");
+	  btnCloseModal.addEventListener("click", closeModal);
+	}
+	
+	function closeModal() {
+	  const modal = document.getElementById("myModal");
+	  modal.style.display = "none";
+	
+	  // 모달이 닫힐 때, 닫기 버튼의 이벤트 리스너를 제거합니다.
+	  const btnCloseModal = document.getElementById("btnCloseModal");
+	  btnCloseModal.removeEventListener("click", closeModal);
+	}
+	
+	 function openUpdateModal() {
+    const modalUpdate = document.getElementById("modalUpdate");
+    modalUpdate.style.display = "block";
+
+    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+    btnCloseModalUpdate.addEventListener("click", closeUpdateModal);
+  }
+
+  function closeUpdateModal() {
+    const modalUpdate = document.getElementById("modalUpdate");
+    modalUpdate.style.display = "none";
+
+    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+    btnCloseModalUpdate.removeEventListener("click", closeUpdateModal);
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    const btnUserInsert = document.querySelector(".user_insert");
+    btnUserInsert.addEventListener("click", openModal);
+
+    const btnUpdate = document.querySelector(".user_update");
+    btnUpdate.addEventListener("click", openUpdateModal);
+  });
+</script>
+</head>
+<body>
+<div class="main_container">
+	<div class="users_top">
+		<div class="search_box">
+			<select name="select_box">
+					<option value="" >업체이름</option>
+					<option value="" >업체주소</option>			
+			</select>
+			<div class="search_bar">
+				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;"></i>
+				<input type="search" class="search" id="keyword" name="keyword" placeholder="찾으실 내용을 검색해주세요">
+			</div>
+		</div>
+		<button class="user_insert" onclick="openModal()">추가</button>
+	</div>
+	<div class="container">
+	<hr/>
+	<table class="rwd-table">
+		<tr>
+			<th class="table_id">업체번호</th>
+			<th class="table_name">업체이름</th>
+			<th class="table_fname">업체주소</th>
+			<th class="table_phone">업체번호</th>
+			<th class="table_manager">담당자이름</th>
+			<th class="table_update">관리</th>
+		</tr>
+		<tr th:each="b:${list}">
+			<td class="table_id" th:text="${b.businessNo}"></td>
+			<td class="table_name" th:text="${b.businessName}"></td>
+			<td class="table_fname" th:text="${b.businessAddr}"></td>
+			<td class="table_phone" th:text="${b.businessPhone}"></td>
+			<td class="table_manager" th:text="${b.businessManager}"></td>
+			<td class="table_update">
+				<button class="user_update" onclick="openUpdateModal()">수정</button>
+				<button class="user_delete">삭제</button>
+			</td>
+		</tr>
+	</table>
+	<hr />
+	</div>
+	<div class="pagination">
+		<a href="#">&laquo;</a>
+		<th:block th:each="i:${#numbers.sequence(1,totalPage)}">
+			<a th:href="@{'/admin/business/businessList/'+${i}}" th:text="${i}"></a>		
+		</th:block>
+		<a href="#">&raquo;</a>
+	</div>
+	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
+	    <h2>사용자 추가</h2>
+	    <form action="/board/insert" method="post">		
+			업체이름 : <input type="text" name="business_name"><br/>
+			업체주소 : <input type="text" name="business_addr"><br>
+			업체번호 : <input type="text" name="business_phone"><br>
+			담당자이름 : <input type="text" name="business_manager"><br/>
+			<input type="submit" value="등록">
+			<input type="reset" value="다시입력">		
+		</form>
+	  </div>
+	</div>
+</div>
+	<div id="modalUpdate" class="modalUpdate">
+	  <div class="modalUpdate-content">
+	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
+	    <h2>사용자 수정</h2>
+	    <form action="/board/update" method="post">
+			<input type="hidden" name="business_no" th:value="${business_no}"/>
+			업체이름 : <input type="text" name="business_name" th:value="${businessName}"><br/>
+			업체주소 : <input type="text" name="business_addr" th:value="${businessAddr}"><br>
+			업체번호 : <input type="text" name="business_phone" th:value="${businessPhone}"><br>
+			담당자이름 : <input type="text" name="business_manager" th:value="${businessManager}"><br/> 
+			<input type="submit" value="등록"/>
+			<input type="reset" value="다시입력"/>
+		</form>
+	  </div>
+	</div>
+</body>
+</html>

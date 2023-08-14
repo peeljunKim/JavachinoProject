@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css/admin/users/usersList.css">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
+<script>
+	$(function(){
+		$("#btnSearch").click(function(){			
+			var cname = $("#cname").val();
+			var keyword = $("#keyword").val();
+			var pageNUM = $("#pageNUM").val();
+			url = "/admin/users/usersList/"+pageNUM+"/"+cname+"/"+keyword;
+			location.href=url;
+		});
+		
+		$(".delete").click(function(event){
+			if(confirm('정말로 삭제할까요?')==false){
+				event.preventDefault();
+			}
+		});
+	});
+		function openModal() {
+		const modal = document.getElementById("myModal");
+		modal.style.display = "block";
+	
+		  // 모달이 열릴 때, 닫기 버튼에 이벤트 리스너를 추가합니다.
+		  const btnCloseModal = document.getElementById("btnCloseModal");
+		  btnCloseModal.addEventListener("click", closeModal);
+		}
+		
+		function closeModal() {
+		  const modal = document.getElementById("myModal");
+		  modal.style.display = "none";
+		
+		  // 모달이 닫힐 때, 닫기 버튼의 이벤트 리스너를 제거합니다.
+		  const btnCloseModal = document.getElementById("btnCloseModal");
+		  btnCloseModal.removeEventListener("click", closeModal);
+		}
+	
+		function openUpdateModal(usersNo) {
+		    console.log("Opening modal for user:", usersNo);
+		
+		    const modalUpdate = document.getElementById("modalUpdate");
+		    modalUpdate.style.display = "block";
+		
+		    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+		    btnCloseModalUpdate.addEventListener("click", closeUpdateModal);
+		}
+
+		function closeUpdateModal() {
+		    console.log("Closing modal");
+		
+		    const modalUpdate = document.getElementById("modalUpdate");
+		    modalUpdate.style.display = "none";
+		
+		    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+		    btnCloseModalUpdate.removeEventListener("click", closeUpdateModal);
+		}
+
+	  document.addEventListener("DOMContentLoaded", function () {
+	    const btnUserInsert = document.querySelector(".user_insert");
+	    btnUserInsert.addEventListener("click", openModal);
+	
+	    const btnUpdate = document.querySelector(".user_update");
+	    btnUpdate.addEventListener("click", openUpdateModal);
+	  });
+	  
+	  $(".user_delete").click(function(event){
+			if(confirm('정말로 삭제할까요?')==false){
+				event.preventDefault();
+			}
+		});
+</script>
+</head>
+<body>
+<div class="main_container">
+	<div class="users_top">
+		<div class="search_box">
+			<select name="select_box" id="cname">
+					<option value="usersId" >아이디</option>
+					<option value="usersName" >이름</option>		
+			</select>
+			<div class="search_bar">
+				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
+				<input type="search" class="search" id="keyword" name="keyword" placeholder="찾으실 내용을 검색해주세요">
+				<input type="hidden" id="pageNUM" name="pageNUM" value="1" />
+			</div>
+		</div>
+		<button class="user_insert" onclick="openModal()">추가</button>
+	</div>
+	<div class="container">
+	<hr/>
+	<table class="rwd-table">
+		<tr>
+			<th class="table_id">회원코드</th>
+			<th class="table_id">아이디</th>
+			<th class="table_name">이름</th>
+			<th class="table_fname">프로필사진</th>
+			<th class="table_phone">번호</th>
+			<th class="table_date">가입일</th>
+			<th class="table_update">관리</th>
+			
+		</tr>
+		<tr th:each="u:${list}">
+			<td class="table_no" th:text="${u.usersNo}"></td>
+			<td class="table_id" th:text="${u.usersId}"></td>
+			<td class="table_name" th:text="${u.usersName}"></td>
+			<td class="table_fname" th:text="${u.usersFname}"></td>
+			<td class="table_phone" th:text="${u.usersPhone}"></td>
+			<td class="table_date" th:text="${#dates.format(u.usersDate, 'yyyy-MM-dd')}"></td>
+			<td class="table_update">
+				<button class="user_update" onclick=openUpdateModal() >수정</button>
+				<button class="user_delete" th:href="@{'/users/delete/'+${u.usersNo}}">삭제</button>
+			</td>
+		</tr>
+	</table>
+	<hr />
+	</div>
+	<div class="pagination">
+	    <a href="#">«</a>
+	    <th:block th:each="i:${#numbers.sequence(1, totalPage)}">
+	        <a th:href="@{${'/admin/users/usersList/' + i + (cname != null ? '/' + cname + '/' + keyword : '')}}" th:text="${i}"></a>
+	    </th:block>
+	    <a href="#">»</a>
+	</div>
+	<div id="myModal" class="modal">
+	  <div class="modal-content">
+	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
+	    <h2>사용자 추가</h2>
+	    <form action="/users/insert" method="post">
+			<input type="hidden" name="usersNo"/><br/>
+			아이디 : <input type="text" name="usersId"><br/>
+			이름 : <input type="text" name="usersName"><br/>
+			비밀번호 : <input type="text" name="usersPassword"><br/>
+			프로필사진 : <input type="text" name="usersFname"><br/>
+			번호 : <input type="text" name="usersPhone"><br/>
+			가입일 : <input type="date" name="usersDate"><br/>
+			<input type="submit" value="등록"/>
+			<input type="reset" value="다시입력"/>		
+		</form>
+	  </div>
+	</div>
+</div>
+	<div id="modalUpdate" class="modalUpdate">
+	  <div class="modalUpdate-content">
+	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
+	    <h2>사용자 수정</h2>
+	    <form action="/users/update/{usersNo}" method="post">
+			<input type="hidden" name="usersNo"/><br/>
+			프로필사진 : <input type="text" name="usersFname"><br/>
+			번호 : <input type="text" name="usersPhone"><br/> 
+			<input type="submit" value="수정"/>
+			<input type="reset" value="다시입력"/>
+		</form>
+	  </div>
+	</div>
+	
+</body>
+</html>
