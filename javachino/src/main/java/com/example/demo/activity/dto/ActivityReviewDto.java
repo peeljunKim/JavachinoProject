@@ -28,7 +28,7 @@ public class ActivityReviewDto {
             activityReview.getUsers().getUsersName(),
             activityReview.getUsers().getUsersFname(),
             activityReview.getUsers().getUsersPhone(),
-            activityReview.getUsers().getUsersPassword() // Include password here
+            activityReview.getUsers().getUsersPassword() 
         );
         if (activityReview.getActivity() != null) {
             this.activityDto = new ActivityDto(activityReview.getActivity());
