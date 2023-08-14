@@ -1,0 +1,20 @@
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4px;
+    color: #4e5861;
+    font-family: Noto Sans KR, 'Source Sans Pro';
+    margin-top: 100px;
+    margin-bottom: 40px;
+}
+
+/*푸터 선 삽입*/
+.footer.grid-line{
+   
+    border-top: 1px solid;
+    border-color: #dbdee0;
+}
+.footer-text{
+    margin-top: 30px;
+}

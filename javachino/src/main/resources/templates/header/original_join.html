@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+  <link rel="stylesheet" href="/css/header/original_join.css"/>
+  <!-- jQuery 라이브러리 추가 -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- 외부 스크립트 파일 연결 -->
+  <script type="text/javascript" src="/js/header/original_join.js" defer></script>
+</head>
+<body>
+<div id="container" class="container sign-up">
+    <!-- FORM SECTION -->
+    <div class="row">
+      <!-- SIGN UP -->
+      <div class="col align-items-center flex-col sign-up">
+        <div class="form-wrapper align-items-center">
+          <div class="form sign-up">
+			<!-- 폼 제출을 위한 form 엘리먼트 추가 -->
+			<form method="post" action="/api/signup" id="signupForm">
+			    <div class="input-group">
+			        <i class='bx bxs-user'></i>
+			        <input type="text" name="usersName" placeholder="Username">
+			    </div>
+			    <div class="input-group">
+			        <i class='bx bx-mail-send'></i>
+			        <input type="email" name="usersId" placeholder="Email">
+			    </div>
+			    <div class="input-group">
+			        <i class='bx bxs-phone'></i>
+			        <input type="tel" name="usersPhone" placeholder="Phone">
+			    </div>
+			    <button type="submit" class="btn">Sign up</button>
+			</form>
+            <p>
+              <span>
+                Already have an account?
+              </span>
+              <b onclick="window.location.href='/header/original_login'" class="pointer">
+                Sign in here
+              </b>
+            </p>
+          </div>
+        </div>
+      
+      </div>
+      <!-- END SIGN UP -->  
+    </div>
+    <!-- END FORM SECTION -->
+    <!-- CONTENT SECTION -->
+    <div class="row content-row">
+      <!-- SIGN IN CONTENT -->
+      <div class="col align-items-center flex-col">
+        <div class="img sign-in">
+        </div>
+      </div>
+      <!-- END SIGN IN CONTENT -->
+      <!-- SIGN UP CONTENT -->
+      <div class="col align-items-center flex-col">
+        <div class="img sign-up">
+        
+        </div>
+        <div class="text sign-up">
+          <h2>
+            Join with us
+          </h2>
+  
+        </div>
+      </div>
+      <!-- END SIGN UP CONTENT -->
+    </div>
+    <!-- END CONTENT SECTION -->
+  </div>
+</body>
+</html>

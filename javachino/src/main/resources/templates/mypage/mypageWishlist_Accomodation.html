@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A500%2C700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A500%2C700">
+    <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/mypage/mypageWishlist.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+    <link rel="stylesheet" href="/css/footer/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>mypage-profile</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!--Header-->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <div class="p-1 flex-lg-fill">
+                <div class="header-logo-search">
+                    <a class="navbar-brand" href="#">
+                        <img src="/images/header/TripJava.png" id="logoImg">
+                    </a>
+                    <div class="searchBox">
+                        <form class="search">
+                            <div class="input-group" style="margin-top: 10px;">
+                                <span class="input-group-text" id="search-icon">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </span>
+                                <input class="form-control" type="search" placeholder="도시를 검색해보세요" aria-label="search">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="p-1 flex-lg-fill">
+                <div class="row g-0">
+                    <div class="col">
+                        <a class="nav-link" href="#">
+                            <img src="/images/header/accomodation.png" id="accomodationImg">
+                            <span id="menuText"> 숙박</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="nav-link" href="#">
+                            <img src="/images/header/bikini.png" id="bikiniImg">
+                            <span id="menuText"> 액티비티</span>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a class="nav-link" href="#">
+                            <img src="/images/header/user-group.png" id="user-groupImg">
+                            <span id="menuText"> 커뮤니티</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+                <div class="p-3" style="border: transparent;">
+                    <div class="row" id="header-btn-group">
+                        <div class="col">
+                            <a href="/header/original_login" >
+							   <button type="button" id="btn-login">
+                                    <span class="login" id="btnText">로그인</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a  href="/header/original_join" >
+                                <button type="button" id="btn-join">
+                                    <span class="join" id="btnText">회원가입</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </nav>
+
+    <!--Mypage_Profile-->
+    <div class="container overflow-hidden text-center" id="MyPage_Profile">
+        <div class="title">
+            <p>My Page</p>
+        </div>
+        <div class="row gx-5">
+            <!--left-->
+            <div class="col-3">
+                <div class="p-3">
+			<img th:if="${u.usersFname != null and u.usersFname != ''}"
+             	th:src="@{/images/mypage/__${u.usersFname}__}" id="userImg" style="border-radius: 5px;"/>
+        	<img th:unless="${u.usersFname != null and u.usersFname != ''}"
+             	src="/images/mypage/user.png" id="userImg" style="border-radius: 5px;"/>
+                    <h5 id="userName" th:text="${u.usersName}"></h5>
+                    <div class="row" id="profileLeft">
+                        <div class="col">
+                            <a href="/mypage/mypageProfile">
+                                <span><i class="fa-solid fa-gear fa-sm" style="color: #000000;"></i>&nbsp;&nbsp;&nbsp;프로필관리</span>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="/mypage/mypageWishlist_Accomodation">
+                                <span><i class="fa-regular fa-heart fa-sm" style="color: #000000;"></i>&nbsp;&nbsp;&nbsp;위시리스트</span>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="/mypage/mypageTravel_Accomodation">
+                                <span><i class="fa-solid fa-suitcase-rolling fa-sm" style="color: #000000;"></i>&nbsp;&nbsp;&nbsp;내여행</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!--right-->
+            <div class="col-6">
+                <div class="p-4">
+					<div style="display: flex; align-items: flex-start; margin-left: 10px; column-gap: 10px;">
+					    <a href="/mypage/mypageWishlist_Accomodation" style="text-decoration: none;">
+					        <button style="border-radius: 10px; border-color: transparent;">숙박</button>
+					    </a>
+					    <a href="/mypage/mypageWishlist_Activity" style="text-decoration: none;">
+					        <button style="border-radius: 10px; border-color: transparent;">액티비티</button>
+					    </a>
+					</div>
+                    <div class="container text-center">
+                        <div class="row row-cols-3 row row-gap-3">
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="row">
+                                    <div class="row-sm-3">
+                                        <img src="/images/mypage/haribo.png">
+                                    </div>
+                                    <div class="row-sm-3">
+                                        <div class="container">
+                                            <div class="row">한국민속촌 자유이용권</div>
+                                            <div class="row"><span><i class="fa-solid fa-star" style="color: #8baadf;"></i>4.8(166)</span></div>
+                                            <div class="row">21,000원 / 1인</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Repeat the above structure for other items -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div class="footer grid-line">
+        <div class="footer-text">
+            상호명 (주)강원치노 | 대표 자바치노 | 개인정보보호책임자 김자반 | 사업자등록번호 200-81-00000 사업자정보확인 | 통신판매업신고번호 2023-서울마포-1234 | 관광사업등록번호 : 제2023-99호
+            <br>
+            주소 : 서울특별시 마포구 청춘대로 79 20층 (행복동, 자바치노아자자빌딩) | 이메일 help@javachino.com | 광고/제휴 문의 partnership@javachino.com | 고객문의 070-1234-5678
+            <br>
+            <br>
+            자사는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다. 영업보증보험: 1.5억원 / 기획여행보증: 2억원
+            <br>
+            마이리얼트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품·거래정보 및 거래에 대하여 책임을 지지 않습니다.
+            <br>
+            부득이한 사정에 의해 확정된 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다.
+        </div>
+    </div>
+</body>
+</html>
