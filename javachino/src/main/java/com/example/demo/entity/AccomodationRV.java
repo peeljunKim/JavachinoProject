@@ -41,8 +41,8 @@ public class AccomodationRV {
     private LocalDate accomodationRVDate;
     @Column(name = "accomodation_rv_Name")
     private String accomodationRVName;
-    @Column(name = "accomodation_rv_numberOfPerson")
-    private String accomodationRVNumberOfPerson;
+    @Column(name = "accomodation_rv_People")
+    private String accomodationRVPeople;
     @Column(name = "accomodation_RV_Phone")
     private String accomodationRVPhone;
     
@@ -53,8 +53,4 @@ public class AccomodationRV {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_accom"))
     private Accomodation accomodation;
-
-
-    
-    
 }
