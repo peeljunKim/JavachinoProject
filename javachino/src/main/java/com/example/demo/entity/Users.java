@@ -27,6 +27,8 @@ public class Users {
     private int usersNo;
     @Column(name = "users_id")
     private String usersId;
+    @Column(name = "users_password")
+    private String usersPassword;
     @Column(name = "users_name")
     private String usersName;
     @Column(name = "users_fname")
@@ -35,6 +37,4 @@ public class Users {
     private String usersPhone;
     @Column(name = "users_date")
     private Date usersDate;
-    @Column(name = "users_password")
-    private String usersPassword;
 } 
