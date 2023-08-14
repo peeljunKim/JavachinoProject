@@ -17,25 +17,29 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "community_File")
+@Table(
+		name = "community_Like"
+		)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
-        name="COMMUNITY_FILE_SEQ_GEN",
-        sequenceName = "COMMUNITY_FILE_SEQ",
+        name="COMMUNITY_LIKE_SEQ_GEN",
+        sequenceName = "COMMUNITY_LIKE_SEQ",
 		initialValue = 1,
 		allocationSize = 1
 ) 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class CommunityFile {
+public class CommunityLike {
 	@Id
 	@GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "COMMUNITY_FILE_SEQ_GEN"
+            generator = "COMMUNITY_LIKE_SEQ_GEN"
     )
-	@Column(name = "community_file_no")
-	private int communityFileNo;
-	@Column(name = "community_file_fname")
-	private String communityFileFname;
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_file_to_community"))  
+	@Column(name="community_like_no")
+	private int communityLikeNo;
+	  @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "users_no", foreignKey = @ForeignKey(name = "fk_community_like_to_user"))
+	private Users users;
+	  
+	  @ManyToOne(fetch = FetchType.LAZY)
+	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_like_to_community"))  
 	private Community community;
 }

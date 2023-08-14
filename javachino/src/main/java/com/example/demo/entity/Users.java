@@ -35,4 +35,6 @@ public class Users {
     private String usersPhone;
     @Column(name = "users_date")
     private Date usersDate;
+    @Column(name = "users_password")
+    private String usersPassword;
 } 

@@ -41,7 +41,7 @@ public class Community {
 	private Date communityDate;
 	@Column(name = "community_title")
 	private String communityTitle;
-	@Column(name = "community_content")
+	@Column(name = "community_content", length = 4000)
 	private String communityContent;
 	@Column(name = "community_addr")
 	private String communityAddr;

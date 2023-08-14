@@ -14,14 +14,14 @@ public class AccomodationFac {
     @OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "accomodation_no")
     private Accomodation accomodation;
-    private int spa;
-    private int kitchen;
-    private int bbq;
-    private int pool;
-    private int wifi;
-    private int parking;
-    private int pet;
-    private int karaoke;
+    private char spa;
+    private char kitchen;
+    private char bbq;
+    private char pool;
+    private char wifi;
+    private char parking;
+    private char pet;
+    private char karaoke;
     
     
    
