@@ -12,7 +12,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 @Entity
-@Data
 @Table(name = "accomodation_rv")
 @SequenceGenerator(
         name="ACCOMODATION_RV_SEQ_GEN",
