@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>MainPage</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C600"/>
+  <link rel="stylesheet" href="/css/community/mainpage.css"/>
+  <link rel="stylesheet" href="/css/community/header.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script>
+		$(function(){
+			$("#jejuAccomBtn").click(function(){
+				console.log("클릭");
+			});
+		});
+		
+	</script>
+</head>
+<body>
+	    <nav class="navbar navbar-expand-lg  fixed-top" style="
+    position: relative;
+">
+        <div class="container-fluid">
+                <div class="p-1 flex-lg-fill">
+                    <div class="header-logo-search" >
+                         <a class="navbar-brand" href="#">
+                            <img src="./assets/javachino_logo.png" id="logoImg" >
+                        </a>
+                        <div class="searchBox">
+                            <form class="search" action="/searching" method="post">
+                                <div class="input-group" style="margin-top: 10px; ">
+                                    <span class="input-group-text" id="search-icon">
+                                        <i class="fa-solid fa-magnifying-glass" ></i>
+                                    </span>
+                                    <input class="form-control" name="keyword" type="search" placeholder="도시를 검색해보세요" aria-label="search" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 flex-lg-fill">
+                        <div class="row g-0">
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/accomodation.png"  id="accomodationImg"> 
+                                    <span id="menuText"> 숙박</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/bikini.png" id="bikiniImg">
+                                    <span id="menuText"> 액티비티</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/user-group.png" id="user-groupImg">
+                                    <span id="menuText"> 커뮤니티</span>
+                                </a>
+                            </diV>
+                        </div>
+                </div>
+                <div class="p-3" >
+                    <div class="row" id="header-btn-group">
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-login">
+                                    <span class="login" id="btnText">로그인</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-join">
+                                    <span class="join" id="btnText">회원가입</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </nav>
+<div class="mainpage-siH">
+  <div class="divcontainer-GVX">
+	  
+	  <!-- Carousel -->
+<div id="demo" class="carousel slide" data-bs-ride="carousel">
+	<!-- Indicators/dots -->
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+  </div>
+  
+  <!-- The slideshow/carousel -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/images/community/main2.jpg" alt="Los Angeles" class="d-block" style="width:100%; height: 30rem;">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/community/main.jpg" alt="Chicago" class="d-block" style="width:100%; height: 30rem;">
+    </div>
+    <div class="carousel-item">
+      <img src="/images/community/main3.jpg" alt="New York" class="d-block" style="width:100%; height: 30rem;">
+    </div>
+  </div>
+  
+  <!-- Left and right controls/icons -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+    <!--첫번째 리스트 -->
+    <div style="display: flex; justify-content: center; align-items: center;  width: 100%; margin-top: 2rem;">
+    <div class="divinr-Fdb">
+      <div class="strong--zbB">지금 사랑받는여행지 💛</div>
+      <div class="list-56q">
+        <button class="item-zUh" id="jejuAccomBtn">
+			<div class="item-zUh-bg">
+          </div>
+          <div class="strong--6Xj">
+			  JEJU<br/>
+            언제가도 종말로 좋수다
+          </div>         
+        </button>
+        <button class="item-nhP" id="gangwonAccomBtn">
+          <div class="d8f5bd-8878-4d3f-95f1-482c8c3d83c8jpg-8WM">
+          </div>
+          <div class="pseudo-pe5">
+          </div>
+          <div class="gangwon--wyb">
+			  GANGWON
+            <br/>
+            오션뷰&amp;호수뷰&amp;마운틴뷰들 한 눈에          
+          </div>
+        </button>
+        <button class="bnrcojpg-TKf" id="busanAccomBtn">
+          <div class="pseudo-Jr5">
+          </div>
+          <div class="strong--3of">
+          BUSAN
+          <br/>
+          어서오이소~ 호텔오이소~
+          </div>
+        </button>
+        <button class="item-TMb" id="seoulAccomBtn">
+          <div class="bnrcojpg-cEV">
+          </div>
+          <div class="pseudo-Dk5">
+          </div>
+          <div class="strong--ZJ9">
+			  SEOUL
+            <br/>
+            잠들지 않는 시티뷰
+          </div>
+        </button>
+      </div>
+    </div>
+    </div>
+    <!--두번째 리스트-->
+    <div style="display: flex; justify-content: center; align-items: center;  width: 100%; margin-top:2rem;">
+    <div class="divsubmain-umK">
+      <div class="strong--eU1">주간 베스트 TOP 4 👑</div>
+      <div class="list-9ff">	
+        <div class="auto-group-s5jq-6L1">
+          <div class="group-dKw">
+            <button class="divc14dgvke-P4D">
+              <div class="divc14whb16-vpq">
+                <div class="link-2dd7e47b-7fe0-4dd5-8c03-87870a2e113djpeg-Gdo">
+                </div>
+              </div>
+            </button>
+            <div class="divg1qv1ctd-kJ5">
+              <div class="divtitle898622005542393497-UUy">산타크루즈, 캘리포니아, 미국</div>
+              <div class="auto-group-af8m-9r1">
+                <div class="div1jo4hgw-6mF">
+                  <div class="item-1396958-eGy">₩1,396,958 </div>
+                  <div class="item--8xq">/박</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="auto-group-wrnh-pDP">
+            <button class="group-jLM">
+              <div class="divc14dgvke-Uoj">
+                <div class="divc14whb16-DmK">
+					<!--사진-->
+                  <div class="link-2dd7e47b-7fe0-4dd5-8c03-87870a2e113djpeg-mnq">
+                  </div>
+                </div>
+              </div>
+              <div class="divg1qv1ctd-r3b">
+                <div class="divtitle898622005542393497-P3X">산타크루즈, 캘리포니아, 미국</div>
+                <div class="auto-group-jhfo-Tp5">
+                  <div class="div1jo4hgw-1qb">
+                    <div class="item-1396958-ACh">₩1,396,958 </div>
+                    <div class="item--Yj3">/박</div>
+                  </div>
+                </div>
+              </div>
+            </button>
+            <button class="group-EVP">
+              <div class="divc14dgvke-CBK">
+                <div class="divc14whb16-weh">
+                  <div class="link-2dd7e47b-7fe0-4dd5-8c03-87870a2e113djpeg-tZw">
+                  </div>
+                </div>
+              </div>
+              <div class="divg1qv1ctd-NV7">
+                <div class="divtitle898622005542393497-uzq">산타크루즈, 캘리포니아, 미국</div>
+                <div class="auto-group-gsx1-1Y5">
+                  <div class="div1jo4hgw-MM3">
+                    <div class="item-1396958-6ZX">₩1,396,958 </div>
+                    <div class="item--cGy">/박</div>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+        <!--4위-->
+        <button class="secondList">
+			<div class="image-18-7sw">
+				<div class="secondText">
+                  <div class="secondTextDiv">
+                    <div>₩1,396,958 </div>
+                    <div>/박</div>
+                  </div>
+                </div>
+			</div>
+		<div>
+      </div>
+    </button>
+    </div>
+    <!--세번째 리스트-->
+    <div style="display: flex; justify-content: center; align-items: center;  width: 100%; margin-top:2rem;">
+    <div class="divsubmain-Two">
+      <div class="strong--QMF">푸른 바다만큼 시원한 제주 🌊</div>
+      <div class="list-4Ro">
+        <div class="group-1bw" th:each="a:${activityList}">
+          <button class="divc14dgvke-ZNZ">
+            <div class="divc14whb16-VX7">
+              <div class="divo47luuh-Sx9">
+                <img class="button--xQh" src="./assets/button--q8m.png"/>
+                <img class="img-6-1--e2d" src="./assets/img-6-1--XXX.png"/>
+              </div>
+              <div class="divc14whb16-VX7-bg">
+              </div>
+            </div>
+          </button>
+          <div class="divg1qv1ctd-Dzq">
+            <div class="divtitle898622005542393497-yz1" th:text="${a.activityName}"></div>
+            <div class="auto-group-8v3s-3ys">
+              <div class="div1jo4hgw-1A1">
+                <div class="item-1396958-Yfj" th:text="${a.activityPrice}"></div>
+                <div class="item--Fq3">원</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!--네번째 리스트-->
+    <div style="display: flex; justify-content: center; align-items: center;  width: 100%; margin-top:2rem;">
+    <div class="divsubmain-U81">
+      <div class="strong--17w">버스 타고 갈 수 있는 여행 🚌</div>
+      <div class="list-fyB">
+        <div class="group-RSZ" th:each="a:${accomodationList}">
+          <button class="divc14dgvke-yDB">
+            <div class="divc14whb16-HzZ">
+              <div class="divo47luuh-rGy">
+                <img class="button--B4M" src="./assets/button--VMj.png"/>
+                <img class="img-6-1--U3T" src="./assets/img-6-1--jqs.png"/>
+              </div>
+              <div class="divc14whb16-HzZ-bg">
+              </div>
+            </div>
+          </button>
+          <div class="divg1qv1ctd-USm">
+            <div class="divtitle898622005542393497-pmX" th:text="${a.accomodationName}"></div>
+            <div class="auto-group-bg8q-Jgh">
+              <div class="div1jo4hgw-3uB">
+                <div class="item--fvZ">₩</div>
+                <div class="item-1396958-zpR" th:text="${a.accomodationPrice}">₩</div>
+              </div>
+            </div>
+          </div>
+        </div>
+   
+        
+      </div>
+    </div>
+    </div>
+    <!--게시판-->
+    <div class="divblockreview-E2V">
+      <div class="divboxreview-tsj">
+        <div class="heading-2-link-qHB">          <div class="heading-2-link-qHB-bg">
+          </div>
+BEST 커뮤니티</div>
+        <div class="divbx-wrapper-26m">
+          <div class="divbx-viewport-8xR">
+            <div class="divboxslide-sQD">
+              <div class="link-p4Z">
+                <div class="heading-3-kiu" th:text="${community.communityTitle}"></div>
+                <div class="auto-group-wcvf-2gR">
+
+                  <div class="ptxtlocal-McD">
+                    <div class="emphasis-Hkm">
+                      <div class="pseudo-ER7">
+                      </div>
+                      <div class="item--ApZ" th:if="${community.communityCategory.name() == 'MYMONEY'}">내돈내산</div>
+                      <div class="item--ApZ" th:if="${community.communityCategory.name() == 'SPONSORSHIP'}">추천해요</div>
+                      <div class="item--ApZ" th:if="${community.communityCategory.name() == 'TRVELMATE'}">여행메이트</div>
+                      <div class="item--ApZ" th:if="${community.communityCategory.name() == 'INFORMATION'}">정보</div>
+                      <div class="item--ApZ" th:if="${community.communityCategory.name() == 'ETC'}">기타</div>
+                    </div>
+                  </div>
+                  <div class="divreviewview-zBK">
+                    <div class="ph2d-8015b704-Vtm">
+                      <div class="item-200--CHP" th:utext="${community.communityContent}">만족도 200%의 완벽한 여행을 가이드 해주신 최승자</div>
+                    </div>
+                    <!--
+                    <div class="spanthumb-qFo">
+                      <div class="png-zPb">
+                      </div>
+                    </div>
+                    -->
+                  </div>
+                  <div class="spanunderlinelinkarrow-mtu">                  
+										  <a class="spanunderlinelinkarrow-mtu-bg" th:href="@{/main/communityDetail2(communityNo=${community.communityNo})}"> 자세히 보기</a></div>
+                </div>
+              </div>
+              <div class="list-UpZ">
+                <div class="spanthumb-RYm">
+                  <div class="spanthumb-RYm-bg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

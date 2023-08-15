@@ -23,4 +23,53 @@ public class BusinessDto {
         this.businessManager = businessManager;
         this.businessCategory = businessCategory;
     }
+
+	public int getBusinessNo() {
+		return businessNo;
+	}
+
+	public void setBusinessNo(int businessNo) {
+		this.businessNo = businessNo;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+
+	public String getBusinessAddr() {
+		return businessAddr;
+	}
+
+	public void setBusinessAddr(String businessAddr) {
+		this.businessAddr = businessAddr;
+	}
+
+	public String getBusinessPhone() {
+		return businessPhone;
+	}
+
+	public void setBusinessPhone(String businessPhone) {
+		this.businessPhone = businessPhone;
+	}
+
+	public String getBusinessManager() {
+		return businessManager;
+	}
+
+	public void setBusinessManager(String businessManager) {
+		this.businessManager = businessManager;
+	}
+
+	public BusinessCategory getBusinessCategory() {
+		return businessCategory;
+	}
+
+	public void setBusinessCategory(BusinessCategory businessCategory) {
+		this.businessCategory = businessCategory;
+	}
+    
 }

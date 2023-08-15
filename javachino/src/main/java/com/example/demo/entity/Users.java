@@ -37,4 +37,47 @@ public class Users {
     private String usersPhone;
     @Column(name = "users_date")
     private Date usersDate;
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
+	public String getUsersId() {
+		return usersId;
+	}
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
+	public String getUsersPassword() {
+		return usersPassword;
+	}
+	public void setUsersPassword(String usersPassword) {
+		this.usersPassword = usersPassword;
+	}
+	public String getUsersName() {
+		return usersName;
+	}
+	public void setUsersName(String usersName) {
+		this.usersName = usersName;
+	}
+	public String getUsersFname() {
+		return usersFname;
+	}
+	public void setUsersFname(String usersFname) {
+		this.usersFname = usersFname;
+	}
+	public String getUsersPhone() {
+		return usersPhone;
+	}
+	public void setUsersPhone(String usersPhone) {
+		this.usersPhone = usersPhone;
+	}
+	public Date getUsersDate() {
+		return usersDate;
+	}
+	public void setUsersDate(Date usersDate) {
+		this.usersDate = usersDate;
+	}
+    
 } 

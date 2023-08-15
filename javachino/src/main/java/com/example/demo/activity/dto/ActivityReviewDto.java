@@ -34,4 +34,54 @@ public class ActivityReviewDto {
             this.activityDto = new ActivityDto(activityReview.getActivity());
         }
     }
+
+	public int getActivityReviewNo() {
+		return activityReviewNo;
+	}
+
+	public void setActivityReviewNo(int activityReviewNo) {
+		this.activityReviewNo = activityReviewNo;
+	}
+
+	public double getActivityReviewStar() {
+		return activityReviewStar;
+	}
+
+	public void setActivityReviewStar(double activityReviewStar) {
+		this.activityReviewStar = activityReviewStar;
+	}
+
+	public String getActivityReviewContent() {
+		return activityReviewContent;
+	}
+
+	public void setActivityReviewContent(String activityReviewContent) {
+		this.activityReviewContent = activityReviewContent;
+	}
+
+	public LocalDate getActivityReviewDate() {
+		return activityReviewDate;
+	}
+
+	public void setActivityReviewDate(LocalDate activityReviewDate) {
+		this.activityReviewDate = activityReviewDate;
+	}
+
+	public UsersDto getUsersDto() {
+		return usersDto;
+	}
+
+	public void setUsersDto(UsersDto usersDto) {
+		this.usersDto = usersDto;
+	}
+
+	public ActivityDto getActivityDto() {
+		return activityDto;
+	}
+
+	public void setActivityDto(ActivityDto activityDto) {
+		this.activityDto = activityDto;
+	}
+	
+	
 }

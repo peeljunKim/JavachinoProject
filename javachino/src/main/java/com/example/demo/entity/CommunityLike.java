@@ -42,4 +42,30 @@ public class CommunityLike {
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_community_like_to_community"))  
 	private Community community;
+
+	public int getCommunityLikeNo() {
+		return communityLikeNo;
+	}
+
+	public void setCommunityLikeNo(int communityLikeNo) {
+		this.communityLikeNo = communityLikeNo;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+	  
+	  
 }

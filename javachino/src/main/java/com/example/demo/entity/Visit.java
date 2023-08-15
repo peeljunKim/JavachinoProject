@@ -17,5 +17,18 @@ public class Visit {
 	private Date visitDate;
 	@Column(name = "visit_count")
 	private int visitCount;
+	public Date getVisitDate() {
+		return visitDate;
+	}
+	public void setVisitDate(Date visitDate) {
+		this.visitDate = visitDate;
+	}
+	public int getVisitCount() {
+		return visitCount;
+	}
+	public void setVisitCount(int visitCount) {
+		this.visitCount = visitCount;
+	}
+	
 }
 

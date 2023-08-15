@@ -38,4 +38,62 @@ public class ActivityRvDto {
             this.activityDto = new ActivityDto(activityRv.getActivity());
         }
     }
+
+	public int getActivityRvNo() {
+		return activityRvNo;
+	}
+
+	public void setActivityRvNo(int activityRvNo) {
+		this.activityRvNo = activityRvNo;
+	}
+
+	public LocalDate getRvDate() {
+		return rvDate;
+	}
+
+	public void setRvDate(LocalDate rvDate) {
+		this.rvDate = rvDate;
+	}
+
+	public LocalDate getActivityRvDate() {
+		return activityRvDate;
+	}
+
+	public void setActivityRvDate(LocalDate activityRvDate) {
+		this.activityRvDate = activityRvDate;
+	}
+
+	public int getActivityRvPeople() {
+		return activityRvPeople;
+	}
+
+	public void setActivityRvPeople(int activityRvPeople) {
+		this.activityRvPeople = activityRvPeople;
+	}
+
+	public String getActivityRvPhone() {
+		return activityRvPhone;
+	}
+
+	public void setActivityRvPhone(String activityRvPhone) {
+		this.activityRvPhone = activityRvPhone;
+	}
+
+	public UsersDto getUsersDto() {
+		return usersDto;
+	}
+
+	public void setUsersDto(UsersDto usersDto) {
+		this.usersDto = usersDto;
+	}
+
+	public ActivityDto getActivityDto() {
+		return activityDto;
+	}
+
+	public void setActivityDto(ActivityDto activityDto) {
+		this.activityDto = activityDto;
+	}
+    
+    
 }

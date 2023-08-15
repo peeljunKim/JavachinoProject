@@ -51,5 +51,47 @@ public class ActivityRv {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_rv_to_activity"))
     private Activity activity;
-
+	public int getActivityRvNo() {
+		return activityRvNo;
+	}
+	public void setActivityRvNo(int activityRvNo) {
+		this.activityRvNo = activityRvNo;
+	}
+	public LocalDate getRvDate() {
+		return rvDate;
+	}
+	public void setRvDate(LocalDate rvDate) {
+		this.rvDate = rvDate;
+	}
+	public LocalDate getActivityRvDate() {
+		return activityRvDate;
+	}
+	public void setActivityRvDate(LocalDate activityRvDate) {
+		this.activityRvDate = activityRvDate;
+	}
+	public int getActivityRvPeople() {
+		return activityRvPeople;
+	}
+	public void setActivityRvPeople(int activityRvPeople) {
+		this.activityRvPeople = activityRvPeople;
+	}
+	public String getActivityRvPhone() {
+		return activityRvPhone;
+	}
+	public void setActivityRvPhone(String activityRvPhone) {
+		this.activityRvPhone = activityRvPhone;
+	}
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	public Activity getActivity() {
+		return activity;
+	}
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+    
 }

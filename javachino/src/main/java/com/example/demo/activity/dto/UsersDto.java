@@ -24,4 +24,62 @@ public class UsersDto {
 		this.usersPhone = usersPhone;
 		this.usersPassword = usersPassword;
 	}
+
+	public int getUsersNo() {
+		return usersNo;
+	}
+
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
+
+	public String getUsersId() {
+		return usersId;
+	}
+
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
+
+	public String getUsersName() {
+		return usersName;
+	}
+
+	public void setUsersName(String usersName) {
+		this.usersName = usersName;
+	}
+
+	public String getUsersFname() {
+		return usersFname;
+	}
+
+	public void setUsersFname(String usersFname) {
+		this.usersFname = usersFname;
+	}
+
+	public String getUsersPhone() {
+		return usersPhone;
+	}
+
+	public void setUsersPhone(String usersPhone) {
+		this.usersPhone = usersPhone;
+	}
+
+	public Date getUserDate() {
+		return userDate;
+	}
+
+	public void setUserDate(Date userDate) {
+		this.userDate = userDate;
+	}
+
+	public String getUsersPassword() {
+		return usersPassword;
+	}
+
+	public void setUsersPassword(String usersPassword) {
+		this.usersPassword = usersPassword;
+	}
+	
+	
 }

@@ -53,4 +53,59 @@ public class AccomodationRV {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_rv_to_accom"))
     private Accomodation accomodation;
+	public int getAccomodationRVNo() {
+		return accomodationRVNo;
+	}
+	public void setAccomodationRVNo(int accomodationRVNo) {
+		this.accomodationRVNo = accomodationRVNo;
+	}
+	public String getAccomodationRVCheckIn() {
+		return accomodationRVCheckIn;
+	}
+	public void setAccomodationRVCheckIn(String accomodationRVCheckIn) {
+		this.accomodationRVCheckIn = accomodationRVCheckIn;
+	}
+	public String getAccomodationRVCheckOut() {
+		return accomodationRVCheckOut;
+	}
+	public void setAccomodationRVCheckOut(String accomodationRVCheckOut) {
+		this.accomodationRVCheckOut = accomodationRVCheckOut;
+	}
+	public LocalDate getAccomodationRVDate() {
+		return accomodationRVDate;
+	}
+	public void setAccomodationRVDate(LocalDate accomodationRVDate) {
+		this.accomodationRVDate = accomodationRVDate;
+	}
+	public String getAccomodationRVName() {
+		return accomodationRVName;
+	}
+	public void setAccomodationRVName(String accomodationRVName) {
+		this.accomodationRVName = accomodationRVName;
+	}
+	public String getAccomodationRVPeople() {
+		return accomodationRVPeople;
+	}
+	public void setAccomodationRVPeople(String accomodationRVPeople) {
+		this.accomodationRVPeople = accomodationRVPeople;
+	}
+	public String getAccomodationRVPhone() {
+		return accomodationRVPhone;
+	}
+	public void setAccomodationRVPhone(String accomodationRVPhone) {
+		this.accomodationRVPhone = accomodationRVPhone;
+	}
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	public Accomodation getAccomodation() {
+		return accomodation;
+	}
+	public void setAccomodation(Accomodation accomodation) {
+		this.accomodation = accomodation;
+	}
+    
 }
