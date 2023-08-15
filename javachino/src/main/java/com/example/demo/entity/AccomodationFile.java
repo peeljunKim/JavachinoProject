@@ -35,7 +35,47 @@ public class AccomodationFile {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))
     private Accomodation accomodation;
-	
 
+	public int getAccomodationFileNo() {
+		return accomodationFileNo;
+	}
+
+	public void setAccomodationFileNo(int accomodationFileNo) {
+		this.accomodationFileNo = accomodationFileNo;
+	}
+
+	public String getAccomodationFileFname1() {
+		return accomodationFileFname1;
+	}
+
+	public void setAccomodationFileFname1(String accomodationFileFname1) {
+		this.accomodationFileFname1 = accomodationFileFname1;
+	}
+
+	public String getAccomodationFileFname2() {
+		return accomodationFileFname2;
+	}
+
+	public void setAccomodationFileFname2(String accomodationFileFname2) {
+		this.accomodationFileFname2 = accomodationFileFname2;
+	}
+
+	public String getAccomodationFileFname3() {
+		return accomodationFileFname3;
+	}
+
+	public void setAccomodationFileFname3(String accomodationFileFname3) {
+		this.accomodationFileFname3 = accomodationFileFname3;
+	}
+
+	public Accomodation getAccomodation() {
+		return accomodation;
+	}
+
+	public void setAccomodation(Accomodation accomodation) {
+		this.accomodation = accomodation;
+	}
+	
+    
   
 }

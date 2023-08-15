@@ -38,4 +38,61 @@ public class AccomodationInfo {
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_info_to_accom"))
     private Accomodation accomodation;
 
+	public int getAccomodationInfoNo() {
+		return accomodationInfoNo;
+	}
+
+	public void setAccomodationInfoNo(int accomodationInfoNo) {
+		this.accomodationInfoNo = accomodationInfoNo;
+	}
+
+	public int getAccomodationInfoMinPerson() {
+		return accomodationInfoMinPerson;
+	}
+
+	public void setAccomodationInfoMinPerson(int accomodationInfoMinPerson) {
+		this.accomodationInfoMinPerson = accomodationInfoMinPerson;
+	}
+
+	public int getAccomodationInfoMaxPersion() {
+		return accomodationInfoMaxPersion;
+	}
+
+	public void setAccomodationInfoMaxPersion(int accomodationInfoMaxPersion) {
+		this.accomodationInfoMaxPersion = accomodationInfoMaxPersion;
+	}
+
+	public String getAccomodationInfoSize() {
+		return accomodationInfoSize;
+	}
+
+	public void setAccomodationInfoSize(String accomodationInfoSize) {
+		this.accomodationInfoSize = accomodationInfoSize;
+	}
+
+	public String getAccomodationInfoExplanation() {
+		return accomodationInfoExplanation;
+	}
+
+	public void setAccomodationInfoExplanation(String accomodationInfoExplanation) {
+		this.accomodationInfoExplanation = accomodationInfoExplanation;
+	}
+
+	public String getAccomodationPriceperPerson() {
+		return accomodationPriceperPerson;
+	}
+
+	public void setAccomodationPriceperPerson(String accomodationPriceperPerson) {
+		this.accomodationPriceperPerson = accomodationPriceperPerson;
+	}
+
+	public Accomodation getAccomodation() {
+		return accomodation;
+	}
+
+	public void setAccomodation(Accomodation accomodation) {
+		this.accomodation = accomodation;
+	}
+
+    
 }

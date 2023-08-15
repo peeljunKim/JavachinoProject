@@ -49,6 +49,112 @@ public class ActivityDto {
 	        DecimalFormat decimalFormat = new DecimalFormat("#");
 	        this.activityPrice = Double.parseDouble(decimalFormat.format(this.activityPrice));
 	    }
+
+	public int getActivityNo() {
+		return activityNo;
+	}
+
+	public void setActivityNo(int activityNo) {
+		this.activityNo = activityNo;
+	}
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+
+	public String getActivityAddr() {
+		return activityAddr;
+	}
+
+	public void setActivityAddr(String activityAddr) {
+		this.activityAddr = activityAddr;
+	}
+
+	public String getActivityExplanation() {
+		return activityExplanation;
+	}
+
+	public void setActivityExplanation(String activityExplanation) {
+		this.activityExplanation = activityExplanation;
+	}
+
+	public ActivityCategory getActivityCategory() {
+		return activityCategory;
+	}
+
+	public void setActivityCategory(ActivityCategory activityCategory) {
+		this.activityCategory = activityCategory;
+	}
+
+	public double getActivityPrice() {
+		return activityPrice;
+	}
+
+	public void setActivityPrice(double activityPrice) {
+		this.activityPrice = activityPrice;
+	}
+
+	public int getActivityTime() {
+		return activityTime;
+	}
+
+	public void setActivityTime(int activityTime) {
+		this.activityTime = activityTime;
+	}
+
+	public String getActivityFname1() {
+		return activityFname1;
+	}
+
+	public void setActivityFname1(String activityFname1) {
+		this.activityFname1 = activityFname1;
+	}
+
+	public String getActivityFname2() {
+		return activityFname2;
+	}
+
+	public void setActivityFname2(String activityFname2) {
+		this.activityFname2 = activityFname2;
+	}
+
+	public String getActivityFname3() {
+		return activityFname3;
+	}
+
+	public void setActivityFname3(String activityFname3) {
+		this.activityFname3 = activityFname3;
+	}
+
+	public BusinessDto getBusinessDto() {
+		return businessDto;
+	}
+
+	public void setBusinessDto(BusinessDto businessDto) {
+		this.businessDto = businessDto;
+	}
+
+	public double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+	 
+	 
 	}
 	
 

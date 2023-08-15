@@ -44,5 +44,41 @@ public class ActivityReview {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "activity_no", foreignKey = @ForeignKey(name = "fk_activity_review_to_activity"))
     private Activity activity;
-
+	public int getActivityReviewNo() {
+		return activityReviewNo;
+	}
+	public void setActivityReviewNo(int activityReviewNo) {
+		this.activityReviewNo = activityReviewNo;
+	}
+	public double getActivityReviewStar() {
+		return activityReviewStar;
+	}
+	public void setActivityReviewStar(double activityReviewStar) {
+		this.activityReviewStar = activityReviewStar;
+	}
+	public String getActivityReviewContent() {
+		return activityReviewContent;
+	}
+	public void setActivityReviewContent(String activityReviewContent) {
+		this.activityReviewContent = activityReviewContent;
+	}
+	public LocalDate getActivityReviewDate() {
+		return activityReviewDate;
+	}
+	public void setActivityReviewDate(LocalDate activityReviewDate) {
+		this.activityReviewDate = activityReviewDate;
+	}
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	public Activity getActivity() {
+		return activity;
+	}
+	public void setActivity(Activity activity) {
+		this.activity = activity;
+	}
+    
 }

@@ -46,4 +46,46 @@ public class Commentary {
 	  @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "community_no", foreignKey = @ForeignKey(name = "fk_commentary_to_community"))  
 	private Community community;
+
+	public int getCommentaryNo() {
+		return commentaryNo;
+	}
+
+	public void setCommentaryNo(int commentaryNo) {
+		this.commentaryNo = commentaryNo;
+	}
+
+	public Date getCommentaryDate() {
+		return commentaryDate;
+	}
+
+	public void setCommentaryDate(Date commentaryDate) {
+		this.commentaryDate = commentaryDate;
+	}
+
+	public String getCommentaryContent() {
+		return commentaryContent;
+	}
+
+	public void setCommentaryContent(String commentaryContent) {
+		this.commentaryContent = commentaryContent;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Community getCommunity() {
+		return community;
+	}
+
+	public void setCommunity(Community community) {
+		this.community = community;
+	}
+	  
+	  
 }

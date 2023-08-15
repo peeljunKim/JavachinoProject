@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>SEARCHING</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A500%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A500%2C700"/>
+  <link rel="stylesheet" th:href="@{/css/community/searching.css}"/>
+  <link rel="stylesheet" th:href="@{/css/community/header.css}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script>
+	  $(document).ready(function(){
+		  $('#accomoBtn').on('click',function(){
+			 var keyword = $('#keyword').val();
+			  console.log("accomBtn클릭됐음"+keyword);
+			  updateList('accomodation',keyword)
+		  });
+		  $('#activityBtn').on('click',function(){
+			  var keyword = $('#keyword').val();
+			  console.log("activityBtn클릭됐음"+keyword);
+			  updateList('activity',keyword)
+			  
+		  });
+		  function updateList(category,keyword){
+			  console.log("함수"+category);
+			  console.log("함수"+keyword);
+			  $.ajax({
+				 url: "/searching",
+				 type: "POST",
+				 data: {category:category,keyword:keyword},
+				 success:function(data){
+					  $('#listDiv').html($(data).find('#listDiv').html());
+				 }
+			  });
+		  }
+	  });
+	  </script>
+</head>
+<body>
+	   <nav class="navbar navbar-expand-lg  fixed-top" style="
+    position: relative;
+">
+        <div class="container-fluid">
+                <div class="p-1 flex-lg-fill">
+                    <div class="header-logo-search" >
+                         <a class="navbar-brand" href="#">
+                            <img src="./assets/javachino_logo.png" id="logoImg" >
+                        </a>
+                        <div class="searchBox">
+                            <form class="search" action="/searching" method="post">
+                                <div class="input-group" style="margin-top: 10px; ">
+                                    <span class="input-group-text" id="search-icon">
+                                        <i class="fa-solid fa-magnifying-glass" ></i>
+                                    </span>
+                                    <input class="form-control" name="keyword" type="search" placeholder="도시를 검색해보세요" aria-label="search" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 flex-lg-fill">
+                        <div class="row g-0">
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/accomodation.png"  id="accomodationImg"> 
+                                    <span id="menuText"> 숙박</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/bikini.png" id="bikiniImg">
+                                    <span id="menuText"> 액티비티</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="./assets/user-group.png" id="user-groupImg">
+                                    <span id="menuText"> 커뮤니티</span>
+                                </a>
+                            </diV>
+                        </div>
+                </div>
+                <div class="p-3" >
+                    <div class="row" id="header-btn-group">
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-login">
+                                    <span class="login" id="btnText">로그인</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-join">
+                                    <span class="join" id="btnText">회원가입</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </nav>
+    <!--바디-->
+<div class="searching-uBo">
+	<input type="hidden" th:value="${keyword}" id="keyword">
+  <div class="divtransparentcontainer-modulecontainer-r7ums-DCV">
+    <div class="frame-3-Vvh">
+      <div class="divcityverticals-modulecontainer-bndt5-EtH">
+        <button class="divcityverticalitem-modulecontainer-bczt7-x3b" id="accomoBtn">
+          <img class="icon-accomodation-gEV" src="/assets/icon-accomodation-N5F.png"/>
+          <div class="item--zW5">숙소</div>
+        </button>
+        <button class="divcityverticalitem-modulecontainer-bczt7-rYH" id="activityBtn">
+          <img class="emoji-bikini-nRw" src="/assets/emoji-bikini-eh7.png"/>
+          <div class="item--hJ1">액티비티</div>
+        </button>
+      </div>
+    </div>
+    <div class="auto-group-qhxv-J2u" >
+      <div>
+        <div id="listDiv">
+            <div class="group-27K" th:each="a, loop: ${list}" th:if="${category =='activity'}">
+              <div class="divc14dgvke-Zsw">
+                <div class="divc14whb16-hDT">
+                  <div class="divo47luuh-TCd">
+                    <img class="button--mUD" src="./assets/button--LU1.png"/>
+                    <img class="img-6-1--17f" src="./assets/img-6-1--Dp5.png"/>
+                  </div>
+                  <div class="divc14whb16-hDT-bg">
+					  
+                  </div>
+                </div>
+              </div>
+              <div class="divg1qv1ctd-v89">
+                <div class="divtitle898622005542393497-frR" th:text="${a.activityName}"></div>
+                <div class="auto-group-nr8u-jbP">
+                  <div class="div1jo4hgw-V4m">
+                    <div class="item--ueH">₩</div>
+                    <div class="item-1396958-dAy" th:text="${a.activityPrice}"></div>
+                  </div>
+                </div>
+              </div>
+               <div th:if="${loop.index % 4 == 3}" style="position: relative; width: 100%;"></div>
+            </div>
+            
+            <div class="group-27K" th:each="a: ${list}" th:if="${category =='accomodation'}">
+              <div class="divc14dgvke-Zsw">
+                <div class="divc14whb16-hDT">
+                  <div class="divo47luuh-TCd">
+                    <img class="button--mUD" src="./assets/button--LU1.png"/>
+                    <img class="img-6-1--17f" src="./assets/img-6-1--Dp5.png"/>
+                  </div>
+                  <div class="divc14whb16-hDT-bg">
+                  </div>
+                </div>
+              </div>
+              <div class="divg1qv1ctd-v89">
+                <div class="divtitle898622005542393497-frR" th:text="${a.accomodationName}"></div>
+                <div class="auto-group-nr8u-jbP">
+                  <div class="div1jo4hgw-V4m">
+                    <div class="item--ueH">₩</div>
+                    <div class="item-1396958-dAy" th:text="${a.accomodationPrice}"></div>
+                  </div>
+                </div>
+              </div>
+            
+            
+            
+
+      </div>
+    </div>
+
+  </div>
+  </div>
+</div>
+</body>

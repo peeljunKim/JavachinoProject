@@ -34,6 +34,68 @@ public class View_PayActivity {
     private String activityFname1;
 	@Column(name = "activity_review_star")
     private Double activityReviewStar;
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
+	public int getPayNo() {
+		return payNo;
+	}
+	public void setPayNo(int payNo) {
+		this.payNo = payNo;
+	}
+	public int getPayPrice() {
+		return payPrice;
+	}
+	public void setPayPrice(int payPrice) {
+		this.payPrice = payPrice;
+	}
+	public int getActivityRvNo() {
+		return activityRvNo;
+	}
+	public void setActivityRvNo(int activityRvNo) {
+		this.activityRvNo = activityRvNo;
+	}
+	public Date getActivityRvDate() {
+		return activityRvDate;
+	}
+	public void setActivityRvDate(Date activityRvDate) {
+		this.activityRvDate = activityRvDate;
+	}
+	public Date getActivityReviewDate() {
+		return activityReviewDate;
+	}
+	public void setActivityReviewDate(Date activityReviewDate) {
+		this.activityReviewDate = activityReviewDate;
+	}
+	public int getActivityNo() {
+		return activityNo;
+	}
+	public void setActivityNo(int activityNo) {
+		this.activityNo = activityNo;
+	}
+	public String getActivityName() {
+		return activityName;
+	}
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}
+	public String getActivityFname1() {
+		return activityFname1;
+	}
+	public void setActivityFname1(String activityFname1) {
+		this.activityFname1 = activityFname1;
+	}
+	public Double getActivityReviewStar() {
+		return activityReviewStar;
+	}
+	public void setActivityReviewStar(Double activityReviewStar) {
+		this.activityReviewStar = activityReviewStar;
+	}
+	
+	
 }
 
 

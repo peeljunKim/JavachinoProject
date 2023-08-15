@@ -53,4 +53,23 @@ public class ActivityLike {
     }
     public ActivityLike() {
     }
+	public int getActivityLikeNo() {
+		return activityLikeNo;
+	}
+	public void setActivityLikeNo(int activityLikeNo) {
+		this.activityLikeNo = activityLikeNo;
+	}
+	public Users getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(Users usersNo) {
+		this.usersNo = usersNo;
+	}
+	public Activity getActivityNo() {
+		return activityNo;
+	}
+	public void setActivityNo(Activity activityNo) {
+		this.activityNo = activityNo;
+	}
+    
 }

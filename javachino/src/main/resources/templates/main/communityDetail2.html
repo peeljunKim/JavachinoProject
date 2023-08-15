@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>community</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C500%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C500%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C500"/>
+  <link rel="stylesheet" href="/css/community/communityDetail2.css"/>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script type="text/javascript">
+	  //게시글 삭제
+	   function deleteCommunity(communityNo) {
+	    var re = confirm('정말로 삭제할까요?');
+	    if (re == true) {
+			console.log("삭제한다아")
+	      window.location.href = "deleteCommunity?communityNo=" + communityNo;
+	    }
+	  }
+	  //댓글 삭제
+	  function deleteCommentary(commentaryNo, communityNo) {
+	    var re = confirm('정말로 삭제할까요?');
+	    if (re == true) {
+	      location.href = "deleteCommentary?commentaryNo=" + commentaryNo + "&communityNo=" + communityNo;
+	    }
+	  }
+	  //댓글수정버튼구현
+$(document).ready(function() {
+    $('.updateCommentaryBtn').click(function() {
+        var commentaryNo = $(this).data('commentary-no');
+        var commentaryContent = $(this).data('commentary-content');
+        updateCommentaryBtn(commentaryNo, commentaryContent);
+    });
+
+    function updateCommentaryBtn(commentaryNo, commentaryContent) {
+        var updateInput = $("#commentaryContent_" + commentaryNo);
+        updateInput.removeAttr('readonly');
+        $(".updateCommentaryBtn[data-comment-id='" + commentaryNo + "']").hide();
+        $(".updateCommentaryCompleteBtn[data-comment-id='" + commentaryNo + "']").show();
+    }
+
+    $('.updateCommentaryCompleteBtn').click(function() {
+        var commentaryNo = $(this).data('comment-id');
+        var updatedContent = $("#commentaryContent_" + commentaryNo).val();
+        console.log(commentaryNo);
+        console.log(updatedContent);
+        
+        updateCommentaryCompleteBtn(commentaryNo, updatedContent);
+    });
+
+    function updateCommentaryCompleteBtn(commentaryNo, updatedContent) {
+		console.log(commentaryNo);
+        console.log(updatedContent);
+        $.ajax({
+            url: "/updateCommentary",
+            type: "POST", // 변경된 부분
+            data: { commentaryNo: commentaryNo, commentaryContent: updatedContent },
+            success: function(data) {
+                console.log("댓글 업데이트 성공");
+                console.log(data);
+
+                $("#commentaryContent_" + commentaryNo).attr('readonly', 'readonly');
+                $(".updateCommentaryBtn[data-comment-id='" + commentaryNo + "']").show();
+                $(".updateCommentaryCompleteBtn[data-comment-id='" + commentaryNo + "']").hide();
+            },
+            error: function(error) {
+                console.error("댓글 업데이트 실패");
+                console.error(error);
+                console.log(data);
+            }
+        });
+    }
+    
+    //좋아요버튼
+    $('.likeBtn').click(function() {
+		console.log("좋아요 버튼 눌림")
+        var usersNo = $(this).data('users-no');
+        var communityNo = $(this).data('community-no');
+		updateLikeBtn(usersNo,communityNo);
+		});
+		
+		function updateLikeBtn(usersNo, communityNo) {
+        var communotyLikeCount = $("#communotyLikeCount");
+        var likeBtnDiv = $("#likeBtnDiv");
+        $.ajax({
+			url:"/insertCommunityLike",
+			type: "POST",
+			data: { usersNo: usersNo, communityNo: communityNo },
+			success:function(data){
+				console.log("커뮤니티 좋아요 성공");
+				$('#likeDiv').html($(data).find('#likeDiv').html());
+			}
+		});
+    }
+    
+     //좋아요취소버튼
+    $('.unlikeBtn').click(function() {
+		console.log("좋아요취소버튼 눌림")
+        var usersNo = $(this).data('users-no');
+        var communityNo = $(this).data('community-no');
+		updateUnlikeBtn(usersNo,communityNo);
+		});
+		
+		function updateUnlikeBtn(usersNo, communityNo) {
+        var communotyLikeCount = $("#communotyLikeCount");
+        var unlikeBtnDiv = $("#unlikeBtnDiv");
+        $.ajax({
+			url:"/deleteCommunityLike",
+			type: "POST",
+			data: { usersNo: usersNo, communityNo: communityNo },
+			success:function(data){
+				console.log("커뮤니티 좋아요 취소 성공");
+				$('#likeDiv').html($(data).find('#likeDiv').html());
+				
+			}
+		});
+    }
+});
+
+
+
+
+
+</script>
+</head>
+<body>
+<div class="wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P">
+  <div class="divcontent-AWV">
+    <div class="heading-3--Rqj">커뮤니티</div>
+    <div class="divconttravelreview-E2V">
+      <div class="heading-4-MN1">
+        <div class="item--Tfw" th:text="${c.communityTitle}"></div>
+        <div class="divbrdright-vpR">
+          <div class="spanh2d-68d532b5-F61">
+            <div class="item-20230619-enM" th:text="${#dates.format(c.communityDate, 'yyyy.MM.dd')}"></div>
+            <div class="pseudo-sf7">
+            </div>
+          </div>
+          <div class="item-783-Q9F">조회&nbsp;&nbsp;<span th:text="${c.communityHit}"></span></div>
+        </div>
+      </div>
+      <div class="divbrdeditor-WCH">
+        <div class="divreportbox-qEZ">
+          <div class="divtxtguide-8zM">
+            <div class="pseudo-RCm">
+            </div>
+            <div class="item--uNq" th:text="${c.users.usersName}"></div>
+          </div>
+          <!-- 커뮤니티 작성자랑 현재 접속한 회원이랑 같으면 수정, 삭제 보여라 -->
+          <div class="left-co3" th:if="${c.users.usersNo == u.usersNo}">
+            <div class="item--NnD"><a th:href="@{/main/updateCommunity(communityNo=${c.communityNo})}" style="text-decoration: none; color: inherit">수정</a></div>
+            <div class="item--UqF"><a href="#" th:onclick="'deleteCommunity('+${c.communityNo}+')'" style="text-decoration: none; color: inherit">삭제</a></div>
+          </div>
+        </div>
+        <div class="diveditorarea-BDs">
+          <div class="auto-group-bjbf-WX3">
+			  <!--썸머노트는 utext로 불러오ㅏ야한다! -->
+            <div class="auto-group-217f-SvV" th:utext="${c.communityContent}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divboxprodinfo-dmK" th:if="${c.activityRv != null && c.accomodationRv != null}">
+        <div class="c588e936f0127c1002d95ffc681d5e5ctn410x280jpg-MSR">
+        </div>
+        <div class="auto-group-acuf-Q9o">
+          <div class="spanicobrdblue-vP3">
+            <div class="spanh2d-121b737c-Dd3">
+              <div class="item--YvD">해외패키지</div>
+            </div>
+          </div>
+          <div class="spanlinkellipsis-sr1">[CJ온스타일+] 백두산/서파+북파 4일 #가장가까운공항 #두번보는천지</div>
+        </div>
+      </div>
+      <!--
+      <div class="auto-group-3fm3-atq">
+        <div class="button-ugD">신고하기</div>
+      </div>
+      -->
+      
+      <!--좋아요-->
+      <div class="auto-group-3fm3-atq" id="likeDiv">
+        <div class="likeBtnDiv" id="likeBtnDiv" th:if="${like==0}">
+          <button class="likeBtn" id="communityLikeBtn" th:data-users-no="${u.usersNo}"
+            th:data-community-no="${c.communityNo}">좋아요</button>&nbsp;
+          <div class="item-1-hVb" id="communotyLikeCount" th:text="${likeCount}"></div>
+        </div>
+        <div class="unlikeBtnDiv" id="unlikeBtnDiv" th:if="${like==1}">
+          <button class="unlikeBtn" id="communityUnlikeBtn" th:data-users-no="${u.usersNo}"
+            th:data-community-no="${c.communityNo}">좋아요 취소</button>&nbsp;
+          <div class="item-1-hVb" id="communotyLikeCount" th:text="${likeCount}"></div>
+        </div>
+        </div>
+        
+        <!--댓글 시작-->
+      <div class="divblocktitareamore-a3b">댓글</div>
+      <div class="commantary-f53">
+        <div class="divanswer-9772-RZK" th:each="commentary:${list}">
+          <div class="divpage-header-MSy">
+            <div class="right-585">
+              <div class="divstudyitemuserinfo1kkga-Rhj">
+                <img class="icon-profile-circle-mmb" src="./assets/icon-profile-circle.png"/>
+                <div class="item--JWd" th:text="${commentary.users.usersName}"></div>
+              </div>
+              <div class="link-10951-ab-4-DtV" th:text="${#dates.format(commentary.commentaryDate, 'yyyy.MM.dd')}">2023/07/01</div>
+            </div>
+            <!--댓글 작성자가 본인이면 수정, 삭제 보이게-->
+            <div class="left-fkV" th:if="${commentary.users.usersNo == u.usersNo}">
+				<div class="item--BD3">
+    <button style="text-decoration: none; color: inherit; border: none; background-color: white; font-size: 1.2rem; color: #848484;"
+            class="updateCommentaryBtn" th:data-comment-id="${commentary.commentaryNo}"
+            th:data-commentary-no="${commentary.commentaryNo}"
+            th:data-commentary-content="${commentary.commentaryContent}">수정</button>
+
+    <button style="text-decoration: none; color: inherit; border: none; background-color: white; font-size: 1.2rem;
+            color: #848484; display: none" class="updateCommentaryCompleteBtn" th:data-comment-id="${commentary.commentaryNo}">수정완료</button>
+</div>
+
+
+              <div class="item--esK"><a href="#" th:onclick="'deleteCommentary(' + ${commentary.commentaryNo} + ', ' + ${c.communityNo} + ')'" style="text-decoration: none; color: inherit">삭제</a></div>
+
+            </div>
+          </div>
+          <div class="divmarkdown-NHX">
+            <input th:id="'commentaryContent_'+${commentary.commentaryNo}" class="for-i-in-rangen-i-0-i-n--VN9" th:value="${commentary.commentaryContent}" readonly="readonly" name="commentaryContent" data-comment-id="${commentary.commentaryNo}">
+            </input>
+          </div>
+        </div>
+        <!--댓글 작성하기-->
+        <form class="divanswer-form-Sid" action="/insertCommentary" method="post">
+          <div class="heading-5--NsB">댓글 쓰기</div>
+          <div class="form-HUM">
+			  <input type="hidden" th:value="${c.communityNo}" name="communityNo">
+			  <input type="hidden" th:value="${u.usersNo}" name="usersNo">
+            <textarea name="commentaryContent" class="textarea-S6M" placeholder="댓글을 입력하세요"></textarea>
+            <input type="submit" value="작성하기" class="input-fUu">
+          </div>
+        </form>
+      </div>
+    </div>
+    <a class="button-KJZ" href="/main/board">목록</a>
+  </div>
+</div>
+</body>

@@ -63,4 +63,72 @@ public class Community {
    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_rv_no", foreignKey = @ForeignKey(name = "fk_community_to_accomodation_rv"))
    private AccomodationRV accomodationRv;
+public int getCommunityNo() {
+	return communityNo;
+}
+public void setCommunityNo(int communityNo) {
+	this.communityNo = communityNo;
+}
+public Date getCommunityDate() {
+	return communityDate;
+}
+public void setCommunityDate(Date communityDate) {
+	this.communityDate = communityDate;
+}
+public String getCommunityTitle() {
+	return communityTitle;
+}
+public void setCommunityTitle(String communityTitle) {
+	this.communityTitle = communityTitle;
+}
+public String getCommunityContent() {
+	return communityContent;
+}
+public void setCommunityContent(String communityContent) {
+	this.communityContent = communityContent;
+}
+public String getCommunityAddr() {
+	return communityAddr;
+}
+public void setCommunityAddr(String communityAddr) {
+	this.communityAddr = communityAddr;
+}
+public int getCommunityHit() {
+	return communityHit;
+}
+public void setCommunityHit(int communityHit) {
+	this.communityHit = communityHit;
+}
+public CommunityCategory getCommunityCategory() {
+	return communityCategory;
+}
+public void setCommunityCategory(CommunityCategory communityCategory) {
+	this.communityCategory = communityCategory;
+}
+public CommunitySelect getCommunitySelect() {
+	return communitySelect;
+}
+public void setCommunitySelect(CommunitySelect communitySelect) {
+	this.communitySelect = communitySelect;
+}
+public Users getUsers() {
+	return users;
+}
+public void setUsers(Users users) {
+	this.users = users;
+}
+public ActivityRv getActivityRv() {
+	return activityRv;
+}
+public void setActivityRv(ActivityRv activityRv) {
+	this.activityRv = activityRv;
+}
+public AccomodationRV getAccomodationRv() {
+	return accomodationRv;
+}
+public void setAccomodationRv(AccomodationRV accomodationRv) {
+	this.accomodationRv = accomodationRv;
+}
+   
+   
 }

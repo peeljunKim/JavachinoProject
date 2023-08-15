@@ -32,6 +32,30 @@ public class AccomodationLike {
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_like_to_accom"))
     private Accomodation accomodation;
 
+	public int getAccmodationLikeNo() {
+		return accmodationLikeNo;
+	}
+
+	public void setAccmodationLikeNo(int accmodationLikeNo) {
+		this.accmodationLikeNo = accmodationLikeNo;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+
+	public Accomodation getAccomodation() {
+		return accomodation;
+	}
+
+	public void setAccomodation(Accomodation accomodation) {
+		this.accomodation = accomodation;
+	}
+
     
 
     

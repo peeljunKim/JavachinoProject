@@ -46,4 +46,37 @@ public class Refund {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "pay_no", foreignKey = @ForeignKey(name = "fk_refund_to_pay"))
 	private Pay pay;
+
+	public int getRefundNo() {
+		return refundNo;
+	}
+
+	public void setRefundNo(int refundNo) {
+		this.refundNo = refundNo;
+	}
+
+	public Date getRefundReceiptDate() {
+		return refundReceiptDate;
+	}
+
+	public void setRefundReceiptDate(Date refundReceiptDate) {
+		this.refundReceiptDate = refundReceiptDate;
+	}
+
+	public Date getRefundFinishDate() {
+		return refundFinishDate;
+	}
+
+	public void setRefundFinishDate(Date refundFinishDate) {
+		this.refundFinishDate = refundFinishDate;
+	}
+
+	public Pay getPay() {
+		return pay;
+	}
+
+	public void setPay(Pay pay) {
+		this.pay = pay;
+	}
+	
 }

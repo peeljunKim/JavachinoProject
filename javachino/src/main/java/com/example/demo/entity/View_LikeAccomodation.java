@@ -20,6 +20,32 @@ public class View_LikeAccomodation {
 	private String accomodationName;
 	@Column(name = "accomodation_review_star")
 	private float accomodationReviewStar;
+	public int getUsersNo() {
+		return usersNo;
+	}
+	public void setUsersNo(int usersNo) {
+		this.usersNo = usersNo;
+	}
+	public int getAccomodationNo() {
+		return accomodationNo;
+	}
+	public void setAccomodationNo(int accomodationNo) {
+		this.accomodationNo = accomodationNo;
+	}
+	public String getAccomodationName() {
+		return accomodationName;
+	}
+	public void setAccomodationName(String accomodationName) {
+		this.accomodationName = accomodationName;
+	}
+	public float getAccomodationReviewStar() {
+		return accomodationReviewStar;
+	}
+	public void setAccomodationReviewStar(float accomodationReviewStar) {
+		this.accomodationReviewStar = accomodationReviewStar;
+	}
+	
+	
 	
 }
 

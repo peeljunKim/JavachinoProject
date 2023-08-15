@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <title>COMMUNITY</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C600%2C700"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C700"/>
+  <link rel="stylesheet" href="/css/community/board.css"/>
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A500%2C700"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A500%2C700"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/community/header.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script>
+	  $(document).ready(function (){
+		   var currentCname = "";  // 검색 항목을 유지하기 위한 변수
+   		 var currentKeyword = "";  // 검색 키워드를 유지하기 위한 변수
+   		 var currentSortBy = "latest";
+   		  console.log("cname"+currentCname);
+     			 console.log("currentKeyword"+currentKeyword);
+     			 
+		  
+		 	//버튼 클릭 이벤트 처리
+		 	$('#latestBtn').on('click',function(){
+				 updateSearchResults('latest');
+				// updateList('latest');
+				 console.log("최신순 버튼 클릭됐음");
+			 });
+			 $('#recommendationBtn').on('click',function(){
+				  updateSearchResults('recommendation');
+				// updateList('recommendation');
+				  console.log("추천순 버튼 클릭됐음");
+			 });
+			 
+			 function updateSearchResults(sortBy) {
+				  console.log("함수cname"+currentCname);
+     			 console.log("함수currentKeyword"+currentKeyword);
+     			 currentSortBy = sortBy
+				    var url = '/main/board/1';
+				    if (currentCname && currentKeyword) {
+						
+				        url += '/' + currentCname + '/' + currentKeyword;
+				    }
+				    url += '?sortBy=' + sortBy;
+				
+				    $.ajax({
+				        url: url,
+				        success: function(data) {
+							console.log("여기왔나")
+				            $('#listTable').html($(data).find('#listTable').html());
+				            $('#paging').html($(data).find('#paging').html());
+				        }
+				    });
+				}	
+				 // 페이지 숫자 클릭 이벤트 핸들러
+				$('#paging').on('click', '.page-link', function(e) {
+					console.log("페이징클릭됨..?");
+		        e.preventDefault();
+		        var page = $(this).text();
+		        console.log(page);
+		        updateSearchResultsWithPage(page);
+		    });
+		    
+		    function updateSearchResultsWithPage(page) {
+			    var sortBy = 'latest'; // 예시로 최신순으로 고정
+			    var url = '/main/board/' + page;
+			    if (currentCname && currentKeyword) {
+			        url += '/' + currentCname + '/' + currentKeyword;
+			    }
+			    url += '?sortBy=' + currentSortBy;
+			
+			    $.ajax({
+			        url: url,
+			        success: function(data) {
+			            $('#listTable').html($(data).find('#listTable').html());
+			        }
+			    });
+			    }
+			 
+			 /*
+			 //추천순/최신순으로 리스트 조회하기
+			 function updateList(sortBy){
+				 console.log("sortBy : "+sortBy);
+     			 console.log("cname"+currentCname);
+     			 console.log("currentKeyword"+currentKeyword);
+     			 
+     			 if (currentKeyword && currentKeyword !== "") {
+            $.ajax({
+                url: '/main/board/1/' + currentCname + '/' + currentKeyword + '?sortBy=' + sortBy,
+                success: function(data) {
+                    console.log("ajax 성공했다!");
+                    if (data && data.length > 0) {
+                        console.log(data);
+                        $('#listTable').html($(data).find('#listTable').html());
+                    }
+                }
+            });
+            }else{
+				$.ajax({
+					url:'/main/board/1?sortBy='+sortBy,
+					success:function(data){	
+						console.log("ajax성공했다!");
+						 if (data && data.length > 0) {
+							 console.log(data)
+							$('#listTable').html($(data).find('#listTable').html())
+                        }
+					}
+				 });
+			}
+				 
+			 }
+			 */
+    
+    // 드롭다운 메뉴 항목 클릭 시
+		$('.select-filter').on('click', function() {
+	        var selectedCnameText = $(this).text(); // 선택된 항목의 텍스트를 가져옵니다
+	        if(selectedCnameText == '지역'){
+	         var selectedCnameVal = 'communityAddr';
+			}else{
+	        var selectedCnameVal = 'communityTitle';
+			}
+			console.log("드랍박스 클릭"+selectedCnameText);
+			console.log("드랍박스 클릭"+selectedCnameVal);
+	        $('#cname').text(selectedCnameText); // 드롭다운 버튼 텍스트를 선택한 항목으로 변경합니다
+        	$('#cname').val(selectedCnameVal);
+   		 });
+   
+    //검색 버튼 클릭
+	  $(function(){
+		 $("#btnSearch").click(function(){
+			  console.log("검색 버튼 클릭");
+        currentCname = $('#cname').val();
+        currentKeyword = $("#keyword").val();
+        updateSearchResults('latest'); // 기본적으로 최신순으로 갱신
+    });
+	  });
+    
+	  });
+	  
+	  
+	  
+	  //테이블 행 클릭했을때 디테일로 넘어가기
+	  function selectDetail(communityNo){
+	     console.log("클릭됨"+communityNo);
+	     window.location.href = "/main/communityDetail2?communityNo=" + communityNo;
+	     console.log("클릭됨");
+	  }
+	  
+    
+  </script>
+</head>
+
+<body>
+	    <nav class="navbar navbar-expand-lg  fixed-top" style="
+    position: relative;
+">
+        <div class="container-fluid">
+                <div class="p-1 flex-lg-fill">
+                    <div class="header-logo-search" >
+                         <a class="navbar-brand" href="#">
+                            <img src="/images/activity/assets/javachino_logo.png" id="logoImg" >
+                        </a>
+                        <div class="searchBox">
+                            <form class="search" >
+                                <div class="input-group" style="margin-top: 10px; ">
+                                    <span class="input-group-text" id="search-icon">
+                                        <i class="fa-solid fa-magnifying-glass" ></i>
+                                    </span>
+                                    <input class="form-control" type="search" placeholder="도시를 검색해보세요" aria-label="search" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 flex-lg-fill">
+                        <div class="row g-0">
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="/images/activity/assets/accomodation.png"  id="accomodationImg"> 
+                                    <span id="menuText"> 숙박</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="/images/activity/assets/bikini.png" id="bikiniImg">
+                                    <span id="menuText"> 액티비티</span>
+                                </a>
+                            </diV>
+                            <diV class="col">
+                                <a class="nav-link" href="#">
+                                    <img src="/images/activity/assets/user-group.png" id="user-groupImg">
+                                    <span id="menuText"> 커뮤니티</span>
+                                </a>
+                            </diV>
+                        </div>
+                </div>
+                <div class="p-3" >
+                    <div class="row" id="header-btn-group">
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-login">
+                                    <span class="login" id="btnText">로그인</span>
+                                </button>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a class="nav-link" href="#" >
+                                <button type="button" id="btn-join">
+                                    <span class="join" id="btnText">회원가입</span>
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </nav>
+<div class="board-2G9">
+  <div class="divcontent-JDf">
+    <div class="heading-3--2fT">커뮤니티</div>
+    <div class="auto-group-nhoo-uUM">
+
+      <div class="divbestreview-pt9">
+        <div class="divslidebox-kG1">
+          <div class="divbx-viewport-gfT">
+            <div class="list-3F7">
+              <div class="item-PJy" th:each="best:${best}" th:onclick="'selectDetail(' + ${best.communityNo} + ')'">
+                <div class="link-is3">
+                  <div class="spantrvcountry-3uK">
+                    <img class="png-nM7" src="/images/community/ggg.png">
+                    </img>
+                  </div>
+                  <div class="heading-5-2oB" th:text="${best.communityTitle}">
+                  </div>
+                  <div class="item--fLM"th:text="${best.users.usersName}"></div>
+                </div>
+                <div class="strong-yrq">
+                  <div class="item-5-5Q5">8월</div>
+                  <div class="best-abj">Best</div>
+                  <div class="strong-yrq-bg">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-3">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" style="display: flex; align-items: center; justify-content: center;">
+    <li class="nav-item" style="width: 33%;">
+      <a class="nav-link active" style="width: 100%; text-align: center;" data-bs-toggle="tab" href="#home">전체</a>
+    </li>
+    <li class="nav-item" style="width: 33%;" >
+      <a class="nav-link" style="width: 100%; text-align: center;" data-bs-toggle="tab" href="#blog">블로그</a>
+    </li>
+    <li class="nav-item" style="width: 33%;">
+      <a class="nav-link" style="width: 100%; text-align: center;" data-bs-toggle="tab" href="#board">소통해요</a>
+    </li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <!--<div id="home" class="container tab-pane active"><br>
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    </div>
+    -->
+   <!-- <div id="menu1" class="container tab-pane fade"><br>
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    -->
+    <!--<div id="menu2" class="container tab-pane fade"><br>
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>-->
+  </div>
+</div>
+    <!--전체 부분-->
+    <div class="tab-content">
+    <div class="container tab-pane active" id="home">
+      <div class="form-vu7">
+		
+        <button class="button-VDT" data-bs-toggle="dropdown" id="cname">전체</button>
+        <ul class="dropdown-menu">
+			      <li><a class="dropdown-item select-filter" href="#" th:value="communityTitle">제목</a></li>
+			      <li><a class="dropdown-item select-filter" href="#" value="communityAddr">지역</a></li>
+			    </ul>
+        <input type="search" class="input-6yw" id="keyword" name="keyword">
+        <input type="submit" class="button-WXs" id="btnSearch" value="검색"></input>
+      </div>
+      <div class="ptblcount-Dx5">
+        <div class="item-28922-aGq">
+        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
+      </div>
+    </div>
+    <!-- 테이블 -->
+    <div class="container mt-3" >       
+  <table class="table table-hover" id="listTable">
+    <thead>
+      <tr>
+        <th>분류</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  th:each="b:${list}" th:onclick="'selectDetail(' + ${b.communityNo} + ')'">
+		<td th:if="${b.communitySelect.name() == 'BLOG'}">블로그</td>
+		<td th:if="${b.communitySelect.name() == 'BOARD'}">소통해요</td>
+        <td th:text="${b.communityTitle}"></td>
+        <td th:text="${b.users.usersName}"></td>
+        <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${b.communityHit}"></td>
+        <td th:text="${b.communityNo}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
+      <a class="button-eem" href="/main/boardwriting">등록</a>
+      </div>
+    <!-- 페이징 -->
+    <div class="auto-group-kmj1-vUZ" >
+      <div class="divpaging-44y">
+        <div class="auto-group-esvz-a3K" id="paging">
+			
+        <th:block th:each="i:${#numbers.sequence(1,totalPage)}">
+		<a href="#" class="page-link" data-page="${i}" th:text="${i}" data-sort="${sortBy}"></a>		
+	</th:block>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+    <!--블로그 부분-->
+    <div class="tab-content" id="listTable">
+    <div class="container tab-pane fade" id="blog">
+      <div class="form-vu7">
+		  <button class="button-qWH" data-bs-toggle="dropdown">
+			카테고리 선택          
+          </button>
+          <ul class="dropdown-menu">
+			      <li><a class="dropdown-item" href="#">내돈내산</a></li>
+			      <li><a class="dropdown-item" href="#">추천해요</a></li>
+			    </ul>
+        <div class="button-fER">지역 전체          <div class="button-fER-bg">
+          </div>
+	</div>
+        <div class="button-VDT">전체          <div class="button-VDT-bg">
+          </div>
+</div>
+        <div class="input-6yw">
+        </div>
+        <div class="button-WXs">검색</div>
+      </div>
+      <div class="ptblcount-Dx5">
+        <div class="item-28922-aGq">
+        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
+      </div>
+    </div>
+    <!-- 테이블 -->
+    <div class="container mt-3">       
+  <table class="table table-hover" id="listTable">
+    <thead>
+      <tr>
+        <th>카테고리</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- communitySelect가 0일때==blog인것만 불러오기 -->
+      <tr  th:each="b:${list}" th:if="${b.communitySelect.ordinal() == 0}">
+  		<td th:if="${b.communityCategory.name() == 'MYMONEY'}">내돈내산</td>
+		<td th:if="${b.communityCategory.name() == 'SPONSORSHIP'}">추천해요</td>
+        <td th:text="${b.communityTitle}"></td>
+        <td th:text="${b.users.usersName}"></td>
+        <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${b.communityHit}"></td>
+        <td>1</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
+      <a class="button-eem" href="/main/boardwriting">등록</a>
+      </div>
+    <!-- 페이징 -->
+    <div class="auto-group-kmj1-vUZ">
+      <div class="divpaging-44y">
+        <div class="auto-group-esvz-a3K">
+        <div class="link-6vm">1</div>
+        <div class="link-2-yzZ">2</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!--소통해요 부분-->
+    <div class="tab-content" id="listTable">
+    <div class="container tab-pane fade" id="board">
+      <div class="form-vu7">
+		<button class="button-qWH" data-bs-toggle="dropdown">
+			분류 선택          
+          </button>
+          <ul class="dropdown-menu">
+			      <li><a class="dropdown-item" href="#">블로그</a></li>
+			      <li><a class="dropdown-item" href="#">소통해요</a></li>
+			    </ul>
+        <button class="button-VDT" data-bs-toggle="dropdown">전체</button>
+        <ul class="dropdown-menu">
+			      <li><a class="dropdown-item" href="#">제목</a></li>
+			      <li><a class="dropdown-item" href="#">작성자</a></li>
+			      <li><a class="dropdown-item" href="#">지역</a></li>
+			    </ul>
+        <input type="search" class="input-6yw" >
+        <div class="button-WXs">검색</div>
+      </div>
+      <div class="ptblcount-Dx5">
+        <div class="item-28922-aGq">
+        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
+      </div>
+    </div>
+    <!-- 테이블 -->
+    <div class="container mt-3" id="listTable">       
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>카테고리</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
+      </tr>
+    </thead>
+    <!-- communitySelect가 1일때==board인것만 불러오기 -->
+      <tr th:each="b:${list}"  th:if="${b.communitySelect.ordinal() == 1}">
+		<td th:if="${b.communityCategory.name() == 'TRVELMATE'}">여행메이트</td>
+		<td th:if="${b.communityCategory.name() == 'INFORMATION'}">정보</td>
+		<td th:if="${b.communityCategory.name() == 'ETC'}">기타</td>
+        <td th:text="${b.communityTitle}"></td>
+        <td th:text="${b.users.usersName}"></td>
+        <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${b.communityHit}"></td>
+        <td th:text="${b.communityNo}"></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
+      <a class="button-eem" href="/main/boardwriting">등록</a>
+      </div>
+    <!-- 페이징 -->
+    <div class="auto-group-kmj1-vUZ">
+      <div class="divpaging-44y">
+        <div class="auto-group-esvz-a3K">
+        <div class="link-6vm">1</div>
+        <div class="link-2-yzZ">2</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>

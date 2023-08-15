@@ -44,9 +44,45 @@ public class AccomodationReiview {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_review_to_accom"))
     private Accomodation accomodation;
+	public int getAccomodationReviewNo() {
+		return accomodationReviewNo;
+	}
+	public void setAccomodationReviewNo(int accomodationReviewNo) {
+		this.accomodationReviewNo = accomodationReviewNo;
+	}
+	public double getAccomodationReviewStar() {
+		return accomodationReviewStar;
+	}
+	public void setAccomodationReviewStar(double accomodationReviewStar) {
+		this.accomodationReviewStar = accomodationReviewStar;
+	}
+	public String getAccomodationReviewContent() {
+		return accomodationReviewContent;
+	}
+	public void setAccomodationReviewContent(String accomodationReviewContent) {
+		this.accomodationReviewContent = accomodationReviewContent;
+	}
+	public LocalDate getAccomodationReviewDate() {
+		return accomodationReviewDate;
+	}
+	public void setAccomodationReviewDate(LocalDate accomodationReviewDate) {
+		this.accomodationReviewDate = accomodationReviewDate;
+	}
+	public Users getUsers() {
+		return users;
+	}
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	public Accomodation getAccomodation() {
+		return accomodation;
+	}
+	public void setAccomodation(Accomodation accomodation) {
+		this.accomodation = accomodation;
+	}
     
 
-
+    
     
     
 }

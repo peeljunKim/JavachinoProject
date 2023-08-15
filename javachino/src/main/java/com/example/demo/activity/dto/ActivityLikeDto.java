@@ -23,4 +23,29 @@ public class ActivityLikeDto {
         
         this.activityDto = new ActivityDto(activityLike.getActivityNo());
     }
+
+	public int getActivityLikeNo() {
+		return activityLikeNo;
+	}
+
+	public void setActivityLikeNo(int activityLikeNo) {
+		this.activityLikeNo = activityLikeNo;
+	}
+
+	public UsersDto getUsersDto() {
+		return usersDto;
+	}
+
+	public void setUsersDto(UsersDto usersDto) {
+		this.usersDto = usersDto;
+	}
+
+	public ActivityDto getActivityDto() {
+		return activityDto;
+	}
+
+	public void setActivityDto(ActivityDto activityDto) {
+		this.activityDto = activityDto;
+	}
+    
 }

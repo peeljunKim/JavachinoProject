@@ -44,4 +44,37 @@ public class Pay {
 	@ManyToOne(fetch =  FetchType.LAZY)
 	@JoinColumn(name = "activity_rv_no", foreignKey = @ForeignKey(name = "fk_pay_to_activity_rv"))
 	private ActivityRv activityRv;
+
+	public int getPayNo() {
+		return payNo;
+	}
+
+	public void setPayNo(int payNo) {
+		this.payNo = payNo;
+	}
+
+	public int getPayPrice() {
+		return payPrice;
+	}
+
+	public void setPayPrice(int payPrice) {
+		this.payPrice = payPrice;
+	}
+
+	public AccomodationRV getAccomodationRV() {
+		return accomodationRV;
+	}
+
+	public void setAccomodationRV(AccomodationRV accomodationRV) {
+		this.accomodationRV = accomodationRV;
+	}
+
+	public ActivityRv getActivityRv() {
+		return activityRv;
+	}
+
+	public void setActivityRv(ActivityRv activityRv) {
+		this.activityRv = activityRv;
+	}
+	
 }
