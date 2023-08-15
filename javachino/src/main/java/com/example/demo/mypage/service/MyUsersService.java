@@ -2,8 +2,10 @@ package com.example.demo.mypage.service;
 
 import java.util.Optional;
 
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Users;
 import com.example.demo.mypage.dao.MyUsersDAO;
@@ -23,14 +25,35 @@ public class MyUsersService {
 	    return userOptional.orElse(null);
 	}
 	
-	@Transactional
-	public void updateUser(Users user) {
-		dao.save(user);
-	}
-	
     public Optional<Users> getUserByUsersId(String usersId) {
         return dao.findByUsersId(usersId);
     }
+    
+    public Users getUserById(String usersId) {
+        return dao.findByUsersId(usersId).orElse(null);
+    }
 
+    public void updateUserProfile(String usersId, Users updatedUser, MultipartFile profileImage) {
+        Optional<Users> userOptional = dao.findByUsersId(usersId);
+        if (userOptional.isPresent()) {
+            Users user = userOptional.get();
+
+            user.setUsersName(updatedUser.getUsersName());
+            user.setUsersPhone(updatedUser.getUsersPhone());
+
+            // 프로필 이미지 업로드 처리
+            if (!profileImage.isEmpty()) {
+                String originalFilename = profileImage.getOriginalFilename();
+                // 프로필 이미지 업로드 로직 추가
+                user.setUsersFname(originalFilename);
+            }
+
+            dao.save(user); // 정보 저장
+        }
+    }
+    
+    public void deleteUserProfile(String usersId) {
+        dao.deleteByUsersId(usersId);
+    }
 
 }

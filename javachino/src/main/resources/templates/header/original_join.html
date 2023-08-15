@@ -6,8 +6,6 @@
   <link rel="stylesheet" href="/css/header/original_join.css"/>
   <!-- jQuery 라이브러리 추가 -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- 외부 스크립트 파일 연결 -->
-  <script type="text/javascript" src="/js/header/original_join.js" defer></script>
 </head>
 <body>
 <div id="container" class="container sign-up">
@@ -72,5 +70,25 @@
     </div>
     <!-- END CONTENT SECTION -->
   </div>
+  <script>
+	  
+	  let container = document.getElementById('container')
+	
+	  toggle = () => {
+	    container.classList.toggle('sign-in')
+	    container.classList.toggle('sign-up')
+	  }
+	
+	  setTimeout(() => {
+	    container.classList.add('sign-in')
+	  }, 200)
+
+	    // form 제출 시 호출되는 함수
+	    function submitForm() {
+	        var form = document.getElementById('signupForm');
+	        form.submit();
+	    }
+
+  </script>
 </body>
 </html>
