@@ -2,6 +2,7 @@ package com.example.demo.activity.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,4 +56,11 @@ public class ActivityService {
 	public Activity getActivityByActivityNo(int activityNo) {
 		return activityRepository.findById(activityNo).orElse(null);
 	}
+	
+	public List<ActivityDto> findActivitiesByActivityAddr(String activityAddr) {
+	    List<Activity> activities = activityRepository.findByActivityAddrContaining(activityAddr);
+	    return activities.stream().map(ActivityDto::new).collect(Collectors.toList());
+	}
+	
+	
 }
