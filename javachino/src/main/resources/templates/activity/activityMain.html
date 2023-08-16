@@ -64,6 +64,10 @@
 				<input type="text" id="date_range_picker" placeholder="날짜를 선택하세요" readonly />
 			</div>
 			<div>
+				<div><b>인원</b></div>
+				<input type="text" id="search_person" placeholder="인원 추가">
+			</div>
+			<div>
 				<button class="search_button" id="btnSearch">
 					<img src="/images/activity/icon-search.png" class="magnifying_glass">
 				</button>
@@ -105,6 +109,14 @@
 		<div id="searchedActivityList">
 			<div>
 				<b class="font32">전체 액티비티 목록</b>
+				<div class="btn-group">
+					<button class="btn btn-dar">
+						<div class="btn btn-dark" id="btn_indoor">실내</div>
+					</button>
+					<button class="btn btn-dar">
+						<div class="btn btn-dark" id="btn_outdoor">실외</div>
+					</button>
+				</div>
 			</div>
 			<ul class="items quarter">
 				<li th:each="activityDto : ${activityDtoList}" class="accommodation_item">
@@ -145,6 +157,39 @@
 	<div id="footer"></div>
 
 	<script>
+		$(document).ready(function () {
+			$("#btnSearch").click(function () {
+				searchActivitiesByAddress();
+			});
+
+			$("#btn_indoor").click(function () {
+				filterActivitiesByCategory(0);
+			});
+
+			$("#btn_outdoor").click(function () {
+				filterActivitiesByCategory(1);
+			});
+		});
+
+		function filterActivitiesByCategory(categoryOrdinal) {
+			console.log("Filtering activities by category:", categoryOrdinal);
+
+			var categoryValue = categoryOrdinal === 0 ? 0 : 1; // Convert ordinal to value
+
+			$.ajax({
+				type: 'GET',
+				url: `/activity/filter?category=${categoryValue}`,
+				success: function (data) {
+					$('#searchedActivityList ul.items').html($(data).find('.accommodation_item')); // Replace existing items
+					$("#loadMoreButton").hide(); // Hide the load more button
+				},
+				error: function (error) {
+					console.error(error);
+				}
+			});
+		}
+
+
 		var activeSearchRequest = null;
 
 		function searchActivitiesByAddress() {

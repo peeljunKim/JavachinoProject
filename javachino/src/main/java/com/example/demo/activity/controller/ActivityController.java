@@ -74,18 +74,18 @@ public class ActivityController {
 	}
 
 	@GetMapping("/activity/filter")
-	public String filterActivitiesByCategory(@RequestParam String category, Model model) {
-		ActivityCategory activityCategory = null;
+	public String filterActivitiesByCategory(@RequestParam int category, Model model) {
+	    ActivityCategory activityCategory = null;
 
-		if ("실내".equals(category)) {
-			activityCategory = ActivityCategory.INDOOR;
-		} else if ("실외".equals(category)) {
-			activityCategory = ActivityCategory.OUTDOOR;
-		}
+	    if (category == 0) {
+	        activityCategory = ActivityCategory.INDOOR;
+	    } else if (category == 1) {
+	        activityCategory = ActivityCategory.OUTDOOR;
+	    }
 
-		List<ActivityDto> filteredActivityDtoList = activityService.filterActivitiesByCategory(activityCategory);
-		model.addAttribute("activityDtoList", filteredActivityDtoList);
-		return "activityMain :: activityList"; // Return the partial view for the filtered activities
+	    List<ActivityDto> filteredActivityDtoList = activityService.filterActivitiesByCategory(activityCategory);
+	    model.addAttribute("activityDtoList", filteredActivityDtoList);
+	    return "activityMain :: activityList"; // Return the partial view for the filtered activities
 	}
 
 	@GetMapping("/activity/activityMain")

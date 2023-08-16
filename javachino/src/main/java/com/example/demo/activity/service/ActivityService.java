@@ -61,6 +61,4 @@ public class ActivityService {
 	    List<Activity> activities = activityRepository.findByActivityAddrContaining(activityAddr);
 	    return activities.stream().map(ActivityDto::new).collect(Collectors.toList());
 	}
-	
-	
 }
