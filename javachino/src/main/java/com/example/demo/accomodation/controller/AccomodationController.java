@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.accomodation.service.AccomodationReviewService;
 import com.example.demo.accomodation.service.AccomodationService;
+import com.example.demo.accomodation.service.BusinessService;
 import com.example.demo.entity.Accomodation;
 import com.example.demo.entity.AccomodationFac;
 import com.example.demo.entity.AccomodationFile;
 import com.example.demo.entity.AccomodationInfo;
 import com.example.demo.entity.AccomodationReiview;
+import com.example.demo.entity.Business;
 import com.example.demo.entity.View_AccomodationList;
 
 import jakarta.persistence.EntityManager;
@@ -43,6 +45,8 @@ public class AccomodationController {
 	AccomodationService as;
 	@Autowired
 	AccomodationReviewService rs;
+	@Autowired
+	BusinessService bs;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -50,6 +54,7 @@ public class AccomodationController {
 	@GetMapping("/accomodation")
 	public String getAllList(Model model) {
 		model.addAttribute("accomodationList", as.findAll());
+		System.out.println("test"+as.findAll());
 		return "/accomodation/accomodationMain";
 	}
 	
@@ -82,7 +87,10 @@ public class AccomodationController {
 		AccomodationInfo accomodationInfo = as.findByAccomodationNo(accomodationNo);
 		View_AccomodationList otherInformation = as.findAccomodationByNo(accomodationNo);
 		AccomodationFile files = as.findByAccomodation_AccomodationNo(accomodationNo);
-
+		Business business = bs.findByAccomodationNo(accomodationNo);
+		business.getBusinessManager();
+		business.getBusinessPhone();
+		
 		String explanation = accomodationInfo.getAccomodationInfoExplanation();
 		int maxPerson = accomodationInfo.getAccomodationInfoMaxPersion();
 		int minPerson = accomodationInfo.getAccomodationInfoMinPerson();
@@ -99,12 +107,10 @@ public class AccomodationController {
 		String fname1 = files.getAccomodationFileFname1();
 		String fname2 = files.getAccomodationFileFname2();
 		String fname3 = files.getAccomodationFileFname3();
-
 		
 		List<AccomodationReiview> reviews =rs.findByAccomodation_AccomodationNo(accomodationNo);
 		Map<String, Object> info = new HashMap<>();
-		
-		
+
 		
 		info.put("name", name);
 		info.put("explanation", explanation);

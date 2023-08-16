@@ -32,7 +32,7 @@
 </head>
 
 <body class="">
-	header
+	
 	<div id="header"></div>
 
 	<div class="container" style="margin-top: 150px;">
@@ -124,16 +124,17 @@
 				<h4><b>숙소정보</b></h4>
 				<div th:text="'최대 '+${info.maxPerson}+'명까지 수용 가능'"></div>
 				<div th:text="${info.size}+'평'"></div>
+				<div th:text="'최소 '+${info.minPerson}+'인원' + ' 추가 인원당' + ${info.pricePerPerson}+'원'"></div>
 				</p>
 
-				 호스트에게 연락하기 popup 
+				 <!--호스트에게 연락하기 popup -->
 				<button class="btn btn-primary custom-btn accomodation_btn" type="button" data-bs-toggle="collapse"
 					data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
 					호스트에게 <br /> 연락하기
 				</button>
 				<div class="collapse" id="collapseExample">
 					<div class="card card-body">
-						님 이메일:
+						 님 이메일:
 					</div>
 				</div>
 			</article>
