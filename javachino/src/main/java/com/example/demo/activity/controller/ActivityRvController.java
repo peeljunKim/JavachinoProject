@@ -35,7 +35,7 @@ public class ActivityRvController {
         return ResponseEntity.ok(confirmUrl);
     }
 
-    @GetMapping("/confirm")
+    @GetMapping("/activity/confirm")
     public String payok(@RequestParam String imp_uid, @RequestParam String merchant_uid,
                         @RequestParam int paid_amount, @RequestParam String apply_num,
                         @RequestParam int activityNo, @RequestParam int usersNo,

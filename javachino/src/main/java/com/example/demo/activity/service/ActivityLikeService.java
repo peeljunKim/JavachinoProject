@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.activity.repository.ActivityLikeRepository;
 import com.example.demo.activity.repository.ActivityRepository;
-import com.example.demo.activity.repository.UsersRepository;
+import com.example.demo.activity.repository.UsersRepository2;
 import com.example.demo.entity.Activity;
 import com.example.demo.entity.ActivityLike;
 import com.example.demo.entity.Users;
@@ -18,7 +18,7 @@ public class ActivityLikeService {
     @Autowired
     private ActivityLikeRepository activityLikeRepository;
     @Autowired
-    private UsersRepository usersRepository; // Assuming you have a UsersRepository
+    private UsersRepository2 usersRepository; // Assuming you have a UsersRepository
     @Autowired
     private ActivityRepository activityRepository; // Assuming you have an ActivityRepository
     

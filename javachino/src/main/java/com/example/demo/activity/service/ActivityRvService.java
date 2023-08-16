@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.activity.repository.ActivityRepository;
 import com.example.demo.activity.repository.ActivityRvRepository;
-import com.example.demo.activity.repository.UsersRepository;
+import com.example.demo.activity.repository.UsersRepository2;
 
 import jakarta.transaction.Transactional;
 
