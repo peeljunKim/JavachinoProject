@@ -26,11 +26,7 @@ $(function() {
 		search_date = $("#date_range_picker_input").val().trim();
 		search_person = $("#search_person").val().trim();
 
-		// 날짜는 무조건 입력을 해야 되어서 해당 코드는 필요 없음
-		if (!search_addr && !search_date && !search_person) {
-			console.log("데이터가 없음");
-			return;
-		}
+
 		var url = "/accomodation/accomodationMain?addr=" + search_addr + "&date=" + search_date + "&person=" + search_person;
 		location.href = url;
 	});
@@ -66,7 +62,6 @@ $(function() {
 
 	$(".btn-danger").click(function() {
 		var filter_data = [];
-
 		if (filterButtonIndex >= 0) {
 			filter_data.push(filterButtonIndex);
 			console.log(filterButtonIndex);
@@ -77,17 +72,18 @@ $(function() {
 		}
 
 		if (filter_data.length > 0) {
-			$.ajax({
+			var url = "/filterList?filterData=" + filter_data;
+			location.href = url;
+			/*$.ajax({
 				url: "/filterList",
 				traditional: true,
 				data: { filterData: filter_data },
 				success: function() {
-					console.log("실행됨");
 				},
 				error: function(error) {
 					console.error("Error:", error);
 				}
-			});
+			});*/
 		}
 
 	});

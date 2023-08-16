@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.accomodation.service.AccomodationReviewService;
 import com.example.demo.accomodation.service.AccomodationService;
-import com.example.demo.accomodation.service.BusinessService;
 import com.example.demo.entity.Accomodation;
 import com.example.demo.entity.AccomodationFac;
 import com.example.demo.entity.AccomodationFile;
@@ -42,11 +41,11 @@ import lombok.Setter;
 @Setter
 public class AccomodationController {
 	@Autowired
-	AccomodationService as;
+	private AccomodationService as;
 	@Autowired
-	AccomodationReviewService rs;
-	@Autowired
-	BusinessService bs;
+	private AccomodationReviewService rs;
+//	@Autowired
+//	private BusinessService bs;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -87,9 +86,10 @@ public class AccomodationController {
 		AccomodationInfo accomodationInfo = as.findByAccomodationNo(accomodationNo);
 		View_AccomodationList otherInformation = as.findAccomodationByNo(accomodationNo);
 		AccomodationFile files = as.findByAccomodation_AccomodationNo(accomodationNo);
-		Business business = bs.findByAccomodationNo(accomodationNo);
-		business.getBusinessManager();
-		business.getBusinessPhone();
+		//Business business = bs.findByAccomodation_AccomodationNo(accomodationNo);
+		//System.out.println(business.getBusinessManager());
+		//business.getBusinessManager();
+		//business.getBusinessPhone();
 		
 		String explanation = accomodationInfo.getAccomodationInfoExplanation();
 		int maxPerson = accomodationInfo.getAccomodationInfoMaxPersion();
@@ -230,7 +230,7 @@ public class AccomodationController {
 		resultList.forEach(list -> accomodationNo.add(list.getAccomodation().getAccomodationNo()));
 		searchList = as.findByAccomodationNoIn(accomodationNo);
 		model.addAttribute("accomodationList", searchList);
-		return "accomodationMain";
+		return "/accomodation/accomodationMain";
 	}
 
 	// 숙소 디테일 화면에서 데이트 랭스 피커 클릭 시 이미 예약 된 날짜 추출(ajax통신)
