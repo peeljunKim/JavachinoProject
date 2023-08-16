@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="/css/accomodation/accomodationMain.css" rel="stylesheet" />
-	<link href="/css/accomodation/header.css" rel="stylesheet" />
-	<link href="/css/accomodation/footer.css" rel="stylesheet" />
+	<link rel="stylesheet" href="/css/header/header.css">
+	<link rel="stylesheet" href="/css/footer/footer.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -19,73 +19,16 @@
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
 	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 	<script type="text/javascript" src="/js/accomodation/accomodationMain.js" defer></script>
+	<script type="text/javascript" src="/js/mypage/mypageProfile.js" ></script>
+	<script type="text/javascript" src="/js/header/headerfooter.js" ></script>
 
 	<title>accomodation page</title>
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg  fixed-top" style="background-color: #ffffff;">
-		<div class="container-fluid">
-			<div class="p-1 flex-lg-fill">
-				<div class="header-logo-search">
-					<a class="navbar-brand" href="#">
-						<img src="./images/javachino_logo.png" id="logoImg">
-					</a>
-					<div class="searchBox">
-						<form class="search">
-							<div class="input-group" style="margin-top: 10px; ">
-								<span class="input-group-text" id="search-icon">
-									<i class="fa-solid fa-magnifying-glass"></i>
-								</span>
-								<input class="form-control" type="search" placeholder="도시를 검색해보세요"
-									aria-label="search" />
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<div class="p-1 flex-lg-fill">
-				<div class="row g-0">
-					<diV class="col">
-						<a class="nav-link" href="#">
-							<img src="./images/accomodation.png" id="accomodationImg">
-							<span id="menuText"> 숙박</span>
-						</a>
-					</diV>
-					<diV class="col">
-						<a class="nav-link" href="#">
-							<img src="./images/bikini.png" id="bikiniImg">
-							<span id="menuText"> 액티비티</span>
-						</a>
-					</diV>
-					<diV class="col">
-						<a class="nav-link" href="#">
-							<img src="./images/user-group.png" id="user-groupImg">
-							<span id="menuText"> 커뮤니티</span>
-						</a>
-					</diV>
-				</div>
-			</div>
-			<div class="p-3">
-				<div class="row" id="header-btn-group">
-					<div class="col">
-						<a class="nav-link" href="#">
-							<button type="button" id="btn-login">
-								<span class="login" id="btnText">로그인</span>
-							</button>
-						</a>
-					</div>
-					<div class="col">
-						<a class="nav-link" href="#">
-							<button type="button" id="btn-join">
-								<span class="join" id="btnText">회원가입</span>
-							</button>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</nav>
+	
+	<div id="header"></div>
+	
 
 	<div class="search_input_box">
 		<div class="search_input">
@@ -105,7 +48,7 @@
 			</div>
 			<div>
 				<button id="btnSearch" class="search_button">
-					<img src="/images/icon-search.png" class="magnifying_glass">
+					<img src="https://i.ibb.co/kHJGMWF/icon-search.png" class="magnifying_glass">
 				</button>
 			</div>
 		</div>
@@ -144,27 +87,27 @@
 		<div>
 			<div class="test">
 				<b class="font32">오늘은 여기서 자볼래?</b>
-				<!--필터 버튼-->
+				
 				<div class="btn_filter">
 					<button type="button" class="btn btn-primary filter_btn_color" data-bs-toggle="modal"
 						data-bs-target="#myModal">
-						<img class="icon_filter" src="/images/icon-filter.png" alt="icon-filter">
+						<img class="icon_filter" src="https://i.ibb.co/0XpWnJt/icon-filter.png" alt="icon-filter">
 						<div class="btn_filter_font">필터</div>
 					</button>
 				</div>
 			</div>
-			<!-- Modal -->
+			
 			<div class="modal" id="myModal">
 				<div class="modal-dialog modal-lg">
 					<div class="modal-content">
 
-						<!-- Modal Header -->
+						 Modal Header 
 						<div class="modal-header">
 							<h4 class="modal-title">필터</h4>
 							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 						</div>
 
-						<!-- Modal body -->
+						 Modal body 
 						<div class="modal-body">
 							<h3>건물 유형</h3>
 							<div class="pad">
@@ -227,7 +170,7 @@
 
 						</div>
 
-						<!-- Modal footer -->
+						 Modal footer 
 						<div class="modal-footer">
 							<button type="button" class="btn btn-danger" data-bs-dismiss="">검색</button>
 						</div>
@@ -252,7 +195,7 @@
 								<div class="font18 lodging_price" th:text="₩+${accomodationList.accomodationPrice}+원">
 								</div>
 								<div class="font18">
-									<img src="/images/icon-star.png" alt="" width="16px" height="16px" />
+									<img src="https://i.ibb.co/THBKjdt/icon-star.png" alt="" width="16px" height="16px" />
 									<span
 										th:text="${accomodationList.avgReviewStar + '(' + accomodationList.reviewCount + ')'}"></span>
 								</div>
@@ -267,7 +210,7 @@
 		</div>
 	</section>
 
-
+	<div id="footer"></div>
 </body>
 
 </html>
