@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/accomodation/accomodationDetail.css" />
+	<link rel="stylesheet" href="/css/accomodation/header.css" />
+	<link rel="stylesheet" href="/css/accomodation/footer.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://getbootstrap.com/docs/5.3/assets/css/docs.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C800" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,600,800">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,800">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A500%2C700" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A500%2C700" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%3A400%2C600%2C800" />
+
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=064ac1bd29ada84710ab43307361b893&libraries=services"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/moment/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	<script type="text/javascript" src="/js/accomodation/detailPage.js" defer></script>
+
+	<title>자바치노</title>
+
+</head>
+
+<body class="">
+	<nav class="navbar navbar-expand-lg fixed-top" style="background-color: white;">
+		<div class="container-fluid">
+			<div class="p-1 flex-lg-fill">
+				<div class="header-logo-search">
+					<a class="navbar-brand" href="#">
+						<img src="/images/javachino_logo.png" id="logoImg">
+					</a>
+					<div class="searchBox">
+						<form class="search">
+							<div class="input-group" style="margin-top: 10px; ">
+								<span class="input-group-text" id="search-icon">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</span>
+								<input class="form-control" type="search" placeholder="도시를 검색해보세요"
+									aria-label="search" />
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="p-1 flex-lg-fill">
+				<div class="row g-0">
+					<diV class="col">
+						<a class="nav-link" href="#">
+							<img src="/images/accomodation.png" id="accomodationImg">
+							<span id="menuText"> 숙박</span>
+						</a>
+					</diV>
+					<diV class="col">
+						<a class="nav-link" href="#">
+							<img src="/images/bikini.png" id="bikiniImg">
+							<span id="menuText"> 액티비티</span>
+						</a>
+					</diV>
+					<diV class="col">
+						<a class="nav-link" href="#">
+							<img src="/images/user-group.png" id="user-groupImg">
+							<span id="menuText"> 커뮤니티</span>
+						</a>
+					</diV>
+				</div>
+			</div>
+			<div class="p-3">
+				<div class="row" id="header-btn-group">
+					<div class="col">
+						<a class="nav-link" href="#">
+							<button type="button" id="btn-login">
+								<span class="login" id="btnText">로그인</span>
+							</button>
+						</a>
+					</div>
+					<div class="col">
+						<a class="nav-link" href="#">
+							<button type="button" id="btn-join">
+								<span class="join" id="btnText">회원가입</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
+
+
+	<div class="container" style="margin-top: 150px;">
+		<h1 class="accomodation-title" th:text="${info.name}"></h1>
+		<img class="star-icon" src="/images/icon-star.png" alt="" width="16px" height="16px" />
+		<span th:text="${info.reviewAvg} + '점 (' + ${info.reviewCount} + '개 리뷰)'"></span>
+		<div id="accomodation_addr" class="accomodation-location" th:text="${info.addr}"></div>
+		<div class="accomodation-images">
+			<div class="div1jdtwz4-RpM">
+
+				<div class="button-n97" id="shareButton">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+						class="bi bi-share" viewBox="0 0 16 16">
+						<path
+							d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
+					</svg>
+					<div class="item--3qj">공유하기</div>
+				</div>
+				<div class="button-n97" id="likeButton">
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+						class="bi bi-balloon-heart icon-bigger heart-icon" viewBox="0 0 16 16">
+						<path fill-rule="evenodd"
+							d="m8 2.42-.717-.737c-1.13-1.161-3.243-.777-4.01.72-.35.685-.451 1.707.236 3.062C4.16 6.753 5.52 8.32 8 10.042c2.479-1.723 3.839-3.29 4.491-4.577.687-1.355.587-2.377.236-3.061-.767-1.498-2.88-1.882-4.01-.721L8 2.42Zm-.49 8.5c-10.78-7.44-3-13.155.359-10.063.045.041.089.084.132.129.043-.045.087-.088.132-.129 3.36-3.092 11.137 2.624.357 10.063l.235.468a.25.25 0 1 1-.448.224l-.008-.017c.008.11.02.202.037.29.054.27.161.488.419 1.003.288.578.235 1.15.076 1.629-.157.469-.422.867-.588 1.115l-.004.007a.25.25 0 1 1-.416-.278c.168-.252.4-.6.533-1.003.133-.396.163-.824-.049-1.246l-.013-.028c-.24-.48-.38-.758-.448-1.102a3.177 3.177 0 0 1-.052-.45l-.04.08a.25.25 0 1 1-.447-.224l.235-.468ZM6.013 2.06c-.649-.18-1.483.083-1.85.798-.131.258-.245.689-.08 1.335.063.244.414.198.487-.043.21-.697.627-1.447 1.359-1.692.217-.073.304-.337.084-.398Z" />
+					</svg>
+					<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+						class="bi bi-balloon-heart-fill icon-bigger heart-fill-icon" viewBox="0 0 16 16"
+						style="display: none;">
+						<path fill-rule="evenodd"
+							d="M8.49 10.92C19.412 3.382 11.28-2.387 8 .986 4.719-2.387-3.413 3.382 7.51 10.92l-.234.468a.25.25 0 1 0 .448.224l.04-.08c.009.17.024.315.051.45.068.344.208.622.448 1.102l.013.028c.212.422.182.85.05 1.246-.135.402-.366.751-.534 1.003a.25.25 0 0 0 .416.278l.004-.007c.166-.248.431-.646.588-1.115.16-.479.212-1.051-.076-1.629-.258-.515-.365-.732-.419-1.004a2.376 2.376 0 0 1-.037-.289l.008.017a.25.25 0 1 0 .448-.224l-.235-.468ZM6.726 1.269c-1.167-.61-2.8-.142-3.454 1.135-.237.463-.36 1.08-.202 1.85.055.27.467.197.527-.071.285-1.256 1.177-2.462 2.989-2.528.234-.008.348-.278.14-.386Z" />
+					</svg>
+					<div class="item--3qj">저장하기</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="accomodation-images">
+			<img class="accomodation-image" th:src="@{/images/accomodation/__${info.fname1}__}"
+				alt="accomodation Image 1">
+			<img class="accomodation-image" th:src="@{/images/accomodation/__${info.fname2}__}"
+				alt="accomodation Image 2">
+			<img class="accomodation-image" th:src="@{/images/accomodation/__${info.fname3}__}"
+				alt="accomodation Image 3">
+		</div>
+
+		<section>
+			<nav class="nav_accomodation_payment">
+				<div class="payment-section">
+					<div class="price-info">
+						<div class="price" th:text="'최저가 ₩'+${info.price}"></div>
+						<div class="price-per-person">/인</div>
+					</div>
+					<br />
+					<div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+						<div class="btn-group" role="group">
+							<button type="button" id="date_range_picker"
+								class="btn btn-primary dropdown-toggle accomodation_btn" aria-expanded="false">
+								<span class="bold-font">날짜 &nbsp;<br></span>
+								<span id="confirm_date" class="smaller-font">날짜입력</span>
+							</button>
+							<input type="text" id="date_range_picker" class="form-control" style="display: none;">
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-primary dropdown-toggle accomodation_btn"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								<span class="bold-font">게스트 &nbsp;<br></span>
+								<span id="confirm_people" class="smaller-font">게스트 수</span>
+							</button>
+							<ul class="dropdown-menu">
+								<li th:each="p : ${#numbers.sequence(1, info.maxPerson)}" class="dropdown-item"
+									th:text="${p}"></li>
+							</ul>
+						</div>
+					</div>
+					<br /><br />
+					<a id="confirmPaymentLink" href="#">
+						<button id="confirmPaymentBtn" class="btn btn-primary accomodation_btn bold-font" type="button"
+							th:value="${info.accomodationNo}">확인 및 결제</button>
+					</a>
+				</div>
+			</nav>
+
+			<article class="accomodation-description">
+				<h2>프로그램</h2>
+				<p>
+				<div th:text="${info.explanation}"></div>
+				<br /><br />
+				사진 찍는 것이 많이 쑥스러우신가요?
+				많은 분들이 보통 어떻게 포즈를 취해야 될지 또는 부끄러움을 종종 타십니다. 하지만 실제 모델분들 또는 일반인들과 많이 일을 해온 경험을
+				토대로 자연스럽게 포즈를 취하는 법을 도와드릴겁니다!
+				<br /><br />
+				<div th:text="${info.maxPerson}"></div>
+				<div th:text="${info.minPerson}"></div>
+				<div th:text="${info.size}"></div>
+			
+				</p>
+
+				<!-- 호스트에게 연락하기 popup -->
+				<button class="btn btn-primary custom-btn accomodation_btn" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+					호스트에게 <br /> 연락하기
+				</button>
+				<div class="collapse" id="collapseExample">
+					<div class="card card-body">
+						님 이메일:
+					</div>
+				</div>
+			</article>
+		</section>
+
+		<!--탭 메뉴 넣어서 만들기!-->
+		<div class="tab-menu">
+			<button class="tab-button active accomodation_btn" onclick="showTabContent('directions')">길 찾기</button>
+			<button class="tab-button accomodation_btn" onclick="showTabContent('reviews')">리뷰 보기</button>
+		</div>
+
+
+		<div id="directionsContent" class="tab-content" style="display: block;">
+			<h2>위치</h2>
+			<div id="map" style="width: 100%; height: 400px;">
+				<ul id="category">
+					<li id="MT1" data-order="0">
+						<span class="category_bg mart"></span>
+						마트
+					</li>
+					<li id="PM9" data-order="1">
+						<span class="category_bg pharmacy"></span>
+						약국
+					</li>
+					<li id="OL7" data-order="2">
+						<span class="category_bg oil"></span>
+						주유소
+					</li>
+					<li id="CE7" data-order="3">
+						<span class="category_bg cafe"></span>
+						카페
+					</li>
+					<li id="CS2" data-order="4">
+						<span class="category_bg store"></span>
+						편의점
+					</li>
+			</div>
+			</ul>
+
+		</div>
+
+		<div id="reviewsContent" class="tab-content" style="display: none;">
+			<h2>리뷰 <button class="btn btn-primary bold-font" onclick="showReviewGuidelines()">후기 관련 규정</button></h2>
+			<div id="reviewGuidelinesModal" class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">후기 관련 규정</h5>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>
+								트립자바는 믿을 수 있는 후기문화를 함께 만들어가고자 합니다. 따라서 아래에 해당하는 경우에는 검토 후 삭제될 수 있습니다.
+							</p>
+							<ol>
+								<li>욕설, 폭력성, 음란성, 상업성 등 업체나 타인에게 불쾌한 내용을 작성한 경우</li>
+								<li>구매한 상품과 무관한 내용이나 동일 문자/단순 초성의 반복 등 부적합한 내용을 작성한 경우</li>
+							</ol>
+							<p>또한, 비정상적인 방법을 통해 후기를 작성한 경우 작성자에 법적 책임의 소지가 있음을 알려드립니다. 감사합니다.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="review-section">
+				<div class="review-heading">
+					<div class="review-score">
+						<img class="star-icon" src="/images/icon-star.png" alt="" width="16px" height="16px" />
+						<span th:text="${info.reviewAvg} + '점 (' + ${info.reviewCount} + '개 리뷰)'"></span>
+					</div>
+				</div>
+				<div class="review-list">
+					<div class="review-item">
+						<div class="reviewer-info">
+							<div class="reviewer-name">
+								<img class="avatar-icon"
+									src="https://a0.muscache.com/im/pictures/a0316ecb-e49b-4b3a-b6b6-c2876b820e8c.jpg?im_w=480"
+									alt="" width="32px" height="32px" style="border-radius: 50%;" />
+								&nbsp; Teresa &nbsp;
+								<img class="star-icon" src="/images/icon-star.png" alt="" width="16px"
+									height="16px" />(5.0)
+							</div>
+							<div class="review-date">2023년 9월</div>
+						</div>
+						<div class="review-content">
+							<div class="review-text">
+								Had an incredible time in Korea. The hanbok experience
+								was unforgettable. I would definitely do it again!
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="view-all-reviews-link">후기 더보기</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		상호명 (주)강원치노 | 대표 자바치노 | 개인정보보호책임자 김자반 | 사업자등록번호 200-81-00000 사업자정보확인 | 통신판매업신고번호 2023-서울마포-1234 | 관광사업등록번호 :
+		제2023-99호
+		<br />
+		주소 : 서울특별시 마포구 청춘대로 79 20층 (행복동, 자바치노아자자빌딩) | 이메일 help@javachino.com | 광고/제휴 문의 partnership@javachino.com |
+		고객문의 070-1234-5678
+		<br />
+		<br />
+		자사는 서울특별시관광협회 공제영업보증보험에 가입되어 있습니다. 영업보증보험: 1.5억원 / 기획여행보증: 2억원
+		<br />
+		마이리얼트립은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 따라서 상품·거래정보 및 거래에 대하여 책임을 지지않습니다.
+		<br />
+		부득이한 사정에 의해 확정된 여행일정이 변경되는 경우 여행자의 사전 동의를 받습니다.
+	</div>
+
+
+</body>
+
+</html>

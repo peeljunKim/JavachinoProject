@@ -1,0 +1,574 @@
+body {
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+}
+
+.nav_accomodation_payment {
+   float: left;
+   width: 30%;
+   padding: 20px;
+}
+
+article {
+   float: left;
+   padding-left: 55px;
+   padding-top: 55px;
+   padding-right: 55px;
+   width: 70%;
+   position: relative;
+   top: -60px;
+}
+
+.map,
+.map * {
+   margin: 0;
+   padding: 0;
+   font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+   font-size: 12px;
+}
+
+.map {
+   position: relative;
+   width: 100%;
+   height: 350px;
+}
+
+#category {
+   position: absolute;
+   top: 10px;
+   left: 10px;
+   padding-left: 0px !important;
+   border-radius: 5px;
+   border: 1px solid #909090;
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);
+   background: #fff;
+   overflow: hidden;
+   z-index: 2;
+}
+
+#category li {
+   float: left;
+   list-style: none;
+   width: 50px;
+   border-right: 1px solid #acacac;
+   padding: 6px 0;
+   text-align: center;
+   cursor: pointer;
+}
+
+#category li.on {
+   background: #eee;
+}
+
+#category li:hover {
+   background: #ffe6e6;
+   border-left: 1px solid #acacac;
+   margin-left: -1px;
+}
+
+#category li:last-child {
+   margin-right: 0;
+   border-right: 0;
+}
+
+#category li span {
+   display: block;
+   margin: 0 auto 3px;
+   width: 27px;
+   height: 28px;
+}
+
+#category li .category_bg {
+   background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png) no-repeat;
+}
+
+#category li .mart {
+   background-position: -10px -36px;
+}
+
+#category li .pharmacy {
+   background-position: -10px -72px;
+}
+
+#category li .oil {
+   background-position: -10px -108px;
+}
+
+#category li .cafe {
+   background-position: -10px -144px;
+}
+
+#category li .store {
+   background-position: -10px -180px;
+}
+
+#category li.on .category_bg {
+   background-position-x: -46px;
+}
+
+.placeinfo_wrap {
+   position: absolute;
+   bottom: 28px;
+   left: -150px;
+   width: 300px;
+}
+
+.placeinfo {
+   position: relative;
+   width: 100%;
+   border-radius: 6px;
+   border: 1px solid #ccc;
+   border-bottom: 2px solid #ddd;
+   padding-bottom: 10px;
+   background: #fff;
+}
+
+.placeinfo:nth-of-type(n) {
+   border: 0;
+   box-shadow: 0px 1px 2px #888;
+}
+
+.placeinfo_wrap .after {
+   content: '';
+   position: relative;
+   margin-left: -12px;
+   left: 50%;
+   width: 22px;
+   height: 12px;
+   background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.placeinfo a,
+.placeinfo a:hover,
+.placeinfo a:active {
+   color: #fff;
+   text-decoration: none;
+}
+
+.placeinfo a,
+.placeinfo span {
+   display: block;
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+}
+
+.placeinfo span {
+   margin: 5px 5px 0 5px;
+   cursor: default;
+   font-size: 13px;
+}
+
+.placeinfo .title {
+   font-weight: bold;
+   font-size: 14px;
+   border-radius: 6px 6px 0 0;
+   margin: -1px -1px 0 -1px;
+   padding: 10px;
+   color: #fff;
+   background: #d95050;
+   background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;
+}
+
+.placeinfo .tel {
+   color: #0f7833;
+}
+
+.placeinfo .jibun {
+   color: #999;
+   font-size: 11px;
+   margin-top: 0;
+}
+
+/* Clear floats after the columns */
+section::after {
+   content: "";
+   display: table;
+   clear: both;
+}
+
+.container {
+   max-width: 960px;
+   margin: 0 auto;
+   padding: 20px;
+}
+
+.accomodation-title {
+   font-size: 28px;
+   font-weight: bold;
+   color: #333;
+}
+
+.accomodation-rating {
+   font-size: 18px;
+   color: #fbbf23;
+}
+
+.accomodation-location {
+   font-size: 16px;
+   color: #666;
+}
+
+.accomodation-info {
+   margin-top: 20px;
+   font-size: 16px;
+   color: #333;
+}
+
+.accomodation-images {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-top: 20px;
+}
+
+.accomodation-image {
+   width: 30%;
+   max-height: 400px;
+   object-fit: cover;
+   border-radius: 5px;
+}
+
+.accomodation-buttons {
+   display: flex;
+   width: 50%;
+}
+
+.accomodation-button {
+   display: inline-block;
+   padding: 12px;
+   font-size: 18px;
+   text-decoration: none;
+   color: #fff;
+   border-radius: 5px;
+   transition: background-color 0.3s ease;
+}
+
+.share-button {
+   background-color: #3fa4d9;
+}
+
+.save-button {
+   background-color: #ff6384;
+}
+
+.accomodation-description {
+   margin-top: 20px;
+   line-height: 1.6;
+}
+
+.div1jdtwz4-RpM {
+   height: 1.8rem;
+   display: flex;
+   align-items: center;
+   flex-shrink: 0;
+}
+
+.button-n97 {
+   margin-right: 2.5rem;
+   height: 100%;
+   display: flex;
+   align-items: center;
+   flex-shrink: 0;
+}
+
+.item--cGZ {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.4rem;
+   font-weight: 600;
+   line-height: 1.2857142857;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+   white-space: nowrap;
+   flex-shrink: 0;
+}
+
+.auto-group-av9j-N8H {
+   margin-right: 39.076rem;
+   width: calc(100% - 39.076rem);
+   display: flex;
+   align-items: center;
+}
+
+.link-utu {
+   margin: 0rem 21.505rem 4.735rem 0rem;
+   width: 19.755rem;
+   height: 4.76rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.6rem;
+   font-weight: 600;
+   line-height: 1.25;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+   white-space: nowrap;
+   border: solid 0.1rem #222222;
+   box-sizing: border-box;
+   background-color: #ffffff;
+   border-radius: 0.8rem;
+   flex-shrink: 0;
+}
+
+.contact-button {
+   display: inline-block;
+   padding: 10px 20px;
+   font-size: 16px;
+   color: #fff;
+   background-color: #3fa4d9;
+   border: none;
+   border-radius: 5px;
+   margin-top: 20px;
+   cursor: pointer;
+}
+
+/* Style for the contact overlay */
+.contact-overlay {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.7);
+   z-index: 9999;
+   justify-content: center;
+   align-items: center;
+}
+
+.contact-box {
+   background-color: #fff;
+   padding: 20px;
+   border-radius: 5px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+   text-align: center;
+}
+
+.close-button {
+   display: inline-block;
+   padding: 10px 20px;
+   font-size: 16px;
+   color: #fff;
+   background-color: #ff6384;
+   border: none;
+   border-radius: 5px;
+   margin-top: 20px;
+   cursor: pointer;
+}
+
+.share-icon,
+.save-icon {
+   width: 1.5rem;
+   /* Set the desired width */
+   height: 1.5rem;
+   /* Set the desired height */
+   object-fit: contain;
+   /* Preserve the aspect ratio and fit the image within the specified dimensions */
+}
+
+.payment-section {
+   width: 24rem;
+   height: 18rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-bottom: 1.5rem;
+   padding: 1.6rem 1.8rem;
+   box-sizing: border-box;
+   border: solid 0.1rem #dddddd;
+   border-radius: 1rem;
+   box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+}
+
+.payment-info {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
+.price-info {
+   display: flex;
+   align-items: flex-end;
+}
+
+.price {
+   font-size: 1.6rem;
+   font-weight: 600;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+}
+
+.price-per-person {
+   margin-left: 0.2rem;
+   font-size: 1.2rem;
+   font-weight: 400;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+}
+
+.view-prices-button {
+   width: 100%;
+   font-size: 1.2rem;
+   font-weight: 400;
+   text-decoration-line: underline;
+   color: #717171;
+   font-family: Roboto, 'Source Sans Pro';
+   white-space: nowrap;
+}
+
+.date-picker,
+.guest-picker {
+   display: flex;
+   align-items: center;
+   margin-top: 0.8rem;
+}
+
+.date-icon,
+.guest-icon {
+   display: flex;
+   flex-direction: column;
+}
+
+.icon {
+   font-size: 1rem;
+   font-weight: 800;
+   text-transform: uppercase;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+}
+
+.icon-text,
+.guest-count {
+   font-size: 1.2rem;
+   font-weight: 400;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+}
+
+.date-icon-frame,
+.guest-icon-frame {
+   margin-top: 0.2rem;
+   width: 1rem;
+   height: 0.5rem;
+   object-fit: contain;
+   vertical-align: top;
+}
+
+.checkout-link {
+   margin: 0.5rem 1rem;
+   width: calc(100% - 2rem);
+   height: 3.6rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-size: 1.4rem;
+   font-weight: 600;
+   line-height: 1.25;
+   color: #222222;
+   font-family: Roboto, 'Source Sans Pro';
+   white-space: nowrap;
+   border: solid 0.1rem #222222;
+   box-sizing: border-box;
+   background-color: #ffffff;
+   border-radius: 0.6rem;
+}
+
+.frame-BcM {
+   width: 1.5rem;
+   /* Set the desired width */
+   height: 1.5rem;
+   /* Set the desired height */
+   object-fit: contain;
+}
+
+.tab-menu {
+   display: flex;
+   justify-content: space-around;
+   margin-top: 20px;
+   margin-bottom: 10px;
+}
+
+.tab-button {
+   cursor: pointer;
+   padding: 10px 20px;
+   border: none;
+   background-color: transparent;
+   font-size: 16px;
+   color: #333;
+   transition: background-color 0.3s ease;
+   border-bottom: 2px solid transparent;
+   /* Add a bottom border to the buttons */
+}
+
+.tab-button.active {
+   color: #007bff;
+   border-bottom-color: #007bff;
+   /* Highlight the active button with a colored bottom border */
+}
+
+.custom-btn {
+   background-color: white;
+   border: 2px solid black;
+   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+   font-size: 16px !important;
+   /* Increase the font size */
+   font-weight: bold !important;
+   /* Make the text bold */
+   padding: 10px 20px !important;
+}
+
+.review-list {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: space-between;
+}
+
+.review-item {
+   flex-basis: 30%;
+   /* Adjust the width of each review item as needed */
+   margin-bottom: 20px;
+   /* Add some space between each review item */
+}
+
+/* Add media query to adjust the layout for smaller screens */
+@media (max-width: 768px) {
+   .review-item {
+      flex-basis: 100%;
+   }
+}
+
+/* Style the star icon and rate next to the reviewer's name */
+.reviewer-name {
+   display: flex;
+   align-items: center;
+}
+
+.star-icon {
+   margin-right: 5px;
+   /* Add some space between the star icon and rate */
+}
+
+/* Style the font size of the date */
+.review-date {
+   font-size: 12px;
+   /* Adjust the font size as needed */
+}
+
+.btn-primary {
+   --bs-btn-color: black !important;
+   --bs-btn-bg: white !important;
+   --bs-btn-border-color: darkgrey !important;
+   padding: 10px 20px !important;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+.smaller-font {
+   font-size: 12px;
+}
+
+.bold-font {
+   font-weight: bold !important;
+}

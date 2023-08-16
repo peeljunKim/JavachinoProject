@@ -1,0 +1,61 @@
+.pad {
+	padding: 10px;
+}
+
+.btn-primary {
+	--bs-btn-bg: #60BCF0 !important;
+	--bs-btn-border-color: #60BCF0 !important;
+	--bs-btn-hover-bg: #60BCF0 !important;
+	--bs-btn-hover-border-color: #60BCF0 !important;
+}
+
+.test {
+	display: flex;
+	align-items: start;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	cursor: pointer;
+	border: 1px solid black;
+	margin: 0;
+	background-color: #FFFFFF;
+	border-color: #DDDDDD;
+	transition-duration: 0.15s;
+	transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
+	text-align: start;
+	padding: 16px;
+	border-radius: 12px;
+
+}
+
+.pad:hover button{
+  border: 3px solid black;
+}
+
+.pad:hover img,
+.pad:hover span {
+  border: none;
+}
+
+
+.accmodation_checkbox_filter_div {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	grid-gap: 30px;
+}
+
+.accmodation_checkbox_filter_label {
+	display: flex;
+	align-items: center;
+}
+
+.accmodation_checkbox_filter_input {
+	margin-right: 10px;
+	width: 24px;
+	height: 24px;
+}
+
+.accmodation_facilities {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}

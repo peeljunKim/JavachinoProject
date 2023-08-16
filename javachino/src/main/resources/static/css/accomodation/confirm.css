@@ -1,0 +1,77 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+	background-color: #f8f9fa;
+}
+
+.container {
+	text-align: center;
+	padding: 30px;
+	border-radius: 10px;
+	background-color: #ffffff;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+	margin-bottom: 20px;
+	color: #333333;
+}
+
+p {
+	font-size: 18px;
+	color: #666666;
+	margin-bottom: 30px;
+}
+
+.mypage-button {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	text-decoration: none;
+	color: #ffffff;
+	background-color: #6c757d;
+	border-radius: 5px;
+	transition: background-color 0.3s ease;
+}
+
+.mypage-button:hover {
+	background-color: #495057;
+}
+
+/* Fix the position of the navbar */
+.navbar.fixed-top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 9999;
+	/* Make sure the navbar is above other elements */
+	box-shadow: none;
+	/* Remove the default box-shadow */
+}
+
+/* Add some styling for the sticky class (optional) */
+.navbar.sticky {
+	background-color: #f8f9fa;
+	border-bottom: 1px solid #dee2e6;
+}
+
+/* Add padding to the body to make up for the fixed navbar height */
+body {
+	padding-top: 70px;
+	/* Adjust this value based on your navbar height */
+}
+
+/* Fix the position of the footer at the bottom */
+.footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background-color: #f8f9fa;
+	padding: 20px 0;
+	text-align: center;
+}

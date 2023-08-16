@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @Table(
         name = "accomodation_like"
 )
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @SequenceGenerator(
         name="ACCOMODATION_LIKE_SEQ_GEN",
         sequenceName = "ACCOMODATION_LIKE_SEQ",
@@ -54,6 +53,9 @@ public class AccomodationLike {
 
 	public void setAccomodation(Accomodation accomodation) {
 		this.accomodation = accomodation;
+	}
+
+	public AccomodationLike() {
 	}
 
     

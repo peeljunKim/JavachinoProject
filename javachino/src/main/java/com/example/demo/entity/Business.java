@@ -35,6 +35,7 @@ public class Business {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "business_category")
     private BusinessCategory businessCategory;
+    
 	public int getBusinessNo() {
 		return businessNo;
 	}

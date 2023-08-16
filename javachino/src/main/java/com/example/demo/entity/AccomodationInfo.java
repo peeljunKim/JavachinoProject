@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
 @Table(name = "accomodation_info")
 @SequenceGenerator(
         name="ACCOMODATION_INFO_SEQ_GEN",
@@ -28,7 +27,7 @@ public class AccomodationInfo {
     @Column(name = "accomodation_info_maxPersion")
     private int accomodationInfoMaxPersion;
     @Column(name = "accomodation_info_size")
-    private String accomodationInfoSize;
+    private int accomodationInfoSize;
     @Column(name = "accomodation_info_explanation")
     private String accomodationInfoExplanation;
     @Column(name = "accomodation_priceper_person")
@@ -62,11 +61,11 @@ public class AccomodationInfo {
 		this.accomodationInfoMaxPersion = accomodationInfoMaxPersion;
 	}
 
-	public String getAccomodationInfoSize() {
+	public int getAccomodationInfoSize() {
 		return accomodationInfoSize;
 	}
 
-	public void setAccomodationInfoSize(String accomodationInfoSize) {
+	public void setAccomodationInfoSize(int accomodationInfoSize) {
 		this.accomodationInfoSize = accomodationInfoSize;
 	}
 
@@ -93,6 +92,8 @@ public class AccomodationInfo {
 	public void setAccomodation(Accomodation accomodation) {
 		this.accomodation = accomodation;
 	}
+
+	
 
     
 }
