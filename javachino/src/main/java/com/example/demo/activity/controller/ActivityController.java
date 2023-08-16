@@ -85,7 +85,7 @@ public class ActivityController {
 
 	    List<ActivityDto> filteredActivityDtoList = activityService.filterActivitiesByCategory(activityCategory);
 	    model.addAttribute("activityDtoList", filteredActivityDtoList);
-	    return "activityMain :: activityList"; // Return the partial view for the filtered activities
+	    return "/activity/activityMain"; 
 	}
 
 	@GetMapping("/activity/activityMain")
