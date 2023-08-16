@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.admin.service.AdminAccomodationService;
 import com.example.demo.entity.Accomodation;
-import com.example.demo.entity.AccomodationFac;
 import com.example.demo.entity.AccomodationFile;
 import com.example.demo.entity.AccomodationInfo;
 
@@ -28,35 +27,11 @@ public class AdminAccomodationController {
 	
 	@Autowired
 	private AdminAccomodationService as;
-	
-//	@GetMapping(value={"/admin/users/usersList/{pageNUM}",
-//			"/admin/users/usersList/{pageNUM}/{cname}/{keyword}"})
-//	public String list(Model model, 
-//			@PathVariable("pageNUM") int pageNUM,
-//			@PathVariable(required = false) String cname,
-//			@PathVariable(required = false) String keyword) {		
-//		if (keyword != null && !keyword.isEmpty()) {
-//	           totalRecord = as.getTotalRecordByKeyword(cname,keyword);
-//	       } else {
-//	           totalRecord = as.getTotalRecord();
-//	       }
-//		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
-//		System.out.println("전체레코드수 : "+totalRecord);
-//		System.out.println("전체페이지수 : "+totalPage);
-//		System.out.println("현재페이지수 : "+pageNUM);
-//		int start = (pageNUM-1)*pageSIZE+1;
-//		int end=start+pageSIZE-1;
-//		System.out.println("start:"+start);
-//		System.out.println("end:"+end);
-//		model.addAttribute("list", as.findAll(start, end, cname, keyword));
-//		model.addAttribute("totalPage", totalPage);
-//		return "/admin/users/usersList";
-//	}
+
 	//추가
 	@PostMapping("accomodation/insert")
     public String insert(@ModelAttribute("accomodation") Accomodation accomodation,
                          @ModelAttribute("accomodationInfo") AccomodationInfo accomodationInfo,
-                         @ModelAttribute("accomodationfac") AccomodationFac accomodationfac,
                          @ModelAttribute("accomodationfile") AccomodationFile accomodationfile,
                          @RequestParam("uploadFile1") MultipartFile uploadFile1,
                          @RequestParam("uploadFile2") MultipartFile uploadFile2,
@@ -102,7 +77,7 @@ public class AdminAccomodationController {
         accomodationfile.setAccomodationFileFname2(fname2);
         accomodationfile.setAccomodationFileFname3(fname3);
         
-        as.insertAccomodationAndInfo(accomodation, accomodationInfo,accomodationfac ,accomodationfile);
+        as.insertAccomodationAndInfo(accomodation, accomodationInfo,accomodationfile);
         return "redirect:/admin/adminPage"; // Redirect to the appropriate page
     }
 //	//수정
