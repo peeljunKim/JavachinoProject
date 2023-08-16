@@ -18,13 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.accomodation.service.AccomodationReviewService;
 import com.example.demo.accomodation.service.AccomodationService;
 import com.example.demo.entity.Accomodation;
 import com.example.demo.entity.AccomodationFac;
 import com.example.demo.entity.AccomodationFile;
 import com.example.demo.entity.AccomodationInfo;
-import com.example.demo.entity.AccomodationReiview;
 import com.example.demo.entity.View_AccomodationList;
 
 import jakarta.persistence.EntityManager;
@@ -41,8 +39,6 @@ import lombok.Setter;
 public class AccomodationController {
 	@Autowired
 	AccomodationService as;
-	@Autowired
-	AccomodationReviewService rs;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -100,12 +96,7 @@ public class AccomodationController {
 		String fname2 = files.getAccomodationFileFname2();
 		String fname3 = files.getAccomodationFileFname3();
 
-		
-		List<AccomodationReiview> reviews =rs.findByAccomodation_AccomodationNo(accomodationNo);
 		Map<String, Object> info = new HashMap<>();
-		
-		
-		
 		info.put("name", name);
 		info.put("explanation", explanation);
 		info.put("maxPerson", maxPerson);
@@ -122,8 +113,6 @@ public class AccomodationController {
 		info.put("accomodationNo", accomodationNo);
 
 		model.addAttribute("info", info);
-		model.addAttribute("reviews", reviews);
-		
 		System.out.println(info);
 		return "/accomodation/accomodationDetatil";
 	}

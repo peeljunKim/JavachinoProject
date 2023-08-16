@@ -20,11 +20,10 @@ public class AccomodationRVController {
 			@RequestParam int usersNo, @RequestParam int accomodationNo,
 			@RequestParam String checkin, @RequestParam String checkout,
 			@RequestParam String name, @RequestParam String phone,
-			@RequestParam String people,
 			@RequestParam String imp_uid, @RequestParam String merchant_uid,
             @RequestParam int paid_amount, @RequestParam String apply_num
 			){
-		accomodationRVService.insertAccomodationRV(accomodationNo, usersNo, checkin, checkout, name, phone, people);
+		accomodationRVService.insertAccomodationRV(accomodationNo, usersNo, checkin, checkout, name, phone);
 
         String confirmUrl = "/confirm?imp_uid=" + imp_uid + "&merchant_uid=" + merchant_uid +
                             "&paid_amount=" + paid_amount + "&apply_num=" + apply_num +
@@ -34,19 +33,22 @@ public class AccomodationRVController {
         return ResponseEntity.ok(confirmUrl);
 	}
 	
-	@GetMapping("/accomodation/confirm")
+	@GetMapping("/confirm")
     public String payok(@RequestParam String imp_uid, @RequestParam String merchant_uid,
                         @RequestParam int paid_amount, @RequestParam String apply_num,
                         @RequestParam int accomodationNo, @RequestParam int usersNo,
                         Model model) {
+        String formattedAmount = formatCurrency(paid_amount);
         model.addAttribute("imp_uid", imp_uid);
         model.addAttribute("merchant_uid", merchant_uid);
-        model.addAttribute("paid_amount", paid_amount+"원");
+        model.addAttribute("formattedAmount", formattedAmount);
         model.addAttribute("apply_num", apply_num);
         model.addAttribute("activityNo", accomodationNo);
         model.addAttribute("usersNo", usersNo);
         return "/accomodation/confirm";
     }
 
-   
+    private String formatCurrency(int amount) {
+        return amount + "원";
+    }
 }

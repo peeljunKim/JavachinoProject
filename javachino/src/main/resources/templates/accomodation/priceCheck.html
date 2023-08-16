@@ -144,7 +144,7 @@
 						<div class="activity-title" th:text="${info.name}"></div>
 					</div> <br />
 					<div class="activity-date1">예약날짜 </div>
-					<div id="rangeRvDate" th:text="${info.startDate} +'~'+${info.endDate}"></div> <br />
+					<div th:text="${startDate} +'~'+${endDate}"></div> <br />
 					<div class="activity-time1">1인금액 </div>
 					<div class="activity-time2" th:text="${info.price}+'원'">
 						(최저가)</div><br />
