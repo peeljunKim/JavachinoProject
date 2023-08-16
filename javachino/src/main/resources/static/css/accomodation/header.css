@@ -1,0 +1,106 @@
+
+.navbar{
+    margin: 0 80px;
+}
+.conatiner-fluid{
+    display: flex;
+    justify-content: center;
+}
+
+/*header-logo-search*/
+.header-logo-search{
+   
+    display: flex;
+    align-items: center;
+}
+#logoImg{
+    width: 223px;
+    height: 55px;
+    display: inline-block;
+    vertical-align: text-top;
+}
+.searchBox{
+    width: 357px;
+    height: 50px;
+    margin-top: -5px;
+}
+.search{
+    background-color: #F5F6F7;
+    border: transparent;
+    border-radius: 10px;
+}
+#search-icon{
+    background-color: #F5F6F7;
+    border-color: transparent;
+    margin-left: 15px;
+}
+.fa-solid {
+    color: #848C94;
+}
+.form-control{
+    background-color: #F5F6F7;
+    border-color: transparent;
+
+    font-size: 14px;
+    color: #666D75;
+    font-family:  'Poppins', sans-serif;
+    font-weight: 300;
+}
+
+/*header-menu-group*/
+#accomodationImg{
+    width: 29.59px;
+    height: 25px;
+}
+
+#bikiniImg{
+    width: 23.76px;
+    height: 25px;
+}
+#user-groupImg{
+    width: 23.76px;
+    height: 25px;
+}
+#menuText {
+    font-size: 16px;
+    color: #000000;
+    font-family: Noto Sans KR, 'Source Sans Pro';
+}
+
+
+/*header-btn-group*/
+#header-btn-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#btn-join{
+    background-color: #9ecaee;
+    width: 90px;
+    height: 36px;
+    border-radius: 2px;
+    border-color: transparent;
+    
+}
+#btn-login{
+    width: 60px;
+    height: 36px;
+    border-radius: 2px;
+    border-color: transparent;
+    background-color: transparent;
+    
+}
+#btnText{
+    font-size: 16px;
+    color: #666D75;
+    font-family: Noto Sans KR, 'Source Sans Pro';
+}
+
+.nav-link {
+    text-decoration: none; 
+}
+
+
+

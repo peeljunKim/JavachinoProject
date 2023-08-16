@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name = "accomodation")
 @SequenceGenerator(name = "ACCOMODATION_SEQ_GEN", 
 sequenceName = "ACCOMODATION_SEQ", 

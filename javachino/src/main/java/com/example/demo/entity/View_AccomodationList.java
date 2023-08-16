@@ -6,59 +6,66 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Data
 @Table(name="view_accomodation_list")
 public class View_AccomodationList {
 	
 	@Id
-	private int accomodation_no;
-    private String accomodation_addr;
-    private String accomodation_name;
-    private String accomodation_price;
-    private String accomodation_file_fname;
-    private int review_count;
-    private double avg_review_star;
-	public int getAccomodation_no() {
-		return accomodation_no;
+	private int accomodationNo;
+    private String accomodationAddr;
+    private String accomodationName;
+    private String accomodationPrice;
+    private String accomodationFileFname1;
+    private int reviewCount;
+    private double avgReviewStar;
+	public View_AccomodationList() {
+		super();
 	}
-	public void setAccomodation_no(int accomodation_no) {
-		this.accomodation_no = accomodation_no;
+	public int getAccomodationNo() {
+		return accomodationNo;
 	}
-	public String getAccomodation_addr() {
-		return accomodation_addr;
+	public void setAccomodationNo(int accomodationNo) {
+		this.accomodationNo = accomodationNo;
 	}
-	public void setAccomodation_addr(String accomodation_addr) {
-		this.accomodation_addr = accomodation_addr;
+	public String getAccomodationAddr() {
+		return accomodationAddr;
 	}
-	public String getAccomodation_name() {
-		return accomodation_name;
+	public void setAccomodationAddr(String accomodationAddr) {
+		this.accomodationAddr = accomodationAddr;
 	}
-	public void setAccomodation_name(String accomodation_name) {
-		this.accomodation_name = accomodation_name;
+	public String getAccomodationName() {
+		return accomodationName;
 	}
-	public String getAccomodation_price() {
-		return accomodation_price;
+	public void setAccomodationName(String accomodationName) {
+		this.accomodationName = accomodationName;
 	}
-	public void setAccomodation_price(String accomodation_price) {
-		this.accomodation_price = accomodation_price;
+	public String getAccomodationPrice() {
+		return accomodationPrice;
 	}
-	public String getAccomodation_file_fname() {
-		return accomodation_file_fname;
+	public void setAccomodationPrice(String accomodationPrice) {
+		this.accomodationPrice = accomodationPrice;
 	}
-	public void setAccomodation_file_fname(String accomodation_file_fname) {
-		this.accomodation_file_fname = accomodation_file_fname;
+	public String getAccomodationFileFname1() {
+		return accomodationFileFname1;
 	}
-	public int getReview_count() {
-		return review_count;
+	public void setAccomodationFileFname1(String accomodationFileFname1) {
+		this.accomodationFileFname1 = accomodationFileFname1;
 	}
-	public void setReview_count(int review_count) {
-		this.review_count = review_count;
+	public int getReviewCount() {
+		return reviewCount;
 	}
-	public double getAvg_review_star() {
-		return avg_review_star;
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
 	}
-	public void setAvg_review_star(double avg_review_star) {
-		this.avg_review_star = avg_review_star;
+	public double getAvgReviewStar() {
+		return avgReviewStar;
 	}
+	public void setAvgReviewStar(double avgReviewStar) {
+		this.avgReviewStar = avgReviewStar;
+	}
+	
+	
+
+	
+	
     
 }

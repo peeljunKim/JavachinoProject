@@ -10,7 +10,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @Table(name = "accomodation_review")
 @SequenceGenerator(
         name="ACCOMODATION_REVIEW_SEQ_GEN",

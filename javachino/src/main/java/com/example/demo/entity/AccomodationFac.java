@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity 
-@Data
 @Table(name = "accomodation_fac")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AccomodationFac {
