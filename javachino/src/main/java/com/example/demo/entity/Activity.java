@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -16,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -59,6 +62,15 @@ public class Activity {
     private String activityFname2;
     @Column(name = "activity_fname3")
     private String activityFname3;
+    //테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile1;
+  	//테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile2;
+  	//테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile3;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_no", foreignKey = @ForeignKey(name = "fk_activity_to_business"))

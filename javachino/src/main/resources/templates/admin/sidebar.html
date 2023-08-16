@@ -1,89 +1,77 @@
-		<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css//admin/adminPage/sidebar.css">
 <title>Insert title here</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-	.w3-sidebar.w3-bar-block.w3-light-grey.w3-card {
-  		position: absolute;
-	    top: 38.5px;
-	    left: 0px;
-	}
-	.mainContainer{
-		margin-top: 50px;
-
-   		margin-left: 250px;
-	}
-	body{
-		background-color: #eee;
-		font-family: 'TheJamsil5Bold';
-	    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302_01@1.0/TheJamsil5Bold.woff2') format('woff2');
-	    font-weight: 500;
-	    font-style: normal;
-	}
-	#side{
-		background-color: #202439;
-		color: white;
-	}
-	.w3-bar{
-		background-color: #202439;
-		color: white;
-		border-bottom:white ;
-	}
-	
-	
-</style>
-<script type="text/javascript">
-function myAccFunc() {
-  var x = document.getElementById("demoAcc");
-  if (x.className.indexOf("w3-show") == -1) {
-    x.className += " w3-show";
-    x.previousElementSibling.className += " w3-green";
-  } else { 
-    x.className = x.className.replace(" w3-show", "");
-    x.previousElementSibling.className = 
-    x.previousElementSibling.className.replace(" w3-green", "");
-  }
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+function navigateTo(url) {
+  window.location.href = url;
 }
+$(document).ready(function() {
+    $(".accordion").click(function() {
+        console.log("Clicked"); // Debugging message
+        $(this).toggleClass("active");
+        $(this).siblings(".panel").slideToggle("fast");
+    });
+});
 </script>
 </head>
 <body>
-<div id="side" class="w3-sidebar w3-bar-block w3-card" style="width:160px;">
-  <a href="#" class="w3-bar-item w3-button">자바치노 배너</a>
-  <br/>
-  <a href="#" class="w3-bar-item w3-button">회원관리</a>
-  <a href="#" class="w3-bar-item w3-button">결제관리</a>
-  <a href="#" class="w3-bar-item w3-button">리뷰관리</a>
-  <a href="#" class="w3-bar-item w3-button">커뮤니티 관리</a>
-  <a href="#" class="w3-bar-item w3-button">예약내역</a>
-  <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
-  컨텐츠 추가 <i class="fa fa-caret-down"></i>
-  </button>
-  <div id="demoAcc" class="w3-hide w3-white w3-card">
-    <a href="#" class="w3-bar-item w3-button">숙소추가</a>
-    <a href="#" class="w3-bar-item w3-button">액티비티 추가</a>
-  </div>
-  <a href="#" class="w3-bar-item w3-button">보고 및 분석</a>
-  <a href="#" class="w3-bar-item w3-button">전체 메세지</a>
-</div>
-
-<div class="w3-bar" style="height: 50px;">
-  <a href="#" id="logout" class="w3-bar-item w3-button w3-right">로그아웃</a>
-</div>
-
-<div class="mainContainer" >
-	<h2>숙소추가</h2>
-<form>
-		글제목 : <input type="text" name="title"><br>
-		글암호 : <input type="password" name="pwd"><br>
-		글내용 : <br>
-		<textarea rows="10" cols="60" name="content"></textarea><br>
-		<input type="submit" value="등록">
-		<input type="reset" value="다시입력">		
-	</form>
-</div>
+<div class="Banner"><a href="/admin/adminPage"><img src="/images/admin/banner.png"></a></div>
+	<div class="Sidebar">
+		<div class="sidebar_menu">
+			<ul>
+				<li class="space"></li>
+				<li class="side_dashboard"  onclick="navigateTo('/admin/adminPage')">
+					<a href="/admin/adminPage">대시보드</a>
+				</li>
+				<li class="side_user" onclick="navigateTo('/admin/users/usersList/1')">
+						<a href="/admin/users/usersList/1">회원관리</a>		
+				</li>
+				<li class="side_business" onclick="navigateTo('/admin/business/businessList/1')">
+						<a href="/admin/business/businessList/1">업체관리</a>
+				</li>
+				<li class="side_accomodation">
+					<a href="#">숙소관리</a>
+				</li>
+				<li class="side_activity">
+					<a href="#">액티비티관리</a>
+				</li>
+				<li class="side_cmmunity">
+					<a href="#">커뮤니티 관리</a>
+				</li>
+				<li class="side_review">
+					<a href="#">리뷰 관리</a>
+				</li>
+				<li class="side_reservation">
+					<a href="#">예약 내역</a>
+				</li>
+				<li class="side_addContent">
+				    <a href="#" class="accordion">컨텐츠 추가</a>
+				    <ul class="panel" style="display: none;">
+				        <li onclick="navigateTo('/admin/addAccomodation')">
+							<a href="/admin/addAccomodation">숙소 추가</a>
+							</li>
+				        <li onclick="navigateTo('/admin/addActivity')">
+							<a href="/admin/addActivity">액티비티 추가</a>
+							</li>
+				    </ul>
+				</li>
+				<li class="side_message">
+					<a href="#">메세지 전송</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="Header">
+			<span class="header-text">대시보드</span> 
+			<div class="header-right">
+				<button class="header_logout">로그아웃</button>
+			</div>
+	</div>
 </body>
 </html>

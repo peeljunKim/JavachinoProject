@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.entity.Visit;
 
 
-public interface VisitDAO extends JpaRepository<Visit, Date> {
+public interface AdminVisitDAO extends JpaRepository<Visit, Date> {
 	
     List<Visit> findAllByVisitDateBetween(Date startDate, Date endDate);
     

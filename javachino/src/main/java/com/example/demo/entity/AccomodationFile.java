@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -30,6 +32,16 @@ public class AccomodationFile {
     private String accomodationFileFname2;
     @Column(name = "accomodation_file_fname3")
     private String accomodationFileFname3;
+    
+    //테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile1;
+  	//테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile2;
+  	//테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile3;
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accomodation_no", foreignKey = @ForeignKey(name = "fk_accom_file_to_accom"))

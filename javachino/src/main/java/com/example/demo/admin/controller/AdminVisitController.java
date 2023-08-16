@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.admin.service.AdminAccomodationRvService;
 import com.example.demo.admin.service.AdminActivityRvService;
-import com.example.demo.admin.service.UsersService;
-import com.example.demo.admin.service.VisitService;
+import com.example.demo.admin.service.AdminUsersService;
+import com.example.demo.admin.service.AdminVisitService;
 import com.example.demo.entity.Visit;
 
 import lombok.Setter;
 
 @Setter
 @Controller
-public class VisitController {
+public class AdminVisitController {
     @Autowired
-    private VisitService vs;
+    private AdminVisitService vs;
     @Autowired
-    private UsersService us;
+    private AdminUsersService us;
     @Autowired
     private AdminActivityRvService ars;
     @Autowired

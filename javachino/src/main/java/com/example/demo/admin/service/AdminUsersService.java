@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.admin.dao.UsersDAO;
+import com.example.demo.admin.dao.AdminUsersDAO;
 import com.example.demo.entity.Users;
 
 import lombok.Setter;
 
 @Service
 @Setter
-public class UsersService {
+public class AdminUsersService {
     @Autowired
-    private UsersDAO dao;
+    private AdminUsersDAO dao;
 
     public List<Users> findAll(int start, int end, String cname, String keyword) {
     	List<Users> list = null;
@@ -29,6 +29,18 @@ public class UsersService {
         return list;
     }
     
+    //검색된 레코드 수 반환
+    public int getTotalRecordByKeyword(String cname,String keyword) {
+       int u;
+       if(cname.equals("usersId")) {
+          u= dao.countByUsersId("%"+keyword+"%");
+       }else{
+    	   u= dao.countByUsersName("%"+keyword+"%");
+       }
+       return u;
+    }
+
+    //전체 레코드 수 반환
     public int getTotalRecord() {
         return (int) dao.count();
     }

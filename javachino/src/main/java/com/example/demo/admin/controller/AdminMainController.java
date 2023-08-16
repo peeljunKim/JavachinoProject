@@ -10,18 +10,22 @@ public class AdminMainController {
 	public String index() {
 		return "admin/index";
 	}
-	@GetMapping("/sidebar")
+	@GetMapping("admin/sidebar")
 	public String sidebar() {
 		return "admin/sidebar";
 	}
 
-	@GetMapping("/hello")
+	@GetMapping("admin/hello")
 	public String hello() {
 		return "admin/hello";
 	}
-	@GetMapping("/dashboard")
-	public String dashboard() {
-		return "admin/dashboard";
+	@GetMapping("admin/addActivity")
+	public String addActivity() {
+		return "admin/addActivity";
+	}
+	@GetMapping("admin/addAccomodation")
+	public String addAccomodation() {
+		return "admin/addAccomodation";
 	}
 	
 }

@@ -7,13 +7,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.admin.dao.VisitDAO;
+import com.example.demo.admin.dao.AdminVisitDAO;
 import com.example.demo.entity.Visit;
 
 @Service
-public class VisitService {
+public class AdminVisitService {
     @Autowired
-    private VisitDAO dao;
+    private AdminVisitDAO dao;
 
     public List<Visit> getAllVisits() {
         return dao.findAll();

@@ -9,5 +9,4 @@ public class JavachinoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(JavachinoApplication.class, args);
 	}
-
 }

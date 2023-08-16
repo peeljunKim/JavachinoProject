@@ -5,71 +5,197 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link rel="stylesheet" href="/css/admin/business/businessList.css">
 <title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
 <script>
-	function openModal() {
-	const modal = document.getElementById("myModal");
-	modal.style.display = "block";
-
-	  // 모달이 열릴 때, 닫기 버튼에 이벤트 리스너를 추가합니다.
-	  const btnCloseModal = document.getElementById("btnCloseModal");
-	  btnCloseModal.addEventListener("click", closeModal);
+	//HTML sideBar연결 		
+    fetch("/admin/sidebar")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("sidebar").innerHTML = data;
+            
+            // 사이드바에 아코디언 기능 적용
+            $(".accordion").click(function() {
+                console.log("Clicked"); // Debugging message
+                $(this).toggleClass("active");
+                $(this).siblings(".panel").slideToggle("fast");
+            });
+    });
+    function navigateTo(url) {
+	  window.location.href = url;
 	}
 	
-	function closeModal() {
-	  const modal = document.getElementById("myModal");
-	  modal.style.display = "none";
+	$(function(){
+		$("#btnSearch").click(function(){			
+			var cname = $("#cname").val();
+			var keyword = $("#keyword").val();
+			var pageNUM = $("#pageNUM").val();
+			url = "/admin/business/businessList/"+pageNUM+"/"+cname+"/"+keyword;
+			location.href=url;
+		});
+	});
+
+	  document.addEventListener("DOMContentLoaded", function () {
+	    const btnBusinessInsert = document.querySelector(".insert_list");
+	    btnBusinessInsert.addEventListener("click", openModal);
 	
-	  // 모달이 닫힐 때, 닫기 버튼의 이벤트 리스너를 제거합니다.
-	  const btnCloseModal = document.getElementById("btnCloseModal");
-	  btnCloseModal.removeEventListener("click", closeModal);
-	}
+	    const btnUpdate = document.querySelector(".update_list");
+	    btnUpdate.addEventListener("click", openUpdateModal);
+	  });
+	  
+	$(document).ready(function() {
+	  $(".delete_list").click(function(event) {
+	    event.preventDefault();
+	    
+	    if (confirm('정말로 삭제하시겠습니까?')) {
+	      let BusinessNo = $(this).data('businessNo');
+	      let data = new FormData();
+	      data.append('businessNo', businessNo);
+	      
+	      $.ajax({
+	        url: "/business/delete",
+	        method: "post",
+	        processData: false,
+	        contentType: false,
+	        data: data,
+	        success: function(response) {
+	          alert(response);
+	          window.location.reload();
+	        },
+	        error: function() {
+	          alert("삭제에 실패하였습니다.");
+	        }
+	      });
+	    }
+	  });
+	});
 	
-	 function openUpdateModal() {
-    const modalUpdate = document.getElementById("modalUpdate");
-    modalUpdate.style.display = "block";
+	$(document).ready(function () {
+	    $(".insert_list").click(function () {
+	        const modal = document.getElementById("myModal");
+	        modal.style.display = "block";
+	
+	        const btnCloseModal = document.getElementById("btnCloseModal");
+	        btnCloseModal.addEventListener("click", closeModal);
+	    });
+	
+	    function closeModal() {
+	        const modal = document.getElementById("myModal");
+	        modal.style.display = "none";
+	
+	        const btnCloseModal = document.getElementById("btnCloseModal");
+	        btnCloseModal.removeEventListener("click", closeModal);
+	    };
+	
+	    // 모달 내부의 폼 제출
+	    $("#insertForm").submit(function (event) {
+	        event.preventDefault(); // 기본 폼 제출 방지
+	
+	        let formData = new FormData(this);
+	
+	        $.ajax({
+	            url: "/business/insert",
+	            type: "post",
+	            processData: false,
+	            contentType: false,
+	            data: formData,
+	            success: function (response) {
+	                alert(response);
+	                window.location.reload();
+	            },
+	            error: function () {
+	                alert("추가에 실패하였습니다.");
+	            }
+	        });
+	    });
+	});
+	
+	$(document).ready(function () {
+	    function openUpdateModal() {
+	        const modalUpdate = document.getElementById("modalUpdate");
+	        modalUpdate.style.display = "block";
+	
+	        const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+	        btnCloseModalUpdate.addEventListener("click", closeUpdateModal);
+	    }
+	
+	    function closeUpdateModal() {
+	        console.log("Closing modal");
+	
+	        const modalUpdate = document.getElementById("modalUpdate");
+	        modalUpdate.style.display = "none";
+	
+	        const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
+	        btnCloseModalUpdate.removeEventListener("click", closeUpdateModal);
+	    }
 
-    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
-    btnCloseModalUpdate.addEventListener("click", closeUpdateModal);
-  }
+    // Attach click event to the update button
+    $(".update_list").click(function () {
+        openUpdateModal();
+        // Extract user data and populate the form fields
+        const businessNo = $(this).closest("tr").find(".table_no").text();
+        const businessName = $(this).closest("tr").find(".table_name").text();
+        const businessAddr = $(this).closest("tr").find(".table_addr").text();
+        const businessPhone = $(this).closest("tr").find(".table_phone").text();
+        const businessManager = $(this).closest("tr").find(".table_manager").text();
 
-  function closeUpdateModal() {
-    const modalUpdate = document.getElementById("modalUpdate");
-    modalUpdate.style.display = "none";
+        $("#updateForm input[name='businessNo']").val(businessNo);
+        $("#updateForm input[name='businessName']").val(businessName);
+        $("#updateForm input[name='businessAddr']").val(businessAddr);
+        $("#updateForm input[name='businessPhone']").val(businessPhone);
+        $("#updateForm input[name='businessManager']").val(businessManager);
+    });
 
-    const btnCloseModalUpdate = document.getElementById("btnCloseModalUpdate");
-    btnCloseModalUpdate.removeEventListener("click", closeUpdateModal);
-  }
+    // Modal form submission
+    $("#updateForm").submit(function (event) {
+        event.preventDefault(); // Prevent default form submission
 
-  document.addEventListener("DOMContentLoaded", function () {
-    const btnUserInsert = document.querySelector(".user_insert");
-    btnUserInsert.addEventListener("click", openModal);
+        let formData = new FormData(this);
 
-    const btnUpdate = document.querySelector(".user_update");
-    btnUpdate.addEventListener("click", openUpdateModal);
-  });
+        $.ajax({
+            url: "/business/update/" + formData.get("businessNo"),
+            type: "post",
+            processData: false,
+            contentType: false,
+            data: formData,
+            success: function (response) {
+                alert(response);
+                window.location.reload();
+            },
+            error: function () {
+                alert("수정에 실패하였습니다.");
+            }
+        });
+    });
+});
 </script>
 </head>
 <body>
+<!--사이드바-->
+<div id="sidebar"></div>
+<div class="MainBoard" id="mainContent">
 <div class="main_container">
-	<div class="users_top">
+	<div class="list_top">
 		<div class="search_box">
-			<select name="select_box">
-					<option value="" >업체이름</option>
-					<option value="" >업체주소</option>			
+			<select name="select_box" id="cname">
+					<option value="businessName" >업체이름</option>
+					<option value="businessAddr" >업체주소</option>
+					<option value="businessPhone" >업체번호</option>
+					<option value="businessManager" >담당자이름</option>
 			</select>
 			<div class="search_bar">
-				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;"></i>
+				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
 				<input type="search" class="search" id="keyword" name="keyword" placeholder="찾으실 내용을 검색해주세요">
+				<input type="hidden" id="pageNUM" name="pageNUM" value="1" />
 			</div>
 		</div>
-		<button class="user_insert" onclick="openModal()">추가</button>
+		<button class="insert_list" onclick="openModal()">추가</button>
 	</div>
 	<div class="container">
 	<hr/>
 	<table class="rwd-table">
 		<tr>
-			<th class="table_id">업체번호</th>
+			<th class="table_id">업체코드</th>
 			<th class="table_name">업체이름</th>
 			<th class="table_fname">업체주소</th>
 			<th class="table_phone">업체번호</th>
@@ -77,35 +203,40 @@
 			<th class="table_update">관리</th>
 		</tr>
 		<tr th:each="b:${list}">
-			<td class="table_id" th:text="${b.businessNo}"></td>
+			<td class="table_no" th:text="${b.businessNo}"></td>
 			<td class="table_name" th:text="${b.businessName}"></td>
-			<td class="table_fname" th:text="${b.businessAddr}"></td>
+			<td class="table_addr" th:text="${b.businessAddr}"></td>
 			<td class="table_phone" th:text="${b.businessPhone}"></td>
 			<td class="table_manager" th:text="${b.businessManager}"></td>
 			<td class="table_update">
-				<button class="user_update" onclick="openUpdateModal()">수정</button>
-				<button class="user_delete">삭제</button>
+				<button class="update_list" onclick=openUpdateModal() >수정</button>
+				<button class="delete_list" th:attr="data-businessNo=${b.businessNo}">삭제</button>
 			</td>
 		</tr>
 	</table>
 	<hr />
 	</div>
 	<div class="pagination">
-		<a href="#">&laquo;</a>
-		<th:block th:each="i:${#numbers.sequence(1,totalPage)}">
-			<a th:href="@{'/admin/business/businessList/'+${i}}" th:text="${i}"></a>		
-		</th:block>
-		<a href="#">&raquo;</a>
+	    <a href="#">«</a>
+	    <th:block th:each="i : ${#numbers.sequence(1, totalPage)}">
+        <a th:href="@{${'/admin/business/businessList/' + i + (cname != null ? '/' + cname + '/' + keyword : '')}}" th:text="${i}" th:class="${i == pageNUM ? 'active' : ''}"></a>
+   		</th:block>
+	    <a href="#">»</a>
 	</div>
 	<div id="myModal" class="modal">
 	  <div class="modal-content">
 	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
 	    <h2>사용자 추가</h2>
-	    <form action="/board/insert" method="post">		
-			업체이름 : <input type="text" name="business_name"><br/>
-			업체주소 : <input type="text" name="business_addr"><br>
-			업체번호 : <input type="text" name="business_phone"><br>
-			담당자이름 : <input type="text" name="business_manager"><br/>
+	    <form id="insertForm" action="/business/insert" method="post">		
+			업체이름 : <input type="text" name="businessName"><br/>
+			업체주소 : <input type="text" name="businessAddr"><br>
+			업체번호 : <input type="text" name="businessPhone"><br>
+			담당자이름 : <input type="text" name="businessManager"><br/>
+			카테고리 :
+		    <select name="businessCategory">
+		        <option value="ACCOMODATION">Accommodation</option>
+		        <option value="ACTIVITY">Activity</option>
+		    </select><br/>
 			<input type="submit" value="등록">
 			<input type="reset" value="다시입력">		
 		</form>
@@ -116,16 +247,17 @@
 	  <div class="modalUpdate-content">
 	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
 	    <h2>사용자 수정</h2>
-	    <form action="/board/update" method="post">
-			<input type="hidden" name="business_no" th:value="${business_no}"/>
-			업체이름 : <input type="text" name="business_name" th:value="${businessName}"><br/>
-			업체주소 : <input type="text" name="business_addr" th:value="${businessAddr}"><br>
-			업체번호 : <input type="text" name="business_phone" th:value="${businessPhone}"><br>
-			담당자이름 : <input type="text" name="business_manager" th:value="${businessManager}"><br/> 
-			<input type="submit" value="등록"/>
+	    <form id="updateForm" action="/business/update/{businessNo}" method="post">
+			<input type="hidden" name="businessNo"/>
+			업체이름 : <input type="text" name="businessName"><br/>
+			업체주소 : <input type="text" name="businessAddr"><br/>
+			업체번호 : <input type="text" name="businessPhone"><br/>
+			담당자이름 : <input type="text" name="businessManager"><br/> 
+			<input type="submit" value="수정"/>
 			<input type="reset" value="다시입력"/>
 		</form>
 	  </div>
 	</div>
+</div>
 </body>
 </html>

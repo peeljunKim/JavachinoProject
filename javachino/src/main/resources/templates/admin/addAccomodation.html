@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="/css/admin/business/businessList.css">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
+<script>
+	//HTML sideBar연결 		
+    fetch("/admin/sidebar")
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById("sidebar").innerHTML = data;
+            
+            // 사이드바에 아코디언 기능 적용
+            $(".accordion").click(function() {
+                console.log("Clicked"); // Debugging message
+                $(this).toggleClass("active");
+                $(this).siblings(".panel").slideToggle("fast");
+            });
+    });
+    function navigateTo(url) {
+	  window.location.href = url;
+	}
+	
+	// 모달 내부의 폼 제출
+	    $("#insertForm").submit(function (event) {
+	        event.preventDefault(); // 기본 폼 제출 방지
+	
+	        let formData = new FormData(this);
+	
+	        $.ajax({
+	            url: "/accomdoation/insert",
+	            type: "post",
+	            processData: false,
+	            contentType: false,
+	            data: formData,
+	            success: function (response) {
+	                alert(response);
+	                window.location.reload();
+	            },
+	            error: function () {
+	                alert("추가에 실패하였습니다.");
+	            }
+	        });
+	    });
+</script>
+</head>
+<body>
+<!--사이드바-->
+<div id="sidebar"></div>
+<div class="MainBoard" id="mainContent">
+<div class="main_container">
+	<h2>숙소 추가</h2>
+	<hr/>
+	<form id="insertForm" action="/accomodation/insert" method="post" enctype="multipart/form-data">	
+		이름 : <input type="text" name="accomodationName"><br>
+		주소 : <input type="text" name="accomodationAddr"><br>
+		가격 : <input type="text" name="accomodationPrice"><br>
+		카테고리 :
+		<select name="accomodationCategory">
+		        <option value="HOTEL">HOTEL</option>
+		        <option value="PENSION">PENSION</option>
+		        <option value="GUESTHOUSE">GUESTHOUSE</option>
+		</select><br/>
+		최소인원 : <input type="text" name="accomodationInfoMinPerson"><br>	
+		최대인원 : <input type="text" name="accomodationInfoMaxPersion"><br>	
+		객실평수 : <input type="text" name="accomodationInfoSize"><br>		
+		인원별가격 : <input type="text" name="accomodationPriceperPerson"><br>		
+		설명 : <br>
+		<textarea rows="10" cols="60" name="accomodationInfoExplanation"></textarea><br>
+		<input type="submit" value="등록">
+		<input type="reset" value="다시입력">
+		    스파 :
+		    <select name="spa">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    부엌 :
+		    <select name="kitchen">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    바베큐 :
+		    <select name="bbq">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    풀 :
+		    <select name="pool">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    와이파이 :
+		    <select name="wifi">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    주차 :
+		    <select name="parking">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    애완동물 :
+		    <select name="pet">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		    노래방 :
+		    <select name="karaoke">
+		        <option value="y">y</option>
+		        <option value="n">n</option>
+		    </select><br/>
+		첨부파일1 : <input type="file" name="uploadFile1"><br/>
+		첨부파일2 : <input type="file" name="uploadFile2"><br/>
+		첨부파일3 : <input type="file" name="uploadFile3"><br/>
+	</form>
+</div>
+</div>
+</body>
+</html>

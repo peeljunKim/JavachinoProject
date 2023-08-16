@@ -2,6 +2,8 @@ package com.example.demo.entity;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -33,6 +35,9 @@ public class Users {
     private String usersName;
     @Column(name = "users_fname")
     private String usersFname;
+    //테이블 매핑에서는 제외 시켜라!
+  	@Transient
+  	private MultipartFile uploadFile;
     @Column(name = "users_phone")
     private String usersPhone;
     @Column(name = "users_date")
