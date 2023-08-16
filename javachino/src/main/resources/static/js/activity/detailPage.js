@@ -41,6 +41,21 @@ function changeCategoryClass(el) {
 
 //share button
 $(function() {
+	var selectedDropdownValue = null;
+	$("#confirmPaymentLink").click(function(e) {
+		e.preventDefault();
+		var dateRangeValue = $("#confirm_date").html();
+		selectedDropdownValue;
+		var activityNo = $("#confirmPaymentBtn").val();
+		console.log("ac")
+		console.log(dateRangeValue);
+		console.log(selectedDropdownValue);
+		var url = "/activity/" + activityNo +
+			"/priceCheck?dateRange=" + dateRangeValue +
+			"&people=" + selectedDropdownValue;
+		location.href = url;
+	});
+
 	$('#shareButton').on('click', function() {
 		var currentUrl = window.location.href;
 		alert(`Current page address: ${currentUrl}`);
@@ -68,10 +83,10 @@ $(function() {
 			},
 
 		});
-		
-		
-		
-		
+
+
+
+
 	$("#date_range_picker").on("apply.daterangepicker",
 		function(ev, picker) {
 			$("#confirm_date").html(
@@ -87,7 +102,7 @@ $(function() {
 
 	$('.dropdown-item').click(function() {
 		$("#confirm_people").html($(this).text() + "명");
-
+		selectedDropdownValue = $(this).text();
 	});
 
 });

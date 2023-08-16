@@ -59,24 +59,48 @@ public class ActivityController {
 	}
 
 	@GetMapping("/activity/{activityNo}/priceCheck")
-	public String getActivityPriceDetails(@PathVariable int activityNo, Model model) {
+	public String getActivityPriceDetails(@PathVariable int activityNo, @RequestParam("dateRange") String dateRange,
+			@RequestParam("people") String people, Model model) {
 		ActivityDto activityDto = activityService.getPost(activityNo);
+		String[] arr = dateRange.split(" ~ ");
+		String startDate = arr[0];
+		String endDate = arr[1];
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		model.addAttribute("activityNo", activityNo);
+		model.addAttribute("people", people);
 		model.addAttribute("activityDto", activityDto);
 		return "/activity/priceCheck";
 	}
-	
+
 	@GetMapping("/activity/filter")
-	public String filterActivitiesByCategory(@RequestParam String category, Model model) {
+	public String filterActivitiesByCategory(@RequestParam int category, Model model) {
 	    ActivityCategory activityCategory = null;
-	    
-	    if ("실내".equals(category)) {
+
+	    if (category == 0) {
 	        activityCategory = ActivityCategory.INDOOR;
-	    } else if ("실외".equals(category)) {
+	    } else if (category == 1) {
 	        activityCategory = ActivityCategory.OUTDOOR;
 	    }
 
 	    List<ActivityDto> filteredActivityDtoList = activityService.filterActivitiesByCategory(activityCategory);
 	    model.addAttribute("activityDtoList", filteredActivityDtoList);
 	    return "activityMain :: activityList"; // Return the partial view for the filtered activities
+	}
+
+	@GetMapping("/activity/activityMain")
+	public String getListBySearch(@RequestParam(value = "addr", required = false) String activityAddr,
+			@RequestParam(value = "date", required = false) String date, Model model) {
+
+		List<ActivityDto> searchList;
+
+		if (activityAddr != null) {
+			searchList = activityService.findActivitiesByActivityAddr(activityAddr);
+		} else {
+			searchList = activityService.findAll();
+		}
+
+		model.addAttribute("activityDtoList", searchList);
+		return "/activity/activityMain";
 	}
 }

@@ -335,92 +335,6 @@ input[type='radio']:checked+span {
 	width: 50%;
 }
 
-.calender_box {
-	position: absolute;
-	display: flex;
-	width: 850px;
-	margin: 10px 0 0 -425px;
-	left: 50%;
-}
-
-.calender_box__inside_box {
-	padding: 16px 32px 25px;
-	display: grid;
-}
-
-.calender_box__table {
-	padding: 0 6px;
-}
-
-.calender_box__table tr>td {
-	height: 45px;
-	width: 45px;
-}
-
-.calender_box__table tr:nth-child(n+3)>td:not(:empty):hover {
-	box-shadow: 0 0 0 1px #000;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.calender_box__table__td-clicked {
-	background: #222;
-	color: #FFF;
-	border-radius: 50%;
-}
-
-.calender_box__table__past_date {
-	color: #b9b9b9;
-}
-
-.calender_box__inside_box .calender_box__table .calender_box__table__tr .calender_box__table__past_date:hover {
-	box-shadow: 0 0 0 0;
-	cursor: default;
-}
-
-.calender_box__table tr:nth-child(2)>td {
-	height: 17px;
-}
-
-.calender_box__table tr:nth-child(-n+2)>td {
-	cursor: default;
-}
-
-.calender_box__inside_box--month {
-	padding: 22px 0 20px;
-}
-
-.calender_box--left_button {
-	position: absolute;
-	display: flex;
-	width: 32px;
-	height: 32px;
-	border: none;
-	background: #FFF;
-	left: 469px;
-	top: 35px;
-	place-content: center;
-	place-items: center;
-}
-
-.calender_box--right_button {
-	position: absolute;
-	display: flex;
-	width: 32px;
-	height: 32px;
-	border: none;
-	background: #FFF;
-	right: 44px;
-	top: 35px;
-	place-content: center;
-	place-items: center;
-}
-
-.calender_box--left_button:hover,
-.calender_box--right_button:hover {
-	background: #F7F7F7;
-	border-radius: 50%;
-}
 
 .display_none {
 	display: none;
@@ -462,4 +376,7 @@ input[type='radio']:checked+span {
 .star-icon {
 	margin-right: 5px;
 	/* Adjust the spacing between the icon and the rating number */
+}
+.accommodation_item.hidden {
+    display: none;
 }

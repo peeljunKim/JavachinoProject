@@ -47,7 +47,7 @@ public class ActivityRvController {
         model.addAttribute("apply_num", apply_num);
         model.addAttribute("activityNo", activityNo);
         model.addAttribute("usersNo", usersNo);
-        return "/activity/confirm"; // 뷰 페이지 이름 반환
+        return "activity/confirm"; // 뷰 페이지 이름 반환
     }
 
     private String formatCurrency(int amount) {

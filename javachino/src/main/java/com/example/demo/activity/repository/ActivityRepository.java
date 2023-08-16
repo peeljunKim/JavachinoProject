@@ -11,4 +11,5 @@ public interface ActivityRepository extends JpaRepository<Activity, Integer> {
 	Activity findByActivityNo(int activityNo);
 
 	List<Activity> findByActivityCategory(ActivityCategory activityCategory);
+	List<Activity> findByActivityAddrContaining(String activityAddr);
 }
