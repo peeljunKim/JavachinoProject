@@ -13,7 +13,7 @@ public class AccomodationRVService {
 	private AccomodationRVRepository accomodationRVDAO;
 	
 	@Transactional
-	public void insertAccomodationRV(int acconodationNo, int userNo, String checkin, String ckeckout, String name, String phone) {
-		accomodationRVDAO.insertAccomodationRv(acconodationNo, userNo, checkin, ckeckout, name, phone);
+	public void insertAccomodationRV(int acconodationNo, int userNo, String checkin, String ckeckout, String name, String phone, String people) {
+		accomodationRVDAO.insertAccomodationRv(acconodationNo, userNo, checkin, ckeckout, name, phone, people);
 	}
 }

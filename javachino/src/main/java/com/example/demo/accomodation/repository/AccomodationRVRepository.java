@@ -17,12 +17,7 @@ import jakarta.transaction.Transactional;
 public interface AccomodationRVRepository extends JpaRepository<AccomodationRV, Integer>{
 	
 	
-//	@Query(value = "SELECT ACCOMODATION_NO "
-//	        + "FROM ACCOMODATION_RV "
-//	        + "WHERE ACCOMODATION_RV_CHECKIN >= to_date(?1, 'YYYY/MM/DD') "
-//	        + "AND ACCOMODATION_RV_CHECKOUT <= to_date(?2, 'YYYY/MM/DD')", nativeQuery = true)
-//	public List<Integer> findByAccomodationRVDate(String startDate, String endDate);
-	
+
 	@Query(value = "SELECT DISTINCT a.accomodation_no, a.accomodation_rv_no "
 			+ "FROM accomodation_rv a "
 			+ "WHERE "
@@ -38,9 +33,9 @@ public interface AccomodationRVRepository extends JpaRepository<AccomodationRV, 
 	
 	@Transactional
     @Modifying
-    @Query(value = "INSERT INTO ACCOMODATION_RV (ACCOMODATION_NO, ACCOMODATION_RV_NO, USERS_NO, ACCOMODATION_RV_CHECKIN, ACCOMODATION_RV_CHECKOUT, ACCOMODATION_RV_DATE, ACCOMODATION_RV_NAME, ACCOMODATION_RV_PEOPLE, ACCOMODATION_RV_PHONE)"
-            + "VALUES (?1, ACCOMODATION_RV_SEQ.nextval, ?2, ?3, ?4, CURRENT_DATE, ?5, ?6)", nativeQuery = true)
-    public void insertAccomodationRv(int accomodationNo, int usersNo, String checkin, String chekcout, String name, String phone);
+    @Query(value = "INSERT INTO ACCOMODATION_RV (ACCOMODATION_NO, ACCOMODATION_RV_NO, USERS_NO, ACCOMODATION_RV_CHECKIN, ACCOMODATION_RV_CHECKOUT, ACCOMODATION_RV_DATE, ACCOMODATION_RV_NAME, ACCOMODATION_RV_PEOPLE, ACCOMODATION_RV_PHONE, ACCOMODATION_RV_People)"
+            + "VALUES (?1, ACCOMODATION_RV_SEQ.nextval, ?2, ?3, ?4, CURRENT_DATE, ?5, ?6, ?7)", nativeQuery = true)
+    public void insertAccomodationRv(int accomodationNo, int usersNo, String checkin, String chekcout, String name, String phone, String people);
 
 
 	
