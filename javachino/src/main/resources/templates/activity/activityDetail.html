@@ -220,8 +220,8 @@
 						총 별점(<span th:text="${reviewCount}"></span>개)
 					</div>
 				</div>
-				<div th:each="activityReviewDto : ${activityReviewDtoList}" class="review-list">
-					<div class="review-item">
+				<div class="review-list">
+					<div th:each="activityReviewDto : ${activityReviewDtoList}"  class="review-item">
 						<div class="reviewer-info">
 							<div class="reviewer-name">
 								<img class="avatar-icon" alt="" width="32px" height="32px"

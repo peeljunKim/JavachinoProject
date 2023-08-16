@@ -52,7 +52,7 @@ public class Activity {
     private double activityPrice;
     @Column(name = "activity_time")
     private int activityTime;
-    @Setter
+   
     @Column(name = "activity_fname1")
     private String activityFname1;
     @Column(name = "activity_fname2")

@@ -9,6 +9,6 @@ import com.example.demo.entity.ActivityReview;
 
 public interface ActivityReviewRepository extends JpaRepository<ActivityReview, Integer> {
 
-	List<ActivityReview> findByActivityReviewNo(int activityReviewNo);
+	List<ActivityReview> findByActivity_ActivityNo(int activityNo);
 	List<ActivityReview> findByActivity(Activity activity);
 }

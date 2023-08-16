@@ -39,8 +39,8 @@ public class ActivityReviewService {
 		return reviews.size();
 	}
 
-	public List<ActivityReviewDto> getReviewsByActivityReviewNo(int activityReviewNo) {
-		List<ActivityReview> activityReviewList = activityReviewRepository.findByActivityReviewNo(activityReviewNo);
+	public List<ActivityReviewDto> getReviewsByActivity_ActivityNo(int activityNo) {
+		List<ActivityReview> activityReviewList = activityReviewRepository.findByActivity_ActivityNo(activityNo);
 
 		return activityReviewList.stream().map(ActivityReviewDto::new).collect(Collectors.toList());
 	}

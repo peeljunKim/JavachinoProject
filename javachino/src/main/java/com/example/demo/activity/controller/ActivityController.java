@@ -45,7 +45,7 @@ public class ActivityController {
 	@GetMapping("/activity/{activityNo}")
 	public String getActivityDetails(@PathVariable int activityNo, Model model) {
 		ActivityDto activityDto = activityService.getPost(activityNo);
-		List<ActivityReviewDto> activityReviewDtoList = activityReviewService.getReviewsByActivityReviewNo(activityNo);
+		List<ActivityReviewDto> activityReviewDtoList = activityReviewService.getReviewsByActivity_ActivityNo(activityNo);
 
 		double averageRating = activityReviewService.getAverageRatingForActivity(activityDto);
 		int reviewCount = activityReviewService.getReviewCountForActivity(activityDto);
