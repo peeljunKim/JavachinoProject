@@ -76,6 +76,13 @@
               <artifactId>commons-fileupload</artifactId>
               <version>1.3.1</version>
           </dependency>
+          
+          <!-- https://mvnrepository.com/artifact/com.oracle.database.xml/xdb6 -->
+		<dependency>
+			<groupId>com.oracle.database.xml</groupId>
+			<artifactId>xdb6</artifactId>
+			<version>18.3.0.0</version>
+		</dependency>
    </dependencies>
 
    <build>
