@@ -17,9 +17,8 @@ import java.time.LocalDate;
     	initialValue = 1,
     	allocationSize = 1
 )
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class AccomodationReiview {
+public class AccomodationReview {
     @Id
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
@@ -78,6 +77,20 @@ public class AccomodationReiview {
 	}
 	public void setAccomodation(Accomodation accomodation) {
 		this.accomodation = accomodation;
+	}
+	public AccomodationReview(int accomodationReviewNo, double accomodationReviewStar, String accomodationReviewContent,
+			LocalDate accomodationReviewDate, Users users, Accomodation accomodation) {
+		super();
+		this.accomodationReviewNo = accomodationReviewNo;
+		this.accomodationReviewStar = accomodationReviewStar;
+		this.accomodationReviewContent = accomodationReviewContent;
+		this.accomodationReviewDate = accomodationReviewDate;
+		this.users = users;
+		this.accomodation = accomodation;
+	}
+	public AccomodationReview() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
     
 
