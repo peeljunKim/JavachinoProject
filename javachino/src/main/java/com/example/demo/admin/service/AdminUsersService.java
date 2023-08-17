@@ -20,8 +20,8 @@ public class AdminUsersService {
     	List<Users> list = null;
     	if(keyword != null && !keyword.equals("")) {			
 			switch(cname) {
-				case "usersId": list=dao.findByUsersIdLike("%"+keyword+"%");break;
-				case "usersName":list =  dao.findByUsersNameLike("%"+keyword+"%");break;
+				case "usersId" : list=dao.findByUsersIdLike("%"+keyword+"%");break;
+				case "usersName" : list =  dao.findByUsersNameLike("%"+keyword+"%");break;
 			}			
 		}else {
 			list = dao.selectAll(start, end);

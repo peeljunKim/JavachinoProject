@@ -25,7 +25,7 @@ public class AdminBusinessController {
 	private AdminBusinessService bs;
 	
 	@GetMapping(value={"/admin/business/businessList/{pageNUM}",
-			"/admin/business/businessList/{pageNUM}/{cname}/{keyword}"})
+					   "/admin/business/businessList/{pageNUM}/{cname}/{keyword}"})
 	public String list(Model model, 
 			@PathVariable("pageNUM") int pageNUM,
 			@PathVariable(required = false) String cname,

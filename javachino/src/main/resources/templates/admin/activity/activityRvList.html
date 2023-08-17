@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="/css/admin/users/usersList.css">
+<link rel="stylesheet" href="/css/admin/activity/activityList.css">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
@@ -24,20 +24,20 @@
     function navigateTo(url) {
 	  window.location.href = url;
 	}
-        
+	
 	$(function(){
 		$("#btnSearch").click(function(){			
 			var cname = $("#cname").val();
 			var keyword = $("#keyword").val();
 			var pageNUM = $("#pageNUM").val();
-			url = "/admin/users/usersList/"+pageNUM+"/"+cname+"/"+keyword;
+			url = "/admin/activity/activityRv/"+pageNUM+"/"+cname+"/"+keyword;
 			location.href=url;
 		});
 	});
 
 	  document.addEventListener("DOMContentLoaded", function () {
-	    const btnUserInsert = document.querySelector(".insert_list");
-	    btnUserInsert.addEventListener("click", openModal);
+	    const btnActivityRvInsert = document.querySelector(".insert_list");
+	    btnActivityRvInsert.addEventListener("click", openModal);
 	
 	    const btnUpdate = document.querySelector(".update_list");
 	    btnUpdate.addEventListener("click", openUpdateModal);
@@ -48,12 +48,12 @@
 	    event.preventDefault();
 	    
 	    if (confirm('정말로 삭제하시겠습니까?')) {
-	      let usersNo = $(this).data('usersNo');
+	      let activityRvNo = $(this).data('activityRvNo');
 	      let data = new FormData();
-	      data.append('usersNo', usersNo);
+	      data.append('activityRvNo', activityRvNo);
 	      
 	      $.ajax({
-	        url: "/users/delete",
+	        url: "/activityRv/delete",
 	        method: "post",
 	        processData: false,
 	        contentType: false,
@@ -94,7 +94,7 @@
 	        let formData = new FormData(this);
 	
 	        $.ajax({
-	            url: "/users/insert",
+	            url: "/activityRv/insert",
 	            type: "post",
 	            processData: false,
 	            contentType: false,
@@ -133,13 +133,19 @@
     $(".update_list").click(function () {
         openUpdateModal();
         // Extract user data and populate the form fields
-        const userNo = $(this).closest("tr").find(".table_no").text();
-        const userFname = $(this).closest("tr").find(".table_fname").text();
-        const userPhone = $(this).closest("tr").find(".table_phone").text();
+        const activityRvNo = $(this).closest("tr").find(".table_no").text();
+        const activityName = $(this).closest("tr").find(".table_name").text();
+        const rvDate = $(this).closest("tr").find(".table_date").text();
+        const activityRvDate = $(this).closest("tr").find(".table_ar_date").text();
+        const activityRvPhone = $(this).closest("tr").find(".table_phone").text();
+        const usersName = $(this).closest("tr").find(".table_users_name").text();
 
-        $("#updateForm input[name='usersNo']").val(userNo);
-        $("#updateForm input[name='usersFname']").val(userFname);
-        $("#updateForm input[name='usersPhone']").val(userPhone);
+        $("#updateForm input[name='activityRvNo']").val(activityRvNo);
+        $("#updateForm input[name='activityName']").val(activityName);
+        $("#updateForm input[name='rvDate']").val(rvDate);
+        $("#updateForm input[name='activityRvDate']").val(activityRvDate);
+        $("#updateForm input[name='activityRvPhone']").val(activityRvPhone);
+        $("#updateForm input[name='usersName']").val(usersName);
     });
 
     // Modal form submission
@@ -149,7 +155,7 @@
         let formData = new FormData(this);
 
         $.ajax({
-            url: "/users/update/" + formData.get("usersNo"),
+            url: "/activityRv/update/" + formData.get("activityRvNo"),
             type: "post",
             processData: false,
             contentType: false,
@@ -164,20 +170,18 @@
         });
     });
 });
-
 </script>
 </head>
 <body>
 <!--사이드바-->
 <div id="sidebar"></div>
-
 <div class="MainBoard" id="mainContent">
 <div class="main_container">
 	<div class="list_top">
 		<div class="search_box">
 			<select name="select_box" id="cname">
-					<option value="usersId" >아이디</option>
-					<option value="usersName" >이름</option>		
+					<option value="activityName">액티비티이름</option>
+					<option value="usersName">회원이름</option>
 			</select>
 			<div class="search_bar">
 				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
@@ -191,24 +195,24 @@
 	<hr/>
 	<table class="rwd-table">
 		<tr>
-			<th class="table_id">회원코드</th>
-			<th class="table_id">아이디</th>
-			<th class="table_name">이름</th>
-			<th class="table_fname">프로필사진</th>
+			<th class="table_no">예약코드</th>
+			<th class="table_name">액티이름</th>
+			<th class="table_date">예약날짜</th>
+			<th class="table_ar_date">체험날짜</th>
 			<th class="table_phone">번호</th>
-			<th class="table_date">가입일</th>
+			<th class="table_users_name">예약자명</th>
 			<th class="table_update">관리</th>
 		</tr>
-		<tr th:each="u:${list}">
-			<td class="table_no" th:text="${u.usersNo}"></td>
-			<td class="table_id" th:text="${u.usersId}"></td>
-			<td class="table_name" th:text="${u.usersName}"></td>
-			<td class="table_fname" th:text="${u.usersFname}"></td>
-			<td class="table_phone" th:text="${u.usersPhone}"></td>
-			<td class="table_date" th:text="${#dates.format(u.usersDate, 'yyyy-MM-dd')}"></td>
+		<tr th:each="a:${list}">
+			<td class="table_no" th:text="${a.activityRvNo}"></td>
+			<td class="table_name" th:text="${a.activityName}"></td>
+			<td class="table_date" th:text="${a.rvDate}"></td>
+			<td class="table_ar_date" th:text="${a.activityRvDate}"></td>
+			<td class="table_phone" th:text="${a.activityRvPhone}"></td>
+			<td class="table_users_name" th:text="${a.usersName}"></td>
 			<td class="table_update">
 				<button class="update_list" onclick=openUpdateModal() >수정</button>
-				<button class="delete_list" th:attr="data-usersNo=${u.usersNo}">삭제</button>
+				<button class="delete_list" th:attr="data-activityRvNo=${a.activityRvNo}">삭제</button>
 			</td>
 		</tr>
 	</table>
@@ -217,7 +221,7 @@
 	<div class="pagination">
 	    <a href="#">«</a>
 	    <th:block th:each="i : ${#numbers.sequence(1, totalPage)}">
-        <a th:href="@{${'/admin/users/usersList/' + i + (cname != null ? '/' + cname + '/' + keyword : '')}}" th:text="${i}" th:class="${i == pageNUM ? 'active' : ''}"></a>
+        <a th:href="@{${'/admin/activity/activityRvList/' + i + (cname != null ? '/' + cname + '/' + keyword : '')}}" th:text="${i}" th:class="${i == pageNUM ? 'active' : ''}"></a>
    		</th:block>
 	    <a href="#">»</a>
 	</div>
@@ -225,14 +229,14 @@
 	  <div class="modal-content">
 	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
 	    <h2>사용자 추가</h2>
-	    <form id="insertForm" action="/users/insert" method="post" enctype="multipart/form-data">
-			아이디 : <input type="text" name="usersId"><br/>
-			이름 : <input type="text" name="usersName"><br/>
-			비밀번호 : <input type="text" name="usersPassword"><br/>
-			번호 : <input type="text" name="usersPhone"><br/>
-			첨부파일 : <input type="file" name="uploadFile"><br/>
-			<input type="submit" value="등록"/>
-			<input type="reset" value="다시입력"/>	
+	    <form id="insertForm" action="/activityRv/insert" method="post">		
+			액티비티이름 : <input type="text" name="activityName"><br/>
+			예약날짜 : <input type="text" name="rvDate"><br>
+			체험날짜 : <input type="text" name="activityRvDate"><br>
+			번호 : <input type="text" name="activityRvPhone"><br/>
+			예약자명 : <input type="text" name="usersName"><br/>
+			<input type="submit" value="등록">
+			<input type="reset" value="다시입력">		
 		</form>
 	  </div>
 	</div>
@@ -241,10 +245,13 @@
 	  <div class="modalUpdate-content">
 	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
 	    <h2>사용자 수정</h2>
-	    <form id="updateForm" action="/users/update/{usersNo}" method="post">
-			<input type="hidden" name="usersNo"/><br/>
-			프로필사진 : <input type="text" name="usersFname"><br/>
-			번호 : <input type="text" name="usersPhone"><br/> 
+	    <form id="updateForm" action="/activityRv/update/{activityRvNo}" method="post">
+			<input type="hidden" name="activityRvNo"/>
+			액티비티이름 : <input type="text" name="activityName"><br/>
+			예약날짜 : <input type="text" name="rvDate"><br>
+			체험날짜 : <input type="text" name="activityRvDate"><br>
+			번호 : <input type="text" name="activityRvPhone"><br/>
+			예약자명 : <input type="text" name="usersName"><br/>
 			<input type="submit" value="수정"/>
 			<input type="reset" value="다시입력"/>
 		</form>

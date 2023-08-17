@@ -38,8 +38,8 @@ $(document).ready(function() {
 				<li class="side_accomodation">
 					<a href="#">숙소관리</a>
 				</li>
-				<li class="side_activity">
-					<a href="#">액티비티관리</a>
+				<li class="side_activity"  onclick="navigateTo('/admin/activity/activityList/1')">
+					<a href="/admin/activity/activityList/1">액티비티관리</a>
 				</li>
 				<li class="side_cmmunity">
 					<a href="#">커뮤니티 관리</a>
@@ -48,7 +48,15 @@ $(document).ready(function() {
 					<a href="#">리뷰 관리</a>
 				</li>
 				<li class="side_reservation">
-					<a href="#">예약 내역</a>
+				    <a href="#" class="accordion">예약 내역</a>
+				    <ul class="panel" style="display: none;">
+				        <li onclick="navigateTo('/admin/activity/activityRvList/1')">
+							<a href="/admin/activity/activityRvList/1">숙소 예약</a>
+							</li>
+				        <li onclick="navigateTo('/admin/activity/activityRvList/1')">
+							<a href="/admin/activity/activityRvList/1">액티비티 예약</a>
+							</li>
+				    </ul>
 				</li>
 				<li class="side_addContent">
 				    <a href="#" class="accordion">컨텐츠 추가</a>
