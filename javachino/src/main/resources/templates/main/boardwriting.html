@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
   <link rel="icon" href="/favicon.ico" />
@@ -20,77 +20,101 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
   <!--여기까지-->
       <script>
+		  var url;
 
-document.addEventListener("DOMContentLoaded", function() {
-    var blogSelect = document.getElementById("blog");
-    var blogCategory = document.getElementById("blogCategory");
-    var boardCategory = document.getElementById("boardCategory");
+$(document).ready(function() {
+    var blogSelect = $("#blog");
+    var blogCategory = $("#blogCategory");
+    var boardCategory = $("#boardCategory");
 
-    blogSelect.addEventListener("change", function() {
-        if (blogSelect.checked) {
-            blogCategory.style.display = "flex";
-            boardCategory.style.display = "none";
+    blogSelect.on("change", function() {
+        if (blogSelect.prop("checked")) {
+            blogCategory.css("display", "flex");
+            boardCategory.css("display", "none");
         }
     });
 
-    var boardSelect = document.getElementById("board");
+    var boardSelect = $("#board");
 
-    boardSelect.addEventListener("change", function() {
-        if (boardSelect.checked) {
-            blogCategory.style.display = "none";
-            boardCategory.style.display = "flex";
+    boardSelect.on("change", function() {
+        if (boardSelect.prop("checked")) {
+            blogCategory.css("display", "none");
+            boardCategory.css("display", "flex");
         }
     });
-});	  
-        //파일이 있을 시 
-   var url;
-   //summernote 내용 입력하기
-    $(document).ready(function() {
-   //여기 아래 부분
-   $('#summernote').summernote({
-         height: 500,                 // 에디터 높이
-         minHeight: 500,             // 최소 높이
-         maxHeight: null,             // 최대 높이
-         focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-         lang: "ko-KR",               // 한글 설정
-         placeholder: '최대 2048자까지 쓸 수 있습니다',   //placeholder 설정
-         callbacks: {   //여기 부분이 이미지를 첨부하는 부분
-            onImageUpload : function(files) {
-               console.log(files)
-               uploadSummernoteImageFile(files[0],this);
+    
+        $("#summernote").summernote({
+        height: 500,
+        minHeight: 500,
+        maxHeight: null,
+        focus: true,
+        lang: "ko-KR",
+        placeholder: '최대 2048자까지 쓸 수 있습니다',
+        callbacks: {
+            onImageUpload: function(files) {
+                console.log(files);
+                uploadSummernoteImageFile(files[0], this);
             }
+        }
+    });
+    
+    
+    	 $(document).on("click", ".dropdown-item", function() {
+        changeButtonText(this);
+    });
+    
+});
 
-         }
-      });
-      
-   });
 
 
-   function uploadSummernoteImageFile(file, editor) {
-	  console.log("upload함수는 오나.."+file+","+editor)
-      data = new FormData();
-      data.append("file", file);
-      $.ajax({
-         data : data,
-         type : "POST",
-         url : "/uploadSummernoteImageFile",
-         contentType : false,
-         processData : false,
-         success : function(response) {
-			 console.log("ajax 실행됐지?"); // 서버 응답 확인
-			 console.log(response); // 서버 응답 확인
-            // JSON 문자열을 JSON 객체로 파싱
-               var jsonResponse = JSON.parse(response);
-               url=jsonResponse.url;
-               console.log(url);
-               // url에 접근하여 이미지 삽입
-               $(editor).summernote('insertImage', jsonResponse.url);
-            
-         }
-      });
-   }
 
-   
+function uploadSummernoteImageFile(file, editor) {
+    console.log("upload 함수 호출: " + file + ", " + editor);
+    var data = new FormData();  // 누락된 부분입니다.
+    data.append("file", file);
+    $.ajax({
+        data: data,
+        type: "POST",
+        url: "/uploadSummernoteImageFile",
+        contentType: false,
+        processData: false,
+        success: function(response) {
+            console.log("ajax 실행됐지?");
+            console.log(response);
+            var jsonResponse = JSON.parse(response);
+            url = jsonResponse.url;
+            console.log(url);
+            $(editor).summernote('insertImage', jsonResponse.url);
+        }
+    });
+}
+
+function changeButtonText(linkElement) {
+	 console.log("클릭됨");
+    var selectedRv = $(linkElement).text();
+    var rvNo = $(linkElement).data('rvno');
+    var no = $(linkElement).data('no');
+    var type = $(linkElement).data('type');
+    console.log("rvno" + rvNo);
+    console.log("no" + no);
+    console.log("type" + type);
+    $('#rv').text(selectedRv);
+    if(type=='activity'){
+		$('#activityRv').val(rvNo);
+		$('#accomodationRv').val('0');
+		console.log("activityRv"+$('#activityRv').val());
+		console.log("accomoRvNo"+$('#accomodationRv').val());
+	}else{
+		$('#accomodationRv').val(rvNo);
+		$('#activityRv').val('0');
+		console.log("accomoRvNo"+$('#accomodationRv').val());
+		console.log("activityRv"+$('#activityRv').val());
+	}
+}
+
+
+  
+
     </script>
 </head>
 <body>
@@ -209,15 +233,17 @@ document.addEventListener("DOMContentLoaded", function() {
         <div class="item-8A5">
           <div class="label--55K">예약내역</div>
 
-			  
-			    <button type="button" class="divselectcontrol-Prh" data-bs-toggle="dropdown">
+			    <button type="button" class="divselectcontrol-Prh" data-bs-toggle="dropdown" id="rv">
 			      예약 내역을 선택해주세요
 			    </button>
-			    <ul class="dropdown-menu" style="width: 48.85rem;	">
-			      <li><a class="dropdown-item" href="#">Link 1</a></li>
-			      <li><a class="dropdown-item" href="#">Link 2</a></li>
-			      <li><a class="dropdown-item" href="#">Link 3</a></li>
+			    <ul class="dropdown-menu" style="width: 48.85rem;" th:if="${acRv != null && accomRv != null} ">
+			      <li th:each="ac:${acRv}"><a class="dropdown-item" href="#" th:text="${ac.activity.activityName}" th:attr="data-rvno=${ac.activityRvNo}, data-no=${ac.activity.activityNo}, data-type='activity'" onclick="changeButtonText(this)">
+					  </a></li>
+			      <li th:each="accomo:${accomRv}"><a class="dropdown-item" href="#" th:text="${accomo.accomodation.accomodationName}" th:attr="data-rvno=${accomo.accomodationRVNo}, data-no=${accomo.accomodation.accomodationNo},data-type='accomodation'" onclick="changeButtonText(this)">
+					  </a></li>
 			    </ul>
+			    <input type="hidden" value="" id="activityRv" name="activityRvNo">
+			    <input type="hidden" value="" id="accomodationRv" name="accomodationRvNo">
 
         </div>
         <div class="item-CZF">

@@ -22,14 +22,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.entity.Commentary;
-import com.example.demo.entity.Community;
-import com.example.demo.entity.Users;
 import com.example.demo.community.repository.CommunityRepository;
+import com.example.demo.community.service.MainAccomodationRVService;
+import com.example.demo.community.service.MainAccomodationService;
+import com.example.demo.community.service.MainActivityRvService;
 import com.example.demo.community.service.CommentaryService;
 import com.example.demo.community.service.CommunityLikeService;
 import com.example.demo.community.service.CommunityService;
 import com.example.demo.community.service.MainUsersService;
+import com.example.demo.entity.AccomodationRV;
+import com.example.demo.entity.ActivityRv;
+import com.example.demo.entity.Commentary;
+import com.example.demo.entity.Community;
+import com.example.demo.entity.Users;
+import com.example.demo.entity.View_AccomodationList;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
@@ -53,6 +59,15 @@ public class CommunityController {
 	
 	@Autowired
 	private CommunityLikeService communityLikeService;
+	
+	@Autowired
+	private MainActivityRvService activityRvService;
+	
+	@Autowired
+	private MainAccomodationRVService accomodationRVService;
+	
+	@Autowired
+	private MainAccomodationService accomodationService;
 	
 	
 	
@@ -84,10 +99,26 @@ public class CommunityController {
 	    }
 	    
 
+	    List<Community> bestList = cs.selectThird();
+	    
+	    for(Community community : bestList ) {
+	    	if(community.getAccomodationRv()!=null) {
+	    	View_AccomodationList view_AccomodationList =accomodationService.findByAccomodationNo(community.getAccomodationRv().getAccomodationRVNo());
+	    	model.addAttribute("view",view_AccomodationList);
+	    	}
+	    	
+	    }
+	    
 	    model.addAttribute("best",cs.selectThird());
+	    
+	    
 	    
 	    model.addAttribute("list", resultList);
 	    model.addAttribute("totalPage", totalPage);
+	  //로그인유저임의로넣기
+	  		Users user = us.getUserById("user1@example.com");
+	  		model.addAttribute("u",user);
+	  		System.out.println("usersNo"+user.getUsersNo());
 
 	    return "/main/board2";
 	}
@@ -136,10 +167,16 @@ public class CommunityController {
 //		return "main/board";
 //	}
 	
-	@GetMapping("/main/boardwriting")
-	public void list2() {
-		
+	@RequestMapping("/main/boardwriting/{usersNo}")
+	public String list2(Model model, @PathVariable("usersNo") Integer usersNo) {
+		System.out.println("userno작성"+usersNo);
+		System.out.println("dddd"+activityRvService.findAllByUsersNo(usersNo));
+		model.addAttribute("acRv",activityRvService.findAllByUsersNo(usersNo));
+		model.addAttribute("accomRv",accomodationRVService.findAllByUsersNo(usersNo));
+		System.out.println("accomo"+accomodationRVService.findAllByUsersNo(usersNo));
+		return "/main/boardwriting";
 	}
+	
 	@GetMapping("/main/communityDetail")
 	public void list3() {
 		
@@ -148,7 +185,10 @@ public class CommunityController {
 	@GetMapping("/main/communityDetail2")
 	public void communityDetail(Model model, @RequestParam("communityNo") Integer communityNo) {
 		System.out.println("컨트롤러 디테일 조회하는거 왔다!!!");
-		model.addAttribute("c",cs.findById(communityNo));
+		cs.updateHit(communityNo);
+		
+		Community community = cs.findById(communityNo);
+		model.addAttribute("c",community);
 		//로그인유저임의로넣기
 		Users user = us.getUserById("user1@example.com");
 		model.addAttribute("u",user);
@@ -160,6 +200,12 @@ public class CommunityController {
 		
 		model.addAttribute("list",commentaryService.findAllByCommunityNo(communityNo));
 		
+		if(community.getAccomodationRv()!=null) {
+			System.out.println("숙소예약추가한게시물!");
+	    	View_AccomodationList view_AccomodationList =accomodationService.findByAccomodationNo(communityNo);
+	    	model.addAttribute("view",view_AccomodationList);
+		}
+		
 	}
 //
 //	  @RequestMapping(value="uploadSummernoteImageFile" , method = RequestMethod.POST)
@@ -170,12 +216,29 @@ public class CommunityController {
 //			}
 	  
 	  @PostMapping("/save-content")
-	    public String saveContent(Community c) {
+	    public String saveContent(Community c, @RequestParam("activityRvNo") Integer activityRvNo, @RequestParam("accomodationRvNo") Integer accomodationRvNo) {
+		  System.out.println("인설트 컨트롤러에서 activityNo"+activityRvNo);
+		  System.out.println("인설트 컨트롤러에서 accomodationRvNo"+accomodationRvNo);
 		  Users user = us.getUserById("user1@example.com");
+		  System.out.println("users+"+user);
 		  c.setCommunityNo(cs.getNextNo());
 		  c.setUsers(user);
-		  System.out.println("users+"+user);
-	        cs.saveCommunity(c);
+		  
+		  
+		  if(activityRvNo== 0 && accomodationRvNo != null) {
+			//  System.out.println("accom"+c.getAccomodationRv().getAccomodationRVNo());
+			  AccomodationRV accomodationRV = accomodationRVService.findByAccomodationRVNo(accomodationRvNo);
+			  c.setAccomodationRv(accomodationRV);
+			  cs.insertWithAccom(c);
+		  }else if(activityRvNo != null && accomodationRvNo == 0){
+			//  System.out.println("activity"+c.getActivityRv().getActivityRvNo());
+			  ActivityRv activityRv = activityRvService.findByActivityRvNo(activityRvNo);
+			  c.setActivityRv(activityRv);
+			  cs.insertWithActivity(c);
+		  }else{
+			  System.out.println("예약 추가 안함");
+			  cs.saveCommunity(c);
+		  }
 	        return "redirect:/main/board/1"; // 저장 후 폼 페이지로 리다이렉트
 	    }
 	  
@@ -199,7 +262,7 @@ public class CommunityController {
 	  public String deleteCommunity(@RequestParam("communityNo") Integer communityNo) {
 		  System.out.println("삭제하는 컨트ㅗㄹ러 왔다");
 		  cs.deleteById(communityNo);
-		  return "redirect:/main/board";
+		  return "redirect:/main/board/1";
 	  }
 	  
 	//게시글 작성 시 사진이 있으면 폴더에 저장
@@ -208,7 +271,7 @@ public class CommunityController {
 	   public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile) {
 	      JsonObject jsonObject = new JsonObject();
 	      
-	      String fileRoot = "C:\\images\\community\\";   //저장될 외부 파일 경로
+	      String fileRoot = "C:\\images\\main\\";   //저장될 외부 파일 경로
 	      String originalFileName = multipartFile.getOriginalFilename();   //오리지날 파일명
 	      String extension = originalFileName.substring(originalFileName.lastIndexOf("."));   //파일 확장자
 	            
@@ -220,7 +283,7 @@ public class CommunityController {
 	      try {
 	         InputStream fileStream = multipartFile.getInputStream();
 	         FileUtils.copyInputStreamToFile(fileStream, targetFile);   //파일 저장
-	         jsonResponse.put("url", "/images/community/" + savedFileName);
+	         jsonResponse.put("url", "/images/main/" + savedFileName);
 	         jsonResponse.put("responseCode", "success");
 
 	      } catch (IOException e) {

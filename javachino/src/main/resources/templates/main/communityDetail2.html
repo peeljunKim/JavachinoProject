@@ -163,17 +163,32 @@ $(document).ready(function() {
           </div>
         </div>
       </div>
-      <div class="divboxprodinfo-dmK" th:if="${c.activityRv != null && c.accomodationRv != null}">
-        <div class="c588e936f0127c1002d95ffc681d5e5ctn410x280jpg-MSR">
-        </div>
+      <!--예약 선택했으면-->
+      <div style="width: 100%; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"  th:if="${c.accomodationRv != null}">다녀오신 상품</div>
+      <div class="divboxprodinfo-dmK" th:if="${c.accomodationRv != null}">
+        <img class="c588e936f0127c1002d95ffc681d5e5ctn410x280jpg-MSR" th:attr="src=@{/images/accomodation/__${view.accomodationFileFname1}__}">
         <div class="auto-group-acuf-Q9o">
           <div class="spanicobrdblue-vP3">
             <div class="spanh2d-121b737c-Dd3">
-              <div class="item--YvD">해외패키지</div>
+              <div class="item--YvD">Type > Accomodation</div>
             </div>
           </div>
-          <div class="spanlinkellipsis-sr1">[CJ온스타일+] 백두산/서파+북파 4일 #가장가까운공항 #두번보는천지</div>
+          <div class="spanlinkellipsis-sr1" th:text="${c.accomodationRv.accomodation.accomodationName}"></div>
         </div>
+        <button style="width: 8rem; height: 2rem; border:  none; color: #666d75; background-color: rgba(157, 201, 238, 0.4499999881); margin-right: 1rem; font-weight: 600; text-decoration: none;"><a th:href="@{'/accomodation/' + ${c.accomodationRv.accomodation.accomodationNo}}" style="text-decoration: none; color: #666d75;">상품 정보 보기</a></button>
+      </div>
+      <div style="width: 100%; font-size: 1.1rem; font-weight: 600; margin-bottom: 1rem;"  th:if="${c.activityRv != null}">다녀오신 상품</div>
+      <div class="divboxprodinfo-dmK" th:if="${c.activityRv != null }">
+        <img class="c588e936f0127c1002d95ffc681d5e5ctn410x280jpg-MSR" th:attr="src=@{/images/activity/__${c.activityRv.activity.activityFname1}__}"> 
+        <div class="auto-group-acuf-Q9o">
+          <div class="spanicobrdblue-vP3">
+            <div class="spanh2d-121b737c-Dd3">
+              <div class="item--YvD">Type > Activity</div>
+            </div>
+          </div>
+          <div class="spanlinkellipsis-sr1" th:text="${c.activityRv.activity.activityName}"></div>
+        </div>
+        <button style="width: 8rem; height: 2rem; border:  none; color: #666d75; background-color: rgba(157, 201, 238, 0.4499999881); margin-right: 1rem; font-weight: 600; text-decoration: none;"><a th:href="@{'/activity/' + ${c.activityRv.activity.activityNo}}" style="text-decoration: none; color: #666d75;">상품 정보 보기</a></button>
       </div>
       <!--
       <div class="auto-group-3fm3-atq">
@@ -241,7 +256,7 @@ $(document).ready(function() {
         </form>
       </div>
     </div>
-    <a class="button-KJZ" href="/main/board">목록</a>
+    <div style=" width: 100%; display: flex; justify-content: center;"><a class="button-KJZ" href="/main/board/1">목록</a></div>
   </div>
 </div>
 </body>

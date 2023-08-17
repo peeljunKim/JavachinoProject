@@ -12,9 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.community.repository.CommunityRepository;
 import com.example.demo.entity.Community;
 import com.example.demo.entity.Users;
-import com.example.demo.community.repository.CommunityRepository;
 import com.google.gson.JsonObject;
 
 import lombok.Setter;
@@ -72,19 +72,48 @@ public class CommunityService {
 				}	
 			}else {
 				switch(cname) {
-				case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityNo(start,end,"%"+keyword+"%");break;
-				case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityNo(start,end,"%"+keyword+"%");break;
+				case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityHit(start,end,"%"+keyword+"%");break;
+				case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
 				}
 			}
+		//검색이 없을때
 		}else {
 			if(sortBy.equals("latest")) {
 				list = communityRepository.selectAllByOrderByCommunityDate(start, end);
 			}else {
-				list = communityRepository.selectAllByOrderByCommunityNo(start, end);
+				list = communityRepository.selectAllByOrderByCommunityHit(start, end);
 			}
 		}
 		return list;
 	}
+	
+	//블로그일때
+	public List<Community> findBlogy(int start, int end, String cname, String keyword, String sortBy){
+		List<Community> list = null;
+		if(keyword != null && !keyword.equals("")) {		
+			if(sortBy.equals("latest")) {
+				switch(cname) {
+					case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+					
+					case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+				}	
+			}else {
+				switch(cname) {
+				case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+				case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
+				}
+			}
+		//검색이 없을때
+		}else {
+			if(sortBy.equals("latest")) {
+				list = communityRepository.selectAllBlogByOrderByCommunityDate(start, end);
+			}else {
+				list = communityRepository.selectAllBlogByOrderByCommunityHit(start, end);
+			}
+		}
+		return list;
+	}
+	
 	
 	//페이징..(최신순으로)
 	public List<Community> selectAllByOrderByCommunityDate(int start, int end){
@@ -93,7 +122,7 @@ public class CommunityService {
 	
 	//페이징..(추천순으로)
 		public List<Community> selectAllByOrderByCommunityNo(int start, int end){
-			return communityRepository.selectAllByOrderByCommunityNo(start, end);
+			return communityRepository.selectAllByOrderByCommunityHit(start, end);
 		}
 	
 	//최신순으로 정렬
@@ -144,6 +173,18 @@ public class CommunityService {
 		
 	}
 	
+	//커뮤니티 등록(숙소도_)
+	public void insertWithAccom(Community c) {
+		communityRepository.insertWithAccom(c);
+		
+	}
+	
+	//커뮤니티 등록(숙소도_)
+		public void insertWithActivity(Community c) {
+			communityRepository.insertWithActivity(c);
+			
+		}
+	
 	//커뮤니티 상세보기
 	public Community findById(int communityNo) {
 		Community c = communityRepository.findById(communityNo);
@@ -168,6 +209,11 @@ public class CommunityService {
 	//1d위
 	public Community selectFirst() {
 		return communityRepository.selectFirst();
+	}
+	
+	//조회수 업데이트
+	public void updateHit(int communityNo) {
+		communityRepository.updateHit(communityNo);
 	}
 	
 }

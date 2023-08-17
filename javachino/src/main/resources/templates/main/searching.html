@@ -113,29 +113,40 @@
     <div class="frame-3-Vvh">
       <div class="divcityverticals-modulecontainer-bndt5-EtH">
         <button class="divcityverticalitem-modulecontainer-bczt7-x3b" id="accomoBtn">
-          <img class="icon-accomodation-gEV" src="/assets/icon-accomodation-N5F.png"/>
+          <img class="icon-accomodation-gEV" src="/images/main/icon-accomodation.png"/>
           <div class="item--zW5">숙소</div>
         </button>
         <button class="divcityverticalitem-modulecontainer-bczt7-rYH" id="activityBtn">
-          <img class="emoji-bikini-nRw" src="/assets/emoji-bikini-eh7.png"/>
+          <img class="emoji-bikini-nRw" src="/images/main/emoji-bikini-eh7.png"/>
           <div class="item--hJ1">액티비티</div>
         </button>
       </div>
     </div>
-    <div class="auto-group-qhxv-J2u" >
-      <div>
-        <div id="listDiv">
+    <!--검색된 부분-->
+    <div class="auto-group-qhxv-J2u" style="
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+">
+      <div style="
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+">
+        <div id="listDiv" style="
+    display: flex;
+    flex-wrap: wrap; justify-content: center;
+">
             <div class="group-27K" th:each="a, loop: ${list}" th:if="${category =='activity'}">
               <div class="divc14dgvke-Zsw">
-                <div class="divc14whb16-hDT">
+                <img class="divc14whb16-hDT"  th:attr="src=@{/images/activity/__${a.activityFname1}__}">
                   <div class="divo47luuh-TCd">
-                    <img class="button--mUD" src="./assets/button--LU1.png"/>
-                    <img class="img-6-1--17f" src="./assets/img-6-1--Dp5.png"/>
+                    <img class="button--mUD" src="./images/main/button--LU1.png"/>
+                    <img class="img-6-1--17f" src="/images/main/img-6-1--Dp5.png"/>
                   </div>
                   <div class="divc14whb16-hDT-bg">
 					  
                   </div>
-                </div>
               </div>
               <div class="divg1qv1ctd-v89">
                 <div class="divtitle898622005542393497-frR" th:text="${a.activityName}"></div>
@@ -149,16 +160,15 @@
                <div th:if="${loop.index % 4 == 3}" style="position: relative; width: 100%;"></div>
             </div>
             
-            <div class="group-27K" th:each="a: ${list}" th:if="${category =='accomodation'}">
+            <div class="group-27K" th:each="a, loop: ${list}" th:if="${category =='accomodation'}">
               <div class="divc14dgvke-Zsw">
-                <div class="divc14whb16-hDT">
+                <img class="divc14whb16-hDT" th:attr="src=@{/images/accomodation/__${view.accomodationFileFname1}__}">
                   <div class="divo47luuh-TCd">
-                    <img class="button--mUD" src="./assets/button--LU1.png"/>
-                    <img class="img-6-1--17f" src="./assets/img-6-1--Dp5.png"/>
+                    <img class="button--mUD" src="/images/main/button--LU1.png"/>
+                    <img class="img-6-1--17f" src="/images/main/img-6-1--Dp5.png"/>
                   </div>
                   <div class="divc14whb16-hDT-bg">
                   </div>
-                </div>
               </div>
               <div class="divg1qv1ctd-v89">
                 <div class="divtitle898622005542393497-frR" th:text="${a.accomodationName}"></div>
@@ -169,6 +179,7 @@
                   </div>
                 </div>
               </div>
+               <div th:if="${loop.index % 4 == 3}" style="position: relative; width: 100%;"></div>
             
             
             

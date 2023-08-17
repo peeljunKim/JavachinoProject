@@ -99,5 +99,11 @@ public class Users {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	public MultipartFile getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(MultipartFile uploadFile) {
+		this.uploadFile = uploadFile;
+	}
     
 } 

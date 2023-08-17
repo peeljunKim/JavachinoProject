@@ -13,7 +13,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     //로 접속하면 C:/summernote_image/1234.jpg 파일을 불러온다.
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/community/**")
-                .addResourceLocations("file:/C:/images/community/");
+        registry.addResourceHandler("/images/main/**")
+                .addResourceLocations("file:/C:/images/main/");
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Community;
@@ -31,9 +32,9 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 		@Query(value="select * from "
 				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
 				+ "from (select * from community "
-				+ "order by community_no desc)) a "
+				+ "order by community_hit desc)) a "
 				+ "where a.n between ?1 and ?2", nativeQuery = true)
-		public List<Community> selectAllByOrderByCommunityNo(int start, int end);
+		public List<Community> selectAllByOrderByCommunityHit(int start, int end);
 	
 	//제목으로 검색
 	@Query(value="select * from "
@@ -63,9 +64,9 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value="select * from "
 			+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
 			+ "from (select * from community where community_title like ?3 "
-			+ "order by community_no desc)) a "
+			+ "order by community_hit desc)) a "
 			+ "where a.n between ?1 and ?2", nativeQuery = true)
-	public List<Community> findByCommunityTitleOrderByCommunityNo(int start, int end, String communityTitle);
+	public List<Community> findByCommunityTitleOrderByCommunityHit(int start, int end, String communityTitle);
 
 	//지역으로 검색 + 최신순 + 페이징
 	@Query(value="select * from "
@@ -79,10 +80,75 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value="select * from "
 			+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
 			+ "from (select * from community where community_addr like ?3 "
-			+ "order by community_no desc)) a "
+			+ "order by community_hit desc)) a "
 			+ "where a.n between ?1 and ?2", nativeQuery = true)
-	public List<Community> findByCommunityAddrOrderByCommunityNo(int start, int end, String communityTitle);
+	public List<Community> findByCommunityAddrOrderByCommunityHit(int start, int end, String communityTitle);
 
+	
+	//제목으로 검색(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_title like ?3 "
+				+ "order by community_no desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findByCommunityTitleBlog(int start, int end, String communityTitle);
+		
+		//지역으로 검색(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_addr like ?3 "
+				+ "order by community_no desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findByCommunityAddrBlog(int start, int end, String communityAddr);
+	
+		//제목으로 검색 + 최신순 + 페이징(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_title like ?3 "
+				+ "order by community_date desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findBlogByCommunityTitleOrderByCommunityDate(int start, int end, String communityTitle);
+		
+		//제목으로 검색 + 추천순 + 페이징(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_title like ?3 "
+				+ "order by community_hit desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findBlogyCommunityTitleOrderByCommunityHit(int start, int end, String communityTitle);
+
+		//지역으로 검색 + 최신순 + 페이징(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_addr like ?3 "
+				+ "order by community_date desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findBlogByCommunityAddrOrderByCommunityDate(int start, int end, String communityTitle);
+
+		//지역으로 검색 + 추천순 + 페이징(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community where community_select = 0 and community_addr like ?3 "
+				+ "order by community_hit desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> findBlogByCommunityAddrOrderByCommunityHit(int start, int end, String communityTitle);
+		
+		//게시글 페이징...(최신순)(blog)
+		@Query(value="select * from "
+				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+				+ "from (select * from community "
+				+ "order by community_date desc)) a "
+				+ "where a.n between ?1 and ?2", nativeQuery = true)
+		public List<Community> selectAllBlogByOrderByCommunityDate(int start, int end);
+		
+		//게시글 페이징...(추천순)(blog)
+			@Query(value="select * from "
+					+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
+					+ "from (select * from community "
+					+ "order by community_hit desc)) a "
+					+ "where a.n between ?1 and ?2", nativeQuery = true)
+			public List<Community> selectAllBlogByOrderByCommunityHit(int start, int end);
+		
 	//3위
 	@Query(value="select * from "
 			+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
@@ -92,11 +158,7 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	public List<Community> selectThird();
 
 	//1위
-		@Query(value="select * from "
-				+ " (select rownum n, community_no, community_category, community_select, community_date, community_title, users_no,accomodation_rv_no,activity_rv_no,community_addr,community_content,community_hit "
-				+ "from (select * from community "
-				+ "order by community_date desc)) a "
-				+ "where a.n = 1", nativeQuery = true)
+		@Query(value="select * from community where community_no = 5", nativeQuery = true)
 		public Community selectFirst();
 	
 	//게시글 다음 번호
@@ -108,6 +170,18 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value = "insert into Community (community_no, community_date, community_title, community_addr, community_content, community_category, community_select, community_hit, users_no) values (:#{#c.communityNo}, sysdate, :#{#c.communityTitle}, :#{#c.communityAddr}, :#{#c.communityContent}, :#{#c.communityCategory.ordinal()}, :#{#c.communitySelect.ordinal()}, 0, :#{#c.users.usersNo})", nativeQuery = true)
 	@Transactional
 	public void insert(Community c);
+
+	//숙소 예약있을때 게시글 등록
+	@Modifying
+	@Query(value = "insert into Community (community_no, community_date, community_title, community_addr, community_content, community_category, community_select, community_hit, users_no,  accomodation_rv_no) values (:#{#c.communityNo}, sysdate, :#{#c.communityTitle}, :#{#c.communityAddr}, :#{#c.communityContent}, :#{#c.communityCategory.ordinal()}, :#{#c.communitySelect.ordinal()}, 0, :#{#c.users.usersNo}, :#{#c.accomodationRv.accomodationRVNo})", nativeQuery = true)
+	@Transactional
+	public void insertWithAccom(Community c);
+	
+	//액티비티 예약있을때 게시글 등록
+	@Modifying
+	@Query(value = "insert into Community (community_no, community_date, community_title, community_addr, community_content, community_category, community_select, community_hit, users_no, activity_rv_no) values (:#{#c.communityNo}, sysdate, :#{#c.communityTitle}, :#{#c.communityAddr}, :#{#c.communityContent}, :#{#c.communityCategory.ordinal()}, :#{#c.communitySelect.ordinal()}, 0, :#{#c.users.usersNo}, :#{#c.activityRv.activityRvNo})", nativeQuery = true)
+	@Transactional
+	public void insertWithActivity(Community c);
 
 	//게시글 상세
 	public Community findById(int CommunityNo);
@@ -125,4 +199,10 @@ public interface CommunityRepository extends JpaRepository<Community, Integer> {
 	@Query(value ="select count(*) from Community c where community_addr like ?1", nativeQuery = true)
 	public int countByCommunityAddr(String keyword);
 	
+	//게시글 조회수 올리기
+	@Modifying
+	@Query(value = "update Community c set c.community_hit = c.community_hit+1 where c.community_no=:communityNo", nativeQuery = true)
+	@Transactional
+	public void updateHit(@Param("communityNo") int communityNo);
+
 }

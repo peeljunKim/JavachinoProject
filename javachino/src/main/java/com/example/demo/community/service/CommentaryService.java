@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.entity.Commentary;
 import com.example.demo.community.repository.CommentaryRepository;
+import com.example.demo.entity.Commentary;
 
 @Service
 public class CommentaryService {

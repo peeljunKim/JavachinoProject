@@ -167,7 +167,7 @@
                 <div class="p-1 flex-lg-fill">
                     <div class="header-logo-search" >
                          <a class="navbar-brand" href="#">
-                            <img src="/images/activity/assets/javachino_logo.png" id="logoImg" >
+                            <img src="./assets/javachino_logo.png" id="logoImg" >
                         </a>
                         <div class="searchBox">
                             <form class="search" >
@@ -185,19 +185,19 @@
                         <div class="row g-0">
                             <diV class="col">
                                 <a class="nav-link" href="#">
-                                    <img src="/images/activity/assets/accomodation.png"  id="accomodationImg"> 
+                                    <img src="./assets/accomodation.png"  id="accomodationImg"> 
                                     <span id="menuText"> 숙박</span>
                                 </a>
                             </diV>
                             <diV class="col">
                                 <a class="nav-link" href="#">
-                                    <img src="/images/activity/assets/bikini.png" id="bikiniImg">
+                                    <img src="./assets/bikini.png" id="bikiniImg">
                                     <span id="menuText"> 액티비티</span>
                                 </a>
                             </diV>
                             <diV class="col">
                                 <a class="nav-link" href="#">
-                                    <img src="/images/activity/assets/user-group.png" id="user-groupImg">
+                                    <img src="./assets/user-group.png" id="user-groupImg">
                                     <span id="menuText"> 커뮤니티</span>
                                 </a>
                             </diV>
@@ -235,8 +235,9 @@
               <div class="item-PJy" th:each="best:${best}" th:onclick="'selectDetail(' + ${best.communityNo} + ')'">
                 <div class="link-is3">
                   <div class="spantrvcountry-3uK">
-                    <img class="png-nM7" src="/images/community/ggg.png">
-                    </img>
+                    <img class="png-nM7" th:if="${best.activityRv == null && best.accomodationRv == null}" src="/images/main/png.png">
+                    <img class="png-nM7" th:if="${best.activityRv != null && best.accomodationRv == null}" th:attr="src=@{/images/activity/__${best.activityRv.activity.activityFname1}__}">
+                    <img class="png-nM7" th:if="${best.activityRv == null && best.accomodationRv != null}" th:attr="src=@{/images/accomodation/__${view.accomodationFileFname1}__}">
                   </div>
                   <div class="heading-5-2oB" th:text="${best.communityTitle}">
                   </div>
@@ -287,24 +288,25 @@
     </div>-->
   </div>
 </div>
-    <!--전체 부분-->
-    <div class="tab-content">
-    <div class="container tab-pane active" id="home">
-      <div class="form-vu7">
+  <div class="form-vu7">
 		
-        <button class="button-VDT" data-bs-toggle="dropdown" id="cname">전체</button>
+        <button class="button-VDT" data-bs-toggle="dropdown" id="cname">검색조건을 선택하세요</button>
         <ul class="dropdown-menu">
-			      <li><a class="dropdown-item select-filter" href="#" th:value="communityTitle">제목</a></li>
-			      <li><a class="dropdown-item select-filter" href="#" value="communityAddr">지역</a></li>
+			      <li><a class="dropdown-item select-filter" href="#">제목</a></li>
+			      <li><a class="dropdown-item select-filter" href="#">지역</a></li>
 			    </ul>
         <input type="search" class="input-6yw" id="keyword" name="keyword">
         <input type="submit" class="button-WXs" id="btnSearch" value="검색"></input>
       </div>
       <div class="ptblcount-Dx5">
         <div class="item-28922-aGq">
-        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
+        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">조회순</buttonid></div>
       </div>
     </div>
+    <!--전체 부분-->
+    <div class="tab-content">
+    <div class="container tab-pane active" id="home">
+    
     <!-- 테이블 -->
     <div class="container mt-3" >       
   <table class="table table-hover" id="listTable">
@@ -314,8 +316,7 @@
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
-        <th>댓글수</th>
-        <th>좋아요수</th>
+        <th>조회수</th>
       </tr>
     </thead>
     <tbody>
@@ -326,13 +327,12 @@
         <td th:text="${b.users.usersName}"></td>
         <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
         <td th:text="${b.communityHit}"></td>
-        <td th:text="${b.communityNo}"></td>
       </tr>
     </tbody>
   </table>
 </div>
 <div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
-      <a class="button-eem" href="/main/boardwriting">등록</a>
+      <a class="button-eem" th:href="@{'/main/boardwriting/' + ${u.usersNo}}">등록</a>
       </div>
     <!-- 페이징 -->
     <div class="auto-group-kmj1-vUZ" >
@@ -350,31 +350,9 @@
 </div>
 
     <!--블로그 부분-->
-    <div class="tab-content" id="listTable">
+    <div class="tab-content">
     <div class="container tab-pane fade" id="blog">
-      <div class="form-vu7">
-		  <button class="button-qWH" data-bs-toggle="dropdown">
-			카테고리 선택          
-          </button>
-          <ul class="dropdown-menu">
-			      <li><a class="dropdown-item" href="#">내돈내산</a></li>
-			      <li><a class="dropdown-item" href="#">추천해요</a></li>
-			    </ul>
-        <div class="button-fER">지역 전체          <div class="button-fER-bg">
-          </div>
-	</div>
-        <div class="button-VDT">전체          <div class="button-VDT-bg">
-          </div>
-</div>
-        <div class="input-6yw">
-        </div>
-        <div class="button-WXs">검색</div>
-      </div>
-      <div class="ptblcount-Dx5">
-        <div class="item-28922-aGq">
-        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
-      </div>
-    </div>
+
     <!-- 테이블 -->
     <div class="container mt-3">       
   <table class="table table-hover" id="listTable">
@@ -384,8 +362,7 @@
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
-        <th>댓글수</th>
-        <th>좋아요수</th>
+        <th>조회수</th>
       </tr>
     </thead>
     <tbody>
@@ -397,13 +374,12 @@
         <td th:text="${b.users.usersName}"></td>
         <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
         <td th:text="${b.communityHit}"></td>
-        <td>1</td>
       </tr>
     </tbody>
   </table>
 </div>
 <div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
-      <a class="button-eem" href="/main/boardwriting">등록</a>
+      <a class="button-eem" th:href="@{'/main/boardwriting/' + ${u.usersNo}}">등록</a>
       </div>
     <!-- 페이징 -->
     <div class="auto-group-kmj1-vUZ">
@@ -419,30 +395,9 @@
 </div>
 
 <!--소통해요 부분-->
-    <div class="tab-content" id="listTable">
+    <div class="tab-content">
     <div class="container tab-pane fade" id="board">
-      <div class="form-vu7">
-		<button class="button-qWH" data-bs-toggle="dropdown">
-			분류 선택          
-          </button>
-          <ul class="dropdown-menu">
-			      <li><a class="dropdown-item" href="#">블로그</a></li>
-			      <li><a class="dropdown-item" href="#">소통해요</a></li>
-			    </ul>
-        <button class="button-VDT" data-bs-toggle="dropdown">전체</button>
-        <ul class="dropdown-menu">
-			      <li><a class="dropdown-item" href="#">제목</a></li>
-			      <li><a class="dropdown-item" href="#">작성자</a></li>
-			      <li><a class="dropdown-item" href="#">지역</a></li>
-			    </ul>
-        <input type="search" class="input-6yw" >
-        <div class="button-WXs">검색</div>
-      </div>
-      <div class="ptblcount-Dx5">
-        <div class="item-28922-aGq">
-        <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">추천순</buttonid></div>
-      </div>
-    </div>
+
     <!-- 테이블 -->
     <div class="container mt-3" id="listTable">       
   <table class="table table-hover">
@@ -452,8 +407,7 @@
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
-        <th>댓글수</th>
-        <th>좋아요수</th>
+        <th>조회수</th>
       </tr>
     </thead>
     <!-- communitySelect가 1일때==board인것만 불러오기 -->
@@ -465,13 +419,12 @@
         <td th:text="${b.users.usersName}"></td>
         <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
         <td th:text="${b.communityHit}"></td>
-        <td th:text="${b.communityNo}"></td>
       </tr>
     </tbody>
   </table>
 </div>
 <div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
-      <a class="button-eem" href="/main/boardwriting">등록</a>
+      <a class="button-eem" th:href="@{'/main/boardwriting/' + ${u.usersNo}}">등록</a>
       </div>
     <!-- 페이징 -->
     <div class="auto-group-kmj1-vUZ">
