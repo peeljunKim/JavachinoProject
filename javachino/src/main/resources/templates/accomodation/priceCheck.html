@@ -15,11 +15,12 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 	<script type="text/javascript" src="/js/accomodation/priceCheck.js"></script>
+	<script type="text/javascript" src="/js/mypage/mypageProfile.js" defer></script>
+	<script type="text/javascript" src="/js/header/headerfooter.js" defer></script>
 </head>
 
 <body>
-	header
-   <div id="header"></div>
+	<div id="header"></div>
 
 
 	<div class="center-wrapper" style="margin-top: 150px;">
@@ -35,52 +36,51 @@
 					</a>
 					<div class="activity-title">&nbsp; 예약자 정보</div> <br>
 
-					<form>
-						<div class="">
-							<div class="input-group flex-nowrap">
-								<input type="text" id="nameInput" name="name" class="qanda1-input"
-									placeholder="예약자명 입력해주세요." /> <br />
-							</div><br>
 
-							<div class="input-group flex-nowrap">
-								<input type="text" id="phoneInput" name="phone" class="qanda1-input"
-									placeholder="휴대폰 번호를 숫자로만 입력해주세요." required /><br />
-							</div><br>
+					<div class="">
+						<div class="input-group flex-nowrap">
+							<input type="text" id="nameInput" name="name" class="qanda1-input"
+								placeholder="예약자명 입력해주세요." /> <br />
+						</div><br>
 
-							<form action="" method="">
-								<span class="title_s">&nbsp; 인원 수</span> <br />
-								<select class="form-select" aria-label="Default select example" name="peopleCount"
-									id="peopleCountSelect" style="margin-left: 10px;">
-									<option selected>1</option>
-										<option value="2">2</option>
-										<option value="3">3</option>
-										<option value="4">4</option>
-										<option value="5">5</option>
-								</select>
+						<div class="input-group flex-nowrap">
+							<input type="text" id="phoneInput" name="phone" class="qanda1-input"
+								placeholder="휴대폰 번호를 숫자로만 입력해주세요." required /><br />
+						</div><br>
+
+
+						<span class="title_s">&nbsp; 인원 수</span> <br />
+						<select class="form-select" aria-label="Default select example" name="peopleCount"
+							id="peopleCountSelect" style="margin-left: 10px;">
+							<option selected>1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+						</select>
+						<br />
+						<hr />
+						<div class="activity-guidelines">
+							<div class="title_s">
+								<p><input type="checkbox" class="checkbox" id="agreeCheckbox" />&nbsp; 확인 및 결제
+									버튼을 선택함으로써 <br /> &nbsp;&nbsp;&nbsp;&nbsp; 다음 사항에 동의합니다:</p>
 								<br />
-								<hr />
-								<div class="activity-guidelines">
-									<div class="title_s">
-										<p><input type="checkbox" class="checkbox" id="agreeCheckbox" />&nbsp; 확인 및 결제
-											버튼을 선택함으로써 <br /> &nbsp;&nbsp;&nbsp;&nbsp; 다음 사항에 동의합니다:</p>
-										<br />
-										<ul>
-											<li>환불 정책</li>
-											<li>게스트 환불 정책</li>
-											<li>자바치노의 사회적 거리 두기 및 기타 코로나19 </br> 관련 가이드라인</li>
-										</ul>
-									</div>
-								</div>
-							</form>
-					</form>
+								<ul>
+									<li>환불 정책</li>
+									<li>게스트 환불 정책</li>
+									<li>자바치노의 사회적 거리 두기 및 기타 코로나19 </br> 관련 가이드라인</li>
+								</ul>
+							</div>
+						</div>
+
+
 				</nav>
 			</div>
 
 			<article class="article_activity_payment">
 				<div class="payment-box" style="margin-top: 150px;">
 					<div class="activity-title-container">
-					<img class="activity-image"
-							th:attr="src=@{/images/accomodation/__${info.fname}__}, alt=''" />
+						<img class="activity-image" th:attr="src=@{/images/accomodation/__${info.fname}__}, alt=''" />
 						<div class="activity-title" th:text="${info.name}"></div>
 					</div> <br />
 					<div class="activity-date1">예약날짜 </div>
@@ -90,18 +90,16 @@
 						(최저가)</div><br />
 					<div class="payment-title">총 결제 금액(VAT 포함)</div>
 					<div class="payment-amount"></div>
-					
 					<div class="activity-rule">* 결제완료 후 예약자 이름으로 체크인 하시면 됩니다.</div> <br />
-					</div>
 				</div>
-				<button type="button" class="btn btn-primary btn-lg" id="payment-button" style="margin-top: 150px;">확인 및
-					결제</button>
-			</article>
 		</div>
+		<button type="button" class="btn btn-primary btn-lg" id="payment-button" style="margin-top: 150px;">확인 및
+			결제</button>
+		</article>
+	</div>
 	</div>
 
-	footer
-    <div id="footer" style="margin-top: 250px;"></div>
+	<div id="footer" style="margin-top: 250px;"></div>
 
 </body>
 

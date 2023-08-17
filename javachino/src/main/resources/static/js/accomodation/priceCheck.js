@@ -1,72 +1,59 @@
 $(function() {
 	var IMP = window.IMP;
 	IMP.init("imp80816338");
+	const checkbox = document.getElementById('agreeCheckbox');
+	var paymentButton = document.getElementById('payment-button');
+	const nameInput = document.getElementById('nameInput');
+	const phoneInput = document.getElementById('phoneInput');
+	const peopleCountSelect = document.getElementById('peopleCountSelect');
+
 
 	$("#payment-button").click(function() {
-		var now = new Date()
-		var year = now.getFullYear();
-		var name = $("#nameInput").val();
-		var phone = $("#phoneInput").val();
-		var rangeRvDate = $("#rangeRvDate").html();
-		var people = $("#peopleCountSelect").val();
-		console.log(name);
-		console.log(phone);
-		console.log(rangeRvDate);
-		console.log(people);
-		var arr = rangeRvDate.split("~");
-		var checkin = arr[0];
-		var checkout = arr[1];
 		IMP.request_pay({
 			pg: "kcp",
 			pay_method: "card",
 			merchant_uid: "ORD" + new Date().getTime(),
 			name: "",
 			amount: 100,
-			buyer_email: "",
-			buyer_name: "",
+			buyer_name: "김필준",
 			buyer_tel: "010-1111-1111",
 			buyer_addr: "서울특별시 강남구 신사동",
-			buyer_postcode: "01181"
+			buyer_postcode: "01181",
 		}, function(res) {
 			if (res.success) {
-				$.ajax({
-					type: 'POST',
-					url: '/api/accomodationRv/cardConfirm',
-					data: {
+				var data = {
 						usersNo: 1,
 						accomodationNo: 1,
-						checkin: year+'/' + checkin,
-						checkout: year+'/' + checkout,
-						name: name,
-						phone: phone,
-						people: people,
-						imp_uid: res.imp_uid,
-						merchant_uid: res.merchant_uid,
-						paid_amount: res.paid_amount,
-						apply_num: res.apply_num
-					},
+						accomodationRvCheckin: '2023-08-27',
+						accomodationRvCheckout: '2023-08-28',
+						accomodationRvName: '1',
+						accomodationRvPhone: '2',
+						accomodationRvPeople: '3'
+						/*imp_uid: res.imp_uid,
+						paid_amount: res.paid_amount,*/
+				};
+				$.ajax({
+					url: '/accomodation/confirm',
+					data: data,
 					success: function(response) {
 						console.log(response);
-						url = "/accomodation/confirm?imp_uid=" + res.imp_uid + "&merchant_uid=" + res.merchant_uid + "&paid_amount=" + res.paid_amount + "&apply_num=" + res.apply_num;
+						/*var url = "/accomodation/confirm";
 						console.log("url:" + url)
-						location.href = response;
+						location.href = url;*/
 					},
 					error: function(error) {
 						console.error(error);
+
 					}
 				});
 
 			} else {
-				console.log('에러내용' + res.error_msg);
+				console.log('에러내용' + rsp.error_msg);
 			}
 		});
 	});
 
-	const checkbox = document.getElementById('agreeCheckbox');
-	var paymentButton = document.getElementById('payment-button');
-	const nameInput = document.getElementById('nameInput');
-	const phoneInput = document.getElementById('phoneInput');
-	const peopleCountSelect = document.getElementById('peopleCountSelect');
+
 
 	// 초기 상태에서 버튼 비활성화
 	paymentButton.disabled = 'true';

@@ -19,7 +19,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
     	initialValue = 1,
     	allocationSize = 1
 )
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class AccomodationRV {
     @Id
@@ -30,9 +29,9 @@ public class AccomodationRV {
     @Column(name = "ACCOMODATION_RV_NO")
     private int  accomodationRVNo;
     @Column(name = "accomodation_rv_checkin")
-    private String accomodationRVCheckIn;
+    private LocalDate accomodationRVCheckIn;
     @Column(name = "accomodation_rv_checkout")
-    private String accomodationRVCheckOut;
+    private LocalDate  accomodationRVCheckOut;
     
     @LastModifiedDate
     @Temporal(TemporalType.DATE)
@@ -58,18 +57,8 @@ public class AccomodationRV {
 	public void setAccomodationRVNo(int accomodationRVNo) {
 		this.accomodationRVNo = accomodationRVNo;
 	}
-	public String getAccomodationRVCheckIn() {
-		return accomodationRVCheckIn;
-	}
-	public void setAccomodationRVCheckIn(String accomodationRVCheckIn) {
-		this.accomodationRVCheckIn = accomodationRVCheckIn;
-	}
-	public String getAccomodationRVCheckOut() {
-		return accomodationRVCheckOut;
-	}
-	public void setAccomodationRVCheckOut(String accomodationRVCheckOut) {
-		this.accomodationRVCheckOut = accomodationRVCheckOut;
-	}
+
+	
 	public LocalDate getAccomodationRVDate() {
 		return accomodationRVDate;
 	}
@@ -106,5 +95,44 @@ public class AccomodationRV {
 	public void setAccomodation(Accomodation accomodation) {
 		this.accomodation = accomodation;
 	}
+	public LocalDate getAccomodationRVCheckIn() {
+		return accomodationRVCheckIn;
+	}
+	public void setAccomodationRVCheckIn(LocalDate accomodationRVCheckIn) {
+		this.accomodationRVCheckIn = accomodationRVCheckIn;
+	}
+	public LocalDate getAccomodationRVCheckOut() {
+		return accomodationRVCheckOut;
+	}
+	public void setAccomodationRVCheckOut(LocalDate accomodationRVCheckOut) {
+		this.accomodationRVCheckOut = accomodationRVCheckOut;
+	}
+	public AccomodationRV() {
+	}
+	public AccomodationRV(int accomodationRVNo, LocalDate accomodationRVCheckIn, LocalDate accomodationRVCheckOut,
+			LocalDate accomodationRVDate, String accomodationRVName, String accomodationRVPeople,
+			String accomodationRVPhone, Users users, Accomodation accomodation) {
+		super();
+		this.accomodationRVNo = accomodationRVNo;
+		this.accomodationRVCheckIn = accomodationRVCheckIn;
+		this.accomodationRVCheckOut = accomodationRVCheckOut;
+		this.accomodationRVDate = accomodationRVDate;
+		this.accomodationRVName = accomodationRVName;
+		this.accomodationRVPeople = accomodationRVPeople;
+		this.accomodationRVPhone = accomodationRVPhone;
+		this.users = users;
+		this.accomodation = accomodation;
+	}
+	@Override
+	public String toString() {
+		return "AccomodationRV [accomodationRVNo=" + accomodationRVNo + ", accomodationRVCheckIn="
+				+ accomodationRVCheckIn + ", accomodationRVCheckOut=" + accomodationRVCheckOut + ", accomodationRVDate="
+				+ accomodationRVDate + ", accomodationRVName=" + accomodationRVName + ", accomodationRVPeople="
+				+ accomodationRVPeople + ", accomodationRVPhone=" + accomodationRVPhone + ", users=" + users
+				+ ", accomodation=" + accomodation + "]";
+	}
+
+	
+	
     
 }

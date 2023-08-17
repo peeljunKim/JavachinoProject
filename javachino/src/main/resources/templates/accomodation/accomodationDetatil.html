@@ -134,13 +134,12 @@
 				</button>
 				<div class="collapse" id="collapseExample">
 					<div class="card card-body">
-						 님 이메일:
+						 <span th:text="${info.manager} + '님 전화번호: ' + ${info.phone}"></span> 
 					</div>
 				</div>
 			</article>
 		</section>
 
-		탭 메뉴 넣어서 만들기!
 		<div class="tab-menu">
 			<button class="tab-button active accomodation_btn" onclick="showTabContent('directions')">길 찾기</button>
 			<button class="tab-button accomodation_btn" onclick="showTabContent('reviews')">리뷰 보기</button>

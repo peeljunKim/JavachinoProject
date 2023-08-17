@@ -20,11 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.accomodation.service.AccomodationReviewService;
 import com.example.demo.accomodation.service.AccomodationService;
+import com.example.demo.accomodation.service.BusinessService;
 import com.example.demo.entity.Accomodation;
 import com.example.demo.entity.AccomodationFac;
 import com.example.demo.entity.AccomodationFile;
 import com.example.demo.entity.AccomodationInfo;
-import com.example.demo.entity.AccomodationReiview;
+import com.example.demo.entity.AccomodationReview;
 import com.example.demo.entity.Business;
 import com.example.demo.entity.View_AccomodationList;
 
@@ -44,8 +45,8 @@ public class AccomodationController {
 	private AccomodationService as;
 	@Autowired
 	private AccomodationReviewService rs;
-//	@Autowired
-//	private BusinessService bs;
+	@Autowired
+	private BusinessService bs;
 
 	@Autowired
 	private EntityManager entityManager;
@@ -86,10 +87,8 @@ public class AccomodationController {
 		AccomodationInfo accomodationInfo = as.findByAccomodationNo(accomodationNo);
 		View_AccomodationList otherInformation = as.findAccomodationByNo(accomodationNo);
 		AccomodationFile files = as.findByAccomodation_AccomodationNo(accomodationNo);
-		//Business business = bs.findByAccomodation_AccomodationNo(accomodationNo);
-		//System.out.println(business.getBusinessManager());
-		//business.getBusinessManager();
-		//business.getBusinessPhone();
+		Business business = bs.findManagerAndPhoneByAccomodationNo(accomodationNo);
+		
 		
 		String explanation = accomodationInfo.getAccomodationInfoExplanation();
 		int maxPerson = accomodationInfo.getAccomodationInfoMaxPersion();
@@ -108,7 +107,7 @@ public class AccomodationController {
 		String fname2 = files.getAccomodationFileFname2();
 		String fname3 = files.getAccomodationFileFname3();
 		
-		List<AccomodationReiview> reviews =rs.findByAccomodation_AccomodationNo(accomodationNo);
+		List<AccomodationReview> reviews =rs.findByAccomodation_AccomodationNo(accomodationNo);
 		Map<String, Object> info = new HashMap<>();
 
 		
@@ -126,6 +125,8 @@ public class AccomodationController {
 		info.put("pricePerPerson", prieperPerson);
 		info.put("price", price);
 		info.put("accomodationNo", accomodationNo);
+		info.put("manager", business.getBusinessManager());
+		info.put("phone", business.getBusinessPhone());
 
 		model.addAttribute("info", info);
 		model.addAttribute("reviews", reviews);
