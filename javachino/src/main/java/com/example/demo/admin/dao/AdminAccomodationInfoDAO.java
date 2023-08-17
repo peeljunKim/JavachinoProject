@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.entity.Accomodation;
 import com.example.demo.entity.AccomodationInfo;
-import com.example.demo.entity.AccomodationReiview;
+import com.example.demo.entity.AccomodationReview;
 
 import jakarta.transaction.Transactional;
 
