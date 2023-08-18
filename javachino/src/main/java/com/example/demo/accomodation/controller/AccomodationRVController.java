@@ -20,15 +20,13 @@ import com.example.demo.accomodation.service.AccomodationRVService;
 public class AccomodationRVController {
 	@Autowired
 	private AccomodationRVService accomodationRVService;
-	
+
 	@GetMapping("/accomodation/confirm")
 	@ResponseBody
 	public void payOk(
-			 int usersNo,  int accomodationNo,
-			 String accomodationRvCheckin,  String accomodationRvCheckout,
-			 String accomodationRvName,  String accomodationRvPhone,
-			 String accomodationRvPeople
-			){
+			int usersNo, int accomodationNo, String accomodationRvCheckin, 
+			String accomodationRvCheckout, String accomodationRvName, 
+			String accomodationRvPhone, String accomodationRvPeople) {
 
 		AccomodationRvDTO ard = new AccomodationRvDTO();
 		ard.setAccomodationNo(accomodationNo);
@@ -39,9 +37,9 @@ public class AccomodationRVController {
 		ard.setUsersNo(usersNo);
 		ard.setAccomodationRvPhone(accomodationRvPhone);
 		System.out.println(ard);
-		
+
 		accomodationRVService.insertAccomodationRV(ard);
-		
+
 		/*
 		 * String confirmUrl = "/accomodation/confirm?imp_uid=" + imp_uid +
 		 * "&merchant_uid=" + merchant_uid + "&paid_amount=" + paid_amount +
@@ -49,12 +47,15 @@ public class AccomodationRVController {
 		 * + usersNo + "&checkin=" + checkin + "&checkout=" + checkout + "&name=" + name
 		 * + "&phone=" + phone + "&people=" + people;
 		 */
-        // 확인 페이지로 리다이렉션
-        //return ResponseEntity.ok(confirmUrl);
-       //return "/accomodation/confirm";
+		// 확인 페이지로 리다이렉션
+		// return ResponseEntity.ok(confirmUrl);
+		// return "/accomodation/confirm";
 	}
-	
 
+	/*
+	 * @GetMapping("/accomodation/confirm") public String test123() {
+	 * 
+	 * return "/accomodation/confirm"; }
+	 */
 
-   
 }

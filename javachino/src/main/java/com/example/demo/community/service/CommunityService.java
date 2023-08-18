@@ -22,11 +22,11 @@ import lombok.Setter;
 @Service
 @Setter
 public class CommunityService {
-	@Autowired
-	private CommunityRepository communityRepository;
-	
-	/* public List<Community> findAll(String sortBy){
-		List<Community> communityList;
+   @Autowired
+   private CommunityRepository communityRepository;
+   
+   /* public List<Community> findAll(String sortBy){
+      List<Community> communityList;
         
         switch (sortBy) {
             case "recommendation":
@@ -42,178 +42,178 @@ public class CommunityService {
 
         return communityList;
 
-	} */
-	//검색된 레코드 수 반환
-	public int getTotalRecordByKeyword(String cname,String keyword) {
-		int c;
-		if(cname.equals("communityTitle")) {
-			c= communityRepository.countByCommunityTitle("%"+keyword+"%");
-		}else{
-			c = communityRepository.countByCommunityAddr("%"+keyword+"%");
-		}
-		return c;
-	}
-	 
-	
-	//전체레코드 수를 반환하는 메소드정의
-		public int getTotalRecord() {
-			return (int)communityRepository.count();
-		}
-		
-	//검색+필터+페이징
-	public List<Community> findBy(int start, int end, String cname, String keyword, String sortBy){
-		List<Community> list = null;
-		if(keyword != null && !keyword.equals("")) {		
-			if(sortBy.equals("latest")) {
-				switch(cname) {
-					case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
-					
-					case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityDate(start,end,"%"+keyword+"%");break;
-				}	
-			}else {
-				switch(cname) {
-				case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityHit(start,end,"%"+keyword+"%");break;
-				case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
-				}
-			}
-		//검색이 없을때
-		}else {
-			if(sortBy.equals("latest")) {
-				list = communityRepository.selectAllByOrderByCommunityDate(start, end);
-			}else {
-				list = communityRepository.selectAllByOrderByCommunityHit(start, end);
-			}
-		}
-		return list;
-	}
-	
-	//블로그일때
-	public List<Community> findBlogy(int start, int end, String cname, String keyword, String sortBy){
-		List<Community> list = null;
-		if(keyword != null && !keyword.equals("")) {		
-			if(sortBy.equals("latest")) {
-				switch(cname) {
-					case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
-					
-					case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityDate(start,end,"%"+keyword+"%");break;
-				}	
-			}else {
-				switch(cname) {
-				case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
-				case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
-				}
-			}
-		//검색이 없을때
-		}else {
-			if(sortBy.equals("latest")) {
-				list = communityRepository.selectAllBlogByOrderByCommunityDate(start, end);
-			}else {
-				list = communityRepository.selectAllBlogByOrderByCommunityHit(start, end);
-			}
-		}
-		return list;
-	}
-	
-	
-	//페이징..(최신순으로)
-	public List<Community> selectAllByOrderByCommunityDate(int start, int end){
-		return communityRepository.selectAllByOrderByCommunityDate(start, end);
-	}
-	
-	//페이징..(추천순으로)
-		public List<Community> selectAllByOrderByCommunityNo(int start, int end){
-			return communityRepository.selectAllByOrderByCommunityHit(start, end);
-		}
-	
-	//최신순으로 정렬
-	public List<Community> findAllByOrderByCommunityDateDesc(){
-		List<Community> communityList;
-		communityList = communityRepository.findAllByOrderByCommunityDateDesc();
-		return communityList;
-	}
-	//추천순으로 정렬(지금은 그냥 no순으로 정렬임)
-	public List<Community> findAllByOrderByCommunityNoDesc(){
-		return communityRepository.findAllByOrderByCommunityNoDesc();
-	}
-	
-	//썸머노트 인설트..
-	public void write(Community community, Users users) {
-		communityRepository.save(community);
-	}
-	
-	public int getNextNo() {
-		return communityRepository.getNextNo();
-	}
-	
-	public JsonObject SummerNoteImageFile(MultipartFile file) {
-		JsonObject jsonObject = new JsonObject();
-		String fileRoot = "E:\\javachino2\\javachino_hyun\\src\\main\\resources\\static\\summernoteImg\\";
-		String originalFileName = file.getOriginalFilename();
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-		
-		String saveFileName = UUID.randomUUID()+extension;
-			
-		File targetFile = new File(fileRoot+saveFileName);
-		
-		try {
-			InputStream fileStream = file.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
-			jsonObject.addProperty("responseCode", "success");
-		} catch(IOException e) {
-			FileUtils.deleteQuietly(targetFile);
-			jsonObject.addProperty("responseCode", "error");
-			e.printStackTrace();
-		}	
-		return jsonObject;
-	}
-	//커뮤니티 등록
-	public void saveCommunity(Community c) {
-		communityRepository.insert(c);
-		
-	}
-	
-	//커뮤니티 등록(숙소도_)
-	public void insertWithAccom(Community c) {
-		communityRepository.insertWithAccom(c);
-		
-	}
-	
-	//커뮤니티 등록(숙소도_)
-		public void insertWithActivity(Community c) {
-			communityRepository.insertWithActivity(c);
-			
-		}
-	
-	//커뮤니티 상세보기
-	public Community findById(int communityNo) {
-		Community c = communityRepository.findById(communityNo);
-		return c;
-	}
-	
-	//커뮤니티 수정
-	public void updateCommunity(Community c) {
-		communityRepository.update(c);
-	}
-	
-	//커뮤니티 삭제
-	public void deleteById(int communityNo) {
-		communityRepository.deleteById(communityNo);
-	}
-	
-	//3위까지
-	public List<Community> selectThird(){
-		return communityRepository.selectThird();
-	}
-	
-	//1d위
-	public Community selectFirst() {
-		return communityRepository.selectFirst();
-	}
-	
-	//조회수 업데이트
-	public void updateHit(int communityNo) {
-		communityRepository.updateHit(communityNo);
-	}
-	
+   } */
+   //검색된 레코드 수 반환
+   public int getTotalRecordByKeyword(String cname,String keyword) {
+      int c;
+      if(cname.equals("communityTitle")) {
+         c= communityRepository.countByCommunityTitle("%"+keyword+"%");
+      }else{
+         c = communityRepository.countByCommunityAddr("%"+keyword+"%");
+      }
+      return c;
+   }
+    
+   
+   //전체레코드 수를 반환하는 메소드정의
+      public int getTotalRecord() {
+         return (int)communityRepository.count();
+      }
+      
+   //검색+필터+페이징
+   public List<Community> findBy(int start, int end, String cname, String keyword, String sortBy){
+      List<Community> list = null;
+      if(keyword != null && !keyword.equals("")) {      
+         if(sortBy.equals("latest")) {
+            switch(cname) {
+               case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+               
+               case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+            }   
+         }else {
+            switch(cname) {
+            case "communityTitle": list=communityRepository.findByCommunityTitleOrderByCommunityHit(start,end,"%"+keyword+"%");break;
+            case "communityAddr":list =  communityRepository.findByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
+            }
+         }
+      //검색이 없을때
+      }else {
+         if(sortBy.equals("latest")) {
+            list = communityRepository.selectAllByOrderByCommunityDate(start, end);
+         }else {
+            list = communityRepository.selectAllByOrderByCommunityHit(start, end);
+         }
+      }
+      return list;
+   }
+   
+   //블로그일때
+   public List<Community> findBlogy(int start, int end, String cname, String keyword, String sortBy){
+      List<Community> list = null;
+      if(keyword != null && !keyword.equals("")) {      
+         if(sortBy.equals("latest")) {
+            switch(cname) {
+               case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+               
+               case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+            }   
+         }else {
+            switch(cname) {
+            case "communityTitle": list=communityRepository.findBlogByCommunityTitleOrderByCommunityDate(start,end,"%"+keyword+"%");break;
+            case "communityAddr":list =  communityRepository.findBlogByCommunityAddrOrderByCommunityHit(start,end,"%"+keyword+"%");break;
+            }
+         }
+      //검색이 없을때
+      }else {
+         if(sortBy.equals("latest")) {
+            list = communityRepository.selectAllBlogByOrderByCommunityDate(start, end);
+         }else {
+            list = communityRepository.selectAllBlogByOrderByCommunityHit(start, end);
+         }
+      }
+      return list;
+   }
+   
+   
+   //페이징..(최신순으로)
+   public List<Community> selectAllByOrderByCommunityDate(int start, int end){
+      return communityRepository.selectAllByOrderByCommunityDate(start, end);
+   }
+   
+   //페이징..(추천순으로)
+      public List<Community> selectAllByOrderByCommunityNo(int start, int end){
+         return communityRepository.selectAllByOrderByCommunityHit(start, end);
+      }
+   
+   //최신순으로 정렬
+   public List<Community> findAllByOrderByCommunityDateDesc(){
+      List<Community> communityList;
+      communityList = communityRepository.findAllByOrderByCommunityDateDesc();
+      return communityList;
+   }
+   //추천순으로 정렬(지금은 그냥 no순으로 정렬임)
+   public List<Community> findAllByOrderByCommunityNoDesc(){
+      return communityRepository.findAllByOrderByCommunityNoDesc();
+   }
+   
+   //썸머노트 인설트..
+   public void write(Community community, Users users) {
+      communityRepository.save(community);
+   }
+   
+   public int getNextNo() {
+      return communityRepository.getNextNo();
+   }
+   
+   public JsonObject SummerNoteImageFile(MultipartFile file) {
+      JsonObject jsonObject = new JsonObject();
+      String fileRoot = "E:\\javachino2\\javachino_hyun\\src\\main\\resources\\static\\summernoteImg\\";
+      String originalFileName = file.getOriginalFilename();
+      String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+      
+      String saveFileName = UUID.randomUUID()+extension;
+         
+      File targetFile = new File(fileRoot+saveFileName);
+      
+      try {
+         InputStream fileStream = file.getInputStream();
+         FileUtils.copyInputStreamToFile(fileStream, targetFile);
+         jsonObject.addProperty("url", "/summernoteImg/"+saveFileName);
+         jsonObject.addProperty("responseCode", "success");
+      } catch(IOException e) {
+         FileUtils.deleteQuietly(targetFile);
+         jsonObject.addProperty("responseCode", "error");
+         e.printStackTrace();
+      }   
+      return jsonObject;
+   }
+   //커뮤니티 등록
+   public void saveCommunity(Community c) {
+      communityRepository.insert(c);
+      
+   }
+   
+   //커뮤니티 등록(숙소도_)
+   public void insertWithAccom(Community c) {
+      communityRepository.insertWithAccom(c);
+      
+   }
+   
+   //커뮤니티 등록(숙소도_)
+      public void insertWithActivity(Community c) {
+         communityRepository.insertWithActivity(c);
+         
+      }
+   
+   //커뮤니티 상세보기
+   public Community findById(int communityNo) {
+      Community c = communityRepository.findById(communityNo);
+      return c;
+   }
+   
+   //커뮤니티 수정
+   public void updateCommunity(Community c) {
+      communityRepository.update(c);
+   }
+   
+   //커뮤니티 삭제
+   public void deleteById(int communityNo) {
+      communityRepository.deleteById(communityNo);
+   }
+   
+   //3위까지
+   public List<Community> selectThird(){
+      return communityRepository.selectThird();
+   }
+   
+   //1d위
+   public Community selectFirst() {
+      return communityRepository.selectFirst();
+   }
+   
+   //조회수 업데이트
+   public void updateHit(int communityNo) {
+      communityRepository.updateHit(communityNo);
+   }
+   
 }

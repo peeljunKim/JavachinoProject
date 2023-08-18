@@ -35,7 +35,7 @@ public interface AccomodationRVRepository extends JpaRepository<AccomodationRV, 
 	@Transactional
 	@Modifying
 	@Query(value = "INSERT INTO ACCOMODATION_RV (ACCOMODATION_NO, ACCOMODATION_RV_NO, USERS_NO, ACCOMODATION_RV_CHECKIN, ACCOMODATION_RV_CHECKOUT, ACCOMODATION_RV_DATE, ACCOMODATION_RV_NAME, ACCOMODATION_RV_PEOPLE, ACCOMODATION_RV_PHONE)"
-	        + " VALUES (:#{#ar.accomodationNo}, 27, :#{#ar.usersNo}, :#{#ar.accomodationRvCheckin}, :#{#ar.accomodationRvCheckout}, CURRENT_DATE, :#{#ar.accomodationRvName}, :#{#ar.accomodationRvPeople}, :#{#ar.accomodationRvPhone})", nativeQuery = true)
+	        + " VALUES (:#{#ar.accomodationNo}, accomodation_rv_seq.nextval, :#{#ar.usersNo}, :#{#ar.accomodationRvCheckin}, :#{#ar.accomodationRvCheckout}, CURRENT_DATE, :#{#ar.accomodationRvName}, :#{#ar.accomodationRvPeople}, :#{#ar.accomodationRvPhone})", nativeQuery = true)
 	public void insertAccomodationRv(AccomodationRvDTO ar);
 
 

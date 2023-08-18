@@ -37,9 +37,7 @@ $(function() {
 					data: data,
 					success: function(response) {
 						console.log(response);
-						/*var url = "/accomodation/confirm";
-						console.log("url:" + url)
-						location.href = url;*/
+						//location.href = "/accomodation/confirm";
 					},
 					error: function(error) {
 						console.error(error);
@@ -48,7 +46,7 @@ $(function() {
 				});
 
 			} else {
-				console.log('에러내용' + rsp.error_msg);
+				console.log('에러내용' + res.error_msg);
 			}
 		});
 	});
