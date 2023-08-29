@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,7 +19,7 @@ import lombok.NoArgsConstructor;
     	initialValue = 1,
     	allocationSize = 1
 )
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class Users {
     @Id
     @GeneratedValue(

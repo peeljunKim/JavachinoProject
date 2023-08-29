@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="accomodationpay">
+  <select id="selectAll" resultType="AccomodationPayVO">
+		SELECT
+		    a.accomodation_name,
+		    a.accomodation_no,
+		    rv.accomodation_rv_date,
+		    ar.accomodation_review_date,
+		    p.pay_no,
+		    p.pay_price,
+		    ar.accomodation_review_date,
+		    ar.accomodation_review_content,
+		    ar.accomodation_review_star,
+		    (SELECT af.accomodation_file_fname1 FROM accomodation_file af WHERE af.accomodation_no = a.accomodation_no) as accomodation_file_fname1
+		FROM
+		    pay p
+		JOIN
+		    accomodation_rv rv ON p.accomodation_rv_no = rv.accomodation_rv_no
+		JOIN
+		    accomodation_review ar ON rv.accomodation_no = ar.accomodation_no
+		JOIN
+		    accomodation a ON ar.accomodation_no = a.accomodation_no
+		WHERE
+		    rv.users_no = #{users_no}
+		    AND p.pay_no IS NOT NULL
+		ORDER BY
+		    rv.accomodation_rv_date DESC
+
+  </select>
+</mapper>

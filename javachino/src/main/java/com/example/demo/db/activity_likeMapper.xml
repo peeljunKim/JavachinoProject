@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="activitylike">
+  <select id="selectAll" resultType="ActivityLikeVO">
+    select activity_name, activity_price, activity_fname1,
+    (select avg(activity_review_star) from activity_review ar where ar.activity_no = a.activity_no) avg,
+    (select count(activity_review_star) from activity_review ar where ar.activity_no = a.activity_no) cnt
+    from activity_like al, activity a
+    where al.activity_no = a.activity_no and al.users_no = #{users_no}
+  </select>
+</mapper>
+  

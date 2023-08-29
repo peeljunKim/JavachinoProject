@@ -26,10 +26,18 @@
 			        <input type="email" name="usersId" placeholder="Email">
 			    </div>
 			    <div class="input-group">
+			        <i class='bx bx-usersPassword'></i>
+			        <input type="password" name="usersPassword" placeholder="Password">
+			    </div>
+			    <div class="input-group">
 			        <i class='bx bxs-phone'></i>
 			        <input type="tel" name="usersPhone" placeholder="Phone">
 			    </div>
 			    <button type="submit" class="btn">Sign up</button>
+			    
+			    <div class="error-message">
+					<p th:if"${error}" th:text="${error}"></p>
+				</div>
 			</form>
             <p>
               <span>
@@ -87,6 +95,11 @@
 	    function submitForm() {
 	        var form = document.getElementById('signupForm');
 	        form.submit();
+	    }
+	    
+	    function showPopup() {
+	        var popup = document.getElementById("popup");
+	        popup.style.display = "block";
 	    }
 
   </script>

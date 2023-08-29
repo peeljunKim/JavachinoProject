@@ -1,4 +1,4 @@
-package com.example.demo.header.service;
+package com.example.demo.login;
 
 import java.util.Optional;
 
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Users;
-import com.example.demo.mypage.dao.MyUsersDAO;
 
 @Service
 public class LoginService {
@@ -14,8 +13,8 @@ public class LoginService {
 	@Autowired
 	private MyUsersDAO usersDao;
 
-	public Users loginUser(String usersId, String usersPhone) {
-		return usersDao.findByUsersIdAndUsersPhone(usersId, usersPhone);
+	public Users loginUser(String usersId, String usersPassword) {
+		return usersDao.findByUsersIdAndUsersPassword(usersId, usersPassword);
 	}
 	
 }

@@ -1,7 +1,7 @@
-src="https://code.jquery.com/jquery-3.6.0.min.js"
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+//src="https://code.jquery.com/jquery-3.6.0.min.js"
+//src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
 
-//HTML Header&Footer연결 		
+//HTML Header&Footer연결       
         fetch("/header/header")
             .then(response => response.text())
             .then(data => {
@@ -43,7 +43,7 @@ src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.j
         sessionStorage.removeItem("loggedInUserId");
         
         //세션을 만료시키는 URL로 리다이렉
-        window.location.href="/logout;"
+        window.location.href="/logout";
         
         handleLoginLogout(null); // 로그아웃 상태로 버튼 변경
         window.location.href = "/header/original_login"; 

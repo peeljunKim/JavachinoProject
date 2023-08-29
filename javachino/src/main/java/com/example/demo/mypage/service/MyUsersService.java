@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.entity.Users;
-import com.example.demo.mypage.dao.MyUsersDAO;
+import com.example.demo.login.MyUsersDAO;
 
+import jakarta.transaction.TransactionScoped;
 import jakarta.transaction.Transactional;
 import lombok.Setter;
 
@@ -33,21 +34,19 @@ public class MyUsersService {
         return dao.findByUsersId(usersId).orElse(null);
     }
 
+    @Transactional
     public void updateUserProfile(String usersId, Users updatedUser, MultipartFile profileImage) {
         Optional<Users> userOptional = dao.findByUsersId(usersId);
         if (userOptional.isPresent()) {
             Users user = userOptional.get();
-
             user.setUsersName(updatedUser.getUsersName());
             user.setUsersPhone(updatedUser.getUsersPhone());
-
             // 프로필 이미지 업로드 처리
             if (!profileImage.isEmpty()) {
                 String originalFilename = profileImage.getOriginalFilename();
-                // 프로필 이미지 업로드 로직 추가
                 user.setUsersFname(originalFilename);
             }
-
+            System.out.println("UserUpdate Service");
             dao.save(user); // 정보 저장
         }
     }

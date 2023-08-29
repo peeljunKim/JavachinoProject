@@ -1,4 +1,4 @@
-package com.example.demo.mypage.dao;
+package com.example.demo.login;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +21,7 @@ public interface MyUsersDAO extends JpaRepository<Users, String> {
 
 		
 	//로그인
-	Users findByUsersIdAndUsersPhone(String usersId, String usersPhone);
+	Users findByUsersIdAndUsersPassword(String usersId, String usersPassword);
 
     @Transactional
     void deleteByUsersId(String usersId);
