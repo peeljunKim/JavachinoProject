@@ -15,13 +15,14 @@ input {
 body {
   width: 139.4rem;
 }.boardwriting-WSD {
+	display: flex;
   box-sizing: border-box;
-  padding: 0rem 18.5rem 0rem 21.7rem;
   width: 100%;
   height: 140.3rem;
   overflow: hidden;
   position: relative;
   background-color: #ffffff;
+  justify-content: center;
 }
 .boardwriting-WSD .page-CZw {
   box-sizing: border-box;
@@ -41,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  align-items: center;
 }
 .boardwriting-WSD .page-CZw .section-j45 .divpostregisterpostcontentwrapper3bxz6-57w {
   box-sizing: border-box;
@@ -63,6 +65,7 @@ body {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  justify-content: center;
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-VxM .item-3ys {
   margin-right: 1.5rem;
@@ -165,6 +168,7 @@ body {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  justify-content: center;
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-xmP .item-8A5 {
   margin-right: 1.5rem;
@@ -184,12 +188,12 @@ body {
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-xmP .item-8A5 .divselectcontrol-Prh {
   box-sizing: border-box;
-  padding: 1.944rem 1.089rem 1.856rem 1.089rem;
   width: 100%;
   height: 5.6rem;
   border: solid 0.1rem #cccccc;
   background-color: #ffffff;
   border-radius: 0.4rem;
+  font-size: 1.3rem;
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-xmP .item-8A5 .divselectcontrol-Prh .divselectvalue-container-8JV {
   margin-right: 39.472rem;
@@ -224,12 +228,13 @@ body {
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-xmP .item-CZF .divselectcontrol-tgy {
   box-sizing: border-box;
-  padding: 1.944rem 1.089rem 1.856rem 1.089rem;
   width: 100%;
   height: 5.6rem;
   border: solid 0.1rem #cccccc;
   background-color: #ffffff;
   border-radius: 0.4rem;
+  font-size: 1.3rem;
+  text-align: center;
 }
 .boardwriting-WSD .page-CZw .section-j45 .list-xmP .item-CZF .divselectcontrol-tgy .divselectvalue-container-22V {
   margin-right: 39.472rem;
@@ -252,6 +257,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
+  align-items: center
 }
 .boardwriting-WSD .page-CZw .section-j45 .item-UfB .label--E8Z {
   margin-bottom: 0.711rem;
@@ -263,16 +269,18 @@ body {
   font-family: Roboto, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
+      justify-content: flex-start;
 }
 .boardwriting-WSD .page-CZw .section-j45 .item-UfB .divselectcontrol-9FX {
   box-sizing: border-box;
   padding: 1.944rem 1.089rem 1.856rem 1.089rem;
-  width: 100%;
+  width: 100rem;
   height: 5.6rem;
   border: solid 0.1rem #cccccc;
   background-color: #ffffff;
   border-radius: 0.4rem;
   flex-shrink: 0;
+  font-size: 1.3rem;
 }
 .boardwriting-WSD .page-CZw .section-j45 .item-UfB .divselectcontrol-9FX .divselectvalue-container-Gqw {
   margin-right: 89.822rem;
@@ -294,7 +302,7 @@ body {
   box-sizing: border-box;
   padding: 5.5rem 0rem 8.4rem 0rem;
   width: 100%;
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -718,11 +726,11 @@ body {
 }
 .boardwriting-WSD .page-CZw .auto-group-m9mt-7k5 .section-75j {
   margin-left: 81.154rem;
-  width: calc(100% - 81.154rem);
   height: 3.2rem;
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  justify-content: flex-end;
 }
 .boardwriting-WSD .page-CZw .auto-group-m9mt-7k5 .section-75j .button-Ew3 {
   margin-right: 1.6rem;
@@ -740,6 +748,7 @@ body {
   background-color: #e9ecef;
   border-radius: 0.4rem;
   flex-shrink: 0;
+  text-decoration: none;
 }
 .boardwriting-WSD .page-CZw .auto-group-m9mt-7k5 .section-75j .button-YB3 {
   width: 9.246rem;

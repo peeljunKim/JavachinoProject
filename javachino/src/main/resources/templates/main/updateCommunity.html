@@ -129,8 +129,8 @@ document.addEventListener("DOMContentLoaded", function() {
 		</div>
 		<div class="divselectcontrol-NHP" id="boardCategory" style="display: none;">
 			<div class="radiogroup">
-			  <input class="" type="radio" name="communityCategory" id="TRVELMATE" value="TRVELMATE" th:checked="${c.communityCategory.name() == 'TRVELMATE'}">
-			  <label class="radioLabel" for="TRVELMATE">여행메이트</label>
+			  <input class="" type="radio" name="communityCategory" id="TRAVELMATE" value="TRAVELMATE" th:checked="${c.communityCategory.name() == 'TRAVELMATE'}">
+			  <label class="radioLabel" for="TRAVELMATE">여행메이트</label>
 			</div>
 			<div class="radiogroup">
 			  <input class="" type="radio" name="communityCategory" id="INFORMATION" value="INFORMATION" th:checked="${c.communityCategory.name() == 'INFORMATION'}">
@@ -165,7 +165,13 @@ document.addEventListener("DOMContentLoaded", function() {
         </div>
       </div>
       <div class="item-UfB">
+      <div style="
+    width: 100rem;
+    display: flex;
+    justify-content: flex-start;
+">
         <div class="label--E8Z">제목</div>
+        </div>
         <input type="text" class="divselectcontrol-9FX" placeholder="제목을 입력하세요" name="communityTitle" th:value="${c.communityTitle}">
         </input>
       </div>
@@ -181,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function() {
       </div>
       <div class="section-75j">
 		  <input type="hidden" th:value="${c.communityNo}" name="communityNo">
-        <div class="button-Ew3">취소</div>
+        <a th:href="@{'/main/board/1'}" class="button-Ew3">취소</a>
         <input type="submit" value="글 수정" class="button-YB3">
       </div>
     </div>

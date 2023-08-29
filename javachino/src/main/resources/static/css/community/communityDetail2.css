@@ -12,6 +12,7 @@ input {
 body {
  margin: 0 auto;
 }.wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P {
+	margin-top: 120px;
   width: 100%;
    height: auto;
   overflow: hidden;
@@ -30,8 +31,8 @@ body {
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .heading-3--Rqj {
   margin-bottom: 1rem;
   display: flex;
-  font-size: 2rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #222222;
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
@@ -53,7 +54,7 @@ body {
     height: 4rem;
     display: flex;
     align-items: center;
-    border-top: solid 0.1rem #222222;
+    border-top: solid 0.2rem #222222;
     flex-shrink: 0;
     position: relative;
     justify-content: space-between;
@@ -108,6 +109,7 @@ body {
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
+  margin-left: 1rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divbrdeditor-WCH {
   margin-bottom: 1.738rem;
@@ -136,13 +138,11 @@ body {
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divbrdeditor-WCH .divreportbox-qEZ .divtxtguide-8zM .pseudo-RCm {
   margin-right: 0.798rem;
-  width: 1rem;
-  height: 1rem;
+  width: 2rem;
+  height: 2rem;
   position: relative;
-  background-size: 100% 421.274%;
-  background-position: 0 -4rem;
-  background-image: url('../images/community/pseudo-Eqw.png');
   flex-shrink: 0;
+  border-radius: 1rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divbrdeditor-WCH .divreportbox-qEZ .divtxtguide-8zM .item--uNq {
   display: flex;
@@ -377,7 +377,7 @@ body {
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK {
   box-sizing: border-box;
   width: 100%;
-  height: 10rem;
+  height: 8rem;
   display: flex;
   align-items: center;
   border: solid 0.1rem #dddddd;
@@ -386,38 +386,37 @@ body {
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .c588e936f0127c1002d95ffc681d5e5ctn410x280jpg-MSR {
   margin-right: 2rem;
-  width: 10rem;
-  height: 8rem;
+  width: 8rem;
+  height: 6rem;
   position: relative;
-  background-size: 100% 100%;
-  background-image: url('../images/community/c588e936f0127c1002d95ffc681d5e5ctn410x280jpg.png');
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .auto-group-acuf-Q9o {
-  width: fit-content;
+  width: 58rem;
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .auto-group-acuf-Q9o .spanicobrdblue-vP3 {
-  margin: 0rem 25.134rem 0.699rem 0rem;
+  margin: 0rem 29.134rem 0.699rem 0rem;
   width: fit-content;
   display: flex;
   align-items: center;
-  border: solid 0.1rem #4567ad;
+  border: solid 0.1rem rgb(158 202 238);
   background-color: #ffffff;
-  border-radius: 1rem;
+  border-radius: 3rem;
   justify-content: center;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .auto-group-acuf-Q9o .spanicobrdblue-vP3 .spanh2d-121b737c-Dd3 {
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  padding: 0.3rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .auto-group-acuf-Q9o .spanicobrdblue-vP3 .spanh2d-121b737c-Dd3 .item--YvD {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  color: #4567ad;
+  font-size: 0.5rem;
+  color: #666d75;
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
   flex-shrink: 0;
@@ -449,14 +448,14 @@ body {
   overflow: hidden;
   position: relative;
   display: flex;
-  font-size: 1.3rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 700;
   line-height: 1.2125;
   color: #555555;
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divboxprodinfo-dmK .button-N25 {
   margin: 1.9rem 0rem 2.4rem 0rem;
@@ -476,6 +475,7 @@ body {
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .auto-group-3fm3-atq {
+	margin-top: 1rem;
       box-sizing: border-box;
     width: 100%;
     /* align-items: center; */
@@ -517,7 +517,7 @@ body {
   width: 8rem;
   display: flex;
   align-items: center;
-  border: solid 0.1rem rgb(128, 128, 255);
+  border: solid 0.1rem rgb(158 202 238);
   border-radius: 3rem;
   justify-content: center;
   flex-shrink: 0;
@@ -557,11 +557,11 @@ body {
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .divblocktitareamore-a3b {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   width: 100%;
-  height: 4rem;
+  height: 3rem;
   display: flex;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: #222222;
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
@@ -719,7 +719,7 @@ margin-bottom: 2rem;
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divpage-header-MSy .right-585 .divstudyitemuserinfo1kkga-Rhj {
-  margin-right: 2rem;
+  margin-right: 1rem;
   height: 100%;
   display: flex;
   align-items: center;
@@ -731,10 +731,11 @@ margin-bottom: 2rem;
   height: 2rem;
   object-fit: contain;
   flex-shrink: 0;
+  border-radius: 1rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divpage-header-MSy .right-585 .divstudyitemuserinfo1kkga-Rhj .item--JWd {
   display: flex;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #2e3134;
   font-family: Roboto, 'Source Sans Pro';
   white-space: nowrap;
@@ -742,7 +743,7 @@ margin-bottom: 2rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divpage-header-MSy .right-585 .link-10951-ab-4-DtV {
   display: flex;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #8e8e8e;
   font-family: Roboto, 'Source Sans Pro';
   white-space: nowrap;
@@ -756,7 +757,7 @@ margin-bottom: 2rem;
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divpage-header-MSy .left-fkV .item--BD3 {
-  margin-right: 2rem;
+  margin-right: 1rem;
   display: flex;
   font-size: 1.2rem;
   color: #848484;
@@ -766,7 +767,7 @@ margin-bottom: 2rem;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divpage-header-MSy .left-fkV .item--esK {
   display: flex;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
   color: #848484;
   font-family: Roboto, 'Source Sans Pro';
   white-space: nowrap;
@@ -781,7 +782,7 @@ margin-bottom: 2rem;
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-9772-RZK .divmarkdown-NHX .for-i-in-rangen-i-0-i-n--VN9 {
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #263747;
   font-family: Inter, 'Source Sans Pro';
   flex-shrink: 0;
@@ -856,7 +857,7 @@ margin-bottom: 2rem;
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-form-Sid .heading-5--NsB {
   margin-bottom: 0.901rem;
   display: flex;
-  font-size: 1.7rem;
+  font-size: 1.1rem;
   font-weight: 700;
   line-height: 1.2800000191;
   letter-spacing: -0.0144rem;
@@ -876,50 +877,52 @@ margin-bottom: 2rem;
   margin: 0rem 0.16rem 0.82rem 0rem;
   box-sizing: border-box;
   width: 100%;
-  height: 10rem;
+  height: 8rem;
   overflow: hidden;
   position: relative;
   display: flex;
-  font-size: 1.6rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: rgba(50, 50, 80, 0.2399999946);
   font-family: Inter, 'Source Sans Pro';
   white-space: nowrap;
-  border: solid 0.1rem #d7e2eb;
-  background-color: #fbfbfd;
+  border: solid 0.1rem #748490;
+  background-color: #fcfdff;
   border-radius: 0.4rem;
   flex-shrink: 0;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .divconttravelreview-E2V .commantary-f53 .divanswer-form-Sid .form-HUM .input-fUu {
-  width: 6rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  line-height: 1.5;
-  color: #ffffff;
-  font-family: Inter, 'Source Sans Pro';
-  white-space: nowrap;
-  border: solid 0.1rem #8b7aa6;
-  box-sizing: border-box;
-  background-color: #8b7aa6;
-  border-radius: 0.4rem;
-  flex-shrink: 0;
+  width: 5rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    /* line-height: 1.5; */
+    color: #666d75;
+    font-family: Inter, 'Source Sans Pro';
+    /* white-space: nowrap; */
+    /* border: solid 0.1rem rgba(157, 201, 238, 0.4499999881); */
+    box-sizing: border-box;
+    background-color: rgb(158 202 238);
+    border-radius: 2px;
+    flex-shrink: 0;
+    font-weight: 600;
 }
 .wwwybtourcokr-by-htmltodesign-free-version-11-08-2023-11-35-51-gmt9-H3P .divcontent-AWV .button-KJZ {
   box-sizing: border-box;
-  padding: 0rem 5.892rem 0rem 5.907rem;
-  width: 6rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: #ffffff;
-  font-family: Inter, 'Source Sans Pro';
-  white-space: nowrap;
-  background-color: #555555;
-  flex-shrink: 0;
+     width: 5rem;
+    height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: #666d75;
+    font-family: Inter, 'Source Sans Pro';
+    white-space: nowrap;
+    background-color: rgb(158 202 238);
+    flex-shrink: 0;
+    border-radius: 0.2rem;
+    text-decoration: none;
+    font-weight: 600;
 }

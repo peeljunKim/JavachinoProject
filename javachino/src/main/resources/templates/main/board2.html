@@ -8,7 +8,9 @@
   <title>COMMUNITY</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter%3A400%2C600%2C700"/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A400%2C600%2C700"/>
-  <link rel="stylesheet" href="/css/community/board.css"/>
+  <link rel="stylesheet" th:href="@{/css/community/board.css}"/>
+  <link rel="stylesheet" th:href="@{/css/header/header.css}">
+  <link rel="stylesheet" th:href="@{/css/footer/footer.css}">
   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
@@ -16,7 +18,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR%3A500%2C700"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro%3A500%2C700"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="/css/community/header.css">
+    <script type="text/javascript" src="/js/mypage/mypageProfile.js" defer></script>
+	<script type="text/javascript" src="/js/header/headerfooter.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
@@ -27,21 +30,46 @@
    		 var currentSortBy = "latest";
    		  console.log("cname"+currentCname);
      			 console.log("currentKeyword"+currentKeyword);
+     			
      			 
 		  
-		 	//버튼 클릭 이벤트 처리
+		 	//버튼 클릭 이벤트 처리(전체)
 		 	$('#latestBtn').on('click',function(){
-				 updateSearchResults('latest');
+				 updateSearchResults('latest','all');
 				// updateList('latest');
 				 console.log("최신순 버튼 클릭됐음");
 			 });
 			 $('#recommendationBtn').on('click',function(){
-				  updateSearchResults('recommendation');
+				  updateSearchResults('recommendation','all');
 				// updateList('recommendation');
 				  console.log("추천순 버튼 클릭됐음");
 			 });
 			 
-			 function updateSearchResults(sortBy) {
+			 //버튼 클릭 이벤트 처리(블로그)
+		 	$('#blogLatestBtn').on('click',function(){
+				 updateSearchResults('latest','blog');
+				// updateList('latest');
+				 console.log("최신순 버튼 클릭됐음");
+			 });
+			 $('#blogRecommendationBtn').on('click',function(){
+				  updateSearchResults('recommendation','blog');
+				// updateList('recommendation');
+				  console.log("추천순 버튼 클릭됐음");
+			 });
+			
+			 //버튼 클릭 이벤트 처리(게시판)
+		 	$('#boardLatestBtn').on('click',function(){
+				 updateSearchResults('latest','board');
+				// updateList('latest');
+				 console.log("최신순 버튼 클릭됐음");
+			 });
+			 $('#boardRecommendationBtn').on('click',function(){
+				  updateSearchResults('recommendation','board');
+				// updateList('recommendation');
+				  console.log("추천순 버튼 클릭됐음");
+			 });
+			 
+			 function updateSearchResults(sortBy,select) {
 				  console.log("함수cname"+currentCname);
      			 console.log("함수currentKeyword"+currentKeyword);
      			 currentSortBy = sortBy
@@ -56,21 +84,52 @@
 				        url: url,
 				        success: function(data) {
 							console.log("여기왔나")
-				            $('#listTable').html($(data).find('#listTable').html());
-				            $('#paging').html($(data).find('#paging').html());
+							if(select == 'all'){
+				            $('#allListTable').html($(data).find('#allListTable').html());
+				            $('#pagingAll').html($(data).find('#pagingAll').html());
+							}else if(select == 'blog'){
+				            $('#blogListTable').html($(data).find('#blogListTable').html());
+				            $('#pagingBlog').html($(data).find('#pagingBlog').html());
+							}else{
+				            $('#boardListTable').html($(data).find('#boardListTable').html());
+				            $('#pagingBoard').html($(data).find('#pagingBoard').html());
+							}
 				        }
 				    });
 				}	
+				
 				 // 페이지 숫자 클릭 이벤트 핸들러
-				$('#paging').on('click', '.page-link', function(e) {
+				$('#pagingAll').on('click', '.page-link', function(e) {
 					console.log("페이징클릭됨..?");
 		        e.preventDefault();
+		        $('.page-link').css('font-size', '1rem'); // 기본 크기로 초기화
+		        $(this).css('font-size', '1.2rem');
 		        var page = $(this).text();
 		        console.log(page);
-		        updateSearchResultsWithPage(page);
+		        updateSearchResultsWithPage(page,"all");
 		    });
 		    
-		    function updateSearchResultsWithPage(page) {
+		    $('#pagingBlog').on('click', '.page-link', function(e) {
+					console.log("페이징클릭됨..?");
+		        e.preventDefault();
+		        $('.page-link').css('font-size', '1rem'); // 기본 크기로 초기화
+		        $(this).css('font-size', '1.2rem');
+		        var page = $(this).text();
+		        console.log(page);
+		        updateSearchResultsWithPage(page,"blog");
+		    });
+		    
+		    $('#pagingBoard').on('click', '.page-link', function(e) {
+					console.log("페이징클릭됨..?");
+		        e.preventDefault();
+		        $('.page-link').css('font-size', '1rem'); // 기본 크기로 초기화
+		        $(this).css('font-size', '1.2rem');
+		        var page = $(this).text();
+		        console.log(page);
+		        updateSearchResultsWithPage(page,"board");
+		    });
+		    
+		    function updateSearchResultsWithPage(page,select) {
 			    var sortBy = 'latest'; // 예시로 최신순으로 고정
 			    var url = '/main/board/' + page;
 			    if (currentCname && currentKeyword) {
@@ -81,7 +140,13 @@
 			    $.ajax({
 			        url: url,
 			        success: function(data) {
-			            $('#listTable').html($(data).find('#listTable').html());
+						if(select == "all"){
+			            $('#allListTable').html($(data).find('#allListTable').html());
+						}else if(select == "blog"){
+			            $('#blogListTable').html($(data).find('#blogListTable').html());
+						}else{
+			            $('#boardListTable').html($(data).find('#boardListTable').html());
+						}
 			        }
 			    });
 			    }
@@ -120,8 +185,8 @@
 			 }
 			 */
     
-    // 드롭다운 메뉴 항목 클릭 시
-		$('.select-filter').on('click', function() {
+    // 전체 드롭다운 메뉴 항목 클릭 시
+		$('.select-filter-all').on('click', function() {
 	        var selectedCnameText = $(this).text(); // 선택된 항목의 텍스트를 가져옵니다
 	        if(selectedCnameText == '지역'){
 	         var selectedCnameVal = 'communityAddr';
@@ -130,17 +195,65 @@
 			}
 			console.log("드랍박스 클릭"+selectedCnameText);
 			console.log("드랍박스 클릭"+selectedCnameVal);
-	        $('#cname').text(selectedCnameText); // 드롭다운 버튼 텍스트를 선택한 항목으로 변경합니다
-        	$('#cname').val(selectedCnameVal);
+	        $('#allCname').text(selectedCnameText); // 드롭다운 버튼 텍스트를 선택한 항목으로 변경합니다
+        	$('#allCname').val(selectedCnameVal);
    		 });
    
-    //검색 버튼 클릭
+    // 전체 검색 버튼 클릭
 	  $(function(){
-		 $("#btnSearch").click(function(){
+		 $("#btnSearchAll").click(function(){
 			  console.log("검색 버튼 클릭");
-        currentCname = $('#cname').val();
-        currentKeyword = $("#keyword").val();
-        updateSearchResults('latest'); // 기본적으로 최신순으로 갱신
+        currentCname = $('#allCname').val();
+        currentKeyword = $("#allKeyword").val();
+        updateSearchResults('latest','all'); // 기본적으로 최신순으로 갱신
+    });
+	  });
+	  
+	  // 블로그 드롭다운 메뉴 항목 클릭 시
+		$('.select-filter-blog').on('click', function() {
+	        var selectedCnameText = $(this).text(); // 선택된 항목의 텍스트를 가져옵니다
+	        if(selectedCnameText == '지역'){
+	         var selectedCnameVal = 'communityAddr';
+			}else{
+	        var selectedCnameVal = 'communityTitle';
+			}
+			console.log("드랍박스 클릭"+selectedCnameText);
+			console.log("드랍박스 클릭"+selectedCnameVal);
+	        $('#blogCname').text(selectedCnameText); // 드롭다운 버튼 텍스트를 선택한 항목으로 변경합니다
+        	$('#blogCname').val(selectedCnameVal);
+   		 });
+   
+    // 블로그 검색 버튼 클릭
+	  $(function(){
+		 $("#btnSearchBlog").click(function(){
+			  console.log("검색 버튼 클릭");
+        currentCname = $('#blogCname').val();
+        currentKeyword = $("#blogKeyword").val();
+        updateSearchResults('latest','blog'); // 기본적으로 최신순으로 갱신
+    });
+	  });
+	  
+	  // 게시판 드롭다운 메뉴 항목 클릭 시
+		$('.select-filter-board').on('click', function() {
+	        var selectedCnameText = $(this).text(); // 선택된 항목의 텍스트를 가져옵니다
+	        if(selectedCnameText == '지역'){
+	         var selectedCnameVal = 'communityAddr';
+			}else{
+	        var selectedCnameVal = 'communityTitle';
+			}
+			console.log("드랍박스 클릭"+selectedCnameText);
+			console.log("드랍박스 클릭"+selectedCnameVal);
+	        $('#boardCname').text(selectedCnameText); // 드롭다운 버튼 텍스트를 선택한 항목으로 변경합니다
+        	$('#boardCname').val(selectedCnameVal);
+   		 });
+   
+    // 게시판 검색 버튼 클릭
+	  $(function(){
+		 $("#btnSearchBoard").click(function(){
+			  console.log("검색 버튼 클릭");
+        currentCname = $('#boardCname').val();
+        currentKeyword = $("#boardKeyword").val();
+        updateSearchResults('latest','board'); // 기본적으로 최신순으로 갱신
     });
 	  });
     
@@ -160,69 +273,9 @@
 </head>
 
 <body>
-	    <nav class="navbar navbar-expand-lg  fixed-top" style="
-    position: relative;
-">
-        <div class="container-fluid">
-                <div class="p-1 flex-lg-fill">
-                    <div class="header-logo-search" >
-                         <a class="navbar-brand" href="#">
-                            <img src="./assets/javachino_logo.png" id="logoImg" >
-                        </a>
-                        <div class="searchBox">
-                            <form class="search" >
-                                <div class="input-group" style="margin-top: 10px; ">
-                                    <span class="input-group-text" id="search-icon">
-                                        <i class="fa-solid fa-magnifying-glass" ></i>
-                                    </span>
-                                    <input class="form-control" type="search" placeholder="도시를 검색해보세요" aria-label="search" />
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-1 flex-lg-fill">
-                        <div class="row g-0">
-                            <diV class="col">
-                                <a class="nav-link" href="#">
-                                    <img src="./assets/accomodation.png"  id="accomodationImg"> 
-                                    <span id="menuText"> 숙박</span>
-                                </a>
-                            </diV>
-                            <diV class="col">
-                                <a class="nav-link" href="#">
-                                    <img src="./assets/bikini.png" id="bikiniImg">
-                                    <span id="menuText"> 액티비티</span>
-                                </a>
-                            </diV>
-                            <diV class="col">
-                                <a class="nav-link" href="#">
-                                    <img src="./assets/user-group.png" id="user-groupImg">
-                                    <span id="menuText"> 커뮤니티</span>
-                                </a>
-                            </diV>
-                        </div>
-                </div>
-                <div class="p-3" >
-                    <div class="row" id="header-btn-group">
-                        <div class="col">
-                            <a class="nav-link" href="#" >
-                                <button type="button" id="btn-login">
-                                    <span class="login" id="btnText">로그인</span>
-                                </button>
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a class="nav-link" href="#" >
-                                <button type="button" id="btn-join">
-                                    <span class="join" id="btnText">회원가입</span>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </nav>
+	        <!--Header-->
+	<div id="header"></div>
+
 <div class="board-2G9">
   <div class="divcontent-JDf">
     <div class="heading-3--2fT">커뮤니티</div>
@@ -288,64 +341,72 @@
     </div>-->
   </div>
 </div>
-  <div class="form-vu7">
+  
+    <!--전체 부분-->
+    <div class="tab-content">
+    <div class="container tab-pane active" id="home">
+    
+    <div class="form-vu7">
 		
-        <button class="button-VDT" data-bs-toggle="dropdown" id="cname">검색조건을 선택하세요</button>
+        <button class="button-VDT" data-bs-toggle="dropdown" id="allCname">검색조건을 선택하세요</button>
         <ul class="dropdown-menu">
-			      <li><a class="dropdown-item select-filter" href="#">제목</a></li>
-			      <li><a class="dropdown-item select-filter" href="#">지역</a></li>
+			      <li><a class="dropdown-item select-filter-all" href="#">제목</a></li>
+			      <li><a class="dropdown-item select-filter-all" href="#">지역</a></li>
 			    </ul>
-        <input type="search" class="input-6yw" id="keyword" name="keyword">
-        <input type="submit" class="button-WXs" id="btnSearch" value="검색"></input>
+        <input type="search" class="input-6yw" id="allKeyword" name="keyword">
+        <input type="submit" class="button-WXs" id="btnSearchAll" value="검색"></input>
       </div>
       <div class="ptblcount-Dx5">
         <div class="item-28922-aGq">
         <div><button id="latestBtn" class="item--vdX">최신순</button> | <button id="recommendationBtn" class="item--vdX">조회순</buttonid></div>
       </div>
     </div>
-    <!--전체 부분-->
-    <div class="tab-content">
-    <div class="container tab-pane active" id="home">
     
     <!-- 테이블 -->
     <div class="container mt-3" >       
-  <table class="table table-hover" id="listTable">
+  <table class="table table-hover" id="allListTable">
     <thead>
       <tr>
         <th>분류</th>
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
         <th>조회수</th>
       </tr>
     </thead>
     <tbody>
-      <tr  th:each="b:${list}" th:onclick="'selectDetail(' + ${b.communityNo} + ')'">
-		<td th:if="${b.communitySelect.name() == 'BLOG'}">블로그</td>
-		<td th:if="${b.communitySelect.name() == 'BOARD'}">소통해요</td>
-        <td th:text="${b.communityTitle}"></td>
-        <td th:text="${b.users.usersName}"></td>
-        <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
-        <td th:text="${b.communityHit}"></td>
+      <tr  th:each="a:${allList}" th:onclick="'selectDetail(' + ${a.communityNo} + ')'">
+		<td th:if="${a.communitySelect.name() == 'BLOG'}">블로그</td>
+		<td th:if="${a.communitySelect.name() == 'BOARD'}">소통해요</td>
+        <td th:text="${a.communityTitle}"></td>
+        <td th:text="${a.usersName}"></td>
+        <td th:text="${#dates.format(a.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${a.commentary}"></td>
+        <td th:text="${a.communityLike}"></td>
+        <td th:text="${a.communityHit}"></td>
       </tr>
     </tbody>
   </table>
 </div>
 <div style="width:100%; display: flex; justify-content:flex-end; justify-content:flex-end">
-      <a class="button-eem" th:href="@{'/main/boardwriting/1'}">등록</a>
+      <a class="button-eem" th:href="@{'/main/boardwriting/' + ${u.usersNo}}">등록</a>
       </div>
     <!-- 페이징 -->
+    
     <div class="auto-group-kmj1-vUZ" >
       <div class="divpaging-44y">
-        <div class="auto-group-esvz-a3K" id="paging">
+        <div class="auto-group-esvz-a3K" id="pagingAll">
 			
-        <th:block th:each="i:${#numbers.sequence(1,totalPage)}">
+        <th:block th:each="i:${#numbers.sequence(1,totalPageAll)}" th:if="${i != 0}">
 		<a href="#" class="page-link" data-page="${i}" th:text="${i}" data-sort="${sortBy}"></a>		
 	</th:block>
 
       </div>
     </div>
   </div>
+  
 </div>
 </div>
 
@@ -353,26 +414,47 @@
     <div class="tab-content">
     <div class="container tab-pane fade" id="blog">
 
+<div class="form-vu7">
+		
+        <button class="button-VDT" data-bs-toggle="dropdown" id="blogCname">검색조건을 선택하세요</button>
+        <ul class="dropdown-menu">
+			      <li><a class="dropdown-item select-filter-blog" href="#">제목</a></li>
+			      <li><a class="dropdown-item select-filter-blog" href="#">지역</a></li>
+			    </ul>
+        <input type="search" class="input-6yw" id="blogKeyword" name="keyword">
+        <input type="submit" class="button-WXs" id="btnSearchBlog" value="검색"></input>
+      </div>
+      <div class="ptblcount-Dx5">
+        <div class="item-28922-aGq">
+        <div><button id="blogLatestBtn" class="item--vdX">최신순</button> | <button id="blogRecommendationBtn" class="item--vdX">조회순</buttonid></div>
+      </div>
+    </div>
+
+
     <!-- 테이블 -->
     <div class="container mt-3">       
-  <table class="table table-hover" id="listTable">
+  <table class="table table-hover" id="blogListTable">
     <thead>
       <tr>
         <th>카테고리</th>
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
         <th>조회수</th>
       </tr>
     </thead>
     <tbody>
       <!-- communitySelect가 0일때==blog인것만 불러오기 -->
-      <tr  th:each="b:${list}" th:if="${b.communitySelect.ordinal() == 0}">
+      <tr  th:each="b:${blogList}" th:onclick="'selectDetail(' + ${b.communityNo} + ')'">
   		<td th:if="${b.communityCategory.name() == 'MYMONEY'}">내돈내산</td>
 		<td th:if="${b.communityCategory.name() == 'SPONSORSHIP'}">추천해요</td>
         <td th:text="${b.communityTitle}"></td>
-        <td th:text="${b.users.usersName}"></td>
+        <td th:text="${b.usersName}"></td>
         <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${b.commentary}"></td>
+        <td th:text="${b.communityLike}"></td>
         <td th:text="${b.communityHit}"></td>
       </tr>
     </tbody>
@@ -382,11 +464,13 @@
       <a class="button-eem" th:href="@{'/main/boardwriting/' + ${u.usersNo}}">등록</a>
       </div>
     <!-- 페이징 -->
-    <div class="auto-group-kmj1-vUZ">
+    <div class="auto-group-kmj1-vUZ" >
       <div class="divpaging-44y">
-        <div class="auto-group-esvz-a3K">
-        <div class="link-6vm">1</div>
-        <div class="link-2-yzZ">2</div>
+        <div class="auto-group-esvz-a3K" id="pagingBlog">
+			
+        <th:block th:each="i:${#numbers.sequence(1,totalPageBlog)}" th:if="${i != 0}">
+		<a href="#" class="page-link" data-page="${i}" th:text="${i}" data-sort="${sortBy}"></a>		
+	</th:block>
 
       </div>
     </div>
@@ -398,8 +482,25 @@
     <div class="tab-content">
     <div class="container tab-pane fade" id="board">
 
+<div class="form-vu7">
+		
+        <button class="button-VDT" data-bs-toggle="dropdown" id="boardCname">검색조건을 선택하세요</button>
+        <ul class="dropdown-menu">
+			      <li><a class="dropdown-item select-filter-board" href="#">제목</a></li>
+			      <li><a class="dropdown-item select-filter-board" href="#">지역</a></li>
+			    </ul>
+        <input type="search" class="input-6yw" id="boardKeyword" name="keyword">
+        <input type="submit" class="button-WXs" id="btnSearchBoard" value="검색"></input>
+      </div>
+      <div class="ptblcount-Dx5">
+        <div class="item-28922-aGq">
+        <div><button id="boardLatestBtn" class="item--vdX">최신순</button> | <button id="boardRecommendationBtn" class="item--vdX">조회순</buttonid></div>
+      </div>
+    </div>
+
+
     <!-- 테이블 -->
-    <div class="container mt-3" id="listTable">       
+    <div class="container mt-3" id="boardListTable">       
   <table class="table table-hover">
     <thead>
       <tr>
@@ -407,18 +508,23 @@
         <th>제목</th>
         <th>작성자</th>
         <th>등록일</th>
+        <th>댓글수</th>
+        <th>좋아요수</th>
         <th>조회수</th>
+        
       </tr>
     </thead>
     <!-- communitySelect가 1일때==board인것만 불러오기 -->
-      <tr th:each="b:${list}"  th:if="${b.communitySelect.ordinal() == 1}">
-		<td th:if="${b.communityCategory.name() == 'TRVELMATE'}">여행메이트</td>
-		<td th:if="${b.communityCategory.name() == 'INFORMATION'}">정보</td>
-		<td th:if="${b.communityCategory.name() == 'ETC'}">기타</td>
-        <td th:text="${b.communityTitle}"></td>
-        <td th:text="${b.users.usersName}"></td>
-        <td th:text="${#dates.format(b.communityDate, 'yyyy.MM.dd')}"></td>
-        <td th:text="${b.communityHit}"></td>
+      <tr th:each="c:${boardList}" th:onclick="'selectDetail(' + ${c.communityNo} + ')'">
+		<td th:if="${c.communityCategory.name() == 'TRAVELMATE'}">여행메이트</td>
+		<td th:if="${c.communityCategory.name() == 'INFORMATION'}">정보</td>
+		<td th:if="${c.communityCategory.name() == 'ETC'}">기타</td>
+        <td th:text="${c.communityTitle}"></td>
+        <td th:text="${c.usersName}"></td>
+        <td th:text="${#dates.format(c.communityDate, 'yyyy.MM.dd')}"></td>
+        <td th:text="${c.commentary}"></td>
+        <td th:text="${c.communityLike}"></td>
+        <td th:text="${c.communityHit}"></td>
       </tr>
     </tbody>
   </table>
@@ -429,13 +535,17 @@
     <!-- 페이징 -->
     <div class="auto-group-kmj1-vUZ">
       <div class="divpaging-44y">
-        <div class="auto-group-esvz-a3K">
-        <div class="link-6vm">1</div>
-        <div class="link-2-yzZ">2</div>
+        <div class="auto-group-esvz-a3K" id="pagingBoard">
+			
+        <th:block th:each="i:${#numbers.sequence(1,totalPageBoard)}"  th:if="${i != 0}">
+		<a href="#" class="page-link" data-page="${i}" th:text="${i}" data-sort="${sortBy}"></a>		
+	</th:block>
 
       </div>
     </div>
   </div>
 </div>
 </div>
+<!--footer-->
+	<div id="footer"></div>
 </body>
