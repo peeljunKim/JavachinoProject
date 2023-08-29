@@ -1,12 +1,19 @@
 package com.example.demo.admin.controller;
 
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,86 +29,141 @@ import lombok.Setter;
 @Controller
 @Setter
 public class AdminUsersController {
-	public int pageSIZE = 13;
-	public int totalRecord;
-	public int totalPage;
-	
-	@Autowired
-	private AdminUsersService us;
-	
-	@GetMapping(value={"/admin/users/usersList/{pageNUM}",
-			"/admin/users/usersList/{pageNUM}/{cname}/{keyword}"})
-	public String list(Model model, 
-			@PathVariable("pageNUM") int pageNUM,
-			@PathVariable(required = false) String cname,
-			@PathVariable(required = false) String keyword) {		
-		if (keyword != null && !keyword.isEmpty()) {
-	           totalRecord = us.getTotalRecordByKeyword(cname,keyword);
-	       } else {
-	           totalRecord = us.getTotalRecord();
-	       }
-		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
-		System.out.println("전체레코드수 : "+totalRecord);
-		System.out.println("전체페이지수 : "+totalPage);
-		System.out.println("현재페이지수 : "+pageNUM);
-		int start = (pageNUM-1)*pageSIZE+1;
-		int end=start+pageSIZE-1;
-		System.out.println("start:"+start);
-		System.out.println("end:"+end);
-		model.addAttribute("list", us.findAll(start, end, cname, keyword));
-		model.addAttribute("totalPage", totalPage);
-		return "/admin/users/usersList";
-	}
-	//추가
-	@PostMapping("/users/insert")
-    public ModelAndView insert(Users u, HttpServletRequest request) {
-		String path = request.getServletContext().getRealPath("/images");
-		System.out.println("path:"+path);
-		String fname = null;
-		MultipartFile uploadFile = u.getUploadFile();
-		fname = uploadFile.getOriginalFilename();
-		if(fname != null && !fname.equals("")) {
-			try {
-				FileOutputStream fos = new FileOutputStream(path+"/"+fname);				
-				FileCopyUtils.copy(uploadFile.getBytes(), fos);
-				fos.close();
-			}catch (Exception e) {
-				System.out.println("예외발생:"+e.getMessage());
-			}
-		}else {
-			fname = "";
-		}
-		u.setUsersFname(fname);
-		
-        us.insert(u);
-        return new ModelAndView("redirect:/admin/users/usersList/1");
-    }
-	//수정
-	@PostMapping("/users/update/{usersNo}")
-    public ModelAndView update(@PathVariable("usersNo") int usersNo, @RequestParam String usersFname, @RequestParam String usersPhone) {
-        us.update(usersNo, usersFname, usersPhone);
-        return new ModelAndView("redirect:/admin/users/usersList/1");
-    }
-	 @GetMapping("/users/update/{usersNo}")
-	    public ModelAndView showUpdateForm(Model model, @PathVariable("usersNo") int usersNo) {
-	        model.addAttribute("usersNo", usersNo);
-	        // Load other necessary data for the form if needed
-	        return new ModelAndView("redirect:/admin/users/usersList/1");
-	    }
-	
-	//삭제
-	@PostMapping("/users/delete")
-	public ModelAndView delete(@RequestParam int usersNo) {
-	    us.deleteUsers(usersNo);
-	    return new ModelAndView("redirect:/admin/users/usersList/1");
-	}
 
-	@GetMapping("/users/delete/{usersNo}")
-	public ModelAndView delete(@PathVariable("usersNo") int usersNo, Model model) {
-	    model.addAttribute("usersNo", usersNo);
-	    return new ModelAndView("redirect:/admin/users/usersList/1");
-	}
-	
-	
-	
+    private final AdminUsersService adminUsersService;
+
+    public AdminUsersController(AdminUsersService adminUsersService) {
+        this.adminUsersService = adminUsersService;
+    }
+
+    @GetMapping("/admin/users/usersList")
+    public String usersList(Model model, @PageableDefault(page=0, size=13,  sort = "usersNo", direction = Sort.Direction.DESC) Pageable pageable,
+    		  @RequestParam(required=false) String usersId,
+              @RequestParam(required=false) String usersName) {
+    	Page<Users> list;
+        if(usersId != null && !usersId.isEmpty()) {
+            list = adminUsersService.findByUsersIdContaining(usersId, pageable);
+        } else if(usersName != null && !usersName.isEmpty()) {
+            list = adminUsersService.findByUsersNameContaining(usersName, pageable);
+        } else {
+            list = adminUsersService.findAll(pageable);
+        }
+        int nowPage = list.getPageable().getPageNumber()+1;
+        int startPage = Math.max(nowPage -4, 1);
+        int endPage = Math.min(nowPage +5, list.getTotalPages());
+        
+        model.addAttribute("list", list);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        
+    	model.addAttribute("usersId", usersId);
+    	model.addAttribute("usersName", usersName);
+        return "/admin/users/usersList";
+    }
+    
+    //파일이 저장되는경로
+    @Value("${file.upload-dir}")
+    private String uploadDir;
+    //추가기능
+    @PostMapping("/users/insert")
+    public ModelAndView insert(@ModelAttribute("users") Users u,
+                               @RequestParam("uploadFile") MultipartFile uploadFile,
+                               HttpServletRequest request) {
+        //파일경로
+    	String path = new File(uploadDir).getAbsolutePath(); 
+        System.out.println("path:" + path);
+
+        try {
+            String fname = generateUniqueFilename(uploadFile);
+
+            saveUploadedFiles(uploadFile, path, fname);
+
+            u.setUsersFname(fname);
+
+        } catch (Exception e) {
+            System.out.println("예외발생:" + e.getMessage());
+        }
+
+        adminUsersService.save(u);
+
+        return new ModelAndView("redirect:/admin/users/usersList");
+    }
+
+    private void saveUploadedFiles(MultipartFile file, String dirPath, String filename) throws IOException {
+      if (!file.isEmpty()) {
+          File destination = new File(dirPath + File.separator + filename);  
+          try (OutputStream fos = new FileOutputStream(destination)) { 
+              fos.write(file.getBytes());
+          }
+      }
+    }
+
+    private String generateUniqueFilename(MultipartFile file) throws IOException {
+      if (!file.isEmpty()) {
+          long n = System.currentTimeMillis();
+          String originalName = file.getOriginalFilename();
+          int dotIndex = originalName.lastIndexOf(".");
+          
+          // 확장자가 없는 경우와 있는 경우를 분리하여 처리
+          if (dotIndex == -1) { 
+              return originalName + "_" + n;
+          } else { 
+              return originalName.substring(0,dotIndex) + "_" + n +
+                     originalName.substring(dotIndex); 
+           }
+       }
+       return null;
+    }
+    
+    //수정기능
+    @PostMapping("/users/update/{usersNo}")
+    public ModelAndView update(@PathVariable int usersNo,
+                               @ModelAttribute("users") Users updatedUsers,
+                               @RequestParam("uploadFile") MultipartFile uploadFile) {
+        String path = new File(uploadDir).getAbsolutePath();
+        System.out.println("path:" + path);
+
+        try {
+            String fname = saveUploadedFiles(uploadFile, path);
+
+            updatedUsers.setUsersFname(fname);
+
+            adminUsersService.update(usersNo, updatedUsers);
+
+         } catch (Exception e) {
+             System.out.println("예외발생:" + e.getMessage());
+         }
+
+         return new ModelAndView("redirect:/admin/users/usersList");
+    }
+
+    private String saveUploadedFiles(MultipartFile file, String dirPath) throws IOException {
+      if (!file.isEmpty()) {
+          File uploadDir = new File(dirPath);
+          if (!uploadDir.exists()) {
+              uploadDir.mkdirs();
+          }
+
+          // 원본 파일명 대신 고유한 새로운 파일명을 생성하여 사용
+          String filename = generateUniqueFilename(file); 
+
+          File destination = new File(uploadDir.getAbsolutePath() + File.separator + filename);
+
+          try (OutputStream fos = new FileOutputStream(destination)) { 
+              fos.write(file.getBytes());
+              return filename;
+         }
+     }
+
+     return null;
+    }
+    
+    //삭제기능(파일은 혹시모르니 삭제 같이 안하는걸로)
+    @PostMapping("/users/delete/{usersNo}")
+    public ModelAndView delete(@PathVariable int usersNo) {
+    	adminUsersService.delete(usersNo);
+        return new ModelAndView("redirect:/admin/users/usersList");
+    }
+
 }

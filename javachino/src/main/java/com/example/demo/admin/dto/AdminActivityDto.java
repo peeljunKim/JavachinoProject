@@ -27,7 +27,5 @@ public class AdminActivityDto {
 		this.activityFname2 = activityFname2;
 		this.activityFname3 = activityFname3;
 	}
-    
-    // 생성자
 
 }

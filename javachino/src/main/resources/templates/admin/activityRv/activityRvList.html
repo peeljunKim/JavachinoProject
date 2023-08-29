@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<link rel="stylesheet" href="/css/admin/activity/activityList.css">
+<link rel="stylesheet" href="/css/admin/business/businessList.css">
 <title>Insert title here</title>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js" integrity="sha384-nHGZxOCfPIKnRfMCsb5sy8GfnmUjF0zUbSHEA0R5MUYD6FpXw6boPkTtIj0kl3V6" crossorigin="anonymous"></script>
@@ -20,19 +20,18 @@
                 $(this).toggleClass("active");
                 $(this).siblings(".panel").slideToggle("fast");
             });
+
     });
     function navigateTo(url) {
 	  window.location.href = url;
 	}
 	
-	$(function(){
-		$("#btnSearch").click(function(){			
-			var cname = $("#cname").val();
-			var keyword = $("#keyword").val();
-			var pageNUM = $("#pageNUM").val();
-			url = "/admin/activity/activityRv/"+pageNUM+"/"+cname+"/"+keyword;
-			location.href=url;
-		});
+	$(document).ready(function(){
+	  $("#btnSearch").click(function(){
+	    var searchType = $("#cname").val();
+	    var keyword = $("#keyword").val();
+	    window.location.href = "/admin/activityRv/activityRvList?" + searchType + "=" + keyword;
+	  });
 	});
 
 	  document.addEventListener("DOMContentLoaded", function () {
@@ -48,22 +47,17 @@
 	    event.preventDefault();
 	    
 	    if (confirm('정말로 삭제하시겠습니까?')) {
-	      let activityRvNo = $(this).data('activityRvNo');
-	      let data = new FormData();
-	      data.append('activityRvNo', activityRvNo);
+	      let activityRvNo = $(this).data('activityrvno');
 	      
 	      $.ajax({
-	        url: "/activityRv/delete",
-	        method: "post",
-	        processData: false,
-	        contentType: false,
-	        data: data,
+	        url: "/activityRv/delete/" + activityRvNo,
+	        method: "POST",
 	        success: function(response) {
-	          alert(response);
-	          window.location.reload();
+	            alert("삭제되었습니다.");
+	            window.location.reload();
 	        },
 	        error: function() {
-	          alert("삭제에 실패하였습니다.");
+	            alert("삭제에 실패하였습니다.");
 	        }
 	      });
 	    }
@@ -100,7 +94,7 @@
 	            contentType: false,
 	            data: formData,
 	            success: function (response) {
-	                alert(response);
+	                alert("추가하였습니다.");
 	                window.location.reload();
 	            },
 	            error: function () {
@@ -134,18 +128,16 @@
         openUpdateModal();
         // Extract user data and populate the form fields
         const activityRvNo = $(this).closest("tr").find(".table_no").text();
-        const activityName = $(this).closest("tr").find(".table_name").text();
         const rvDate = $(this).closest("tr").find(".table_date").text();
-        const activityRvDate = $(this).closest("tr").find(".table_ar_date").text();
+        const activityRvDate = $(this).closest("tr").find(".table_rvDate").text();
+        const activityRvPeople = $(this).closest("tr").find(".table_people").text();
         const activityRvPhone = $(this).closest("tr").find(".table_phone").text();
-        const usersName = $(this).closest("tr").find(".table_users_name").text();
 
         $("#updateForm input[name='activityRvNo']").val(activityRvNo);
-        $("#updateForm input[name='activityName']").val(activityName);
         $("#updateForm input[name='rvDate']").val(rvDate);
         $("#updateForm input[name='activityRvDate']").val(activityRvDate);
+        $("#updateForm input[name='activityRvPeople']").val(activityRvPeople);
         $("#updateForm input[name='activityRvPhone']").val(activityRvPhone);
-        $("#updateForm input[name='usersName']").val(usersName);
     });
 
     // Modal form submission
@@ -161,7 +153,7 @@
             contentType: false,
             data: formData,
             success: function (response) {
-                alert(response);
+                alert("수정되었습니다.");
                 window.location.reload();
             },
             error: function () {
@@ -180,8 +172,8 @@
 	<div class="list_top">
 		<div class="search_box">
 			<select name="select_box" id="cname">
-					<option value="activityName">액티비티이름</option>
-					<option value="usersName">회원이름</option>
+					<option value="usersName">예약자</option>
+					<option value="activityName">액티비티명</option>
 			</select>
 			<div class="search_bar">
 				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
@@ -196,47 +188,60 @@
 	<table class="rwd-table">
 		<tr>
 			<th class="table_no">예약코드</th>
-			<th class="table_name">액티이름</th>
 			<th class="table_date">예약날짜</th>
-			<th class="table_ar_date">체험날짜</th>
-			<th class="table_phone">번호</th>
-			<th class="table_users_name">예약자명</th>
+			<th class="table_rvDate">체험날짜</th>
+			<th class="table_people">인원수</th>
+			<th class="table_phone">인원수</th>
+			<th class="table_users">예약자</th>
+			<th class="table_activity">액티비티명</th>
 			<th class="table_update">관리</th>
 		</tr>
 		<tr th:each="a:${list}">
 			<td class="table_no" th:text="${a.activityRvNo}"></td>
-			<td class="table_name" th:text="${a.activityName}"></td>
 			<td class="table_date" th:text="${a.rvDate}"></td>
-			<td class="table_ar_date" th:text="${a.activityRvDate}"></td>
+			<td class="table_rvDate" th:text="${a.activityRvDate}"></td>
+			<td class="table_people" th:text="${a.activityRvPeople}"></td>
 			<td class="table_phone" th:text="${a.activityRvPhone}"></td>
-			<td class="table_users_name" th:text="${a.usersName}"></td>
+			<td class="table_users" th:text="${a.users.usersName}"></td>
+			<td class="table_activity" th:text="${a.activity.activityName}"></td>
 			<td class="table_update">
 				<button class="update_list" onclick=openUpdateModal() >수정</button>
-				<button class="delete_list" th:attr="data-activityRvNo=${a.activityRvNo}">삭제</button>
+				<button class="delete_list" th:data-activityrvno="${a.activityRvNo}">삭제</button>
 			</td>
 		</tr>
 	</table>
 	<hr />
 	</div>
 	<div class="pagination">
-	    <a href="#">«</a>
-	    <th:block th:each="i : ${#numbers.sequence(1, totalPage)}">
-        <a th:href="@{${'/admin/activity/activityRvList/' + i + (cname != null ? '/' + cname + '/' + keyword : '')}}" th:text="${i}" th:class="${i == pageNUM ? 'active' : ''}"></a>
-   		</th:block>
-	    <a href="#">»</a>
+	    <a href="/admin/activityRv/activityRvList?page=0&usersName=${usersName}&activityName=${activityName}">«</a>
+	     <!--굳이 태그로 감쌀 필요 없는 부분을 타임리프 문법으로 사용할 때 사용-->
+		    <th:block th:each="page:${#numbers.sequence(startPage, endPage)}">
+			    <a th:href="@{/admin/activityRv/activityRvList(page=${page -1}, usersName=${usersName}, activityName=${activityName})}" th:text="${page}" th:style="${page == nowPage ? 'background-color:rgb(0, 128, 192); color:white; border-radius:5px;' : ''}">></a>
+			</th:block>
+	    <a href="/admin/activityRv/activityRvList?page=${totalPages - 1}&usersName=${usersName}&activityName=${activityName}}">»</a>
 	</div>
 	<div id="myModal" class="modal">
 	  <div class="modal-content">
 	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
 	    <h2>사용자 추가</h2>
 	    <form id="insertForm" action="/activityRv/insert" method="post">		
-			액티비티이름 : <input type="text" name="activityName"><br/>
-			예약날짜 : <input type="text" name="rvDate"><br>
-			체험날짜 : <input type="text" name="activityRvDate"><br>
+			예약날짜 : <input type="Date" name="rvDate"><br/>
+			체험날짜 : <input type="Date" name="activityRvDate"><br>
+			인원수 : <input type="text" name="activityRvPeople"><br>
 			번호 : <input type="text" name="activityRvPhone"><br/>
-			예약자명 : <input type="text" name="usersName"><br/>
+						사용자:
+	        <select name='users.usersNo'>
+	            <option th:each='users : ${usersName}' th:value='${users.usersNo}' th:text='${users.usersName}'></option>
+	        </select><br>
+	
+	         <!-- Activities dropdown -->
+	         액티비티:
+	         <select name='activity.activityNo'>
+	             <option th:each='activity : ${activityName}' th:value='${activity.activityNo}' th:text='${activity.activityName}'></option>
+	         </select><br>
 			<input type="submit" value="등록">
 			<input type="reset" value="다시입력">		
+
 		</form>
 	  </div>
 	</div>
@@ -247,11 +252,26 @@
 	    <h2>사용자 수정</h2>
 	    <form id="updateForm" action="/activityRv/update/{activityRvNo}" method="post">
 			<input type="hidden" name="activityRvNo"/>
-			액티비티이름 : <input type="text" name="activityName"><br/>
-			예약날짜 : <input type="text" name="rvDate"><br>
-			체험날짜 : <input type="text" name="activityRvDate"><br>
+			예약날짜 : <input type="Date" name="rvDate"><br/>
+			체험날짜 : <input type="Date" name="activityRvDate"><br>
+			인원수 : <input type="text" name="activityRvPeople"><br>
 			번호 : <input type="text" name="activityRvPhone"><br/>
-			예약자명 : <input type="text" name="usersName"><br/>
+			사용자:
+ 			<select name='users.usersNo'>
+			    <option th:each='user : ${usersName}' 
+			      th:value='${user.usersNo}'
+			      th:selected="${currentActivityRv != null && currentActivityRv.users != null && currentActivityRv.users.id == user.id}"
+			      th:text='${user.usersName}'>
+			    </option>
+			</select><br/>
+		       활동:
+			   <select name='activity.activityNo'>
+				    <option th:each='activity : ${activityName}' 
+				      th:value='${activity.activityNo}'
+				       th:selected="${currentActivityRv != null && currentActivityRv.activity != null && currentActivityRv.activity.id == activity.id}"
+				       th:text='${activity.activityName}'>
+				    </option>
+				</select><br/>
 			<input type="submit" value="수정"/>
 			<input type="reset" value="다시입력"/>
 		</form>

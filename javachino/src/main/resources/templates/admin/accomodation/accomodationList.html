@@ -30,13 +30,13 @@
 	  $("#btnSearch").click(function(){
 	    var searchType = $("#cname").val();
 	    var keyword = $("#keyword").val();
-	    window.location.href = "/admin/users/usersList?" + searchType + "=" + keyword;
+	    window.location.href = "/admin/accomodation/accomodationList?" + searchType + "=" + keyword;
 	  });
 	});
 
 	  document.addEventListener("DOMContentLoaded", function () {
-	    const btnUserInsert = document.querySelector(".insert_list");
-	    btnUserInsert.addEventListener("click", openModal);
+	    const btnAccomodationInsert = document.querySelector(".insert_list");
+	    btnAccomodationInsert.addEventListener("click", openModal);
 	
 	    const btnUpdate = document.querySelector(".update_list");
 	    btnUpdate.addEventListener("click", openUpdateModal);
@@ -49,7 +49,7 @@
 	
 	        const btnCloseModal = document.getElementById("btnCloseModal");
 	        btnCloseModal.addEventListener("click", closeModal);
-	});
+		});
 	
 	    function closeModal() {
 	        const modal = document.getElementById("myModal");
@@ -57,8 +57,7 @@
 	
 	        const btnCloseModal = document.getElementById("btnCloseModal");
 	        btnCloseModal.removeEventListener("click", closeModal);
-	 };
-	
+		};  
 	    // 모달 내부의 폼 제출
 	    $("#insertForm").submit(function (event) {
 	        event.preventDefault(); // 기본 폼 제출 방지
@@ -66,7 +65,7 @@
 	        let formData = new FormData(this);
 	
 	        $.ajax({
-	            url: "/users/insert",
+	            url: "/accomodation/insert",
 	            type: "post",
 	            processData: false,
 	            contentType: false,
@@ -82,20 +81,23 @@
 	    });
 	});
 	  
+	  
+	  
+	  
 	$(document).ready(function() {
 	  $(".delete_list").click(function(event) {
 	    event.preventDefault();
 	    
 	    if (confirm('정말로 삭제하시겠습니까?')) {
-	      let usersNo = $(this).data('usersno');
+	      let accomodationNo = $(this).data('accomodationno');
 	      let data = new FormData();
-	      data.append('usersNo', usersNo);
+	      data.append('accomodationNo', accomodationNo);
 	      
 		    $.ajax({
-			    url: "/users/delete/" + usersNo,
+			    url: "/accomodation/delete/" + accomodationNo,
 			    method: "post",
 			    success: function(response) {
-			        alert("삭제 되었습니다.");
+			        alert("삭제되었습니다.");
 			        window.location.reload();
 			    },
 			    error: function() {
@@ -129,21 +131,15 @@
     $(".update_list").click(function () {
         openUpdateModal();
         // Extract user data and populate the form fields
-        const usersNo = $(this).closest("tr").find(".table_no").text();
-        const usersId = $(this).closest("tr").find(".table_id").text();
-        const usersName = $(this).closest("tr").find(".table_name").text();
-        const usersPhone = $(this).closest("tr").find(".table_phone").text();
-        const usersDate = $(this).closest("tr").find(".table_date").text();
-        const usersFname = $(this).closest("tr").find(".table_fname").text();
-
-        $("#updateForm input[name='usersNo']").val(usersNo);
-        $("#updateForm input[name='usersId']").val(usersId);
-        $("#updateForm input[name='usersName']").val(usersName);
-        $("#updateForm input[name='usersPhone']").val(usersPhone);
-        $("#updateForm input[name='usersDate']").val(usersDate);
-        $("#updateForm input[name='usersFname']").val(usersFname);
-        
-        $("#uesrsImage1").attr("src", "/images/admin/" + usersFname);
+	    const accomodationNo = $(this).closest("tr").find(".table_no").text();
+	    const accomodationName = $(this).closest("tr").find(".table_name").text();
+	    const accomodationAddr = $(this).closest("tr").find(".table_addr").text();
+	    const accomodationPrice = $(this).closest("tr").find(".table_price").text();
+	
+	    $("#updateForm input[name='accomodationNo']").val(accomodationNo);
+	    $("#updateForm input[name='accomodationName']").val(accomodationName);
+	    $("#updateForm input[name='accomodationAddr']").val(accomodationAddr);
+	    $("#updateForm input[name='accomodationPrice']").val(accomodationPrice);
     });
 
     // Modal form submission
@@ -153,13 +149,13 @@
         let formData = new FormData(this);
 
         $.ajax({
-            url: "/users/update/" + formData.get("usersNo"),
+            url: "/accomodation/update/" + formData.get("accomodationNo"),
             type: "post",
             processData: false,
             contentType: false,
             data: formData,
             success: function (response) {
-                alert("수정 되었습니다.");
+                alert("수정되었습니다.");
                 window.location.reload();
             },
             error: function () {
@@ -178,8 +174,8 @@
 	<div class="list_top">
 		<div class="search_box">
 			<select name="select_box" id="cname">
-					<option value="usersId">아이디</option>
-					<option value="usersName">이름</option>
+					<option value="accomodationName">숙소명</option>
+					<option value="accomodationAddr">주소</option>
 			</select>
 			<div class="search_bar">
 				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
@@ -193,48 +189,42 @@
 	<hr/>
 	<table class="rwd-table">
 		<tr>
-			<th class="table_no">회원 코드</th>
-			<th class="table_id">아이디</th>
-			<th class="table_name">이름</th>
-			<th class="table_phone">번호</th>
-			<th class="table_date">가입일</th>
-			<th class="table_fname">프로필 사진</th>
+			<th class="table_no">숙소 코드</th>
+			<th class="table_name">숙소명</th>
+			<th class="table_addr">주소</th>
+			<th class="table_price">가격</th>
 			<th class="table_update">관리</th>
 		</tr>
-		<tr th:each="u:${list}">
-			<td class="table_no" th:text="${u.usersNo}"></td>
-			<td class="table_id" th:text="${u.usersId}"></td>
-			<td class="table_name" th:text="${u.usersName}"></td>
-			<td class="table_phone" th:text="${u.usersPhone}"></td>
-			<td class="table_date" th:text="${#dates.format(u.usersDate, 'yyyy-MM-dd')}"></td>
-			<td class="table_fname" th:text="${u.usersFname}"></td>
+		<tr th:each="a:${list}">
+			<td class="table_no" th:text="${a.accomodationNo}"></td>
+			<td class="table_name" th:text="${a.accomodationName}"></td>
+			<td class="table_addr" th:text="${a.accomodationAddr}"></td>
+			<td class="table_price" th:text="${a.accomodationPrice}"></td>
 			<td class="table_update">
 				<button class="update_list" onclick=openUpdateModal() >수정</button>
-				<button class="delete_list" th:data-usersno="${u.usersNo}">삭제</button>
+				<button class="delete_list" th:data-accomodationno="${a.accomodationNo}">삭제</button>
 			</td>
 		</tr>
 	</table>
 	<hr />
 	</div>
 	<div class="pagination">
-	    <a href="/admin/users/usersList?page=0&usersId=${usersId}&usersName=${usersName}">«</a>
+	    <a href="/admin/accomodation/accomodationList?page=0&accomodationName=${accomodationName}&accomodationAddr=${accomodationAddr}">«</a>
 	     <!--굳이 태그로 감쌀 필요 없는 부분을 타임리프 문법으로 사용할 때 사용-->
 		    <th:block th:each="page:${#numbers.sequence(startPage, endPage)}">
-			    <a th:href="@{/admin/users/usersList(page=${page -1}, usersId=${usersId}, usersName=${usersName})}" th:text="${page}" th:style="${page == nowPage ? 'background-color:rgb(0, 128, 192); color:white; border-radius:5px;' : ''}">></a>
+			    <a th:href="@{/admin/accomodation/accomodationList(page=${page -1}, accomodationName=${accomodationName}, accomodationAddr=${accomodationAddr})}" th:text="${page}" th:style="${page == nowPage ? 'background-color:rgb(0, 128, 192); color:white; border-radius:5px;' : ''}">></a>
 			</th:block>
-	    <a href="/admin/users/usersList?page=${totalPages - 1}&usersId=${usersId}&usersName=${usersName}">»</a>
+	    <a href="/admin/accomodation/accomodationList?page=${totalPages - 1}&accomodationName=${accomodationName}&accomodationAddr=${accomodationAddr}">»</a>
 	</div>
 </div>
 	<div id="myModal" class="modal">
 	  <div class="modal-content">
 	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
-	    <h2>사용자 추가</h2>
-	    <form id="insertForm" action="/users/insert" method="post" enctype="multipart/form-data">
-			아이디 : <input type="text" name="usersId"><br/>
-			이름 : <input type="text" name="usersName"><br/>
-			비밀번호 : <input type="text" name="usersPassword"><br/>
-			번호 : <input type="text" name="usersPhone"><br/>
-			첨부파일 : <input type="file" name="uploadFile"><br/>
+	    <h2>숙소 추가</h2>
+	    <form id="insertForm" action="/accomodation/insert" method="post">
+			숙소명 : <input type="text" name="accomodationName"><br/>
+			주소 : <input type="text" name="accomodationAddr"><br/>
+			가격 : <input type="text" name="accomodationPrice"><br/>
 			<input type="submit" value="등록"/>
 			<input type="reset" value="다시입력"/>	
 		</form>
@@ -244,11 +234,17 @@
 	  <div class="modalUpdate-content">
 	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
 	    <h2>액티비티 수정</h2>
-	    <form id="updateForm" action="/users/update/{usersNo}" method="post">
-			<input type="hidden" name="usersNo"/>
-			이름 : <input type="text" name="usersName"><br/>
-			첨부파일 : <input type="file" name="uploadFile"><br/>
-			<img id="usersImage" src="/images/admin/default.png" width="40px" height="auto">
+	    <form id="updateForm" action="/accomodation/update/{accomodationNo}" method="post">
+			<input type="hidden" name="accomodationNo"/>
+			숙소명 : <input type="text" name="accomodationName"><br/>
+			주소 : <input type="text" name="accomodationAddr"><br/>
+			가격 : <input type="text" name="accomodationPrice"><br/>
+			카테고리 :
+		    <select name="AccomodationCategory">
+		        <option value="HOTEL">HOTEL</option>
+		        <option value="PENSION">PENSION</option>
+		        <option value="GUESTHOUSE">GUESTHOUSE</option>
+		    </select><br/>
 			<input type="submit" value="수정"/>
 			<input type="reset" value="다시입력"/>
 		</form>

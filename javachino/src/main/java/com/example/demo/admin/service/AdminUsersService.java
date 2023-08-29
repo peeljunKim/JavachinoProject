@@ -1,59 +1,75 @@
 package com.example.demo.admin.service;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.admin.dao.AdminUsersDAO;
+import com.example.demo.admin.repository.AdminUsersRepository;
 import com.example.demo.entity.Users;
 
 import lombok.Setter;
 
-@Service
 @Setter
+@Service
 public class AdminUsersService {
-    @Autowired
-    private AdminUsersDAO dao;
+    private final AdminUsersRepository adminRepository;
 
-    public List<Users> findAll(int start, int end, String cname, String keyword) {
-    	List<Users> list = null;
-    	if(keyword != null && !keyword.equals("")) {			
-			switch(cname) {
-				case "usersId" : list=dao.findByUsersIdLike("%"+keyword+"%");break;
-				case "usersName" : list =  dao.findByUsersNameLike("%"+keyword+"%");break;
-			}			
-		}else {
-			list = dao.selectAll(start, end);
-		}
-        return list;
+    public AdminUsersService(AdminUsersRepository adminRepository) {
+        this.adminRepository = adminRepository;
+    }
+    //테이블 출력
+    @Transactional(readOnly = true)
+    public Page<Users> findAll(Pageable pageable) {
+        return adminRepository.findAll(pageable);
+    }
+    //name 검색기능
+    @Transactional(readOnly = true)
+    public Page<Users> findByUsersIdContaining(String usersId, Pageable pageable) {
+        return adminRepository.findByUsersIdContaining(usersId, pageable);
+    }
+    //addr 검색기능
+    @Transactional(readOnly = true)
+    public Page<Users> findByUsersNameContaining(String usersName, Pageable pageable) {
+        return adminRepository.findByUsersNameContaining(usersName, pageable);
     }
     
-    //검색된 레코드 수 반환
-    public int getTotalRecordByKeyword(String cname,String keyword) {
-       int u;
-       if(cname.equals("usersId")) {
-          u= dao.countByUsersId("%"+keyword+"%");
-       }else{
-    	   u= dao.countByUsersName("%"+keyword+"%");
-       }
-       return u;
+    @Transactional
+    public Users save(Users users) {
+        return adminRepository.save(users);
     }
-
+    //수정기능
+    @Transactional
+    public Users update(Integer id, Users updatedUsers) {
+        return adminRepository.findById(id)
+                .map(users -> {
+                	users.setUsersName(updatedUsers.getUsersName());
+                	users.setUsersFname(updatedUsers.getUsersFname());
+                    
+                    return adminRepository.save(users);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Invalid users Id:" + id));
+    }
+    //삭제기능
+    @Transactional
+    public void delete(Integer id) {
+        adminRepository.deleteById(id);
+    }
     //전체 레코드 수 반환
     public int getTotalRecord() {
-        return (int) dao.count();
+        return (int) adminRepository.count();
     }
-    //추가
-    public void insert(Users u) {
-        dao.insert(u);
+    
+    @Transactional(readOnly = true)
+    public List<Users> findAll() {
+        return adminRepository.findAll();
     }
-    //수정
-    public void update(int usersNo, String usersFname, String usersPhone) {
-		dao.update(usersNo, usersFname, usersPhone);
-	}
-    //삭제
-    public int deleteUsers(int usersNo) {
-		return dao.deleteUsers(usersNo);
-	}
+    @Transactional(readOnly = true)
+    public Optional<Users> findById(Integer id) {
+        return adminRepository.findById(id);
+    }
+
 }

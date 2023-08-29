@@ -1,11 +1,11 @@
 package com.example.demo.admin.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.admin.dao.AdminBusinessDAO;
+import com.example.demo.admin.repository.AdminBusinessRepository;
 import com.example.demo.entity.Business;
 
 import lombok.Setter;
@@ -13,53 +13,60 @@ import lombok.Setter;
 @Service
 @Setter
 public class AdminBusinessService {
-	@Autowired
-	private AdminBusinessDAO dao;
-	
-	public List<Business> findAll(int start, int end, String cname, String keyword) {
-    	List<Business> list = null;
-    	if(keyword != null && !keyword.equals("")) {			
-			switch(cname) {
-				case "businessName": list=dao.findByBusinessNameLike("%"+keyword+"%");break;
-				case "businessAddr":list =  dao.findByBusinessAddrLike("%"+keyword+"%");break;
-				case "businessPhone":list =  dao.findByBusinessPhoneLike("%"+keyword+"%");break;
-				case "businessManager":list =  dao.findByBusinessManagerLike("%"+keyword+"%");break;
-			}			
-		}else {
-			list = dao.selectAll(start, end);
-		}
-        return list;
+	private final AdminBusinessRepository adminRepository;
+
+    public AdminBusinessService(AdminBusinessRepository adminRepository) {
+        this.adminRepository = adminRepository;
+    }
+    //테이블 출력
+    @Transactional(readOnly = true)
+    public Page<Business> findAll(Pageable pageable) {
+        return adminRepository.findAll(pageable);
+    }
+    //name 검색기능
+    @Transactional(readOnly = true)
+    public Page<Business> findByBusinessNameContaining(String businessName, Pageable pageable) {
+        return adminRepository.findByBusinessNameContaining(businessName, pageable);
+    }
+    //addr 검색기능
+    @Transactional(readOnly = true)
+    public Page<Business> findByBusinessAddrContaining(String businessAddr, Pageable pageable) {
+        return adminRepository.findByBusinessAddrContaining(businessAddr, pageable);
+    }
+    //phone 검색기능
+    @Transactional(readOnly = true)
+    public Page<Business> findByBusinessPhoneContaining(String businessphone, Pageable pageable) {
+    	return adminRepository.findByBusinessPhoneContaining(businessphone, pageable);
+    }
+    //manager 검색기능
+    @Transactional(readOnly = true)
+    public Page<Business> findByBusinessManagerContaining(String businessManager, Pageable pageable) {
+    	return adminRepository.findByBusinessManagerContaining(businessManager, pageable);
     }
     
-    //검색된 레코드 수 반환
-    public int getTotalRecordByKeyword(String cname,String keyword) {
-       int b=0;
-       if(cname.equals("businessName")) {
-          b= dao.countByBusinessName("%"+keyword+"%");
-       }else if(cname.equals("businessAddr")){
-    	   b= dao.countByBusinessAddr("%"+keyword+"%");
-       }else if(cname.equals("businessPhone")){
-    	   b= dao.countByBusinessPhone("%"+keyword+"%");
-       }else if(cname.equals("businessManager")){
-    	   b= dao.countByBusinessManager("%"+keyword+"%");
-       }
-       return b;
+    @Transactional
+    public Business save(Business business) {
+        return adminRepository.save(business);
     }
-    //전체 레코드 수 반환
-    public int getTotalRecord() {
-        return (int) dao.count();
+    //수정기능
+    @Transactional
+    public Business update(Integer id, Business updatedBusiness) {
+        return adminRepository.findById(id)
+                .map(business -> {
+                	business.setBusinessName(updatedBusiness.getBusinessName());
+                	business.setBusinessAddr(updatedBusiness.getBusinessAddr());
+                	business.setBusinessPhone(updatedBusiness.getBusinessPhone());
+                	business.setBusinessManager(updatedBusiness.getBusinessManager());
+                	business.setBusinessCategory(updatedBusiness.getBusinessCategory());
+                    
+                    return adminRepository.save(business);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Invalid business Id:" + id));
     }
-    //추가
-    public void insert(Business b) {
-        dao.insert(b);
+    //삭제기능
+    @Transactional
+    public void delete(Integer id) {
+        adminRepository.deleteById(id);
     }
-    //수정
-    public void update(int businessNo, String businessName, String businessAddr, String businessPhone, String businessManager) {
-		dao.update(businessNo, businessName, businessAddr, businessPhone, businessManager);
-	}
-    //삭제
-    public int deleteBusiness(int businessNo) {
-		return dao.deleteBusiness(businessNo);
-	}
 	
 }

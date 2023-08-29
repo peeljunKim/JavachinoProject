@@ -18,6 +18,7 @@ $(document).ready(function() {
         $(this).siblings(".panel").slideToggle("fast");
     });
 });
+
 </script>
 </head>
 <body>
@@ -29,17 +30,17 @@ $(document).ready(function() {
 				<li class="side_dashboard"  onclick="navigateTo('/admin/adminPage')">
 					<a href="/admin/adminPage">대시보드</a>
 				</li>
-				<li class="side_user" onclick="navigateTo('/admin/users/usersList/1')">
-						<a href="/admin/users/usersList/1">회원관리</a>		
+				<li class="side_user" onclick="navigateTo('/admin/users/usersList')">
+						<a href="/admin/users/usersList">회원 관리</a>		
 				</li>
-				<li class="side_business" onclick="navigateTo('/admin/business/businessList/1')">
-						<a href="/admin/business/businessList/1">업체관리</a>
+				<li class="side_business" onclick="navigateTo('/admin/business/businessList')">
+						<a href="/admin/business/businessList">업체 관리</a>
 				</li>
-				<li class="side_accomodation">
-					<a href="#">숙소관리</a>
+				<li class="side_accomodation"  onclick="navigateTo('/admin/accomodation/accomodationList')">
+					<a href="/admin/accomodation/accomodationList">숙소 관리</a>
 				</li>
-				<li class="side_activity"  onclick="navigateTo('/admin/activity/activityList/1')">
-					<a href="/admin/activity/activityList/1">액티비티관리</a>
+				<li class="side_activity"  onclick="navigateTo('/admin/activity/activityList')">
+					<a href="/admin/activity/activityList">액티비티 관리</a>
 				</li>
 				<li class="side_cmmunity">
 					<a href="#">커뮤니티 관리</a>
@@ -50,12 +51,12 @@ $(document).ready(function() {
 				<li class="side_reservation">
 				    <a href="#" class="accordion">예약 내역</a>
 				    <ul class="panel" style="display: none;">
-				        <li onclick="navigateTo('/admin/activity/activityRvList/1')">
-							<a href="/admin/activity/activityRvList/1">숙소 예약</a>
-							</li>
-				        <li onclick="navigateTo('/admin/activity/activityRvList/1')">
-							<a href="/admin/activity/activityRvList/1">액티비티 예약</a>
-							</li>
+						<li onclick="navigateTo('/admin/accomodationRv/accomodationRvList')">
+							<a href="/admin/accomodationRv/accomodationRvList">숙소 예약</a>
+						</li>
+				        <li onclick="navigateTo('/admin/activityRv/activityRvList')">
+							<a href="/admin/activityRv/activityRvList">액티비티 예약</a>
+						</li>
 				    </ul>
 				</li>
 				<li class="side_addContent">
@@ -76,7 +77,9 @@ $(document).ready(function() {
 		</div>
 	</div>
 	<div class="Header">
-			<span class="header-text">대시보드</span> 
+			<span class="header-text">
+				관리자 페이지
+			</span> 
 			<div class="header-right">
 				<button class="header_logout">로그아웃</button>
 			</div>

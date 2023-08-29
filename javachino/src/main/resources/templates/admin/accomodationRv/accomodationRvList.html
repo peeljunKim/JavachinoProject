@@ -30,13 +30,13 @@
 	  $("#btnSearch").click(function(){
 	    var searchType = $("#cname").val();
 	    var keyword = $("#keyword").val();
-	    window.location.href = "/admin/business/businessList?" + searchType + "=" + keyword;
+	    window.location.href = "/admin/accomodationRv/accomodationRvList?" + searchType + "=" + keyword;
 	  });
 	});
 
 	  document.addEventListener("DOMContentLoaded", function () {
-	    const btnBusinessInsert = document.querySelector(".insert_list");
-	    btnBusinessInsert.addEventListener("click", openModal);
+	    const btnAccomodationRvInsert = document.querySelector(".insert_list");
+	    btnAccomodationRvInsert.addEventListener("click", openModal);
 	
 	    const btnUpdate = document.querySelector(".update_list");
 	    btnUpdate.addEventListener("click", openUpdateModal);
@@ -47,10 +47,10 @@
 	    event.preventDefault();
 	    
 	    if (confirm('정말로 삭제하시겠습니까?')) {
-	      let businessNo = $(this).data('businessno');
+	      let accomodationRvNo = $(this).data('accomodationrvno');
 	      
 	      $.ajax({
-	        url: "/business/delete/" + businessNo,
+	        url: "/accomodationRv/delete/" + accomodationRvNo,
 	        method: "POST",
 	        success: function(response) {
 	            alert("삭제되었습니다.");
@@ -88,7 +88,7 @@
 	        let formData = new FormData(this);
 	
 	        $.ajax({
-	            url: "/business/insert",
+	            url: "/accomodationRv/insert",
 	            type: "post",
 	            processData: false,
 	            contentType: false,
@@ -127,17 +127,21 @@
     $(".update_list").click(function () {
         openUpdateModal();
         // Extract user data and populate the form fields
-        const businessNo = $(this).closest("tr").find(".table_no").text();
-        const businessName = $(this).closest("tr").find(".table_name").text();
-        const businessAddr = $(this).closest("tr").find(".table_addr").text();
-        const businessPhone = $(this).closest("tr").find(".table_phone").text();
-        const businessManager = $(this).closest("tr").find(".table_manager").text();
+        const accomodationRVNo = $(this).closest("tr").find(".table_no").text();
+        const accomodationRVCheckIn = $(this).closest("tr").find(".table_in").text();
+        const accomodationRVCheckOut = $(this).closest("tr").find(".table_out").text();
+        const accomodationRVDate = $(this).closest("tr").find(".table_date").text();
+        const accomodationRVName = $(this).closest("tr").find(".table_name").text();
+        const accomodationRVPeople = $(this).closest("tr").find(".table_people").text();
+        const accomodationRVPhone = $(this).closest("tr").find(".table_phone").text();
 
-        $("#updateForm input[name='businessNo']").val(businessNo);
-        $("#updateForm input[name='businessName']").val(businessName);
-        $("#updateForm input[name='businessAddr']").val(businessAddr);
-        $("#updateForm input[name='businessPhone']").val(businessPhone);
-        $("#updateForm input[name='businessManager']").val(businessManager);
+        $("#updateForm input[name='accomodationRVNo']").val(accomodationRVNo);
+        $("#updateForm input[name='accomodationRVCheckIn']").val(accomodationRVCheckIn);
+        $("#updateForm input[name='accomodationRVCheckOut']").val(accomodationRVCheckOut);
+        $("#updateForm input[name='accomodationRVDate']").val(accomodationRVDate);
+        $("#updateForm input[name='accomodationRVName']").val(accomodationRVName);
+        $("#updateForm input[name='accomodationRVPeople']").val(accomodationRVPeople);
+        $("#updateForm input[name='accomodationRVPhone']").val(accomodationRVPhone);
     });
 
     // Modal form submission
@@ -147,7 +151,7 @@
         let formData = new FormData(this);
 
         $.ajax({
-            url: "/business/update/" + formData.get("businessNo"),
+            url: "/accomodationRv/update/" + formData.get("accomodationRvNo"),
             type: "post",
             processData: false,
             contentType: false,
@@ -172,10 +176,8 @@
 	<div class="list_top">
 		<div class="search_box">
 			<select name="select_box" id="cname">
-					<option value="businessName" >업체이름</option>
-					<option value="businessAddr" >업체주소</option>
-					<option value="businessPhone" >업체번호</option>
-					<option value="businessManager" >담당자이름</option>
+					<option value="usersName">예약자</option>
+					<option value="accomodationName">숙소명</option>
 			</select>
 			<div class="search_bar">
 				<i class="fa-solid fa-magnifying-glass fa-lg" style="color: #8fa0bd;" id="btnSearch"></i>
@@ -189,49 +191,61 @@
 	<hr/>
 	<table class="rwd-table">
 		<tr>
-			<th class="table_id">업체코드</th>
-			<th class="table_name">업체이름</th>
-			<th class="table_fname">업체주소</th>
-			<th class="table_phone">업체번호</th>
-			<th class="table_manager">담당자이름</th>
+			<th class="table_no">예약코드</th>
+			<th class="table_in">체크인 날짜</th>
+			<th class="table_out">체크아웃 날짜</th>
+			<th class="table_date">예약날짜</th>
+			<th class="table_people">인원수</th>
+			<th class="table_users">예약자</th>
+			<th class="table_accomodation">숙소명</th>
 			<th class="table_update">관리</th>
 		</tr>
-		<tr th:each="b:${list}">
-			<td class="table_no" th:text="${b.businessNo}"></td>
-			<td class="table_name" th:text="${b.businessName}"></td>
-			<td class="table_addr" th:text="${b.businessAddr}"></td>
-			<td class="table_phone" th:text="${b.businessPhone}"></td>
-			<td class="table_manager" th:text="${b.businessManager}"></td>
+		<tr th:each="a:${list}">
+			<td class="table_no" th:text="${a.accomodationRVNo}"></td>
+			<td class="table_in" th:text="${a.accomodationRVCheckIn}"></td>
+			<td class="table_out" th:text="${a.accomodationRVCheckOut}"></td>
+			<td class="table_date" th:text="${a.accomodationRVDate}"></td>
+			<td class="table_people" th:text="${a.accomodationRVPeople}"></td>
+			<td class="table_name" style="display: none;" th:text="${a.accomodationRVName}"></td>
+			<td class="table_phone" style="display: none;"  th:text="${a.accomodationRVPhone}"></td>
+			<td class="table_users" th:text="${a.users.usersName}"></td>
+			<td class="table_accomodation" th:text="${a.accomodation.accomodatioName}"></td>
 			<td class="table_update">
 				<button class="update_list" onclick=openUpdateModal() >수정</button>
-				<button class="delete_list" th:data-businessno="${b.businessNo}">삭제</button>
+				<button class="delete_list" th:data-accomodationrvno="${a.accomodationRVNo}">삭제</button>
 			</td>
 		</tr>
 	</table>
 	<hr />
 	</div>
 	<div class="pagination">
-	    <a href="/admin/business/businessList?page=0&businessName=${businessName}&businessAddr=${businessAddr}&businessPhone=${businessPhone}&businessManager=${businessManager}">«</a>
+	    <a href="/admin/accomodationRv/accomodationRvList?page=0&usersName=${usersName}&accomodatioName=${accomodatioName}">«</a>
 	     <!--굳이 태그로 감쌀 필요 없는 부분을 타임리프 문법으로 사용할 때 사용-->
 		    <th:block th:each="page:${#numbers.sequence(startPage, endPage)}">
-			    <a th:href="@{/admin/business/businessList(page=${page -1}, businessName=${businessName}, businessAddr=${businessAddr}, businessPhone=${businessPhone}, businessManager=${businessManager})}" th:text="${page}" th:style="${page == nowPage ? 'background-color:rgb(0, 128, 192); color:white; border-radius:5px;' : ''}">></a>
+			    <a th:href="@{/admin/accomodationRv/accomodationRvList(page=${page -1}, usersName=${usersName}, accomodatioName=${accomodatioName})}" th:text="${page}" th:style="${page == nowPage ? 'background-color:rgb(0, 128, 192); color:white; border-radius:5px;' : ''}">></a>
 			</th:block>
-	    <a href="/admin/business/businessList?page=${totalPages - 1}&businessName=${businessName}&businessAddr=${businessAddr}&businessPhone=${businessPhone}&businessManager=${businessManager}">»</a>
+	    <a href="/admin/accomodationRv/accomodationRvList?page=${totalPages - 1}&usersName=${usersName}&accomodatioName=${accomodatioName}}">»</a>
 	</div>
 	<div id="myModal" class="modal">
 	  <div class="modal-content">
 	    <span class="close-modal-btn" id="btnCloseModal">&times;</span>
 	    <h2>사용자 추가</h2>
-	    <form id="insertForm" action="/business/insert" method="post">		
-			업체이름 : <input type="text" name="businessName"><br/>
-			업체주소 : <input type="text" name="businessAddr"><br>
-			업체번호 : <input type="text" name="businessPhone"><br>
-			담당자이름 : <input type="text" name="businessManager"><br/>
-			카테고리 :
-		    <select name="businessCategory">
-		        <option value="ACCOMODATION">Accommodation</option>
-		        <option value="ACTIVITY">Activity</option>
-		    </select><br/>
+	    <form id="insertForm" action="/accomodationRv/insert" method="post">		
+			체크인날짜 : <input type="Date" name="accomodationRVCheckIn"><br/>
+			체크아웃날짜 : <input type="Date" name="accomodationRVCheckOut"><br>
+			예약날짜 : <input type="text" name="accomodationRVDate"><br>
+			인원수 : <input type="text" name="accomodationRVPeople"><br/>
+			예약명 : <input type="text" name="accomodationRVName"><br/>
+			번호 : <input type="text" name="accomodationRVPhone"><br/>
+			예약자:
+	        <select name='users.usersNo'>
+	            <option th:each='users : ${usersName}' th:value='${users.usersNo}' th:text='${users.usersName}'></option>
+	        </select><br>
+	         <!-- Activities dropdown -->
+	         숙소:
+	         <select name='accomodation.accomodationNo'>
+	             <option th:each='accomodation : ${accomodatioName}' th:value='${accomodation.accomodationNo}' th:text='${accomodation.accomodationName}'></option>
+	         </select><br>
 			<input type="submit" value="등록">
 			<input type="reset" value="다시입력">		
 		</form>
@@ -242,17 +256,30 @@
 	  <div class="modalUpdate-content">
 	    <span class="close-modalUpdate-btn" id="btnCloseModalUpdate">×</span>
 	    <h2>사용자 수정</h2>
-	    <form id="updateForm" action="/business/update/{businessNo}" method="post">
-			<input type="hidden" name="businessNo"/>
-			업체이름 : <input type="text" name="businessName"><br/>
-			업체주소 : <input type="text" name="businessAddr"><br/>
-			업체번호 : <input type="text" name="businessPhone"><br/>
-			담당자이름 : <input type="text" name="businessManager"><br/> 
-			카테고리 :
-		    <select name="businessCategory">
-		        <option value="ACCOMODATION">Accommodation</option>
-		        <option value="ACTIVITY">Activity</option>
-		    </select><br/>
+	    <form id="updateForm" action="/accomodationRv/update/{accomodationRvNo}" method="post">
+			<input type="hidden" name="accomodationRvNo"/>
+			체크인날짜 : <input type="Date" name="accomodationRVCheckIn"><br/>
+			체크아웃날짜 : <input type="Date" name="accomodationRVCheckOut"><br>
+			예약날짜 : <input type="text" name="accomodationRVDate"><br>
+			인원수 : <input type="text" name="accomodationRVPeople"><br/>
+			예약명 : <input type="text" name="accomodationRVName"><br/>
+			번호 : <input type="text" name="accomodationRVPhone"><br/>
+			예약자:
+ 			<select name='users.usersNo'>
+			    <option th:each='user : ${usersName}' 
+			      th:value='${user.usersNo}'
+			      th:selected="${currentAccomodationRV != null && currentAccomodationRV.users != null && currentAccomodationRV.users.id == user.id}"
+			      th:text='${user.usersName}'>
+			    </option>
+			</select><br/>
+		    숙소명 :
+		    <select name='accomodation.accomodationNo'>
+			    <option th:each='accomodation : ${accomodationName}' 
+			      th:value='${accomodation.accomodationNo}'
+			       th:selected="${currentAccomodationRV != null && currentAccomodationRV.accomodation != null && currentAccomodationRV.accomodation.id == accomodation.id}"
+			       th:text='${accomodation.accomodationName}'>
+			    </option>
+			</select><br/>
 			<input type="submit" value="수정"/>
 			<input type="reset" value="다시입력"/>
 		</form>

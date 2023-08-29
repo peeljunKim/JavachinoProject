@@ -88,6 +88,29 @@
             });
         }
         
+      //원형 차트  
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['업체 현황', '업체 수'],
+          ['숙소 업체수',     48],
+          ['액티비티 업체수',      16],
+        ]);
+
+        var options = {
+          title: '업체 현황',
+       	  titleTextStyle: { fontSize: 20, },
+          hAxis: { title: '일주일간 방문자 수', titleTextStyle: { color: '#333' } },
+          vAxis: { minValue: 0 }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
 
 </script>
 </head>
@@ -112,7 +135,7 @@
 				<div class="card_header">일 방문자수</div>
 				<div class="card_content">
 					<div class="card_body" th:text="${todayVisit+'명'}"></div>
-					<div class="card_body_rate">+0.5%</div>   
+					<div class="card_body_rate">+2.5%</div>   
 				</div>
 			</div>
 		</div>
@@ -121,7 +144,7 @@
 				<div class="card_header">숙소 예약수</div>
 				<div class="card_content">
 					<div class="card_body" th:text="${totalAccomodationRv+'건'}"></div>
-					<div class="card_body_rate">+51%</div>   
+					<div class="card_body_rate">+50%</div>   
 				</div>
 			</div>
 		</div>
@@ -140,36 +163,7 @@
 			<div id="chart_div"></div>
 		</div>
 			<div class="table_chart">
-				<div id="table_chart_body">
-					<div class="table_container">
-					<div class="table_header">일자별 요약</div>    
-					  <table class="table">
-					    <thead>
-					      <tr>
-					        <th>일자</th>
-					        <th>가입</th>
-					        <th>방문자</th>
-					        <th>숙소 예약수</th>
-					        <th>액티비티 예약수</th>
-					        <th>숙소 후기</th>
-					        <th>액티비티 후기</th>
-					      </tr>
-					    </thead>
-					    <tbody>
-					   <th:block th:each="visit : ${last7DaysData}">
-					      <tr>
-					        <td th:text="${#dates.format(visit.visitDate, 'yyyy-MM-dd')}"></td>
-					        <td class="tdr">5</td>
-					        <td class="tdr">174</td>
-					        <td class="tdr">5</td>
-					        <td class="tdr">6</td>
-					        <td class="tdr">8</td>
-					        <td class="tdr">2</td>
-					      </tr>
-					    </tbody>
-					  </table>
-				</div>
-				</div>
+				<div id="piechart"></div>
 			</div>
 		</div>
 	</div>

@@ -1,60 +1,68 @@
 package com.example.demo.admin.service;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.admin.dao.AdminActivityRvDAO;
-import com.example.demo.admin.dto.AdminActivityRvDto;
+import com.example.demo.admin.repository.AdminActivityRvRepository;
 import com.example.demo.entity.ActivityRv;
 
 import lombok.Setter;
 
-@Service
 @Setter
+@Service
 public class AdminActivityRvService {
-    @Autowired
-    private AdminActivityRvDAO dao;
-    
-    public List<AdminActivityRvDto> findAll(int start, int end, String cname, String keyword) {
-    	List<AdminActivityRvDto> list = null;
-    	if(keyword != null && !keyword.equals("")) {			
-			switch(cname) {
-				case "activityName" : list=dao.findByActivityNameLike("%"+keyword+"%");break;
-				case "usersName" : list =  dao.findByUsersNameLike("%"+keyword+"%");break;
-			}			
-		}else {
-			list = dao.getAllActivityRvDto(start, end);
-		}
-        return list;
+    private final AdminActivityRvRepository activityRvRepository;
+
+    public AdminActivityRvService(AdminActivityRvRepository activityRvRepository) {
+        this.activityRvRepository = activityRvRepository;
+    }
+    //테이블 출력
+    @Transactional(readOnly = true)
+    public Page<ActivityRv> findAll(Pageable pageable) {
+        return activityRvRepository.findAll(pageable);
     }
     
-    //검색된 레코드 수 반환
-    public int getTotalRecordByKeyword(String cname,String keyword) {
-       int u;
-       if(cname.equals("activityName")) {
-          u= dao.countByActivityName("%"+keyword+"%");
-       }else{
-    	   u= dao.countByUsersName("%"+keyword+"%");
-       }
-       return u;
+    //name 검색기능
+    @Transactional(readOnly = true)
+    public Page<ActivityRv> findByUsers_UsersNameContaining(String UsersName, Pageable pageable) {
+        return activityRvRepository.findByUsers_UsersNameContaining(UsersName, pageable);
+    }
+    
+    //name 검색기능
+    @Transactional(readOnly = true)
+    public Page<ActivityRv> findByActivity_ActivityNameContaining(String activityName, Pageable pageable) {
+        return activityRvRepository.findByActivity_ActivityNameContaining(activityName, pageable);
     }
 
+    
+    @Transactional
+    public ActivityRv save(ActivityRv activityRv) {
+        return activityRvRepository.save(activityRv);
+    }
+    //수정기능
+    @Transactional
+    public ActivityRv update(Integer id, ActivityRv updatedActivityRv) {
+        return activityRvRepository.findById(id)
+                .map(activityRv -> {
+                	activityRv.setActivityRvNo(updatedActivityRv.getActivityRvNo());
+                	activityRv.setRvDate(updatedActivityRv.getRvDate());
+                	activityRv.setActivityRvDate(updatedActivityRv.getActivityRvDate());
+                	activityRv.setActivityRvPeople(updatedActivityRv.getActivityRvPeople());
+                	activityRv.setActivityRvPhone(updatedActivityRv.getActivityRvPhone());
+                    
+                    return activityRvRepository.save(activityRv);
+                })
+                .orElseThrow(() -> new IllegalArgumentException("Invalid activityRv Id:" + id));
+    }
+    //삭제기능
+    @Transactional
+    public void delete(Integer id) {
+    	activityRvRepository.deleteById(id);
+    }
+    
     public int getActivityRvTotalRecord() {
-        return (int) dao.count();
+        return (int) activityRvRepository.count();
     }
- 
-    
-    public ActivityRv insert(ActivityRv activityRv) {
-        return dao.save(activityRv);
-    }
-    public ActivityRv update(ActivityRv activityRv) {
-        return dao.save(activityRv);
-    }
-
-    public void delete(int activityRvNo) {
-        dao.deleteById(activityRvNo);
-    }
-
 }

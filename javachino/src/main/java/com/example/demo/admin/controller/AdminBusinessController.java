@@ -1,9 +1,13 @@
 package com.example.demo.admin.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,66 +21,67 @@ import lombok.Setter;
 @Controller
 @Setter
 public class AdminBusinessController {
-	public int pageSIZE = 13;
-	public int totalRecord;
-	public int totalPage;
 	
-	@Autowired
-	private AdminBusinessService bs;
-	
-	@GetMapping(value={"/admin/business/businessList/{pageNUM}",
-					   "/admin/business/businessList/{pageNUM}/{cname}/{keyword}"})
-	public String list(Model model, 
-			@PathVariable("pageNUM") int pageNUM,
-			@PathVariable(required = false) String cname,
-			@PathVariable(required = false) String keyword) {		
-		if(keyword != null && !keyword.equals("")){
-	           totalRecord = bs.getTotalRecordByKeyword(cname,keyword);
-	       } else {
-	           totalRecord = bs.getTotalRecord();
-	       }
-		totalPage = (int)Math.ceil(totalRecord/(double)pageSIZE);
-		System.out.println("전체레코드수 : "+totalRecord);
-		System.out.println("전체페이지수 : "+totalPage);
-		System.out.println("현재페이지수 : "+pageNUM);
-		int start = (pageNUM-1)*pageSIZE+1;
-		int end=start+pageSIZE-1;
-		System.out.println("start:"+start);
-		System.out.println("end:"+end);
-		model.addAttribute("list", bs.findAll(start, end, cname, keyword));
-		System.out.println("fb"+ bs.findAll(start, end, cname, keyword));
-		model.addAttribute("totalPage", totalPage);
-		return "/admin/business/businessList";
-	}
-	//추가
-	@PostMapping("/business/insert")
-    public ModelAndView insert(Business b) {
-		bs.insert(b);
-        return new ModelAndView("redirect:/admin/business/businessList/1");
-    }
-	//수정
-	@PostMapping("/business/update/{businessNo}")
-    public ModelAndView update(@PathVariable("businessNo") int businessNo, @RequestParam String businessName, @RequestParam String businessAddr, @RequestParam String businessPhone, @RequestParam String businessManager) {
-		bs.update(businessNo, businessName, businessAddr, businessPhone, businessManager);
-        return new ModelAndView("redirect:/admin/business/businessList/1");
-    }
-	 @GetMapping("/business/update/{businessNo}")
-	    public ModelAndView showUpdateForm(Model model, @PathVariable("businessNo") int businessNo) {
-	        model.addAttribute("businessNo", businessNo);
-	        // Load other necessary data for the form if needed
-	        return new ModelAndView("redirect:/admin/business/businessList/1");
-	    }
-	
-	//삭제
-	@PostMapping("/business/delete")
-	public ModelAndView delete(@RequestParam int businessNo) {
-		bs.deleteBusiness(businessNo);
-	    return new ModelAndView("redirect:/admin/business/businessList/1");
-	}
+	private final AdminBusinessService adminBusinessService;
 
-	@GetMapping("/business/delete/{businessNo}")
-	public ModelAndView delete(@PathVariable("businessNo") int businessNo, Model model) {
-	    model.addAttribute("businessNo", businessNo);
-	    return new ModelAndView("redirect:/admin/business/businessList/1");
-	}
+    public AdminBusinessController(AdminBusinessService adminBusinessService) {
+        this.adminBusinessService = adminBusinessService;
+    }
+
+    @GetMapping("/admin/business/businessList")
+    public String businessList(Model model, @PageableDefault(page=0, size=13,  sort = "businessNo", direction = Sort.Direction.DESC) Pageable pageable,
+    		  @RequestParam(required=false) String businessName,
+    		  @RequestParam(required=false) String businessAddr,
+    		  @RequestParam(required=false) String businessPhone,
+              @RequestParam(required=false) String businessManager) {
+    	Page<Business> list;
+        if(businessName != null && !businessName.isEmpty()) {
+            list = adminBusinessService.findByBusinessNameContaining(businessName, pageable);
+        } else if(businessAddr != null && !businessAddr.isEmpty()) {
+            list = adminBusinessService.findByBusinessAddrContaining(businessAddr, pageable);
+        } else if(businessPhone != null && !businessPhone.isEmpty()) {
+        	list = adminBusinessService.findByBusinessPhoneContaining(businessPhone, pageable);
+        } else if(businessManager != null && !businessManager.isEmpty()) {
+        	list = adminBusinessService.findByBusinessManagerContaining(businessManager, pageable);
+        } else {
+            list = adminBusinessService.findAll(pageable);
+        }
+        int nowPage = list.getPageable().getPageNumber()+1;
+        int startPage = Math.max(nowPage -4, 1);
+        int endPage = Math.min(nowPage +5, list.getTotalPages());
+        
+        model.addAttribute("list", list);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        
+    	model.addAttribute("businessName", businessName);
+    	model.addAttribute("businessAddr", businessAddr);
+    	model.addAttribute("businessPhone", businessPhone);
+    	model.addAttribute("businessManager", businessManager);
+        return "/admin/business/businessList";
+    }
+
+    //추가기능
+    @PostMapping("/business/insert")
+    public ModelAndView insert(@ModelAttribute("business") Business b) {
+        adminBusinessService.save(b);
+        return new ModelAndView("redirect:/admin/business/businessList");
+    }
+    //수정기능
+    @PostMapping("/business/update/{businessNo}")
+    public ModelAndView update(@PathVariable int businessNo,
+                                @ModelAttribute("business") Business updatedBusiness) {
+        adminBusinessService.update(businessNo, updatedBusiness);
+        return new ModelAndView("redirect:/admin/business/businessList");
+    }
+
+    //삭제기능
+    @PostMapping("/business/delete/{businessNo}")
+    public ModelAndView delete(@PathVariable int businessNo) {
+    	adminBusinessService.delete(businessNo);
+    	 System.out.println("bn"+businessNo);
+        return new ModelAndView("redirect:/admin/business/businessList");
+    }
+
 }

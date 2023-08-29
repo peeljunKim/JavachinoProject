@@ -116,3 +116,7 @@ a {
     float: right;
     margin-left: 5px;
 }
+
+.sidebar_menu ul li.clicked {
+  background-color: #3d3d3d; /* 변경할 배경색 지정 */
+}

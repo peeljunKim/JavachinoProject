@@ -54,7 +54,7 @@ public class AdminVisitController {
     }
     
     
-    @GetMapping("/admin/mainpage")
+    @GetMapping("/mainpage")
     public void updateVisitCountForToday() {
         vs.addOrUpdateVisitCountForToday();
     }

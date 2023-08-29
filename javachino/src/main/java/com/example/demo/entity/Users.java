@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
     	initialValue = 1,
     	allocationSize = 1
 )
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Users {
     @Id
     @GeneratedValue(
@@ -34,13 +35,17 @@ public class Users {
     private String usersName;
     @Column(name = "users_fname")
     private String usersFname;
-    //테이블 매핑에서는 제외 시켜라!
-  	@Transient
-  	private MultipartFile uploadFile;
+	//테이블 매핑에서는 제외 시켜라!
+	@Transient
+	private MultipartFile uploadFile;
     @Column(name = "users_phone")
     private String usersPhone;
     @Column(name = "users_date")
     private Date usersDate;
+    @PrePersist
+    public void prePersist() {
+        this.usersDate = new Date();
+    }
 	public int getUsersNo() {
 		return usersNo;
 	}
@@ -82,28 +87,6 @@ public class Users {
 	}
 	public void setUsersDate(Date usersDate) {
 		this.usersDate = usersDate;
-	}
-	public Users(int usersNo, String usersId, String usersPassword, String usersName, String usersFname,
-			MultipartFile uploadFile, String usersPhone, Date usersDate) {
-		super();
-		this.usersNo = usersNo;
-		this.usersId = usersId;
-		this.usersPassword = usersPassword;
-		this.usersName = usersName;
-		this.usersFname = usersFname;
-		this.uploadFile = uploadFile;
-		this.usersPhone = usersPhone;
-		this.usersDate = usersDate;
-	}
-	public Users() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public MultipartFile getUploadFile() {
-		return uploadFile;
-	}
-	public void setUploadFile(MultipartFile uploadFile) {
-		this.uploadFile = uploadFile;
 	}
     
 } 
