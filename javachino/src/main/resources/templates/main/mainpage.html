@@ -279,7 +279,7 @@
     </div>
     </div>
     <!--게시판-->
-    <div class="divblockreview-E2V">
+    <div class="divblockreview-E2V" th:if="${community != null}">
       <div class="divboxreview-tsj">
         <div class="heading-2-link-qHB">          <div class="heading-2-link-qHB-bg">
           </div>
@@ -304,7 +304,7 @@ BEST 커뮤니티</div>
                   </div>
                   <div class="divreviewview-zBK">
                     <div class="ph2d-8015b704-Vtm">
-                      <div class="item-200--CHP" th:utext="${community.communityContent}">만족도 200%의 완벽한 여행을 가이드 해주신 최승자</div>
+                      <div class="item-200--CHP" th:utext="${community.communityContent}"></div>
                     </div>
                     <!--
                     <div class="spanthumb-qFo">

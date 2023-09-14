@@ -77,5 +77,123 @@ public class Member {
         this.birth = birth;
         this.where = where;
     }
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public String getPwd() {
+		return pwd;
+	}
+
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getBirth() {
+		return birth;
+	}
+
+
+	public void setBirth(String birth) {
+		this.birth = birth;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	public String getRole() {
+		return role;
+	}
+
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+
+	public String getPhone() {
+		return phone;
+	}
+
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+
+	public String getNickname() {
+		return nickname;
+	}
+
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+
+	public String getFname() {
+		return fname;
+	}
+
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+
+	public String getWhere() {
+		return where;
+	}
+
+
+	public void setWhere(String where) {
+		this.where = where;
+	}
+
+
+	public Member() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
 	
 }

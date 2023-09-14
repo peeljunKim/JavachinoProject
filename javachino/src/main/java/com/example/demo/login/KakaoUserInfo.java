@@ -34,33 +34,87 @@ public class KakaoUserInfo {
         // kakao_account안에 또 profile이라는 JSON객체가 있다. (nickname, profile_image)
         Map<String, Object> kakaoProfile = (Map<String, Object>)kakaoAccount.get("profile");
 
-    	return KakaoUserInfo.builder()
-    			.attributes(attributes)
-    			.name((String) kakaoProfile.get("nickname"))
-    			.nameAttributeKey(userNameAttributeName)
-                .email((String) kakaoAccount.get("email"))
-                .gender((String) kakaoAccount.get("gender"))
-                .birthday((String) kakaoAccount.get("birthday"))
-                .where(registrationId)
-                .build();
+        return new KakaoUserInfo(
+                attributes,
+                userNameAttributeName,
+                (String) kakaoProfile.get("nickname"),
+                (String) kakaoAccount.get("email"),
+                (String) kakaoAccount.get("gender"),
+                (String) kakaoAccount.get("birthday"),
+                registrationId
+            );
     }
 
     public Member toEntity(){
-    	return Member.builderKakao().id(name)
-    			.email(email).gender(gender)
-    			.birth(birthday).where(where)
-    			.build();
+    	 Member member = new Member();
+    	    member.setId(name);
+    	    member.setEmail(email);
+    	    member.setGender(gender);
+    	    member.setBirth(birthday);
+    	    member.setWhere(where);
+    	    member.setRole("user");
+    	    return member;
     }
     
     public Users toUsersEntity() {
-    	return Users.builder()
-    			.usersId(email)
-    			.usersPassword("tripjava")
-    			.usersName(name)
-    			.usersFname("user.png")
-    			.usersDate(new Date())
-    			.usersPhone("010-1234-5678")
-    			.build();
+    	Users users = new Users();
+        users.setUsersId(email);
+        users.setUsersPassword("tripjava");
+        users.setUsersName(name);
+        users.setUsersFname("user.png");
+        users.setUsersDate(new Date());
+        users.setUsersPhone("010-1234-5678");
+        return users;
     			
     }
+
+
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+
+	public String getNameAttributeKey() {
+		return nameAttributeKey;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getGender() {
+		return gender;
+	}
+
+
+	public String getBirthday() {
+		return birthday;
+	}
+
+
+	public String getWhere() {
+		return where;
+	}
+
+
+	public KakaoUserInfo(Map<String, Object> attributes, String nameAttributeKey, String name, String email,
+			String gender, String birthday, String where) {
+		super();
+		this.attributes = attributes;
+		this.nameAttributeKey = nameAttributeKey;
+		this.name = name;
+		this.email = email;
+		this.gender = gender;
+		this.birthday = birthday;
+		this.where = where;
+	}
+    
+    
 }
